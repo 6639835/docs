@@ -13,8 +13,13 @@ const RETRY_DELAY = 2000;
 
 class TranslationManager {
   constructor() {
-    this.genAI = null;
-    this.model = null;
+    this.apiKeys = [];
+    this.genAIs = [];
+    this.primaryModels = [];
+    this.fallbackModels = [];
+    this.currentKeyIndex = 0;
+    this.keyUsageCount = new Map();
+    this.keyErrorCount = new Map();
     this.config = null;
     this.cache = new Map();
     this.stats = {
@@ -26,18 +31,32 @@ class TranslationManager {
   }
 
   async initialize() {
-    // Initialize Gemini AI
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      throw new Error('GEMINI_API_KEY environment variable is required');
+    // Parse API keys - support both single key and multiple keys
+    const apiKeyEnv = process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEYS;
+    if (!apiKeyEnv) {
+      throw new Error('GEMINI_API_KEY or GEMINI_API_KEYS environment variable is required');
     }
 
-    this.genAI = new GoogleGenerativeAI(apiKey);
-    
-    // Try gemini-2.5-flash first, fallback to gemini-2.0-flash if needed
-    this.primaryModel = this.genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
-    this.fallbackModel = this.genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-    this.model = this.primaryModel;
+    // Split by comma for multiple keys, or use single key
+    this.apiKeys = apiKeyEnv.includes(',') ? 
+      apiKeyEnv.split(',').map(key => key.trim()).filter(key => key) : 
+      [apiKeyEnv.trim()];
+
+    console.log(`🔑 Initialized with ${this.apiKeys.length} API key(s)`);
+
+    // Initialize Google AI instances and models for each API key
+    for (let i = 0; i < this.apiKeys.length; i++) {
+      const apiKey = this.apiKeys[i];
+      const genAI = new GoogleGenerativeAI(apiKey);
+      
+      this.genAIs.push(genAI);
+      this.primaryModels.push(genAI.getGenerativeModel({ model: 'gemini-2.5-flash' }));
+      this.fallbackModels.push(genAI.getGenerativeModel({ model: 'gemini-2.0-flash' }));
+      
+      // Initialize usage counters
+      this.keyUsageCount.set(i, 0);
+      this.keyErrorCount.set(i, 0);
+    }
 
     // Load configuration
     this.config = await this.loadConfig();
@@ -47,6 +66,68 @@ class TranslationManager {
 
     console.log('🚀 Translation Manager initialized');
     console.log(`📋 Target languages: ${this.config.targetLanguages.join(', ')}`);
+  }
+
+  // Select the best API key based on usage and error rates
+  selectBestApiKey() {
+    let bestKeyIndex = 0;
+    let lowestScore = Infinity;
+
+    for (let i = 0; i < this.apiKeys.length; i++) {
+      const usageCount = this.keyUsageCount.get(i) || 0;
+      const errorCount = this.keyErrorCount.get(i) || 0;
+      
+      // Score based on usage count and error rate (lower is better)
+      const errorRate = usageCount > 0 ? errorCount / usageCount : 0;
+      const score = usageCount + (errorRate * 10); // Weight errors heavily
+      
+      if (score < lowestScore) {
+        lowestScore = score;
+        bestKeyIndex = i;
+      }
+    }
+
+    return bestKeyIndex;
+  }
+
+  // Get the next API key using round-robin with smart fallback
+  getNextApiKey() {
+    if (this.apiKeys.length === 1) {
+      return 0;
+    }
+
+    // Use smart selection based on usage and errors
+    const bestKey = this.selectBestApiKey();
+    
+    // If the best key has too many recent errors, try round-robin
+    const bestKeyErrors = this.keyErrorCount.get(bestKey) || 0;
+    const bestKeyUsage = this.keyUsageCount.get(bestKey) || 1;
+    const errorRate = bestKeyErrors / bestKeyUsage;
+    
+    if (errorRate > 0.5) { // If error rate > 50%, try round-robin
+      this.currentKeyIndex = (this.currentKeyIndex + 1) % this.apiKeys.length;
+      return this.currentKeyIndex;
+    }
+    
+    return bestKey;
+  }
+
+  // Record API key usage
+  recordApiKeyUsage(keyIndex, success = true) {
+    const currentUsage = this.keyUsageCount.get(keyIndex) || 0;
+    this.keyUsageCount.set(keyIndex, currentUsage + 1);
+    
+    if (!success) {
+      const currentErrors = this.keyErrorCount.get(keyIndex) || 0;
+      this.keyErrorCount.set(keyIndex, currentErrors + 1);
+    }
+  }
+
+  // Get current models for a specific API key
+  getCurrentModels(keyIndex, useFallback = false) {
+    const primaryModel = this.primaryModels[keyIndex];
+    const fallbackModel = this.fallbackModels[keyIndex];
+    return useFallback ? fallbackModel : primaryModel;
   }
 
   async loadConfig() {
@@ -151,16 +232,25 @@ ${text}
 Translated text:`;
 
     let lastError;
+    let currentKeyIndex = this.getNextApiKey();
     let usingFallback = false;
+    let keyRotationAttempts = 0;
+    const maxKeyRotations = this.apiKeys.length * 2; // Try each key twice
     
     for (let attempt = 1; attempt <= this.config.retryAttempts; attempt++) {
       try {
-        const modelName = this.model === this.primaryModel ? 'gemini-2.5-flash' : 'gemini-2.0-flash';
-        console.log(`🔄 Translating to ${targetLanguage} using ${modelName} (attempt ${attempt}/${this.config.retryAttempts})`);
+        const model = this.getCurrentModels(currentKeyIndex, usingFallback);
+        const modelName = usingFallback ? 'gemini-2.0-flash' : 'gemini-2.5-flash';
+        const keyLabel = `Key-${currentKeyIndex + 1}`;
         
-        const result = await this.model.generateContent(prompt);
+        console.log(`🔄 Translating to ${targetLanguage} using ${modelName} with ${keyLabel} (attempt ${attempt}/${this.config.retryAttempts})`);
+        
+        const result = await model.generateContent(prompt);
         const response = await result.response;
         const translatedText = response.text();
+
+        // Record successful usage
+        this.recordApiKeyUsage(currentKeyIndex, true);
 
         // Cache the translation
         this.cache.set(cacheKey, translatedText);
@@ -175,13 +265,35 @@ Translated text:`;
       } catch (error) {
         lastError = error;
         const isServiceOverloaded = error.message.includes('503') || error.message.includes('overloaded');
+        const isQuotaExceeded = error.message.includes('quota') || error.message.includes('429') || error.message.includes('rate limit');
         
-        console.error(`❌ Translation attempt ${attempt} failed:`, error.message);
+        // Record failed usage
+        this.recordApiKeyUsage(currentKeyIndex, false);
+        
+        console.error(`❌ Translation attempt ${attempt} failed with ${`Key-${currentKeyIndex + 1}`}:`, error.message);
+        
+        // If quota exceeded or rate limited, try a different API key
+        if ((isQuotaExceeded || isServiceOverloaded) && keyRotationAttempts < maxKeyRotations) {
+          const oldKeyIndex = currentKeyIndex;
+          currentKeyIndex = this.getNextApiKey();
+          
+          // Make sure we actually switched to a different key
+          if (currentKeyIndex === oldKeyIndex && this.apiKeys.length > 1) {
+            currentKeyIndex = (currentKeyIndex + 1) % this.apiKeys.length;
+          }
+          
+          console.log(`🔄 Switching to API Key-${currentKeyIndex + 1} due to quota/rate limit`);
+          keyRotationAttempts++;
+          usingFallback = false; // Reset fallback when switching keys
+          
+          // Don't count key rotation as a retry attempt
+          attempt--;
+          continue;
+        }
         
         // If service is overloaded and we haven't tried fallback model yet, switch to it
-        if (isServiceOverloaded && !usingFallback && this.model === this.primaryModel) {
+        if (isServiceOverloaded && !usingFallback) {
           console.log(`🔄 Switching to fallback model (gemini-2.0-flash) due to service overload`);
-          this.model = this.fallbackModel;
           usingFallback = true;
           
           // Don't count this as a retry attempt, just switch models
@@ -191,7 +303,7 @@ Translated text:`;
         
         if (attempt < this.config.retryAttempts) {
           // Exponential backoff with jitter for service overload errors
-          const baseDelay = isServiceOverloaded ? 5000 : RETRY_DELAY;
+          const baseDelay = (isServiceOverloaded || isQuotaExceeded) ? 5000 : RETRY_DELAY;
           const delay = baseDelay * Math.pow(2, attempt - 1) + Math.random() * 1000;
           console.log(`⏳ Retrying in ${Math.round(delay)}ms...`);
           await new Promise(resolve => setTimeout(resolve, delay));
@@ -366,6 +478,17 @@ Translated text:`;
       console.log(`📦 From cache: ${this.stats.cached} files`);
       console.log(`⏭️  Skipped: ${this.stats.skipped} files`);
       console.log(`❌ Errors: ${this.stats.errors} files`);
+      
+      // Print API key usage statistics
+      if (this.apiKeys.length > 1) {
+        console.log('\n🔑 API Key Usage Statistics:');
+        for (let i = 0; i < this.apiKeys.length; i++) {
+          const usage = this.keyUsageCount.get(i) || 0;
+          const errors = this.keyErrorCount.get(i) || 0;
+          const successRate = usage > 0 ? ((usage - errors) / usage * 100).toFixed(1) : '0.0';
+          console.log(`   Key-${i + 1}: ${usage} requests, ${errors} errors (${successRate}% success)`);
+        }
+      }
 
       // Only exit with error if ALL translations failed
       const totalAttempted = this.stats.translated + this.stats.errors;

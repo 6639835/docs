@@ -15,9 +15,9 @@
   "outputDir": "i18n",
   "preserveCodeBlocks": true,
   "preserveLinks": true,
-  "maxConcurrentTranslations": 2,
-  "retryAttempts": 5,
-  "delayBetweenRequests": 2000,
+  "maxConcurrentTranslations": 4,
+  "retryAttempts": 3,
+  "delayBetweenRequests": 1500,
   "languageConfig": {
     "en": {
       "name": "English",
