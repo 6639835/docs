@@ -33,7 +33,11 @@ class TranslationManager {
     }
 
     this.genAI = new GoogleGenerativeAI(apiKey);
-    this.model = this.genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    
+    // Try gemini-2.5-flash first, fallback to gemini-2.0-flash if needed
+    this.primaryModel = this.genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    this.fallbackModel = this.genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    this.model = this.primaryModel;
 
     // Load configuration
     this.config = await this.loadConfig();
@@ -147,9 +151,12 @@ ${text}
 Translated text:`;
 
     let lastError;
+    let usingFallback = false;
+    
     for (let attempt = 1; attempt <= this.config.retryAttempts; attempt++) {
       try {
-        console.log(`🔄 Translating to ${targetLanguage} (attempt ${attempt}/${this.config.retryAttempts})`);
+        const modelName = this.model === this.primaryModel ? 'gemini-2.5-flash' : 'gemini-2.0-flash';
+        console.log(`🔄 Translating to ${targetLanguage} using ${modelName} (attempt ${attempt}/${this.config.retryAttempts})`);
         
         const result = await this.model.generateContent(prompt);
         const response = await result.response;
@@ -167,11 +174,26 @@ Translated text:`;
         return translatedText;
       } catch (error) {
         lastError = error;
+        const isServiceOverloaded = error.message.includes('503') || error.message.includes('overloaded');
+        
         console.error(`❌ Translation attempt ${attempt} failed:`, error.message);
         
+        // If service is overloaded and we haven't tried fallback model yet, switch to it
+        if (isServiceOverloaded && !usingFallback && this.model === this.primaryModel) {
+          console.log(`🔄 Switching to fallback model (gemini-2.0-flash) due to service overload`);
+          this.model = this.fallbackModel;
+          usingFallback = true;
+          
+          // Don't count this as a retry attempt, just switch models
+          attempt--;
+          continue;
+        }
+        
         if (attempt < this.config.retryAttempts) {
-          const delay = RETRY_DELAY * attempt;
-          console.log(`⏳ Retrying in ${delay}ms...`);
+          // Exponential backoff with jitter for service overload errors
+          const baseDelay = isServiceOverloaded ? 5000 : RETRY_DELAY;
+          const delay = baseDelay * Math.pow(2, attempt - 1) + Math.random() * 1000;
+          console.log(`⏳ Retrying in ${Math.round(delay)}ms...`);
           await new Promise(resolve => setTimeout(resolve, delay));
         }
       }
@@ -282,7 +304,8 @@ Translated text:`;
           
         } catch (error) {
           console.error(`❌ ${lang}: Translation failed -`, error.message);
-          throw error;
+          // Don't throw error for individual language failures, just log and continue
+          this.stats.errors++;
         }
       });
 
@@ -296,7 +319,7 @@ Translated text:`;
     } catch (error) {
       console.error(`❌ Failed to process ${filePath}:`, error.message);
       this.stats.errors++;
-      throw error;
+      // Don't throw error, let the main process handle it
     }
   }
 
@@ -315,8 +338,23 @@ Translated text:`;
       }
 
       // Process files sequentially to avoid overwhelming the API
+      const failedFiles = [];
       for (const file of markdownFiles) {
-        await this.translateFile(file);
+        try {
+          await this.translateFile(file);
+        } catch (error) {
+          console.error(`💥 Failed to process ${file}:`, error.message);
+          failedFiles.push({ file, error: error.message });
+          // Continue with other files instead of failing completely
+        }
+      }
+      
+      // Report failed files
+      if (failedFiles.length > 0) {
+        console.log(`\n⚠️  ${failedFiles.length} files failed to translate:`);
+        failedFiles.forEach(({ file, error }) => {
+          console.log(`   ❌ ${file}: ${error}`);
+        });
       }
 
       // Save cache
@@ -329,8 +367,13 @@ Translated text:`;
       console.log(`⏭️  Skipped: ${this.stats.skipped} files`);
       console.log(`❌ Errors: ${this.stats.errors} files`);
 
-      if (this.stats.errors > 0) {
+      // Only exit with error if ALL translations failed
+      const totalAttempted = this.stats.translated + this.stats.errors;
+      if (this.stats.errors > 0 && this.stats.translated === 0 && totalAttempted > 0) {
+        console.log('💥 All translation attempts failed, exiting with error');
         process.exit(1);
+      } else if (this.stats.errors > 0) {
+        console.log('⚠️  Some translations failed, but continuing (partial success)');
       }
 
     } catch (error) {
