@@ -1,125 +1,125 @@
-# 📝 iFly 导航数据转换器更新日志
+# 📝 iFly Navigation Data Converter Changelog
 
-## 🆕 v2.0.0 (2024-12-当前版本)
+## 🆕 v2.0.0 (2024-12-Current Version)
 
-### ✨ 新功能
-- **🎨 全新 Rich CLI 界面**：现代化彩色终端界面
-- **🧭 高精度磁偏角计算**：集成 pygeomag 的 WMM-2025 地磁模型
-- **📅 动态 AIRAC 周期计算**：自动计算当前有效的航空信息修订周期
-- **🛡️ 企业级代码质量**：完整的类型提示和文档
-- **⚡ 性能优化**：并发处理和内存优化
+### ✨ New Features
+- **🎨 Brand New Rich CLI Interface**: Modernized color terminal interface
+- **🧭 High-Precision Magnetic Declination Calculation**: Integrates pygeomag's WMM-2025 Geomagnetic Model
+- **📅 Dynamic AIRAC Cycle Calculation**: Automatically calculates the currently valid AIRAC cycle
+- **🛡️ Enterprise-Grade Code Quality**: Complete type hinting and documentation
+- **⚡ Performance Optimization**: Concurrent processing and memory optimization
 
-### 🔧 改进
-- **📊 实时进度显示**：Rich 库支持的进度条和状态反馈
-- **🎯 直观的步骤引导**：用户友好的交互式界面
-- **📋 详细的配置摘要**：完整的配置信息展示
-- **🚨 智能错误提示**：专业的错误诊断和修复建议
+### 🔧 Improvements
+- **📊 Real-time Progress Display**: Progress bars and status feedback supported by the Rich library
+- **🎯 Intuitive Step-by-Step Guidance**: User-friendly interactive interface
+- **📋 Detailed Configuration Summary**: Complete configuration information display
+- **🚨 Smart Error Prompting**: Professional error diagnosis and remediation suggestions
 
-### 🐛 修复
-- 修复了磁偏角计算精度问题
-- 解决了 AIRAC 周期计算错误
-- 修复了文件路径处理问题
-- 解决了内存使用过高问题
+### 🐛 Fixes
+- Fixed magnetic declination calculation accuracy issues
+- Resolved AIRAC cycle calculation errors
+- Fixed file path handling issues
+- Addressed excessive memory usage
 
-### 🔄 技术改进
-- **本地磁偏角计算**：不再依赖 NOAA API
-- **标准 4 位数 AIRAC 格式**：如 2508
-- **北京时间支持**：UTC+8 时区计算
-- **完善的错误处理**：详细的异常处理机制
-
----
-
-## 📋 v1.0.0 (2024-早期版本)
-
-### ✨ 基础功能
-- **🔄 数据转换核心**：Fenix 到 iFly 数据转换
-- **📁 自动路径检测**：智能检测 iFly 安装路径
-- **🛣️ 航路数据处理**：NAIP RTE_SEG.csv 航路段数据转换
-- **🏢 终端程序处理**：终端程序数据转换和管理
-
-### 📊 支持的数据类型
-- **航路数据 (Enroute)**：从 NAIP CSV 文件转换
-- **终端程序 (Terminals)**：从 Fenix 数据库提取
-- **磁偏角数据**：基础磁偏角计算
-- **AIRAC 周期**：基本的周期管理
-
-### 🔧 基本功能
-- 命令行界面
-- 基础错误处理
-- 文件路径管理
-- 数据验证
+### 🔄 Technical Improvements
+- **Local Magnetic Declination Calculation**: No longer relies on NOAA API
+- **Standard 4-Digit AIRAC Format**: e.g., 2508
+- **Beijing Time Support**: UTC+8 timezone calculation
+- **Comprehensive Error Handling**: Detailed exception handling mechanism
 
 ---
 
-## 🚀 即将发布的功能
+## 📋 v1.0.0 (2024-Early Version)
 
-### v2.1.0 (计划中)
-- **🎯 批量处理**：支持多个数据库文件同时转换
-- **🔍 数据验证工具**：增强的数据完整性检查
-- **📊 详细统计报告**：转换过程的详细统计信息
-- **🔧 高级配置选项**：更多自定义配置参数
+### ✨ Basic Features
+- **🔄 Data Conversion Core**: Fenix to iFly data conversion
+- **📁 Automatic Path Detection**: Intelligently detects iFly installation path
+- **🛣️ Enroute Data Processing**: NAIP RTE_SEG.csv enroute segment data conversion
+- **🏢 Terminal Procedure Processing**: Terminal procedure data conversion and management
 
-### v2.2.0 (计划中)
-- **🖥️ GUI 界面**：桌面图形用户界面
-- **📦 一键安装包**：独立的可执行文件
-- **🌐 在线更新**：自动检查和下载更新
-- **📝 配置文件支持**：保存和加载用户配置
+### 📊 Supported Data Types
+- **Enroute Data**: Converted from NAIP CSV files
+- **Terminal Procedures**: Extracted from Fenix database
+- **Magnetic Declination Data**: Basic magnetic declination calculation
+- **AIRAC Cycle**: Basic cycle management
 
-### v3.0.0 (长期规划)
-- **☁️ 云端处理**：支持云端数据转换
-- **🔌 插件系统**：支持第三方插件
-- **📊 实时监控**：实时转换状态监控
-- **🤖 AI 辅助**：智能数据优化和错误修复
-
----
-
-## 📊 版本对比
-
-| 功能特性 | v1.0.0 | v2.0.0 | v2.1.0 (计划) |
-|---------|--------|--------|---------------|
-| Rich CLI 界面 | ❌ | ✅ | ✅ |
-| 高精度磁偏角 | ❌ | ✅ | ✅ |
-| 动态 AIRAC | ❌ | ✅ | ✅ |
-| 批量处理 | ❌ | ❌ | ✅ |
-| 数据验证工具 | 基础 | 增强 | 专业 |
-| GUI 界面 | ❌ | ❌ | ✅ |
-| 性能优化 | 基础 | 显著 | 极致 |
+### 🔧 Basic Functionality
+- Command-line interface
+- Basic error handling
+- File path management
+- Data validation
 
 ---
 
-## 🐛 已知问题
+## 🚀 Upcoming Features
+
+### v2.1.0 (Planned)
+- **🎯 Batch Processing**: Supports simultaneous conversion of multiple database files
+- **🔍 Data Validation Tools**: Enhanced data integrity checks
+- **📊 Detailed Statistical Reports**: Detailed statistics on the conversion process
+- **🔧 Advanced Configuration Options**: More customizable configuration parameters
+
+### v2.2.0 (Planned)
+- **🖥️ GUI Interface**: Desktop graphical user interface
+- **📦 One-Click Installer**: Standalone executable
+- **🌐 Online Updates**: Automatic check and download of updates
+- **📝 Configuration File Support**: Save and load user configurations
+
+### v3.0.0 (Long-Term Plan)
+- **☁️ Cloud Processing**: Supports cloud-based data conversion
+- **🔌 Plugin System**: Supports third-party plugins
+- **📊 Real-time Monitoring**: Real-time conversion status monitoring
+- **🤖 AI Assistance**: Intelligent data optimization and error correction
+
+---
+
+## 📊 Version Comparison
+
+| Feature                         | v1.0.0 | v2.0.0 | v2.1.0 (Planned) |
+|---------------------------------|--------|--------|------------------|
+| Rich CLI Interface              | ❌     | ✅     | ✅               |
+| High-Precision Magnetic Declination | ❌     | ✅     | ✅               |
+| Dynamic AIRAC                   | ❌     | ✅     | ✅               |
+| Batch Processing                | ❌     | ❌     | ✅               |
+| Data Validation Tools           | Basic  | Enhanced | Professional     |
+| GUI Interface                   | ❌     | ❌     | ✅               |
+| Performance Optimization        | Basic  | Significant | Ultimate         |
+
+---
+
+## 🐛 Known Issues
 
 ### v2.0.0
-- 在某些旧版本 Python 环境中可能出现兼容性问题
-- 大型数据库文件处理时内存使用较高
-- 某些特殊字符处理需要改进
+- May encounter compatibility issues in some older Python environments
+- High memory usage when processing large database files
+- Special character handling needs improvement
 
-### 修复计划
-这些问题将在下一个版本中得到解决：
-1. **Python 兼容性**：v2.1.0 将改善对 Python 3.8 的支持
-2. **内存优化**：v2.1.0 将引入流式处理
-3. **字符处理**：v2.1.0 将改进 Unicode 支持
-
----
-
-## 📢 发布说明
-
-### 下载方式
-- **最新版本**：从 GitHub Releases 页面下载
-- **开发版本**：克隆主分支获取最新代码
-- **稳定版本**：使用带有版本标签的发布版本
-
-### 升级指南
-1. **备份数据**：升级前请备份您的配置和数据
-2. **检查兼容性**：确认您的 Python 版本兼容性
-3. **更新依赖**：运行 `pip install -r requirements.txt`
-4. **测试功能**：升级后先进行小规模测试
-
-### 支持政策
-- **最新版本**：提供完整技术支持
-- **前一版本**：提供安全更新和关键修复
-- **旧版本**：提供社区支持
+### Fix Plan
+These issues will be addressed in the next version:
+1.  **Python Compatibility**: v2.1.0 will improve support for Python 3.8
+2.  **Memory Optimization**: v2.1.0 will introduce stream processing
+3.  **Character Handling**: v2.1.0 will improve Unicode support
 
 ---
 
-感谢所有用户的反馈和贡献，让 iFly 导航数据转换器不断改进和完善！🙏
+## 📢 Release Notes
+
+### Download Options
+- **Latest Version**: Download from the GitHub Releases page
+- **Development Version**: Clone the main branch to get the latest code
+- **Stable Version**: Use release versions with version tags
+
+### Upgrade Guide
+1.  **Back up Data**: Please back up your configuration and data before upgrading
+2.  **Check Compatibility**: Confirm your Python version's compatibility
+3.  **Update Dependencies**: Run `pip install -r requirements.txt`
+4.  **Test Functionality**: Perform small-scale testing after upgrading
+
+### Support Policy
+- **Latest Version**: Full technical support provided
+- **Previous Version**: Security updates and critical fixes provided
+- **Older Versions**: Community support provided
+
+---
+
+Thanks to all users for their feedback and contributions, which continuously improve and perfect the iFly Navigation Data Converter! 🙏

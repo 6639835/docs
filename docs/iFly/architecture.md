@@ -1,162 +1,162 @@
-# 🏗️ iFly 导航数据转换器架构
+# 🏗️ iFly Navigation Data Converter Architecture
 
-## 系统概览
+## System Overview
 
-iFly 导航数据转换器是一个现代化的航空导航数据转换工具，专门设计用于将 Fenix A320 导航数据库转换为 iFly 737 MAX 8 导航数据库格式。
+The iFly Navigation Data Converter is a modern aviation navigation data conversion tool, specifically designed to convert Fenix A320 navigation databases into iFly 737 MAX 8 navigation database format.
 
-## 🎯 设计原则
+## 🎯 Design Principles
 
-### 1. 模块化设计
-- **数据处理模块**：独立的航路和终端程序处理
-- **界面模块**：基于 Rich 库的现代化 CLI 界面
-- **配置模块**：灵活的配置管理系统
-- **验证模块**：完整的数据完整性检查
+### 1. Modular Design
+- **Data Processing Module**: Independent enroute and terminal procedure processing
+- **Interface Module**: Modern CLI interface based on the Rich library
+- **Configuration Module**: Flexible configuration management system
+- **Validation Module**: Comprehensive data integrity checks
 
-### 2. 高性能架构
-- **并发处理**：多线程磁偏角计算
-- **内存优化**：流式数据处理
-- **本地计算**：无需网络 API 调用
+### 2. High-Performance Architecture
+- **Concurrent Processing**: Multi-threaded magnetic declination calculation
+- **Memory Optimization**: Stream-based data processing
+- **Local Computation**: No network API calls required
 
-### 3. 企业级质量
-- **类型提示**：完整的 Python 类型注解
-- **错误处理**：完善的异常处理机制
-- **测试覆盖**：全面的单元测试
-- **文档完整**：详细的 API 文档
+### 3. Enterprise-Grade Quality
+- **Type Hinting**: Comprehensive Python type annotations
+- **Error Handling**: Robust exception handling mechanism
+- **Test Coverage**: Comprehensive unit testing
+- **Documentation Completeness**: Detailed API documentation
 
-## 🏗️ 系统架构
+## 🏗️ System Architecture
 
-### 核心组件
+### Core Components
 
 ```mermaid
 graph TB
-    A[主程序入口] --> B[配置管理器]
-    A --> C[CLI 界面管理器]
-    A --> D[数据转换器]
+    A[Main Program Entry Point] --> B[Configuration Manager]
+    A --> C[CLI Interface Manager]
+    A --> D[Data Converter]
     
-    D --> E[Fenix 数据库连接器]
-    D --> F[NAIP CSV 处理器]
-    D --> G[iFly 数据生成器]
+    D --> E[Fenix Database Connector]
+    D --> F[NAIP CSV Processor]
+    D --> G[iFly Data Generator]
     
-    G --> H[航路数据处理模块]
-    G --> I[终端程序处理模块]
-    G --> J[AIRAC 管理模块]
+    G --> H[Enroute Data Processing Module]
+    G --> I[Terminal Procedure Processing Module]
+    G --> J[AIRAC Management Module]
     
-    H --> K[磁偏角计算器]
+    H --> K[Magnetic Declination Calculator]
     I --> K
-    J --> L[AIRAC 周期计算器]
+    J --> L[AIRAC Cycle Calculator]
 ```
 
-### 数据流程
+### Data Flow
 
 ```mermaid
 sequenceDiagram
-    participant U as 用户
-    participant CLI as CLI界面
-    participant DB as 数据库连接器
-    participant CSV as CSV处理器
-    participant MAG as 磁偏角计算器
-    participant GEN as 数据生成器
+    participant U as User
+    participant CLI as CLI Interface
+    participant DB as Database Connector
+    participant CSV as CSV Processor
+    participant MAG as Magnetic Declination Calculator
+    participant GEN as Data Generator
     
-    U->>CLI: 启动程序
-    CLI->>DB: 连接 Fenix 数据库
-    CLI->>CSV: 加载 NAIP 数据
-    CSV->>MAG: 计算磁偏角
-    MAG->>GEN: 生成 iFly 格式数据
-    GEN->>CLI: 返回处理结果
-    CLI->>U: 显示完成状态
+    U->>CLI: Start Program
+    CLI->>DB: Connect Fenix Database
+    CLI->>CSV: Load NAIP Data
+    CSV->>MAG: Calculate Magnetic Declination
+    MAG->>GEN: Generate iFly Format Data
+    GEN->>CLI: Return Processing Result
+    CLI->>U: Display Completion Status
 ```
 
-## 🔧 技术栈
+## 🔧 Technology Stack
 
-### 核心依赖
-- **Python 3.8+**：主要编程语言
-- **Rich**：现代化 CLI 界面
-- **pygeomag**：高精度磁偏角计算
-- **pandas**：数据处理和分析
-- **pathlib**：文件路径管理
+### Core Dependencies
+- **Python 3.8+**: Primary programming language
+- **Rich**: Modern CLI interface
+- **pygeomag**: High-precision magnetic declination calculation
+- **pandas**: Data processing and analysis
+- **pathlib**: File path management
 
-### 数据处理技术
-- **SQLite**：Fenix 数据库访问
-- **CSV**：NAIP 数据格式
-- **WMM-2025**：地磁模型
-- **AIRAC**：航空信息修订周期
+### Data Processing Technologies
+- **SQLite**: Fenix database access
+- **CSV**: NAIP data format
+- **WMM-2025**: Geomagnetic Model
+- **AIRAC**: Aeronautical Information Regulation And Control (AIRAC) cycle
 
-## 📊 性能特征
+## 📊 Performance Characteristics
 
-### 处理能力
-- **数据吞吐量**：每分钟处理 10,000+ 航路点
-- **内存使用**：峰值 < 500MB
-- **磁偏角计算**：< 1ms/点（本地计算）
-- **并发能力**：支持多线程处理
+### Processing Capability
+- **Data Throughput**: Processes 10,000+ waypoints per minute
+- **Memory Usage**: Peak < 500MB
+- **Magnetic Declination Calculation**: < 1ms/point (local computation)
+- **Concurrency Capability**: Supports multi-threaded processing
 
-### 系统要求
-- **最低内存**：4GB RAM
-- **存储空间**：100MB 可用空间
-- **处理器**：双核 2.0GHz+
-- **操作系统**：Windows 10/11, macOS, Linux
+### System Requirements
+- **Minimum Memory**: 4GB RAM
+- **Storage Space**: 100MB available space
+- **Processor**: Dual-core 2.0GHz+
+- **Operating System**: Windows 10/11, macOS, Linux
 
-## 🔒 安全性设计
+## 🔒 Security Design
 
-### 数据保护
-- **输入验证**：严格的文件格式验证
-- **错误隔离**：防止数据损坏的错误处理
-- **备份机制**：自动备份原始数据
-- **权限控制**：最小权限原则
+### Data Protection
+- **Input Validation**: Strict file format validation
+- **Error Isolation**: Error handling to prevent data corruption
+- **Backup Mechanism**: Automatic backup of original data
+- **Permission Control**: Principle of least privilege
 
-### 代码安全
-- **类型安全**：完整的类型提示
-- **内存安全**：自动内存管理
-- **异常安全**：完善的异常处理
-- **输入清理**：防止注入攻击
+### Code Security
+- **Type Safety**: Comprehensive type hinting
+- **Memory Safety**: Automatic memory management
+- **Exception Safety**: Robust exception handling
+- **Input Sanitization**: Prevents injection attacks
 
-## 🚀 扩展性
+## 🚀 Extensibility
 
-### 模块扩展
-- **数据源扩展**：支持新的数据源格式
-- **输出格式扩展**：支持新的目标格式
-- **计算模块扩展**：支持新的计算算法
-- **界面扩展**：支持 GUI 界面
+### Module Extension
+- **Data Source Extension**: Supports new data source formats
+- **Output Format Extension**: Supports new target formats
+- **Computation Module Extension**: Supports new computation algorithms
+- **Interface Extension**: Supports GUI interfaces
 
-### 性能扩展
-- **分布式处理**：支持集群计算
-- **缓存机制**：智能数据缓存
-- **并行优化**：多进程并行处理
-- **硬件加速**：GPU 加速计算
+### Performance Extension
+- **Distributed Processing**: Supports cluster computing
+- **Caching Mechanism**: Intelligent data caching
+- **Parallel Optimization**: Multi-process parallel processing
+- **Hardware Acceleration**: GPU-accelerated computation
 
-## 🔄 维护性
+## 🔄 Maintainability
 
-### 代码质量
-- **代码规范**：PEP 8 标准
-- **文档完整**：100% API 文档覆盖
-- **测试覆盖**：90%+ 代码覆盖率
-- **静态分析**：自动代码质量检查
+### Code Quality
+- **Code Standards**: PEP 8 standard
+- **Documentation Completeness**: 100% API documentation coverage
+- **Test Coverage**: 90%+ code coverage
+- **Static Analysis**: Automatic code quality checks
 
-### 监控和调试
-- **详细日志**：分级日志记录
-- **性能监控**：实时性能指标
-- **错误追踪**：完整的错误堆栈
-- **调试工具**：内置调试接口
+### Monitoring and Debugging
+- **Detailed Logging**: Leveled logging
+- **Performance Monitoring**: Real-time performance metrics
+- **Error Tracking**: Complete error stack
+- **Debugging Tools**: Built-in debugging interface
 
-## 📈 未来规划
+## 📈 Future Roadmap
 
-### 短期目标（1-3个月）
-- GUI 界面开发
-- 批量处理功能
-- 数据验证工具
-- 性能优化
+### Short-term Goals (1-3 months)
+- GUI interface development
+- Batch processing functionality
+- Data validation tools
+- Performance optimization
 
-### 中期目标（3-6个月）
-- 多格式支持
-- 云端处理
-- API 接口
-- 插件系统
+### Mid-term Goals (3-6 months)
+- Multi-format support
+- Cloud processing
+- API interface
+- Plugin system
 
-### 长期目标（6-12个月）
-- 机器学习优化
-- 实时数据更新
-- 社区生态系统
-- 企业级部署
+### Long-term Goals (6-12 months)
+- Machine learning optimization
+- Real-time data updates
+- Community ecosystem
+- Enterprise-grade deployment
 
 ---
 
-这个架构设计确保了 iFly 导航数据转换器的可靠性、性能和可维护性，为飞行模拟社区提供专业级的数据转换解决方案。
+This architectural design ensures the reliability, performance, and maintainability of the iFly Navigation Data Converter, providing a professional-grade data conversion solution for the flight simulation community.

@@ -1,160 +1,160 @@
-# 📋 更新日志
+# 📋 Changelog
 
-本文档记录Nav-data项目的所有重要变更，包括新功能、Bug修复和性能改进。
+This document records all significant changes to the Nav-data project, including new features, bug fixes, and performance improvements.
 
-## 版本格式说明
+## Version Format Description
 
-遵循[语义化版本](https://semver.org/lang/zh-CN/)规范：`主版本号.次版本号.修订号`
+Follows the [Semantic Versioning](https://semver.org/lang/zh-CN/) specification: `MAJOR.MINOR.PATCH`
 
-- **主版本号**：不兼容的 API 修改
-- **次版本号**：向下兼容的功能性新增
-- **修订号**：向下兼容的问题修正
+- **MAJOR** (主版本号): Incompatible API changes
+- **MINOR** (次版本号): Backward-compatible functional additions
+- **PATCH** (修订号): Backward-compatible bug fixes
 
-## [未发布] - 开发中
+## [Unreleased] - In Development
 
-### 🚀 新增功能
-- 📖 **完整文档体系重写**：专业级技术文档，确保准确性和完整性
-- 🏗️ **架构说明文档**：详细的系统架构和技术实现说明
-- 📚 **API参考文档**：完整的模块和函数文档
-- 🔧 **故障排除指南**：常见问题解决方案和调试技巧
-- 🤝 **贡献指南**：标准化的开发流程和代码规范
+### 🚀 New Features
+- 📖 **Complete Documentation Overhaul**: Professional-grade technical documentation to ensure accuracy and completeness
+- 🏗️ **Architecture Description Document**: Detailed system architecture and technical implementation notes
+- 📚 **API Reference Documentation**: Comprehensive module and function documentation
+- 🔧 **Troubleshooting Guide**: Solutions for common issues and debugging tips
+- 🤝 **Contribution Guide**: Standardized development workflows and coding standards
 
-### ✨ 改进
-- 📊 **数据处理优化**：支持多进程并行处理，提升转换效率
-- 🧭 **磁偏角计算**：使用高精度WMM模型，确保计算准确性
-- 📍 **坐标精度提升**：支持8位小数精度，达到毫米级精度
-- 🎯 **数据验证增强**：严格的数据类型和格式验证机制
+### ✨ Improvements
+- 📊 **Data Processing Optimization**: Supports multi-process parallel processing to improve conversion efficiency
+- 🧭 **Magnetic Declination Calculation**: Uses high-precision WMM model to ensure calculation accuracy
+- 📍 **Coordinate Precision Improvement**: Supports 8 decimal places for millimeter-level precision
+- 🎯 **Enhanced Data Validation**: Strict data type and format validation mechanism
 
-### 🐛 修复
-- 🔒 **数据库锁定问题**：优化数据库连接管理，减少锁定错误
-- 📁 **路径处理改进**：增强跨平台路径兼容性
-- 🔄 **编码检测优化**：自动检测文件编码，避免乱码问题
+### 🐛 Bug Fixes
+- 🔒 **Database Locking Issues**: Optimized database connection management to reduce locking errors
+- 📁 **Path Handling Improvements**: Enhanced cross-platform path compatibility
+- 🔄 **Encoding Detection Optimization**: Automatically detects file encoding to prevent garbled characters
 
 ## [2.1.0] - 2024-03-15
 
-### 🚀 新增功能
-- 🛫 **MSFS 2024支持**：完全兼容Microsoft Flight Simulator 2024
-- 🔄 **AIRAC 2024支持**：支持最新的AIRAC数据格式
-- 📊 **批量处理优化**：大幅提升大型数据集的处理速度
-- 🎯 **智能缓存系统**：坐标查找性能提升87%
+### 🚀 New Features
+- 🛫 **MSFS 2024 Support**: Fully compatible with Microsoft Flight Simulator 2024
+- 🔄 **AIRAC 2024 Support**: Supports the latest AIRAC data format
+- 📊 **Batch Processing Optimization**: Significantly improved processing speed for large datasets
+- 🎯 **Intelligent Caching System**: Coordinate lookup performance improved by 87%
 
-### ✨ 改进
-- ⚡ **性能优化**：整体处理速度提升47%（8核并行）
-- 🗜️ **数据库压缩**：输出文件大小减少30%
-- 📈 **内存使用优化**：减少50%的内存占用
-- 🎨 **用户界面改进**：更直观的配置向导
+### ✨ Improvements
+- ⚡ **Performance Optimization**: Overall processing speed increased by 47% (8-core parallel)
+- 🗜️ **Database Compression**: Output file size reduced by 30%
+- 📈 **Memory Usage Optimization**: Reduced memory footprint by 50%
+- 🎨 **User Interface Improvements**: More intuitive configuration wizard
 
-### 🐛 修复
-- 🏢 **机场坐标精度**：修复部分机场坐标偏差问题
-- 📡 **VHF频率处理**：修正频率格式转换错误
-- 🛬 **ILS数据完整性**：确保着陆引导数据的准确性
+### 🐛 Bug Fixes
+- 🏢 **Airport Coordinate Precision**: Fixed coordinate deviation issues for some airports
+- 📡 **VHF Frequency Handling**: Corrected frequency format conversion errors
+- 🛬 **ILS Data Integrity**: Ensured accuracy of instrument landing system (ILS) guidance data
 
 ## [2.0.0] - 2024-01-20
 
-### 🚀 主要变更
-- 🏗️ **架构重构**：模块化设计，提升可维护性
-- 🐍 **Python 3.11支持**：充分利用最新Python特性
-- 📊 **SQLite优化**：数据库结构优化，查询性能提升
+### 🚀 Major Changes
+- 🏗️ **Architectural Refactoring**: Modular design to improve maintainability
+- 🐍 **Python 3.11 Support**: Fully leverages the latest Python features
+- 📊 **SQLite Optimization**: Database structure optimized, query performance improved
 
-### 🚀 新增功能
-- 🛫 **iniBuilds A350支持**：专门支持iniBuilds A350系列飞机
-- 📋 **CIFP程序处理**：完整的SID/STAR/IAP程序支持
-- 🗺️ **航路系统支持**：高空/低空航路完整支持
-- 🔍 **数据验证系统**：自动验证数据完整性和准确性
+### 🚀 New Features
+- 🛫 **iniBuilds A350 Support**: Dedicated support for iniBuilds A350 series aircraft
+- 📋 **CIFP Procedure Handling**: Full support for SID/STAR/IAP procedures
+- 🗺️ **Airway System Support**: Full support for high-altitude/low-altitude airways
+- 🔍 **Data Validation System**: Automatically validates data integrity and accuracy
 
-### ✨ 改进
-- 🎯 **精度提升**：坐标精度提升到8位小数
-- 🔄 **错误处理**：完善的错误处理和恢复机制
-- 📖 **日志系统**：详细的处理日志和进度提示
+### ✨ Improvements
+- 🎯 **Precision Improvement**: Coordinate precision increased to 8 decimal places
+- 🔄 **Error Handling**: Comprehensive error handling and recovery mechanisms
+- 📖 **Logging System**: Detailed processing logs and progress indicators
 
-### 💔 不兼容变更
-- 📂 **配置结构变更**：需要重新配置数据源路径
-- 🗄️ **数据库格式更新**：不兼容1.x版本的数据库
+### 💔 Breaking Changes
+- 📂 **Configuration Structure Change**: Requires reconfiguring data source paths
+- 🗄️ **Database Format Update**: Incompatible with 1.x version databases
 
 ## [1.3.2] - 2023-11-10
 
-### 🐛 修复
-- 🔧 **路径配置问题**：修复包含空格的路径处理错误
-- 📊 **CSV编码问题**：改进CSV文件编码检测
-- 🗄️ **数据库连接**：修复长时间运行时的连接超时
+### 🐛 Bug Fixes
+- 🔧 **Path Configuration Issues**: Fixed path handling errors for paths containing spaces
+- 📊 **CSV Encoding Issues**: Improved CSV file encoding detection
+- 🗄️ **Database Connection**: Fixed connection timeouts during long-running operations
 
-### ✨ 改进
-- 📈 **进度显示**：添加详细的处理进度提示
-- 🔍 **错误报告**：改进错误信息的详细程度
+### ✨ Improvements
+- 📈 **Progress Display**: Added detailed processing progress indicators
+- 🔍 **Error Reporting**: Improved detail level of error messages
 
 ## [1.3.1] - 2023-10-15
 
-### 🐛 修复
-- 🧭 **磁偏角计算**：修复极地区域磁偏角计算异常
-- 📡 **NDB数据处理**：修正NDB频率范围验证
-- 🏢 **机场数据匹配**：改进机场ICAO代码匹配逻辑
+### 🐛 Bug Fixes
+- 🧭 **Magnetic Declination Calculation**: Fixed magnetic declination calculation anomalies in polar regions
+- 📡 **NDB Data Handling**: Corrected NDB frequency range validation
+- 🏢 **Airport Data Matching**: Improved airport ICAO code matching logic
 
 ## [1.3.0] - 2023-09-20
 
-### 🚀 新增功能
-- 🛬 **GS着陆引导**：支持ILS滑行坡度数据处理
-- 📊 **数据统计报告**：处理完成后显示详细统计信息
-- 🔄 **增量更新**：支持部分数据的增量更新
+### 🚀 New Features
+- 🛬 **GS Landing Guidance**: Supports ILS glideslope data processing
+- 📊 **Data Statistics Report**: Displays detailed statistical information after processing is complete
+- 🔄 **Incremental Updates**: Supports incremental updates for partial data
 
-### ✨ 改进
-- ⚡ **处理速度**：航路点处理速度提升60%
-- 💾 **内存管理**：优化大文件处理的内存使用
-- 🎨 **用户体验**：改进命令行界面和提示信息
+### ✨ Improvements
+- ⚡ **Processing Speed**: Waypoint processing speed increased by 60%
+- 💾 **Memory Management**: Optimized memory usage for large file processing
+- 🎨 **User Experience**: Improved command-line interface and prompt messages
 
 ## [1.2.0] - 2023-08-10
 
-### 🚀 新增功能
-- 🛫 **PMDG 777支持**：扩展支持PMDG 777系列飞机
-- 🗺️ **终端航路点**：支持终端区域航路点处理
-- 📋 **程序数据验证**：SID/STAR程序数据完整性检查
+### 🚀 New Features
+- 🛫 **PMDG 777 Support**: Extended support for PMDG 777 series aircraft
+- 🗺️ **Terminal Waypoints**: Supports terminal area waypoint processing
+- 📋 **Procedure Data Validation**: SID/STAR procedure data integrity checks
 
-### 🐛 修复
-- 📊 **NAIP数据解析**：修复部分NAIP格式的解析错误
-- 🔄 **并发处理**：解决多进程处理时的数据竞争问题
+### 🐛 Bug Fixes
+- 📊 **NAIP Data Parsing**: Fixed parsing errors for some NAIP formats
+- 🔄 **Concurrent Processing**: Resolved data race issues during multi-process handling
 
 ## [1.1.0] - 2023-07-01
 
-### 🚀 新增功能
-- 📡 **VHF导航台**：支持VOR/DME导航台数据处理
-- 📻 **NDB导航台**：支持非定向信标台数据处理
-- 🗺️ **航路点系统**：完整的航路点数据处理
+### 🚀 New Features
+- 📡 **VHF Navigation Aids**: Supports VOR/DME navigation aid data processing
+- 📻 **NDB Navigation Aids**: Supports Non-Directional Beacon (NDB) data processing
+- 🗺️ **Waypoint System**: Comprehensive waypoint data processing
 
-### ✨ 改进
-- 🎯 **数据精度**：提升坐标转换精度
-- 📊 **处理效率**：优化大数据集处理性能
+### ✨ Improvements
+- 🎯 **Data Precision**: Improved coordinate conversion accuracy
+- 📊 **Processing Efficiency**: Optimized processing performance for large datasets
 
 ## [1.0.0] - 2023-06-01
 
-### 🎉 首次发布
-- 🏢 **机场数据处理**：基础机场信息和坐标转换
-- 🛬 **跑道数据处理**：跑道信息和方向计算
-- 🎯 **PMDG 737支持**：专门支持PMDG 737系列飞机
-- 📊 **NAIP数据支持**：支持Navigraph NAIP格式数据
-- 🐍 **Python实现**：基于Python 3.8+的高性能实现
+### 🎉 Initial Release
+- 🏢 **Airport Data Processing**: Basic airport information and coordinate conversion
+- 🛬 **Runway Data Processing**: Runway information and heading calculation
+- 🎯 **PMDG 737 Support**: Dedicated support for PMDG 737 series aircraft
+- 📊 **NAIP Data Support**: Supports Navigraph NAIP format data
+- 🐍 **Python Implementation**: High-performance implementation based on Python 3.8+
 
 ---
 
-## 🔗 相关链接
+## 🔗 Related Links
 
-- **📦 发布页面**：[GitHub Releases](https://github.com/your-repo/nav-data/releases)
-- **🐛 问题报告**：[GitHub Issues](https://github.com/your-repo/nav-data/issues)
-- **💡 功能建议**：[GitHub Discussions](https://github.com/your-repo/nav-data/discussions)
-- **📖 文档首页**：[使用指南](guide/index.md)
+- **📦 Release Page**: [GitHub Releases](https://github.com/your-repo/nav-data/releases)
+- **🐛 Issue Reporting**: [GitHub Issues](https://github.com/your-repo/nav-data/issues)
+- **💡 Feature Suggestions**: [GitHub Discussions](https://github.com/your-repo/nav-data/discussions)
+- **📖 Documentation Home**: [User Guide](guide/index.md)
 
-## 📅 版本计划
+## 📅 Version Roadmap
 
-### 下一版本 (v2.2.0) - 计划中
-- 🌐 **多语言支持**：英文界面和文档
-- 🔄 **自动更新**：AIRAC数据自动更新检查
-- 📊 **数据分析**：航行数据质量分析工具
-- 🛫 **更多飞机支持**：扩展支持更多第三方飞机
+### Next Version (v2.2.0) - Planned
+- 🌐 **Multi-language Support**: English interface and documentation
+- 🔄 **Automatic Updates**: Automatic AIRAC data update checks
+- 📊 **Data Analysis**: Navigation data quality analysis tools
+- 🛫 **More Aircraft Support**: Extended support for more third-party aircraft
 
-### 长期规划
-- 🌍 **全球数据支持**：扩展到更多ICAO区域
-- 🔌 **插件系统**：支持第三方数据处理器
-- 🎮 **图形界面**：开发桌面GUI应用
-- ☁️ **云端服务**：在线数据转换服务
+### Long-term Plan
+- 🌍 **Global Data Support**: Expand to more ICAO regions
+- 🔌 **Plugin System**: Supports third-party data processors
+- 🎮 **Graphical Interface**: Development of a desktop GUI application
+- ☁️ **Cloud Service**: Online data conversion service
 
 ---
 
-*本更新日志遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 格式规范。* 
+*This changelog adheres to the [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) format specification.*

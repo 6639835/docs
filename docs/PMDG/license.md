@@ -1,10 +1,10 @@
-# 📜 许可证信息
+# 📜 License Information
 
-## MIT 许可证
+## MIT License
 
-**Nav-data** 项目基于 MIT 许可证开源，这是一个简洁、宽松的开源许可证。
+The **Nav-data** project is open-sourced under the MIT License, which is a simple, permissive open-source license.
 
-### 许可证全文
+### Full License Text
 
 ```
 MIT License
@@ -30,48 +30,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## 🔍 许可证解读
+## 🔍 License Interpretation
 
-### ✅ 您可以
-- **商业使用** - 在商业环境中使用本软件
-- **修改** - 修改软件源代码
-- **分发** - 分发原始或修改后的软件
-- **私人使用** - 为个人目的使用软件
-- **专利使用** - 使用任何贡献者拥有的专利权
+### ✅ You Can
+- **Commercial Use** - Use the software in a commercial environment
+- **Modification** - Modify the software's source code
+- **Distribution** - Distribute the original or modified software
+- **Private Use** - Use the software for personal purposes
+- **Patent Use** - Use any patent rights owned by contributors
 
-### ⚠️ 使用条件
-- **包含许可证** - 必须在软件的所有副本中包含原始许可证和版权声明
-- **包含版权声明** - 必须保留原始版权声明
+### ⚠️ Conditions
+- **Include License** - Must include the original license and copyright notice in all copies of the software
+- **Include Copyright Notice** - Must retain the original copyright notice
 
-### ❌ 限制
-- **责任** - 软件作者不承担任何责任
-- **担保** - 软件不提供任何形式的担保
+### ❌ Limitations
+- **Liability** - The software authors are not liable for any claims
+- **Warranty** - The software does not provide any form of warranty
 
-## 📋 第三方依赖许可证
+## 📋 Third-Party Dependency Licenses
 
-Nav-data 使用了以下开源库，它们各自有自己的许可证：
+Nav-data uses the following open-source libraries, each with its own license:
 
-### Python 标准库
+### Python Standard Library
 - **Python** - [PSF License](https://docs.python.org/3/license.html)
 
-### 数据处理库
+### Data Processing Libraries
 - **pandas** - BSD 3-Clause License
 - **numpy** - BSD License
 - **sqlite3** - Public Domain
 
-### 科学计算库
+### Scientific Computing Libraries
 - **pygeomag** - MIT License
 
-### 用户界面库
+### User Interface Libraries
 - **tqdm** - MIT License + MPL-2.0 License
 
-### 文件处理库
+### File Processing Libraries
 - **chardet** - LGPL 2.1 License
 
-### HTTP 库
+### HTTP Libraries
 - **requests** - Apache 2.0 License
 
-### 完整依赖列表
+### Full Dependency List
 
 ```yaml
 核心依赖:
@@ -89,100 +89,100 @@ Nav-data 使用了以下开源库，它们各自有自己的许可证：
   mypy: ">=0.910"       # MIT
 ```
 
-### 许可证兼容性
+### License Compatibility
 
-所有第三方依赖的许可证都与 MIT 许可证兼容，确保：
-- 商业使用的合法性
-- 分发的自由度
-- 最小的法律约束
+All third-party dependencies' licenses are compatible with the MIT License, ensuring:
+- Legality of commercial use
+- Freedom of distribution
+- Minimal legal constraints
 
-## ⚖️ 法律声明
+## ⚖️ Legal Disclaimer
 
-### 免责声明
+### Disclaimer
 
-**Nav-data 项目仅供模拟飞行使用，请注意以下重要声明：**
+The **Nav-data** project is intended for flight simulation use only. Please note the following important statements:
 
-#### 🛫 用途限制
-- **仅限模拟器使用** - 本软件及其生成的导航数据仅用于飞行模拟器
-- **非真实导航** - 禁止用于真实航空器导航
-- **教育用途** - 适用于教育、培训和娱乐目的
+#### 🛫 Usage Restrictions
+- **Simulator Use Only** - This software and its generated navigation data are for flight simulators only
+- **No Real Navigation** - Prohibited for use in real aircraft navigation
+- **Educational Purposes** - Suitable for educational, training, and entertainment purposes
 
-#### 📊 数据来源
-- **第三方数据** - 导航数据来源于第三方公开数据源
-- **数据准确性** - 不保证数据的完整性、准确性或时效性
-- **用户责任** - 用户需自行验证数据的适用性
+#### 📊 Data Sources
+- **Third-Party Data** - Navigation data is sourced from publicly available third-party data sources
+- **Data Accuracy** - No guarantee is made regarding the completeness, accuracy, or timeliness of the data
+- **User Responsibility** - Users are responsible for verifying the suitability of the data
 
-#### 🚫 责任限制
-本软件的开发者和贡献者**不承担任何责任**，包括但不限于：
-- 数据错误导致的损失
-- 软件缺陷造成的影响
-- 使用不当引起的问题
-- 第三方数据的准确性问题
+#### 🚫 Limitation of Liability
+The developers and contributors of this software **assume no liability** for, including but not limited to:
+- Losses due to data errors
+- Impacts caused by software defects
+- Issues arising from improper use
+- Accuracy issues with third-party data
 
-### 合规使用
+### Compliant Use
 
-#### 📋 数据使用规范
-1. **遵守当地法律** - 确保符合您所在地区的法律法规
-2. **尊重数据来源** - 遵守原始数据提供者的使用条款
-3. **非商业限制** - 某些数据源可能有非商业使用限制
-4. **归属声明** - 适当地归属数据来源和软件作者
+#### 📋 Data Usage Guidelines
+1. **Comply with Local Laws** - Ensure compliance with laws and regulations in your region
+2. **Respect Data Sources** - Adhere to the terms of use of the original data providers
+3. **Non-Commercial Restrictions** - Some data sources may have non-commercial use restrictions
+4. **Attribution Statement** - Properly attribute data sources and software authors
 
-#### 🔒 安全使用
-1. **备份数据** - 在使用前备份原始导航数据
-2. **测试验证** - 在关键使用前充分测试
-3. **版本管理** - 使用稳定版本进行重要应用
-4. **监控更新** - 及时关注安全更新和修复
+#### 🔒 Secure Use
+1. **Backup Data** - Back up original navigation data before use
+2. **Test and Verify** - Thoroughly test before critical use
+3. **Version Management** - Use stable versions for important applications
+4. **Monitor Updates** - Keep an eye on security updates and fixes
 
-## 🤝 贡献者协议
+## 🤝 Contributor Agreement
 
-### 贡献许可
-通过向 Nav-data 项目贡献代码，您同意：
+### Contribution License
+By contributing code to the Nav-data project, you agree to:
 
-1. **许可授予** - 您的贡献将在 MIT 许可证下发布
-2. **版权归属** - 贡献的版权将归属于项目
-3. **原创性** - 您确认贡献是您的原创作品
-4. **权利拥有** - 您拥有授予这些权利的合法权力
+1. **License Grant** - Your contributions will be released under the MIT License
+2. **Copyright Ownership** - Copyright of contributions will belong to the project
+3. **Originality** - You confirm that your contribution is your original work
+4. **Right to Grant** - You possess the legal authority to grant these rights
 
-### 版权归属
-- **原始作者** - Nav-data 开发团队
-- **贡献者** - 所有代码贡献者保留其贡献的作者身份
-- **集体版权** - 项目作为整体由所有贡献者共同拥有
+### Copyright Ownership
+- **Original Author(s)** - Nav-data development team
+- **Contributors** - All code contributors retain authorship of their contributions
+- **Collective Copyright** - The project as a whole is jointly owned by all contributors
 
-## 📞 法律咨询
+## 📞 Legal Consultation
 
-### 问题报告
-如果您发现任何许可证或法律合规问题，请：
+### Issue Reporting
+If you discover any license or legal compliance issues, please:
 
-1. **立即报告** - 通过 GitHub Issues 报告
-2. **详细描述** - 提供具体的法律关切
-3. **联系维护者** - 直接联系项目维护者
-4. **专业建议** - 在必要时寻求专业法律建议
+1. **Report Immediately** - Report via GitHub Issues
+2. **Describe in Detail** - Provide specific legal concerns
+3. **Contact Maintainers** - Directly contact project maintainers
+4. **Professional Advice** - Seek professional legal advice if necessary
 
-### 商业咨询
-对于商业使用或大规模部署：
+### Commercial Consultation
+For commercial use or large-scale deployment:
 
-1. **风险评估** - 建议进行内部法律风险评估
-2. **合规检查** - 确保符合您组织的合规要求
-3. **专业意见** - 考虑咨询知识产权律师
-4. **定制许可** - 如需特殊许可安排，请联系我们
+1. **Risk Assessment** - Internal legal risk assessment is recommended
+2. **Compliance Check** - Ensure compliance with your organization's requirements
+3. **Professional Opinion** - Consider consulting an intellectual property lawyer
+4. **Custom Licensing** - Contact us for special licensing arrangements
 
-## 🔗 相关资源
+## 🔗 Related Resources
 
-### 许可证信息
+### License Information
 - [MIT License 完整文本](https://opensource.org/licenses/MIT)
-- [开源许可证比较](https://choosealicense.com/)
-- [GPL 兼容性指南](https://www.gnu.org/licenses/license-compatibility.html)
+- [Open Source License Comparison](https://choosealicense.com/)
+- [GPL Compatibility Guide](https://www.gnu.org/licenses/license-compatibility.html)
 
-### 合规指南
-- [企业开源合规最佳实践](https://www.linuxfoundation.org/resources/open-source-compliance-program)
-- [知识产权风险管理](https://www.wipo.int/sme/en/ip_business/trade_secrets/trade_secrets.htm)
+### Compliance Guides
+- [Enterprise Open Source Compliance Best Practices](https://www.linuxfoundation.org/resources/open-source-compliance-program)
+- [Intellectual Property Risk Management](https://www.wipo.int/sme/en/ip_business/trade_secrets/trade_secrets.htm)
 
-### 航空数据法规
-- [ICAO 附件 15 - 航空信息服务](https://www.icao.int/safety/aviation-medicine/library/Documents/ICAO_Annex_15.pdf)
-- [FAA 数据使用政策](https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/gnss/library/policy/)
+### Aviation Data Regulations
+- [ICAO Annex 15 - Aeronautical Information Services](https://www.icao.int/safety/aviation-medicine/library/Documents/ICAO_Annex_15.pdf)
+- [FAA Data Use Policy](https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/gnss/library/policy/)
 
 ---
 
-**最后更新**: 2024年12月24日
+**Last Updated**: December 24, 2024
 
-**注意**: 本文档仅供信息参考，不构成法律建议。如有具体法律问题，请咨询专业律师。 
+**Note**: This document is for informational purposes only and does not constitute legal advice. For specific legal questions, please consult a professional attorney.

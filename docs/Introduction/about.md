@@ -1,20 +1,20 @@
-# 欢迎来到 Nav-data 文档 🚀
+# Welcome to Nav-data Documentation 🚀
 
-Nav-data 是一个由航空爱好者共同维护的数据转换项目，致力于为飞行模拟器（如 Microsoft Flight Simulator）提供高质量的导航数据支持。无论你是开发者、飞行员还是爱好者，这里都能找到你需要的资料和指南。
+Nav-data is a data conversion project maintained collaboratively by aviation enthusiasts, dedicated to providing high-quality navigation data support for flight simulators (such as Microsoft Flight Simulator). Whether you are a developer, a pilot, or an enthusiast, you will find the resources and guides you need here.
 
-## 🔄 数据转换流程
+## 🔄 Data Conversion Process
 
 ```mermaid
 graph TD
-    A["📊 数据源<br/>AIRAC/Navigraph"] --> B["🔄 Nav-data<br/>转换工具"]
-    B --> C["🛩️ PMDG<br/>SQLite数据库"]
-    B --> D["✈️ iniBuilds<br/>A350数据文件"]
-    B --> E["🛫 X-Plane<br/>DAT格式文件"]
+    A["📊 Data Source<br/>AIRAC/Navigraph"] --> B["🔄 Nav-data<br/>Conversion Tool"]
+    B --> C["🛩️ PMDG<br/>SQLite Database"]
+    B --> D["✈️ iniBuilds<br/>A350 Data File"]
+    B --> E["🛫 X-Plane<br/>DAT Format File"]
     
-    F["🗂️ 原始数据"] --> G["📥 数据解析"]
-    G --> H["🔧 格式转换"]
-    H --> I["✅ 数据验证"]
-    I --> J["📤 输出文件"]
+    F["🗂️ Raw Data"] --> G["📥 Data Parsing"]
+    G --> H["🔧 Format Conversion"]
+    H --> I["✅ Data Validation"]
+    I --> J["📤 Output File"]
     
     style A fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
     style B fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
@@ -31,31 +31,31 @@ graph TD
 
 ---
 
-## ✨ 项目特色
+## ✨ Project Features
 
 <div class="feature-grid">
   <div class="feature-card">
     <div class="feature-icon">📦</div>
-    <h3>多平台支持</h3>
-    <p>支持 PMDG、iniBuilds、X-Plane 等主流飞行模拟器平台</p>
+    <h3>Multi-Platform Support</h3>
+    <p>Supports mainstream flight simulator platforms such as PMDG, iniBuilds, and X-Plane</p>
   </div>
   
   <div class="feature-card">
     <div class="feature-icon">🛫</div>
-    <h3>详细指南</h3>
-    <p>提供完整的配置、安装与使用指南，新手也能轻松上手</p>
+    <h3>Detailed Guides</h3>
+    <p>Provides complete configuration, installation, and usage guides, making it easy for beginners to get started</p>
   </div>
   
   <div class="feature-card">
     <div class="feature-icon">🗂️</div>
-    <h3>结构清晰</h3>
-    <p>数据结构清晰，易于扩展与维护，支持自定义配置</p>
+    <h3>Clear Structure</h3>
+    <p>Clear data structure, easy to extend and maintain, supports custom configurations</p>
   </div>
   
   <div class="feature-card">
     <div class="feature-icon">🤝</div>
-    <h3>开源协作</h3>
-    <p>欢迎社区贡献与协作，共同构建更好的导航数据工具</p>
+    <h3>Open Source Collaboration</h3>
+    <p>Community contributions and collaboration are welcome to collectively build better navigation data tools</p>
   </div>
 </div>
 
@@ -103,22 +103,22 @@ graph TD
 
 ---
 
-## 🚀 快速开始
-1. 选择你的插件： [PMDG 指南](/PMDG/guide/index) | [iniBuilds 指南](/iniBuilds/guide/index)
-2. 按照指南进行配置与安装
-3. 享受更真实的飞行体验！
+## 🚀 Quick Start
+1. Select your addon: [PMDG Guide](/PMDG/guide/index) | [iniBuilds Guide](/iniBuilds/guide/index)
+2. Follow the guide for configuration and installation
+3. Enjoy a more realistic flight experience!
 
 ---
 
-## 🧭 快速导航
+## 🧭 Quick Navigation
 
-### 📊 平台支持对比
+### 📊 Platform Support Comparison
 
 <div class="comparison-table">
   <table>
     <thead>
       <tr>
-        <th>特性</th>
+        <th>Feature</th>
         <th>🛩️ PMDG</th>
         <th>✈️ iniBuilds</th>
         <th>🛫 X-Plane</th>
@@ -126,106 +126,106 @@ graph TD
     </thead>
     <tbody>
       <tr>
-        <td><strong>支持飞机</strong></td>
-        <td>737系列, 777系列</td>
+        <td><strong>Supported Aircraft</strong></td>
+        <td>737 series, 777 series</td>
         <td>A350</td>
-        <td>所有X-Plane飞机</td>
+        <td>All X-Plane aircraft</td>
       </tr>
       <tr>
-        <td><strong>数据格式</strong></td>
-        <td>SQLite数据库</td>
-        <td>专用数据文件</td>
-        <td>DAT格式文件</td>
+        <td><strong>Data Format</strong></td>
+        <td>SQLite Database</td>
+        <td>Proprietary Data Files</td>
+        <td>DAT Format Files</td>
       </tr>
       <tr>
-        <td><strong>安装难度</strong></td>
-        <td><StatusBadge type="warning" text="中等" icon="⚠️" /></td>
-        <td><StatusBadge type="success" text="简单" icon="✅" /></td>
-        <td><StatusBadge type="error" text="复杂" icon="🔴" /></td>
+        <td><strong>Installation Difficulty</strong></td>
+        <td><StatusBadge type="warning" text="Medium" icon="⚠️" /></td>
+        <td><StatusBadge type="success" text="Easy" icon="✅" /></td>
+        <td><StatusBadge type="error" text="Complex" icon="🔴" /></td>
       </tr>
       <tr>
-        <td><strong>数据覆盖</strong></td>
-        <td><StatusBadge type="success" text="完整" icon="✅" /></td>
-        <td><StatusBadge type="success" text="完整" icon="✅" /></td>
-        <td><StatusBadge type="warning" text="部分" icon="⚠️" /></td>
+        <td><strong>Data Coverage</strong></td>
+        <td><StatusBadge type="success" text="Complete" icon="✅" /></td>
+        <td><StatusBadge type="success" text="Complete" icon="✅" /></td>
+        <td><StatusBadge type="warning" text="Partial" icon="⚠️" /></td>
       </tr>
       <tr>
-        <td><strong>更新频率</strong></td>
-        <td>AIRAC周期</td>
-        <td>AIRAC周期</td>
-        <td>按需更新</td>
+        <td><strong>Update Frequency</strong></td>
+        <td>AIRAC Cycle</td>
+        <td>AIRAC Cycle</td>
+        <td>On-demand Updates</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-### 📚 使用指南
+### 📚 Usage Guides
 <div class="guide-links">
   <a href="/PMDG/guide/index" class="guide-link pmdg">
     <div class="guide-icon">🛩️</div>
     <div class="guide-content">
-      <h3>PMDG 指南</h3>
-      <p>PMDG 飞机导航数据转换完整教程</p>
+      <h3>PMDG Guide</h3>
+      <p>Complete tutorial for PMDG aircraft navigation data conversion</p>
     </div>
   </a>
   
   <a href="/iniBuilds/guide/index" class="guide-link inibuilds">
     <div class="guide-icon">✈️</div>
     <div class="guide-content">
-      <h3>iniBuilds 指南</h3>
-      <p>iniBuilds A350 导航数据转换指南</p>
+      <h3>iniBuilds Guide</h3>
+      <p>iniBuilds A350 navigation data conversion guide</p>
     </div>
   </a>
   
   <a href="/X-Plane/guide/index" class="guide-link xplane">
     <div class="guide-icon">🛫</div>
     <div class="guide-content">
-      <h3>X-Plane 指南</h3>
-      <p>X-Plane 导航数据处理完整流程</p>
+      <h3>X-Plane Guide</h3>
+      <p>Complete process for X-Plane navigation data handling</p>
     </div>
   </a>
 </div>
 
-### 🆘 获取帮助
+### 🆘 Get Help
 <div class="help-section">
   <div class="help-category">
-    <h4>🛩️ PMDG 支持</h4>
+    <h4>🛩️ PMDG Support</h4>
     <ul>
-      <li><a href="/PMDG/faq">常见问题解答</a></li>
-      <li><a href="/PMDG/troubleshooting">故障排除指南</a></li>
+      <li><a href="/PMDG/faq">Frequently Asked Questions</a></li>
+      <li><a href="/PMDG/troubleshooting">Troubleshooting Guide</a></li>
     </ul>
   </div>
   
   <div class="help-category">
-    <h4>✈️ iniBuilds 支持</h4>
+    <h4>✈️ iniBuilds Support</h4>
     <ul>
-      <li><a href="/iniBuilds/faq">常见问题解答</a></li>
-      <li><a href="/iniBuilds/troubleshooting">故障排除指南</a></li>
+      <li><a href="/iniBuilds/faq">Frequently Asked Questions</a></li>
+      <li><a href="/iniBuilds/troubleshooting">Troubleshooting Guide</a></li>
     </ul>
   </div>
   
   <div class="help-category">
-    <h4>🛫 X-Plane 支持</h4>
+    <h4>🛫 X-Plane Support</h4>
     <ul>
-      <li><a href="/X-Plane/faq">常见问题解答</a></li>
-      <li><a href="/X-Plane/troubleshooting">故障排除指南</a></li>
+      <li><a href="/X-Plane/faq">Frequently Asked Questions</a></li>
+      <li><a href="/X-Plane/troubleshooting">Troubleshooting Guide</a></li>
     </ul>
   </div>
 </div>
 
-### 🔧 技术文档
+### 🔧 Technical Documentation
 <div class="tech-links">
   <a href="/iniBuilds/architecture" class="tech-link">
     <span class="tech-icon">🏗️</span>
-    <span>项目架构说明</span>
+    <span>Project Architecture Explanation</span>
   </a>
   <a href="/iniBuilds/contributing" class="tech-link">
     <span class="tech-icon">🤝</span>
-    <span>贡献指南</span>
+    <span>Contribution Guide</span>
   </a>
   <a href="/iniBuilds/changelog" class="tech-link">
     <span class="tech-icon">📋</span>
-    <span>更新日志</span>
+    <span>Changelog</span>
   </a>
 </div>
 
@@ -409,7 +409,6 @@ graph TD
 
 ---
 
-## 🌍 加入我们 & 反馈建议
+## 🌍 Join Us & Feedback
 - GitHub: [nav-data](https://github.com/nav-data)
-- 有建议或问题？欢迎通过 [Issue](https://github.com/nav-data/nav-data/issues) 或邮件联系我们！
-
+- Have suggestions or questions? Feel free to contact us via [Issue](https://github.com/nav-data/nav-data/issues) or email!

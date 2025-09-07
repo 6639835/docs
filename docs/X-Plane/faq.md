@@ -1,158 +1,154 @@
 ---
-title: 常见问题解答
-description: Nav-data 用户常见问题和解决方案
+title: Frequently Asked Questions
+description: Common issues and solutions for Nav-data users
 ---
 
-# 常见问题解答 (FAQ)
+# Frequently Asked Questions (FAQ)
 
-本文档收集了用户在使用 Nav-data 过程中最常遇到的问题和解决方案。
+This document collects the most frequently encountered issues and their solutions for users during Nav-data usage.
 
-## 🚀 快速解答
+## 🚀 Quick Answers
 
-### Q: Nav-data 是什么？
-**A:** Nav-data 是一个开源的航空导航数据转换工具，专门将中国民航的 NAIP 数据转换为 X-Plane 飞行模拟器可使用的格式。它包含四个主要模块：航路处理、PDF提取、终端修复和X-Plane CIFP生成。
+### Q: What is Nav-data?
+**A:** Nav-data is an open-source aviation navigation data conversion tool specifically designed to convert NAIP data from Chinese Civil Aviation into a format usable by the X-Plane flight simulator. It consists of four main modules: Airway Processing, PDF Extraction, Terminal Procedure Repair, and X-Plane CIFP Generation.
 
-### Q: 我需要什么才能使用 Nav-data？
-**A:** 您需要：
-- Python 3.6+ 环境
-- 相应的导航数据源文件（CSV、PDF等）
-- X-Plane 飞行模拟器（使用转换后的数据）
-- 基本的命令行操作知识
+### Q: What do I need to use Nav-data?
+**A:** You will need:
+- Python 3.6+ environment
+- Corresponding navigation data source files (CSV, PDF, etc.)
+- X-Plane flight simulator (to use the converted data)
+- Basic command-line operation knowledge
 
-### Q: Nav-data 是免费的吗？
-**A:** 是的，Nav-data 采用 MIT 开源许可证，完全免费使用，包括商业用途。
+### Q: Is Nav-data free?
+**A:** Yes, Nav-data is licensed under the MIT open-source license and is completely free to use, including for commercial purposes.
 
-## 📦 安装相关问题
+## 📦 Installation Related Issues
 
-### Q: 安装时提示 "Python 版本过低" 怎么办？
-**A:** Nav-data 需要 Python 3.6 或更高版本。解决方案：
+### Q: What to do if "Python version is too low" is prompted during installation?
+**A:** Nav-data requires Python 3.6 or higher. Solutions:
 
 ```bash
-# 检查当前版本
+# Check current version
 python --version
 
-# 如果版本过低，请：
-# Windows: 从 python.org 下载最新版本
+# If the version is too low, please:
+# Windows: Download the latest version from python.org
 # macOS: brew upgrade python
 # Linux: sudo apt update && sudo apt upgrade python3
 ```
 
-### Q: pip install 命令失败怎么办？
-**A:** 常见解决方案：
+### Q: What to do if the pip install command fails?
+**A:** Common solutions:
 
 ```bash
-# 1. 升级 pip
+# 1. Upgrade pip
 python -m pip install --upgrade pip
 
-# 2. 使用国内镜像源
+# 2. Use a domestic mirror
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ package_name
 
-# 3. 清除缓存
+# 3. Clear cache
 pip cache purge
 
-# 4. 使用虚拟环境
+# 4. Use a virtual environment
 python -m venv nav-data-env
 source nav-data-env/bin/activate  # Linux/macOS
-# 或 nav-data-env\Scripts\activate  # Windows
+# Or nav-data-env\Scripts\activate  # Windows
 ```
 
-### Q: 依赖包安装失败，提示权限不足？
-**A:** 解决方案：
+### Q: Dependency package installation fails, prompting "permission denied"?
+**A:** Solutions:
 
 ```bash
-# 方案1: 使用用户安装（推荐）
+# Solution 1: User installation (recommended)
 pip install --user package_name
 
-# 方案2: 使用虚拟环境（最推荐）
+# Solution 2: Use a virtual environment (most recommended)
 python -m venv nav-data-env
 source nav-data-env/bin/activate
 pip install package_name
 
-# 方案3: 使用sudo（不推荐）
+# Solution 3: Use sudo (not recommended)
 sudo pip install package_name
 ```
 
-### Q: Windows 下安装 pdfplumber 失败？
-**A:** 这通常是缺少 Visual C++ 编译环境导致的：
+### Q: Installing pdfplumber fails on Windows?
+**A:** This is usually due to missing the Visual C++ build environment:
 
-1. 安装 Microsoft Visual C++ Build Tools
-2. 或者使用预编译版本：
+1. Install Microsoft Visual C++ Build Tools
+2. Or use a pre-compiled version:
    ```cmd
    pip install --only-binary=all pdfplumber
    ```
 
-## 🗂️ 数据处理问题
+## 🗂️ Data Processing Issues
 
-### Q: CSV 文件无法读取，提示编码错误？
-**A:** 这是中文CSV文件常见问题：
+### Q: CSV file cannot be read, prompting encoding error?
+**A:** This is a common issue with Chinese CSV files:
 
 ```python
-# 检查文件编码
+# Check file encoding
 import chardet
 with open('your_file.csv', 'rb') as f:
     encoding = chardet.detect(f.read())
     print(encoding)
 
-# 转换编码
+# Convert encoding
 iconv -f gbk -t utf-8 input.csv > output.csv
 ```
 
-### Q: 航路转换后数据不完整？
-**A:** 检查以下项目：
+### Q: Incomplete data after airway conversion?
+**A:** Check the following items:
 
-1. **CSV 文件格式**：确保包含必需字段
-   ```
-   CODE_POINT_START, CODE_TYPE_START, CODE_POINT_END, 
-   CODE_TYPE_END, CODE_DIR, TXT_DESIG
-   ```
+1.  **CSV File Format**: Ensure it contains the required fields
+    ```
+    CODE_POINT_START, CODE_TYPE_START, CODE_POINT_END, 
+    CODE_TYPE_END, CODE_DIR, TXT_DESIG
+    ```
+2.  **Area Filtering Settings**: Check if required data was accidentally filtered out
+    ```python
+    # Check area settings in airway.py
+    china_areas = {'ZB', 'ZG', 'ZY', 'ZS', 'ZW', 'ZJ', 'ZP', 'ZL', 'ZH', 'ZU'}
+    ```
+3.  **Reference Data Files**: Ensure earth_fix.dat and earth_nav.dat exist and are complete
 
-2. **区域过滤设置**：检查是否意外过滤了需要的数据
-   ```python
-   # 在 airway.py 中检查区域设置
-   china_areas = {'ZB', 'ZG', 'ZY', 'ZS', 'ZW', 'ZJ', 'ZP', 'ZL', 'ZH', 'ZU'}
-   ```
+### Q: PDF extracted coordinates are not precise enough?
+**A:** Try the following solutions:
 
-3. **参考数据文件**：确保 earth_fix.dat 和 earth_nav.dat 存在且完整
+1.  **Use manual extraction mode**:
+    ```bash
+    python waypoint_2_edge.py
+    ```
+2.  **Adjust processing parameters**:
+    ```python
+    # Modify precision settings in the script
+    COORDINATE_PRECISION = 8
+    crop_margin = 50  # Increase crop margin
+    ```
+3.  **Pre-process PDF files**:
+    - Ensure the PDF is in text format, not a scanned image
+    - Use tools like Adobe Acrobat to optimize the PDF
 
-### Q: PDF 提取的坐标精度不够？
-**A:** 尝试以下解决方案：
-
-1. **使用手动提取模式**：
-   ```bash
-   python waypoint_2_edge.py
-   ```
-
-2. **调整处理参数**：
-   ```python
-   # 在脚本中修改精度设置
-   COORDINATE_PRECISION = 8
-   crop_margin = 50  # 增加裁剪边距
-   ```
-
-3. **预处理 PDF 文件**：
-   - 确保 PDF 是文本格式而非扫描图像
-   - 使用 Adobe Acrobat 等工具优化 PDF
-
-### Q: 坐标转换结果不正确？
-**A:** 检查坐标格式和转换设置：
+### Q: Incorrect coordinate conversion result?
+**A:** Check coordinate format and conversion settings:
 
 ```python
-# 验证坐标范围（中国区域）
+# Validate coordinate range (China region)
 LAT_MIN, LAT_MAX = 15.0, 55.0
 LON_MIN, LON_MAX = 70.0, 140.0
 
-# 检查度分秒转换
+# Check Degrees-Minutes-Seconds (DMS) conversion
 def dms_to_decimal(degrees, minutes, seconds):
     return degrees + minutes/60 + seconds/3600
 ```
 
-## 🔧 程序修复问题
+## 🔧 Program Repair Issues
 
-### Q: 终端程序编码后格式不正确？
-**A:** 检查编码规则配置：
+### Q: Terminal procedure encoding format is incorrect after encoding?
+**A:** Check encoding rule configuration:
 
 ```python
-# 确认编码规则设置
+# Confirm encoding rule settings
 ENCODING_MAPPINGS = {
     'IF_LINE': 'E  A',
     'TRANSITION_MIDDLE': 'E   ',
@@ -165,108 +161,106 @@ ENCODING_MAPPINGS = {
 }
 ```
 
-### Q: 批量处理时部分文件失败？
-**A:** 使用容错处理模式：
+### Q: Some files fail during batch processing?
+**A:** Use fault-tolerant processing mode:
 
 ```python
-# 修改处理脚本，增加异常处理
+# Modify processing script to add exception handling
 try:
     process_single_file(file_path)
-    print(f"✅ 成功处理: {file_path}")
+    print(f"✅ Successfully processed: {file_path}")
 except Exception as e:
-    print(f"❌ 处理失败: {file_path} - {e}")
-    continue  # 继续处理下一个文件
+    print(f"❌ Processing failed: {file_path} - {e}")
+    continue  # Continue processing the next file
 ```
 
-### Q: 修复规则不生效？
-**A:** 确认修复规则的优先级和匹配条件：
+### Q: Repair rules are not taking effect?
+**A:** Confirm the priority and matching conditions of the repair rules:
 
 ```python
-# 检查规则匹配条件
+# Check rule matching conditions
 def check_rule_match(line, pattern):
     import re
     return re.search(pattern, line) is not None
 
-# 测试特定行
+# Test specific line
 test_line = "APPCH RW25L ABC123 GY M"
 print(check_rule_match(test_line, r"APPCH.*GY M"))
 ```
 
-## 🛩️ X-Plane 集成问题
+## 🛩️ X-Plane Integration Issues
 
-### Q: X-Plane 无法识别转换后的数据？
-**A:** 检查以下项目：
+### Q: X-Plane cannot recognize the converted data?
+**A:** Check the following items:
 
-1. **文件路径正确性**：
-   ```bash
-   # X-Plane 11
-   /path/to/X-Plane/Custom Data/
-   
-   # X-Plane 12
-   /path/to/X-Plane/Output/FMS plans/
-   ```
+1.  **Correct File Path**:
+    ```bash
+    # X-Plane 11
+    /path/to/X-Plane/Custom Data/
+    
+    # X-Plane 12
+    /path/to/X-Plane/Output/FMS plans/
+    ```
+2.  **File Format Integrity**:
+    ```bash
+    # Check if the file ends with "99"
+    tail -n 5 earth_awy.dat
+    ```
+3.  **Encoding Format**:
+    ```bash
+    # Ensure file encoding is UTF-8
+    file -I earth_awy.dat
+    ```
 
-2. **文件格式完整性**：
-   ```bash
-   # 检查文件是否以 "99" 结尾
-   tail -n 5 earth_awy.dat
-   ```
-
-3. **编码格式**：
-   ```bash
-   # 确保文件编码为 UTF-8
-   file -I earth_awy.dat
-   ```
-
-### Q: CIFP 数据在 X-Plane 中显示异常？
-**A:** 验证 CIFP 格式规范：
+### Q: CIFP data displays abnormally in X-Plane?
+**A:** Validate CIFP format specifications:
 
 ```python
-# 检查 CIFP 行格式
+# Check CIFP line format
 def validate_cifp_line(line):
     parts = line.split()
     if line.startswith(('SID', 'STAR', 'APPCH')):
-        return len(parts) >= 15  # CIFP 标准字段数
+        return len(parts) >= 15  # CIFP standard number of fields
     return True
 
-# 批量验证
+# Batch validation
 with open('airport.dat', 'r') as f:
     for i, line in enumerate(f, 1):
         if not validate_cifp_line(line.strip()):
-            print(f"行 {i} 格式错误: {line.strip()}")
+            print(f"Line {i} format error: {line.strip()}")
 ```
 
-### Q: 程序在 X-Plane 中无法选择？
-**A:** 检查程序命名和跑道标识：
+### Q: Procedure cannot be selected in X-Plane?
+**A:** Check procedure naming and runway identifier:
 
-1. **跑道标识符格式**：确保符合 ICAO 标准（如 RW25L, RW03R）
-2. **程序名称**：避免特殊字符和过长名称
-3. **机场代码**：确保使用正确的 ICAO 四字代码
+1.  **Runway Identifier Format**: Ensure compliance with ICAO standards (e.g., RW25L, RW03R)
+2.  **Procedure Name**: Avoid special characters and overly long names
+3.  **Airport Code**: Ensure the correct ICAO four-letter code is used
 
-## ⚡ 性能问题
+## ⚡ Performance Issues
 
-### Q: 处理大文件时速度很慢？
-**A:** 优化处理性能：
+### Q: Slow processing speed when dealing with large files?
+**A:** Optimize processing performance:
 
 ```python
-# 1. 增加批处理大小
-BATCH_SIZE = 5000  # 默认1000
+# 1. Increase batch size
+BATCH_SIZE = 5000  # Default 1000
 
-# 2. 使用多进程处理
+# 2. Use multiprocessing
 from multiprocessing import Pool
 with Pool(processes=4) as pool:
     results = pool.map(process_function, file_list)
 
-# 3. 启用进度缓存
+# 3. Enable progress caching
 USE_CACHE = True
 CACHE_DIR = "cache/"
 ```
 
-### Q: 内存使用过高怎么办？
-**A:** 内存优化策略：
+### Q: High memory usage?
+**A:** Memory optimization strategies:
 
 ```python
-# 1. 分块处理大文件
+# 1. Process large files in chunks
 def process_large_file_chunked(file_path, chunk_size=1000):
     chunk = []
     with open(file_path, 'r') as f:
@@ -275,102 +269,102 @@ def process_large_file_chunked(file_path, chunk_size=1000):
             if len(chunk) >= chunk_size:
                 yield process_chunk(chunk)
                 chunk.clear()
-                gc.collect()  # 强制垃圾回收
+                gc.collect()  # Force garbage collection
 
-# 2. 释放不需要的变量
+# 2. Release unnecessary variables
 del large_data_structure
 gc.collect()
 
-# 3. 使用生成器而非列表
+# 3. Use generators instead of lists
 def data_generator():
     for item in data_source:
         yield process_item(item)
 ```
 
-## 🐛 错误排查
+## 🐛 Error Troubleshooting
 
-### Q: 程序运行时突然崩溃？
-**A:** 收集调试信息：
+### Q: Program crashes unexpectedly during runtime?
+**A:** Collect debugging information:
 
 ```python
-# 1. 启用详细日志
+# 1. Enable detailed logging
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-# 2. 使用异常处理
+# 2. Use exception handling
 try:
     main_processing_function()
 except Exception as e:
     import traceback
-    print(f"错误详情: {e}")
-    print(f"调用栈: {traceback.format_exc()}")
+    print(f"Error details: {e}")
+    print(f"Call stack: {traceback.format_exc()}")
 
-# 3. 检查系统资源
+# 3. Check system resources
 import psutil
-print(f"内存使用: {psutil.virtual_memory().percent}%")
-print(f"磁盘空间: {psutil.disk_usage('/').percent}%")
+print(f"Memory usage: {psutil.virtual_memory().percent}%")
+print(f"Disk space: {psutil.disk_usage('/').percent}%")
 ```
 
-### Q: 输出结果与预期不符？
-**A:** 逐步调试流程：
+### Q: Output result does not match expectations?
+**A:** Step-by-step debugging process:
 
 ```python
-# 1. 添加中间输出
+# 1. Add intermediate output
 def debug_process_step(data, step_name):
     print(f"=== {step_name} ===")
-    print(f"数据量: {len(data)}")
-    print(f"示例数据: {data[:3]}")
+    print(f"Number of data rows: {len(data)}")
+    print(f"Sample data: {data[:3]}")
     return data
 
-# 2. 比较输入输出
-print("输入数据统计:")
+# 2. Compare input and output
+print("Input data statistics:")
 analyze_data(input_data)
-print("输出数据统计:")
+print("Output data statistics:")
 analyze_data(output_data)
 
-# 3. 验证关键步骤
-assert len(processed_data) > 0, "处理后数据为空"
-assert all(validate_item(item) for item in processed_data), "数据验证失败"
+# 3. Validate key steps
+assert len(processed_data) > 0, "Processed data is empty"
+assert all(validate_item(item) for item in processed_data), "Data validation failed"
 ```
 
-## 🌐 平台特定问题
+## 🌐 Platform-Specific Issues
 
-### Q: Windows 下路径包含空格导致错误？
-**A:** 正确处理文件路径：
+### Q: Windows path contains spaces causing errors?
+**A:** Correctly handle file paths:
 
 ```python
 import os
 from pathlib import Path
 
-# 使用 pathlib（推荐）
+# Use pathlib (recommended)
 file_path = Path("C:/Program Files/Nav Data/input.csv")
 if file_path.exists():
     process_file(str(file_path))
 
-# 或者使用引号
+# Or use quotes
 import subprocess
 subprocess.run(['python', 'script.py', '"C:/path with spaces/file.csv"'])
 ```
 
-### Q: macOS 下权限被拒绝？
-**A:** 修复权限问题：
+### Q: Permission denied on macOS?
+**A:** Fix permission issues:
 
 ```bash
-# 1. 修改文件权限
+# 1. Modify file permissions
 chmod +x script.py
 chmod 755 nav-data-directory/
 
-# 2. 使用用户目录
+# 2. Use user directory
 mkdir ~/nav-data
 cd ~/nav-data
 
-# 3. 避免使用 sudo
-# 不要: sudo python script.py
-# 使用: python script.py
+# 3. Avoid using sudo
+# Don't: sudo python script.py
+# Use: python script.py
 ```
 
-### Q: Linux 下缺少系统依赖？
-**A:** 安装必要的系统包：
+### Q: Missing system dependencies on Linux?
+**A:** Install necessary system packages:
 
 ```bash
 # Ubuntu/Debian
@@ -380,115 +374,113 @@ sudo apt-get install python3-dev libpoppler-cpp-dev
 # CentOS/RHEL
 sudo yum install python3-devel poppler-cpp-devel
 
-# 或者使用 conda
+# Or use conda
 conda install -c conda-forge pdfplumber
 ```
 
-## 🔄 数据更新问题
+## 🔄 Data Update Issues
 
-### Q: 如何获取最新的 NAIP 数据？
-**A:** 数据更新流程：
+### Q: How to get the latest NAIP data?
+**A:** Data update process:
 
-1. **数据来源**：从民航局官方网站获取最新 NAIP 数据
-2. **AIRAC 周期**：确保数据对应正确的 AIRAC 周期
-3. **格式验证**：新数据可能需要格式调整
+1.  **Data Source**: Obtain the latest NAIP data from the official website of the Civil Aviation Administration
+2.  **AIRAC Cycle**: Ensure the data corresponds to the correct AIRAC cycle
+3.  **Format Validation**: New data may require format adjustments
 
 ```python
-# 检查 AIRAC 周期
+# Check AIRAC cycle
 from datetime import datetime
 def get_current_airac():
-    # AIRAC 计算逻辑
-    base_date = datetime(2025, 1, 23)  # 基准日期
+    # AIRAC calculation logic
+    base_date = datetime(2025, 1, 23)  # Base date
     current_date = datetime.now()
     days_diff = (current_date - base_date).days
-    cycle_number = (days_diff // 28) + 2501  # 每28天一个周期
+    cycle_number = (days_diff // 28) + 2501  # One cycle every 28 days
     return cycle_number
 ```
 
-### Q: 转换后的数据过期了怎么办？
-**A:** 定期更新数据：
+### Q: What to do if the converted data is expired?
+**A:** Regularly update data:
 
-1. **建立更新提醒**：每28天检查一次新的 AIRAC 数据
-2. **备份旧数据**：在更新前备份当前可用的数据
-3. **渐进式更新**：先测试新数据，确认无误后再全面更新
+1.  **Set up update reminders**: Check for new AIRAC data every 28 days
+2.  **Back up old data**: Back up currently available data before updating
+3.  **Phased update**: Test new data first, then perform a full update once confirmed to be correct
 
-## 📞 获取更多帮助
+## 📞 Get More Help
 
-### Q: 在哪里可以获得技术支持？
-**A:** 多种获取帮助的途径：
+### Q: Where can I get technical support?
+**A:** Multiple ways to get help:
 
-1. **文档资源**：
-   - [使用指南](./guide/usage.md)
-   - [故障排除](./troubleshooting.md)
-   - [架构说明](./architecture.md)
+1.  **Documentation Resources**:
+    - [Usage Guide](./guide/usage.md)
+    - [Troubleshooting](./troubleshooting.md)
+    - [Architecture Description](./architecture.md)
+2.  **Community Support**:
+    - [GitHub Issues](https://github.com/your-repo/nav-data/issues)
+    - [GitHub Discussions](https://github.com/your-repo/nav-data/discussions)
+    - Flight simulation community forums
+3.  **Direct Contact**:
+    - Submit a detailed Bug report
+    - Include error logs and system information
+    - Provide sample data that can reproduce the issue
 
-2. **社区支持**：
-   - [GitHub Issues](https://github.com/your-repo/nav-data/issues)
-   - [GitHub Discussions](https://github.com/your-repo/nav-data/discussions)
-   - 飞行模拟社区论坛
-
-3. **直接联系**：
-   - 提交详细的 Bug 报告
-   - 包含错误日志和系统信息
-   - 提供可重现问题的示例数据
-
-### Q: 如何报告问题或建议改进？
-**A:** 有效的问题报告包含：
+### Q: How to report issues or suggest improvements?
+**A:** An effective issue report includes:
 
 ```markdown
-**问题描述**: 简要描述遇到的问题
-**重现步骤**: 
-1. 使用的命令或操作
-2. 输入的数据文件
-3. 期望的结果 vs 实际结果
+**Issue Description**: Briefly describe the encountered issue
+**Steps to Reproduce**: 
+1. Commands or operations used
+2. Input data files
+3. Expected result vs. Actual result
 
-**环境信息**:
-- 操作系统: Windows 10 / macOS 12 / Ubuntu 20.04
-- Python 版本: 3.9.7
-- Nav-data 版本: v2.1.0
+**Environment Information**:
+- Operating System: Windows 10 / macOS 12 / Ubuntu 20.04
+- Python Version: 3.9.7
+- Nav-data Version: v2.1.0
 
-**附加信息**:
-- 错误日志
-- 相关截图  
-- 示例数据文件（如可分享）
+**Additional Information**:
+- Error logs
+- Related screenshots  
+- Sample data files (if shareable)
 ```
 
-### Q: 想要贡献代码或文档？
-**A:** 欢迎参与项目开发！
+### Q: Want to contribute code or documentation?
+**A:** Welcome to contribute to project development!
 
-1. **查看贡献指南**：[contributing.md](./contributing.md)
-2. **了解项目架构**：[architecture.md](./architecture.md)
-3. **遵循编码规范**：PEP 8 + 项目特定规范
-4. **提交 Pull Request**：通过 GitHub 提交您的贡献
+1.  **Check contribution guidelines**：[contributing.md](./contributing.md)
+2.  **Understand project architecture**：[architecture.md](./architecture.md)
+3.  **Follow coding standards**：PEP 8 + project-specific standards
+4.  **Submit a Pull Request**：Submit your contribution via GitHub
 
 ---
 
-## 💡 实用提示
+## 💡 Useful Tips
 
-### 快速诊断命令
+### Quick Diagnostic Commands
 ```bash
-# 环境检查
+# Environment check
 python --version
 pip list | grep -E "(pandas|pdfplumber|tqdm|colorama)"
 
-# 数据文件检查
+# Data file check
 ls -la *.csv *.dat *.pdf
 file -I input_file.csv
 
-# 系统资源检查
-df -h  # 磁盘空间
-free -h  # 内存使用（Linux）
+# System resource check
+df -h  # Disk space
+free -h  # Memory usage (Linux)
 ```
 
-### 调试开关
-在脚本中添加调试模式：
+### Debug Switch
+Add debug mode to the script:
 ```python
-DEBUG = True  # 设置为 True 启用调试输出
+DEBUG = True  # Set to True to enable debug output
 
 if DEBUG:
-    print(f"处理文件: {file_path}")
-    print(f"数据行数: {len(data)}")
-    print(f"处理时间: {elapsed_time:.2f}s")
+    print(f"Processing file: {file_path}")
+    print(f"Number of data rows: {len(data)}")
+    print(f"Processing time: {elapsed_time:.2f}s")
 ```
 
-**如果您的问题不在上述列表中，请不要犹豫，通过 GitHub Issues 提出新的问题！**我们会持续更新这个FAQ文档，让它更好地为社区服务。 ✈️ 
+**If your issue is not listed above, please don't hesitate to open a new issue via GitHub Issues!** We will continuously update this FAQ document to better serve the community. ✈️ 

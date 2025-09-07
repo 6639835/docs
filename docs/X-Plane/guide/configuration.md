@@ -1,116 +1,116 @@
-# 配置说明
+# Configuration Instructions
 
-本文档详细说明了 Nav-data 各个模块的配置选项和参数设置。
+This document details the configuration options and parameter settings for each Nav-data module.
 
-## 📋 配置文件概览
+## 📋 Configuration File Overview
 
-### 主要配置文件
+### Main Configuration Files
 ```
 config/
-├── main.conf           # 主配置文件
-├── airway.conf         # 航路处理配置
-├── pdf_extract.conf    # PDF提取配置
-├── terminal.conf       # 终端程序配置
-└── paths.conf          # 路径配置
+├── main.conf           # Main configuration file
+├── airway.conf         # Airway processing configuration
+├── pdf_extract.conf    # PDF extraction configuration
+├── terminal.conf       # Terminal program configuration
+└── paths.conf          # Path configuration
 ```
 
-### 环境变量配置
+### Environment Variable Configuration
 ```bash
-# .env 文件示例
+# .env file example
 NAV_DATA_HOME=/path/to/nav-data
 XPLANE_PATH=/path/to/X-Plane
 LOG_LEVEL=INFO
 ```
 
-## 🛣️ 航路模块配置 (Airway)
+## 🛣️ Airway Module Configuration (Airway)
 
-### 配置文件：`config/airway.conf`
+### Configuration File: `config/airway.conf`
 
 ```ini
 [General]
-# 启用详细日志
+# Enable verbose logging
 verbose_logging = true
 
-# 进度条显示
+# Show progress bar
 show_progress = true
 
-# 批处理大小
+# Batch size
 batch_size = 1000
 
 [Input]
-# CSV 输入文件路径
+# CSV input file path
 csv_file = RTE_SEG.csv
 
-# X-Plane 参考数据文件
+# X-Plane reference data files
 earth_fix_file = earth_fix.dat
 earth_nav_file = earth_nav.dat
 earth_awy_file = earth_awy.dat
 
 [Output]
-# 输出文件编码
+# Output file encoding
 output_encoding = utf-8
 
-# 备份原始文件
+# Create backup of original file
 create_backup = true
 
-# 备份文件后缀
+# Backup file suffix
 backup_suffix = .backup
 
 [Filtering]
-# 排除的空域区域代码（逗号分隔）
+# Excluded airspace area codes (comma-separated)
 excluded_areas = ZB,ZG,ZY,ZS,ZW,ZJ,ZP,ZL,ZH,ZU
 
-# 最小航路段长度（海里）
+# Minimum segment length (nautical miles)
 min_segment_length = 0.1
 
-# 最大航路段长度（海里）
+# Maximum segment length (nautical miles)
 max_segment_length = 999.9
 
 [Validation]
-# 启用数据验证
+# Enable data validation
 enable_validation = true
 
-# 导航点容差（度）
+# Waypoint coordinate tolerance (degrees)
 coordinate_tolerance = 0.001
 
-# 区域代码验证
+# Area code validation
 validate_area_codes = true
 
 [AIRAC]
-# 自动计算 AIRAC 周期
+# Automatically calculate AIRAC cycle
 auto_calculate_cycle = true
 
-# 手动指定 AIRAC 周期（格式：YYMM）
+# Manually specify AIRAC cycle (format: YYMM)
 manual_cycle = 
 
-# AIRAC 基准日期（ISO格式）
+# AIRAC reference date (ISO format)
 reference_date = 2025-01-23
 
-# 基准周期
+# Reference cycle
 reference_cycle = 2501
 ```
 
-### 代码中的配置选项
+### Configuration Options in Code
 
-#### 航路处理主脚本配置
+#### Airway Processing Main Script Configuration
 ```python
-# Airway/airway.py 配置示例
+# Airway/airway.py configuration example
 
-# 中国空域代码配置
+# China airspace codes configuration
 CHINA_AREAS = {
-    'ZB',  # 北京飞行情报区
-    'ZG',  # 广州飞行情报区
-    'ZY',  # 沈阳飞行情报区
-    'ZS',  # 上海飞行情报区
-    'ZW',  # 乌鲁木齐飞行情报区
-    'ZJ',  # 三亚飞行情报区
-    'ZP',  # 兰州飞行情报区
-    'ZL',  # 昆明飞行情报区
-    'ZH',  # 武汉飞行情报区
-    'ZU'   # 成都飞行情报区
+    'ZB',  # Beijing Flight Information Region
+    'ZG',  # Guangzhou Flight Information Region
+    'ZY',  # Shenyang Flight Information Region
+    'ZS',  # Shanghai Flight Information Region
+    'ZW',  # Urumqi Flight Information Region
+    'ZJ',  # Sanya Flight Information Region
+    'ZP',  # Lanzhou Flight Information Region
+    'ZL',  # Kunming Flight Information Region
+    'ZH',  # Wuhan Flight Information Region
+    'ZU'   # Chengdu Flight Information Region
 }
 
-# 文件路径配置
+# File path configuration
 FILE_PATHS = {
     'csv_input': 'RTE_SEG.csv',
     'earth_fix': 'earth_fix.dat',
@@ -118,7 +118,7 @@ FILE_PATHS = {
     'earth_awy': 'earth_awy.dat'
 }
 
-# 导航点类型映射
+# Waypoint type mapping
 NAVIGATION_TYPES = {
     'DESIGNATED_POINT': {'code': 'DESIGNATED_POINT', 'type_code': '11'},
     'VORDME': {'code': 'VORDME', 'type_code': '3'},
@@ -126,95 +126,95 @@ NAVIGATION_TYPES = {
 }
 ```
 
-## 📄 PDF 提取模块配置
+## 📄 PDF Extraction Module Configuration
 
-### 配置文件：`config/pdf_extract.conf`
+### Configuration File: `config/pdf_extract.conf`
 
 ```ini
 [General]
-# 处理模式：auto（自动）、manual（手动）
+# Processing mode: auto, manual
 processing_mode = auto
 
-# 输出格式：txt、json、csv
+# Output format: txt, json, csv
 output_format = txt
 
-# 字符编码
+# Character encoding
 encoding = utf-8
 
 [PDF_Processing]
-# PDF 解析引擎：pdfplumber、pypdf2
+# PDF parsing engine: pdfplumber, pypdf2
 pdf_engine = pdfplumber
 
-# 页面裁剪边距（像素）
+# Page cropping margins (pixels)
 crop_margin_top = 50
 crop_margin_bottom = 50
 crop_margin_left = 30
 crop_margin_right = 30
 
-# 文本提取阈值
+# Text extraction threshold
 text_confidence_threshold = 0.8
 
-# 线条检测阈值
+# Line detection threshold
 line_detection_threshold = 5
 
 [Coordinate_Extraction]
-# 坐标格式验证
+# Coordinate format validation
 coordinate_format_strict = true
 
-# 坐标精度（小数位数）
+# Coordinate precision (decimal places)
 coordinate_precision = 8
 
-# 坐标范围验证（中国区域）
+# Coordinate range validation (China region)
 latitude_min = 15.0
 latitude_max = 55.0
 longitude_min = 70.0
 longitude_max = 140.0
 
 [Error_Handling]
-# 遇到错误时继续处理
+# Continue processing on error
 continue_on_error = true
 
-# 错误日志详细程度
+# Error log detail level
 error_detail_level = high
 
-# 自动修复常见错误
+# Automatically fix common errors
 auto_fix_common_errors = true
 
 [Output]
-# 输出文件命名模式
-# 变量：{airport}, {type}, {timestamp}
+# Output file naming pattern
+# Variables: {airport}, {type}, {timestamp}
 filename_pattern = {airport}_{type}.txt
 
-# 创建输出目录
+# Create output directories
 create_output_dirs = true
 
-# 覆盖现有文件
+# Overwrite existing files
 overwrite_existing = false
 ```
 
-### 代码配置示例
+### Code Configuration Example
 
-#### PDF 处理配置
+#### PDF Processing Configuration
 ```python
-# PDF extract/utils.py 配置
+# PDF extract/utils.py configuration
 
-# 航路点类别定义
+# Waypoint category definitions
 WAYPOINT_CATEGORIES = {
-    'ENRT': 1,      # 航路点
-    'VHF': 2,       # VHF 导航台
-    'NDB': 3,       # NDB 导航台
-    'TERMINAL': 4   # 终端区航路点
+    'ENRT': 1,      # Enroute waypoint
+    'VHF': 2,       # VHF navaid
+    'NDB': 3,       # NDB navaid
+    'TERMINAL': 4   # Terminal area waypoint
 }
 
-# 坐标处理精度
+# Coordinate processing precision
 COORDINATE_PRECISION = 8
 
-# 区域代码转换表
+# Area code translation table
 AREA_CODE_TRANSLATION = {
-    'KA': 'K1'  # 特殊区域代码转换
+    'KA': 'K1'  # Special area code conversion
 }
 
-# 错误信息颜色配置（使用 colorama）
+# Error message color configuration (using colorama)
 COLOR_CONFIG = {
     'error': Fore.RED,
     'warning': Fore.YELLOW,
@@ -223,25 +223,25 @@ COLOR_CONFIG = {
 }
 ```
 
-#### 坐标提取配置
+#### Coordinate Extraction Configuration
 ```python
-# PDF extract/waypoint_1_pdf.py 配置
+# PDF extract/waypoint_1_pdf.py configuration
 
-# 页面处理设置
+# Page processing settings
 PAGE_PROCESSING = {
     'enable_text_lines': True,
     'debug_output': False,
     'max_lines_per_page': 1000
 }
 
-# 坐标计算设置
+# Coordinate calculation settings
 COORDINATE_CALCULATION = {
     'precision_digits': 8,
     'handle_number_prefix': True,
     'auto_format_detection': True
 }
 
-# 字符处理设置
+# Character processing settings
 CHARACTER_PROCESSING = {
     'degree_symbol_replacement': '°',
     'minute_symbol_replacement': "'",
@@ -250,29 +250,29 @@ CHARACTER_PROCESSING = {
 }
 ```
 
-## 🔧 终端程序配置 (Terminal Patch)
+## 🔧 Terminal Program Configuration (Terminal Patch)
 
-### 配置文件：`config/terminal.conf`
+### Configuration File: `config/terminal.conf`
 
 ```ini
 [Encoder]
-# 默认输入路径
+# Default input path
 default_input_path = PDF extract/public
 
-# 默认输出路径
+# Default output path
 default_output_path = PDF extract/output
 
-# 文件编码
+# File encoding
 file_encoding = utf-8
 
-# 启用编码验证
+# Enable encoding validation
 enable_encoding_validation = true
 
 [Processing_Rules]
-# IF 点识别规则
+# IF point identification rules
 if_point_markers = c
 
-# 编码规则
+# Encoding rules
 encoding_rules = {
     'if_line': 'E  A',
     'transition_middle': 'E   ',
@@ -285,13 +285,13 @@ encoding_rules = {
 }
 
 [ReEncoder]
-# 支持的机场代码前缀
+# Supported airport code prefixes
 supported_airport_prefixes = ZB,ZG,ZL,ZU,ZW,ZY,ZJ,ZS,ZH,ZP
 
-# 文件编码检测
+# File encoding detection
 auto_detect_encoding = true
 
-# 编码修复规则
+# Encoding fix rules
 fix_rules = {
     'appch_gy_m_rule': true,
     'pure_alpha_rule': true,
@@ -300,29 +300,29 @@ fix_rules = {
 }
 
 [Validation]
-# 格式验证
+# Format validation
 validate_format = true
 
-# 跑道标识符验证
+# Runway identifier validation
 validate_runway_identifiers = true
 
-# 程序类型验证
+# Procedure type validation
 validate_procedure_types = true
 ```
 
-### 编码器配置示例
+### Encoder Configuration Example
 
 ```python
-# Terminal Patch/terminal_encoder.py 配置
+# Terminal Patch/terminal_encoder.py configuration
 
-# 程序类型标识
+# Procedure type markers
 PROCEDURE_MARKERS = {
     'approach': 'c',
     'departure': 'd',
     'arrival': 'a'
 }
 
-# 编码映射
+# Encoding mappings
 ENCODING_MAPPINGS = {
     'IF_LINE': 'E  A',
     'TRANSITION_MIDDLE': 'E   ',
@@ -334,7 +334,7 @@ ENCODING_MAPPINGS = {
     'HOLDING_END': 'EE H'
 }
 
-# 文件处理设置
+# File processing settings
 FILE_PROCESSING = {
     'batch_mode': True,
     'show_progress': True,
@@ -343,123 +343,123 @@ FILE_PROCESSING = {
 }
 ```
 
-## 🛩️ X-Plane CIFP 模块配置
+## 🛩️ X-Plane CIFP Module Configuration
 
-### 配置文件：`config/cifp.conf`
+### Configuration File: `config/cifp.conf`
 
 ```ini
 [General]
-# X-Plane 版本兼容性
+# X-Plane version compatibility
 xplane_version = 12
 
-# CIFP 数据格式版本
+# CIFP data format version
 cifp_format_version = 1101
 
 [Paths]
-# 输入数据路径
+# Input data path
 input_path = /Users/lujuncheng/Downloads/XP导航数据/编码重构
 
-# 输出文件夹
+# Output folder
 output_folder = /Users/lujuncheng/Downloads/XP导航数据/CIFP
 
-# X-Plane 安装路径
+# X-Plane installation path
 xplane_path = /Users/lujuncheng/Downloads/xplane12_native_2502
 
-# CSV 数据文件夹
+# CSV data folder
 csv_folder = /Users/lujuncheng/Downloads/NAIP2502
 
 [Processing]
-# 处理程序类型
+# Process procedure types
 process_departures = true
 process_arrivals = true
 process_approaches = true
 
-# 跑道信息处理
+# Generate runway information
 generate_runway_info = true
 
-# 程序混合模式
+# Procedure mixing mode
 enable_procedure_mixing = true
 
 [NavAid_Processing]
-# VOR 数据文件
+# VOR data file
 vor_data_file = VOR.csv
 
-# NDB 数据文件  
+# NDB data file  
 ndb_data_file = NDB.csv
 
-# 频率处理
+# Frequency processing
 frequency_conversion = true
 
-# 高度单位转换（米转英尺）
+# Altitude unit conversion (meters to feet)
 altitude_conversion_factor = 3.28
 
 [Waypoint_Processing]
-# 航路点类型编码
+# Waypoint type coding
 waypoint_type_coding = true
 
-# ARINC 424 兼容性
+# ARINC 424 compatibility
 arinc424_compatibility = true
 
-# 区域代码处理
+# Process area codes
 process_area_codes = true
 
 [Validation]
-# 坐标验证容差
+# Coordinate validation tolerance
 coordinate_tolerance = 0.2
 
-# 航路点标识符验证
+# Waypoint identifier validation
 validate_identifiers = true
 
-# 程序完整性检查
+# Procedure integrity check
 validate_procedure_integrity = true
 ```
 
-### 航路点系统配置
+### Waypoint System Configuration
 
 ```python
-# X-Plane CIFP/utils.py 配置
+# X-Plane CIFP/utils.py configuration
 
-# 航路点类别定义
+# Waypoint category definitions
 WAYPOINT_CATEGORIES = {
-    'UNAVAILABLE': -1,  # 状态不可用
-    'WAYPOINT': 1,      # 航路点
-    'VHF_NAVAID': 2,    # VHF 导航设备
-    'NDB_NAVAID': 3     # NDB 导航设备
+    'UNAVAILABLE': -1,  # Status unavailable
+    'WAYPOINT': 1,      # Waypoint
+    'VHF_NAVAID': 2,    # VHF Navaid
+    'NDB_NAVAID': 3     # NDB Navaid
 }
 
-# 坐标比较容差（度）
+# Coordinate comparison tolerance (degrees)
 COORDINATE_TOLERANCE = 0.2
 
-# 区域代码映射
+# Area code mapping
 AREA_CODE_MAPPING = {
-    # 中国飞行情报区代码
-    'ZBPE': 'ZB',  # 北京
-    'ZGZU': 'ZG',  # 广州
-    'ZYSH': 'ZY',  # 沈阳
-    'ZSHA': 'ZS',  # 上海
-    'ZWUQ': 'ZW',  # 乌鲁木齐
-    'ZJSA': 'ZJ',  # 三亚
-    'ZLHW': 'ZL',  # 兰州
-    'ZUCK': 'ZU',  # 成都
-    'ZHWH': 'ZH'   # 武汉
+    # China Flight Information Region codes
+    'ZBPE': 'ZB',  # Beijing
+    'ZGZU': 'ZG',  # Guangzhou
+    'ZYSH': 'ZY',  # Shenyang
+    'ZSHA': 'ZS',  # Shanghai
+    'ZWUQ': 'ZW',  # Urumqi
+    'ZJSA': 'ZJ',  # Sanya
+    'ZLHW': 'ZL',  # Lanzhou
+    'ZUCK': 'ZU',  # Chengdu
+    'ZHWH': 'ZH'   # Wuhan
 }
 ```
 
-## 📊 数据处理配置
+## 📊 Data Processing Configuration
 
-### CSV 数据配置
+### CSV Data Configuration
 
 ```python
-# 通用 CSV 处理配置
+# General CSV processing configuration
 CSV_CONFIG = {
-    'encoding': 'gbk',          # 中文 CSV 通常使用 GBK 编码
+    'encoding': 'gbk',          # Chinese CSV usually uses GBK encoding
     'delimiter': ',',
     'quotechar': '"',
     'skipinitialspace': True,
     'na_values': ['', 'N/A', 'NULL', '0.0']
 }
 
-# 必需的 CSV 字段
+# Required CSV fields
 REQUIRED_CSV_FIELDS = {
     'airway': [
         'CODE_POINT_START', 'CODE_TYPE_START',
@@ -477,19 +477,19 @@ REQUIRED_CSV_FIELDS = {
 }
 ```
 
-### 数据库配置
+### Database Configuration
 ```python
-# X-Plane CIFP/数据库.py 配置
+# X-Plane CIFP/database.py configuration
 
 DATABASE_CONFIG = {
     'connection_timeout': 30,
     'auto_commit': True,
     'encoding': 'utf-8',
-    'journal_mode': 'WAL',  # SQLite 优化
+    'journal_mode': 'WAL',  # SQLite optimization
     'synchronous': 'NORMAL'
 }
 
-# 数据表结构
+# Table schemas
 TABLE_SCHEMAS = {
     'waypoints': {
         'id': 'INTEGER PRIMARY KEY',
@@ -503,9 +503,9 @@ TABLE_SCHEMAS = {
 }
 ```
 
-## 🔧 日志配置
+## 🔧 Logging Configuration
 
-### 日志配置文件：`config/logging.conf`
+### Logging Configuration File: `config/logging.conf`
 
 ```ini
 [loggers]
@@ -572,20 +572,20 @@ format=%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(func
 datefmt=%Y-%m-%d %H:%M:%S
 ```
 
-### Python 日志配置示例
+### Python Logging Configuration Example
 
 ```python
 import logging
 import logging.config
 from pathlib import Path
 
-# 加载日志配置
+# Load logging configuration
 def setup_logging(config_path='config/logging.conf'):
-    """设置日志配置"""
+    """Set up logging configuration"""
     if Path(config_path).exists():
         logging.config.fileConfig(config_path)
     else:
-        # 默认配置
+        # Default configuration
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -596,57 +596,57 @@ def setup_logging(config_path='config/logging.conf'):
             ]
         )
 
-# 各模块日志器
+# Loggers for each module
 def get_logger(name):
-    """获取模块专用日志器"""
+    """Get module-specific logger"""
     return logging.getLogger(name)
 
-# 使用示例
+# Usage example
 logger = get_logger('airway')
-logger.info('航路处理开始')
+logger.info('Airway processing started')
 ```
 
-## ⚙️ 性能优化配置
+## ⚙️ Performance Optimization Configuration
 
-### 内存管理配置
+### Memory Management Configuration
 ```python
-# 内存使用优化
+# Memory usage optimization
 MEMORY_CONFIG = {
-    'chunk_size': 10000,        # 分块处理大小
-    'max_memory_usage': '2GB',  # 最大内存使用
-    'garbage_collection': True, # 启用垃圾回收
-    'buffer_size': 8192        # 文件读取缓冲区
+    'chunk_size': 10000,        # Chunk processing size
+    'max_memory_usage': '2GB',  # Maximum memory usage
+    'garbage_collection': True, # Enable garbage collection
+    'buffer_size': 8192        # File read buffer size
 }
 
-# 并发处理配置
+# Concurrency processing configuration
 CONCURRENCY_CONFIG = {
-    'max_workers': 4,           # 最大工作线程数
-    'enable_multiprocessing': False, # 多进程处理
-    'thread_pool_size': 2       # 线程池大小
+    'max_workers': 4,           # Maximum worker threads
+    'enable_multiprocessing': False, # Enable multiprocessing
+    'thread_pool_size': 2       # Thread pool size
 }
 ```
 
-### 缓存配置
+### Caching Configuration
 ```python
-# 缓存设置
+# Cache settings
 CACHE_CONFIG = {
     'enable_cache': True,
     'cache_size': 1000,
-    'cache_ttl': 3600,          # 缓存生存时间（秒）
+    'cache_ttl': 3600,          # Cache Time-To-Live (seconds)
     'cache_directory': 'cache/'
 }
 ```
 
-## 🔍 配置验证
+## 🔍 Configuration Validation
 
-### 配置验证脚本
+### Configuration Validation Script
 
-创建 `validate_config.py`：
+Create `validate_config.py`:
 
 ```python
 #!/usr/bin/env python3
 """
-配置文件验证脚本
+Configuration File Validation Script
 """
 import configparser
 import os
@@ -654,38 +654,38 @@ import sys
 from pathlib import Path
 
 def validate_airway_config(config_file):
-    """验证航路模块配置"""
+    """Validate airway module configuration"""
     config = configparser.ConfigParser()
     config.read(config_file)
     
     errors = []
     
-    # 检查必需的节
+    # Check for required sections
     required_sections = ['General', 'Input', 'Output', 'Filtering']
     for section in required_sections:
         if section not in config:
-            errors.append(f"缺失配置节: [{section}]")
+            errors.append(f"Missing configuration section: [{section}]")
     
-    # 检查文件路径
+    # Check for file paths
     if 'Input' in config:
         for key in ['csv_file', 'earth_fix_file', 'earth_nav_file']:
             if key in config['Input']:
                 file_path = config['Input'][key]
                 if not os.path.exists(file_path):
-                    errors.append(f"文件不存在: {file_path}")
+                    errors.append(f"File does not exist: {file_path}")
     
     return errors
 
 def validate_all_configs():
-    """验证所有配置文件"""
+    """Validate all configuration files"""
     config_dir = Path('config')
     if not config_dir.exists():
-        print("❌ 配置目录不存在")
+        print("❌ Configuration directory does not exist")
         return False
     
     config_files = {
         'airway.conf': validate_airway_config,
-        # 可以添加更多配置验证函数
+        # Can add more configuration validation functions
     }
     
     all_valid = True
@@ -694,48 +694,48 @@ def validate_all_configs():
         if config_path.exists():
             errors = validator(str(config_path))
             if errors:
-                print(f"❌ {config_file} 配置错误:")
+                print(f"❌ {config_file} configuration errors:")
                 for error in errors:
                     print(f"   - {error}")
                 all_valid = False
             else:
-                print(f"✅ {config_file} 配置正确")
+                print(f"✅ {config_file} configuration is correct")
         else:
-            print(f"⚠️  {config_file} 配置文件不存在（使用默认值）")
+            print(f"⚠️  {config_file} configuration file does not exist (using default values)")
     
     return all_valid
 
 if __name__ == "__main__":
     if validate_all_configs():
-        print("\n🎉 所有配置验证通过！")
+        print("\n🎉 All configurations validated successfully!")
         sys.exit(0)
     else:
-        print("\n❌ 配置验证失败，请修复上述问题")
+        print("\n❌ Configuration validation failed, please fix the issues above")
         sys.exit(1)
 ```
 
-## 📚 配置最佳实践
+## 📚 Configuration Best Practices
 
-### 1. 配置文件管理
-- 使用版本控制管理配置文件
-- 为不同环境创建不同的配置文件
-- 定期备份重要配置
+### 1. Configuration File Management
+- Use version control to manage configuration files
+- Create different configuration files for different environments
+- Regularly back up important configurations
 
-### 2. 安全考虑
-- 不要在配置文件中存储敏感信息
-- 使用环境变量存储路径等可变信息
-- 设置适当的文件权限
+### 2. Security Considerations
+- Do not store sensitive information in configuration files
+- Use environment variables to store variable information such as paths
+- Set appropriate file permissions
 
-### 3. 性能优化
-- 根据系统资源调整批处理大小
-- 合理设置内存使用限制
-- 启用适当的缓存机制
+### 3. Performance Optimization
+- Adjust batch size according to system resources
+- Set reasonable memory usage limits
+- Enable appropriate caching mechanisms
 
-### 4. 错误处理
-- 为所有关键配置项设置默认值
-- 实现配置验证机制
-- 提供清晰的错误信息
+### 4. Error Handling
+- Set default values for all critical configuration items
+- Implement a configuration validation mechanism
+- Provide clear error messages
 
 ---
 
-**配置完成！** 🎯 现在您可以根据具体需求调整各模块的配置参数。建议在首次使用前运行配置验证脚本确保设置正确。 
+**Configuration complete!** 🎯 You can now adjust the configuration parameters for each module according to your specific needs. It is recommended to run the configuration validation script before first use to ensure correct settings.

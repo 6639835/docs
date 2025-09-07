@@ -1,70 +1,70 @@
-# 🛫 Nav-data 用户指南
+# 🛫 Nav-data User Guide
 
-Nav-data 是一个专业的航空导航数据转换工具套件，专门为 Microsoft Flight Simulator 中的 PMDG 飞机提供高质量的导航数据支持。本工具将多种标准航空数据格式转换为 PMDG 兼容的 SQLite 数据库格式。
+Nav-data is a professional aviation navigation data conversion tool suite, specifically designed to provide high-quality navigation data support for PMDG aircraft in Microsoft Flight Simulator. This tool converts various standard aviation data formats into a PMDG-compatible SQLite database format.
 
-## 📖 快速导览
+## 📖 Quick Tour
 
-### 🎯 核心功能
-- **多源数据集成** - 支持 AIRAC、ARINC 424、X-Plane 等标准格式
-- **专业数据转换** - 精确的坐标系转换和磁差计算
-- **质量保证** - 内置数据验证和完整性检查
-- **中国地区优化** - 专门针对中国民航数据进行优化
+### 🎯 Core Features
+- **Multi-source Data Integration** - Supports standard formats such as AIRAC, ARINC 424, and X-Plane
+- **Professional Data Conversion** - Precise coordinate system conversion and magnetic variation calculation
+- **Quality Assurance** - Built-in data validation and integrity checks
+- **China Region Optimization** - Optimized specifically for Chinese civil aviation data
 
-### ✈️ 支持的飞机型号
-- **PMDG 737 系列**: 737-600, 737-700, 737-800, 737-900
-- **PMDG 777 系列**: 777-300ER, 777F
+### ✈️ Supported Aircraft Models
+- **PMDG 737 Series**: 737-600, 737-700, 737-800, 737-900
+- **PMDG 777 Series**: 777-300ER, 777F
 
-### 📊 数据类型覆盖
-- **机场数据** - ICAO代码、跑道、磁差
-- **导航设备** - VOR/DME、NDB、ILS/GS
-- **航路网络** - 高空/低空航路、航路点
-- **飞行程序** - SID、STAR、进近程序
+### 📊 Data Type Coverage
+- **Airport Data** - ICAO codes, Runways, Magnetic Variation
+- **Navaids** - VOR/DME, NDB, ILS/GS
+- **Airway Network** - High/Low Altitude Airways, Waypoints
+- **Flight Procedures** - SID, STAR, Approach Procedures
 
-## 📚 文档导航
+## 📚 Documentation Navigation
 
-### 🚀 快速开始
-1. [安装指南](installation.md) - 环境配置和依赖安装
-2. [配置说明](configuration.md) - 数据源配置和路径设置
-3. [使用说明](usage.md) - 转换流程和操作步骤
+### 🚀 Getting Started
+1.  [Installation Guide](installation.md) - Environment setup and dependency installation
+2.  [Configuration Guide](configuration.md) - Data source configuration and path settings
+3.  [Usage Instructions](usage.md) - Conversion process and operational steps
 
-### 🆘 帮助与支持
-- [常见问题](../faq.md) - 用户最关心的问题解答
-- [故障排除](../troubleshooting.md) - 问题诊断和解决方案
+### 🆘 Help and Support
+- [FAQ](../faq.md) - Answers to frequently asked questions
+- [Troubleshooting](../troubleshooting.md) - Problem diagnosis and solutions
 
-### 🔧 进阶内容
-- [技术架构](../architecture.md) - 系统设计和工作原理
-- [贡献指南](../contributing.md) - 开发参与和代码规范
-- [更新日志](../changelog.md) - 版本历史和新功能
-- [许可证信息](../license.md) - 使用条款和法律说明
+### 🔧 Advanced Topics
+- [Technical Architecture](../architecture.md) - System design and working principles
+- [Contributing Guide](../contributing.md) - Developer participation and code standards
+- [Changelog](../changelog.md) - Version history and new features
+- [License Information](../license.md) - Terms of use and legal notes
 
-## ⚠️ 重要提醒
+## ⚠️ Important Reminders
 
-### 数据合规性
-本工具仅用于模拟飞行目的，请确保您的数据源符合相关法律法规：
-- 遵守国际民航组织(ICAO)标准
-- 确认数据来源的合法性
-- 仅用于非商业用途的飞行模拟
+### Data Compliance
+This tool is intended for flight simulation purposes ONLY. Please ensure your data sources comply with relevant laws and regulations:
+- Adhere to International Civil Aviation Organization (ICAO) standards
+- Confirm the legality of data sources
+- For non-commercial flight simulation use only
 
-### 技术要求
-- **Python 3.8+** - 推荐使用 Python 3.9 或更高版本
-- **内存要求** - 至少 4GB RAM（推荐 8GB）
-- **存储空间** - 至少 2GB 可用空间
-- **操作系统** - Windows 10/11, macOS 10.15+, Linux
+### Technical Requirements
+- **Python 3.8+** - Python 3.9 or higher is recommended
+- **Memory Requirements** - At least 4GB RAM (8GB recommended)
+- **Storage Space** - At least 2GB of available space
+- **Operating System** - Windows 10/11, macOS 10.15+, Linux
 
-### 数据更新频率
-- **AIRAC周期** - 建议每28天更新一次
-- **源数据** - 确保使用最新的有效AIRAC周期数据
-- **版本兼容** - 确认与PMDG飞机版本的兼容性
+### Data Update Frequency
+- **AIRAC Cycle** - Recommended to update every 28 days
+- **Source Data** - Ensure the use of the latest valid AIRAC cycle data
+- **Version Compatibility** - Confirm compatibility with PMDG aircraft versions
 
-## 🆘 获取帮助
+## 🆘 Getting Help
 
-如果在使用过程中遇到问题：
+If you encounter problems during use:
 
-1. **查阅文档** - 首先查看相关章节的详细说明
-2. **检查日志** - 查看生成的日志文件了解具体错误
-3. **验证数据** - 使用内置验证工具检查数据完整性
-4. **社区支持** - 在GitHub Issues中报告问题
+1.  **Consult Documentation** - First, refer to the detailed instructions in the relevant sections
+2.  **Check Logs** - Review generated log files for specific errors
+3.  **Validate Data** - Use the built-in validation tool to check data integrity
+4.  **Community Support** - Report issues in GitHub Issues
 
 ---
 
-**下一步**: 前往[安装指南](installation.md)开始配置您的开发环境。 
+**Next Step**: Proceed to the [Installation Guide](installation.md) to start configuring your development environment.

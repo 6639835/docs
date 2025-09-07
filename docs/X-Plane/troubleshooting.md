@@ -1,445 +1,445 @@
 ---
-title: 故障排除指南
-description: Nav-data 系统性故障诊断和解决方案
+title: Troubleshooting Guide
+description: Systematic Troubleshooting and Solutions for Nav-data Issues
 ---
 
-# 故障排除指南
+# Troubleshooting Guide
 
-本文档提供系统性的故障诊断方法和解决方案，帮助用户快速定位和解决 Nav-data 使用过程中遇到的问题。
+This document provides systematic troubleshooting methods and solutions to help users quickly identify and resolve issues encountered during Nav-data usage.
 
-## 🔍 快速诊断流程
+## 🔍 Quick Diagnostic Process
 
-### 第一步：环境检查
+### Step One: Environment Check
 ```bash
-# 1. 检查 Python 版本
+# 1. Check Python Version
 python --version
-# 应显示 Python 3.6+ 版本
+# Should display Python 3.6+ version
 
-# 2. 检查依赖包安装
+# 2. Check Dependency Package Installation
 pip list | grep -E "(pandas|numpy|pdfplumber|tqdm|colorama|geopy)"
 
-# 3. 检查工作目录
+# 3. Check Working Directory
 ls -la
-# 应显示项目文件结构
+# Should display project file structure
 
-# 4. 检查系统资源
-df -h          # 磁盘空间
-free -h        # 内存（Linux/macOS）
-# Windows: 在任务管理器中查看
+# 4. Check System Resources
+df -h          # Disk Space
+free -h        # Memory (Linux/macOS)
+# Windows: View in Task Manager
 ```
 
-### 第二步：日志分析
+### Step Two: Log Analysis
 ```bash
-# 启用详细日志
+# Enable detailed logging
 export NAV_DATA_DEBUG=1  # Linux/macOS
 set NAV_DATA_DEBUG=1     # Windows
 
-# 查看最近的错误日志
+# View recent error logs
 tail -n 50 logs/nav-data.log
 ```
 
-### 第三步：数据文件验证
+### Step Three: Data File Validation
 ```bash
-# 检查输入文件
-file -I input_file.csv   # 检查编码
-head -n 5 input_file.csv # 查看前几行
+# Check input file
+file -I input_file.csv   # Check encoding
+head -n 5 input_file.csv # View first few lines
 
-# 验证文件完整性
-wc -l input_file.csv     # 行数统计
+# Verify file integrity
+wc -l input_file.csv     # Line count
 ```
 
-## 🚨 常见错误模式
+## 🚨 Common Error Patterns
 
-### 错误类型分类
+### Error Type Classification
 
-#### A. 环境配置错误
-- Python 版本不兼容
-- 依赖包缺失或版本冲突
-- 路径配置错误
-- 权限问题
+#### A. Environment Configuration Errors
+- Incompatible Python version
+- Missing dependency packages or version conflicts
+- Incorrect path configuration
+- Permission issues
 
-#### B. 数据格式错误
-- CSV 编码问题
-- PDF 格式不支持
-- 字段缺失或格式错误
-- 坐标格式问题
+#### B. Data Format Errors
+- CSV encoding issues
+- Unsupported PDF format
+- Missing fields or incorrect format
+- Coordinate format issues
 
-#### C. 系统资源问题
-- 内存不足
-- 磁盘空间不够
-- 文件句柄超限
-- 网络连接问题
+#### C. System Resource Issues
+- Insufficient memory
+- Insufficient disk space
+- Exceeded file handles
+- Network connection issues
 
-#### D. 逻辑处理错误
-- 数据验证失败
-- 转换规则错误
-- 输出格式不正确
-- 并发处理冲突
+#### D. Logic Processing Errors
+- Data validation failed
+- Incorrect conversion rules
+- Incorrect output format
+- Concurrent processing conflicts
 
-## 🔧 详细故障排除
+## 🔧 Detailed Troubleshooting
 
-### 1. 安装和环境问题
+### 1. Installation and Environment Issues
 
-#### 问题：ModuleNotFoundError
+#### Problem: ModuleNotFoundError
 ```
-错误信息：ModuleNotFoundError: No module named 'pandas'
+Error Message: ModuleNotFoundError: No module named 'pandas'
 ```
 
-**诊断步骤：**
+**Diagnostic Steps:**
 ```bash
-# 1. 确认当前 Python 环境
+# 1. Confirm current Python environment
 which python
 python -c "import sys; print(sys.path)"
 
-# 2. 检查虚拟环境状态
-echo $VIRTUAL_ENV  # 应显示虚拟环境路径
+# 2. Check virtual environment status
+echo $VIRTUAL_ENV  # Should display virtual environment path
 
-# 3. 验证包安装
+# 3. Verify package installation
 pip show pandas
 ```
 
-**解决方案：**
+**Solutions:**
 ```bash
-# 方案1: 重新安装依赖
+# Solution 1: Reinstall dependencies
 pip install -r requirements.txt
 
-# 方案2: 创建新的虚拟环境
+# Solution 2: Create a new virtual environment
 python -m venv nav-data-env-new
 source nav-data-env-new/bin/activate
 pip install -r requirements.txt
 
-# 方案3: 使用 conda 环境
+# Solution 3: Use a conda environment
 conda create -n nav-data python=3.8
 conda activate nav-data
 pip install -r requirements.txt
 ```
 
-#### 问题：Permission Denied
+#### Problem: Permission Denied
 ```
-错误信息：PermissionError: [Errno 13] Permission denied
+Error Message: PermissionError: [Errno 13] Permission denied
 ```
 
-**诊断步骤：**
+**Diagnostic Steps:**
 ```bash
-# 1. 检查文件权限
+# 1. Check file permissions
 ls -la target_file
 
-# 2. 检查目录权限
+# 2. Check directory permissions
 ls -ld target_directory
 
-# 3. 检查当前用户
+# 3. Check current user
 whoami
 groups
 ```
 
-**解决方案：**
+**Solutions:**
 ```bash
-# 方案1: 修改文件权限
-chmod 644 target_file    # 文件权限
-chmod 755 target_dir     # 目录权限
+# Solution 1: Modify file permissions
+chmod 644 target_file    # File permissions
+chmod 755 target_dir     # Directory permissions
 
-# 方案2: 更改所有者（如需要）
+# Solution 2: Change owner (if necessary)
 sudo chown $USER:$USER target_file
 
-# 方案3: 使用用户目录
+# Solution 3: Use user directory
 mkdir ~/nav-data-workspace
 cd ~/nav-data-workspace
 ```
 
-#### 问题：Python版本冲突
+#### Problem: Python Version Conflict
 ```
-错误信息：SyntaxError: invalid syntax (Python 2.7 detected)
+Error Message: SyntaxError: invalid syntax (Python 2.7 detected)
 ```
 
-**诊断步骤：**
+**Diagnostic Steps:**
 ```bash
-# 检查所有 Python 版本
+# Check all Python versions
 python --version
 python3 --version
 which python
 which python3
 
-# 检查默认 Python
+# Check default Python
 ls -la /usr/bin/python*
 ```
 
-**解决方案：**
+**Solutions:**
 ```bash
-# 方案1: 使用 python3 显式调用
+# Solution 1: Explicitly call with python3
 python3 script.py
 
-# 方案2: 创建别名
+# Solution 2: Create an alias
 echo "alias python=python3" >> ~/.bashrc
 source ~/.bashrc
 
-# 方案3: 更新系统默认（小心操作）
+# Solution 3: Update system default (use with caution)
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 ```
 
-### 2. 数据处理问题
+### 2. Data Processing Issues
 
-#### 问题：CSV编码错误
+#### Problem: CSV Encoding Error
 ```
-错误信息：UnicodeDecodeError: 'utf-8' codec can't decode
+Error Message: UnicodeDecodeError: 'utf-8' codec can't decode
 ```
 
-**诊断脚本：**
+**Diagnostic Script:**
 ```python
 #!/usr/bin/env python3
 """
-CSV 编码诊断工具
+CSV Encoding Diagnostic Tool
 """
 import chardet
 import pandas as pd
 from pathlib import Path
 
 def diagnose_csv_encoding(file_path):
-    """诊断 CSV 文件编码"""
+    """Diagnoses CSV file encoding"""
     file_path = Path(file_path)
     
-    print(f"🔍 诊断文件: {file_path}")
+    print(f"🔍 Diagnosing file: {file_path}")
     
-    # 1. 文件基本信息
-    print(f"文件大小: {file_path.stat().st_size} bytes")
+    # 1. File basic information
+    print(f"File size: {file_path.stat().st_size} bytes")
     
-    # 2. 自动检测编码
+    # 2. Auto-detect encoding
     with open(file_path, 'rb') as f:
-        raw_data = f.read(10000)  # 读取前10KB
+        raw_data = f.read(10000)  # Read first 10KB
         encoding_info = chardet.detect(raw_data)
-        print(f"检测到的编码: {encoding_info}")
+        print(f"Detected encoding: {encoding_info}")
     
-    # 3. 尝试不同编码
+    # 3. Attempt different encodings
     encodings = ['utf-8', 'gbk', 'gb2312', 'utf-16', 'latin1']
     
     for encoding in encodings:
         try:
             df = pd.read_csv(file_path, encoding=encoding, nrows=5)
-            print(f"✅ {encoding}: 成功读取 {len(df)} 行")
-            print(f"   列名: {list(df.columns)}")
+            print(f"✅ {encoding}: Successfully read {len(df)} rows")
+            print(f"   Columns: {list(df.columns)}")
             break
         except Exception as e:
             print(f"❌ {encoding}: {str(e)[:50]}...")
     
     return encoding_info['encoding']
 
-# 使用示例
+# Usage example
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
         diagnosed_encoding = diagnose_csv_encoding(sys.argv[1])
-        print(f"\n💡 建议使用编码: {diagnosed_encoding}")
+        print(f"\n💡 Suggested encoding: {diagnosed_encoding}")
 ```
 
-**解决方案：**
+**Solutions:**
 ```python
-# 方案1: 指定正确编码
+# Solution 1: Specify correct encoding
 import pandas as pd
 df = pd.read_csv('file.csv', encoding='gbk')
 
-# 方案2: 转换文件编码
+# Solution 2: Convert file encoding
 import codecs
 with codecs.open('input.csv', 'r', 'gbk') as f_in:
     with codecs.open('output.csv', 'w', 'utf-8') as f_out:
         f_out.write(f_in.read())
 
-# 方案3: 自动检测编码
+# Solution 3: Auto-detect encoding
 import chardet
 with open('file.csv', 'rb') as f:
     encoding = chardet.detect(f.read())['encoding']
 df = pd.read_csv('file.csv', encoding=encoding)
 ```
 
-#### 问题：PDF解析失败
+#### Problem: PDF Parsing Failed
 ```
-错误信息：PDFSyntaxError: No /Root object found
+Error Message: PDFSyntaxError: No /Root object found
 ```
 
-**诊断工具：**
+**Diagnostic Tool:**
 ```python
 #!/usr/bin/env python3
 """
-PDF 文件诊断工具
+PDF File Diagnostic Tool
 """
 import pdfplumber
 from pathlib import Path
 
 def diagnose_pdf_file(file_path):
-    """诊断 PDF 文件问题"""
+    """Diagnoses PDF file issues"""
     file_path = Path(file_path)
     
-    print(f"🔍 诊断 PDF 文件: {file_path}")
+    print(f"🔍 Diagnosing PDF file: {file_path}")
     
-    # 1. 文件基本信息
-    print(f"文件大小: {file_path.stat().st_size} bytes")
+    # 1. File basic information
+    print(f"File size: {file_path.stat().st_size} bytes")
     
-    # 2. 尝试打开 PDF
+    # 2. Attempt to open PDF
     try:
         with pdfplumber.open(file_path) as pdf:
-            print(f"✅ PDF 打开成功")
-            print(f"页数: {len(pdf.pages)}")
+            print(f"✅ PDF opened successfully")
+            print(f"Number of pages: {len(pdf.pages)}")
             
-            # 检查第一页
+            # Check first page
             if pdf.pages:
                 first_page = pdf.pages[0]
-                print(f"第一页尺寸: {first_page.width} x {first_page.height}")
+                print(f"First page dimensions: {first_page.width} x {first_page.height}")
                 
-                # 提取文本测试
+                # Text extraction test
                 text = first_page.extract_text()
                 if text:
-                    print(f"文本提取成功，前100字符: {text[:100]}...")
+                    print(f"Text extraction successful, first 100 characters: {text[:100]}...")
                 else:
-                    print("⚠️  无法提取文本，可能是扫描版PDF")
+                    print("⚠️  Unable to extract text, possibly a scanned PDF")
                 
-                # 检查表格
+                # Check tables
                 tables = first_page.extract_tables()
-                print(f"检测到 {len(tables)} 个表格")
+                print(f"Detected {len(tables)} tables")
                 
-                # 检查图像
+                # Check images
                 images = first_page.images
-                print(f"检测到 {len(images)} 个图像")
+                print(f"Detected {len(images)} images")
                 
     except Exception as e:
-        print(f"❌ PDF 打开失败: {e}")
+        print(f"❌ PDF failed to open: {e}")
         
-        # 尝试修复建议
-        print("\n💡 修复建议:")
-        print("1. 检查PDF文件是否损坏")
-        print("2. 尝试用Adobe Reader打开验证")
-        print("3. 使用PDF修复工具")
-        print("4. 重新下载或获取PDF文件")
+        # Attempt repair suggestions
+        print("\n💡 Repair Suggestions:")
+        print("1. Check if the PDF file is corrupted")
+        print("2. Try opening with Adobe Reader for verification")
+        print("3. Use a PDF repair tool")
+        print("4. Re-download or obtain the PDF file again")
 
-# 使用示例
+# Usage example
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
         diagnose_pdf_file(sys.argv[1])
 ```
 
-**解决方案：**
+**Solutions:**
 ```python
-# 方案1: 使用更宽松的解析选项
+# Solution 1: Use more lenient parsing options
 import pdfplumber
 try:
     with pdfplumber.open(pdf_file, password="") as pdf:
-        # 处理逻辑
+        # Processing logic
         pass
 except Exception as e:
-    print(f"PDF解析失败: {e}")
+    print(f"PDF parsing failed: {e}")
 
-# 方案2: 尝试其他PDF库
+# Solution 2: Try other PDF libraries
 import pypdf2
 try:
     with open(pdf_file, 'rb') as f:
         reader = pypdf2.PdfFileReader(f)
-        # 处理逻辑
+        # Processing logic
 except Exception as e:
-    print(f"备用PDF库也失败: {e}")
+    print(f"Alternative PDF library also failed: {e}")
 
-# 方案3: 预处理PDF
-# 使用外部工具如 pdftk 修复PDF
+# Solution 3: Pre-process PDF
+# Use external tools like pdftk to repair PDF
 import subprocess
 subprocess.run(['pdftk', 'broken.pdf', 'output', 'fixed.pdf'])
 ```
 
-#### 问题：坐标转换错误
+#### Problem: Coordinate Conversion Error
 ```
-错误信息：ValueError: invalid literal for float()
+Error Message: ValueError: invalid literal for float()
 ```
 
-**诊断工具：**
+**Diagnostic Tool:**
 ```python
 #!/usr/bin/env python3
 """
-坐标数据诊断工具
+Coordinate Data Diagnostic Tool
 """
 import re
 
 def diagnose_coordinate_data(text):
-    """诊断坐标数据格式"""
-    print(f"🔍 诊断坐标数据: {text[:50]}...")
+    """Diagnoses coordinate data format"""
+    print(f"🔍 Diagnosing coordinate data: {text[:50]}...")
     
-    # 常见坐标格式模式
+    # Common coordinate format patterns
     patterns = {
         'decimal': r'[+-]?\d+\.\d+',
         'dms_with_symbols': r'\d+°\d+′\d+″',
         'dms_with_letters': r'\d+[°]\d+[\']\d+["]',
         'dms_spaces': r'\d+\s+\d+\s+\d+',
-        'chinese_format': r'北纬|南纬|东经|西经',
+        'chinese_format': r'北纬|南纬|东经|西经', # This pattern is for matching Chinese characters
     }
     
     found_patterns = []
     for name, pattern in patterns.items():
         matches = re.findall(pattern, text)
         if matches:
-            found_patterns.append((name, matches[:3]))  # 显示前3个匹配
+            found_patterns.append((name, matches[:3]))  # Display first 3 matches
     
-    print("检测到的坐标格式:")
+    print("Detected coordinate formats:")
     for name, matches in found_patterns:
         print(f"  {name}: {matches}")
     
-    # 提取可能的坐标
+    # Extract possible coordinates
     coord_candidates = re.findall(r'\d+[°′″\s\'"]+\d+[°′″\s\'"]*\d*', text)
-    print(f"坐标候选: {coord_candidates[:5]}")
+    print(f"Coordinate candidates: {coord_candidates[:5]}")
     
     return found_patterns
 
 def test_coordinate_conversion(coord_string):
-    """测试坐标转换"""
-    print(f"\n🧪 测试转换: {coord_string}")
+    """Tests coordinate conversion"""
+    print(f"\n🧪 Testing conversion: {coord_string}")
     
     try:
-        # 尝试不同的转换方法
+        # Attempt different conversion methods
         
-        # 方法1: 直接转换为浮点数
+        # Method 1: Convert directly to float
         try:
             result = float(coord_string)
-            print(f"  直接转换: {result}")
+            print(f"  Direct conversion: {result}")
             return result
         except ValueError:
             pass
         
-        # 方法2: 度分秒转换
+        # Method 2: Degrees-Minutes-Seconds conversion
         dms_pattern = r'(\d+)[°]\s*(\d+)[′\']\s*(\d+(?:\.\d+)?)[″"]?'
         match = re.search(dms_pattern, coord_string)
         if match:
             degrees, minutes, seconds = map(float, match.groups())
             decimal = degrees + minutes/60 + seconds/3600
-            print(f"  度分秒转换: {decimal}")
+            print(f"  DMS conversion: {decimal}")
             return decimal
         
-        # 方法3: 清理特殊字符后转换
+        # Method 3: Convert after cleaning special characters
         cleaned = re.sub(r'[^\d\.]', '', coord_string)
         if cleaned:
             result = float(cleaned)
-            print(f"  清理后转换: {result}")
+            print(f"  Conversion after cleaning: {result}")
             return result
             
-        print(f"  ❌ 转换失败")
+        print(f"  ❌ Conversion failed")
         return None
         
     except Exception as e:
-        print(f"  ❌ 转换异常: {e}")
+        print(f"  ❌ Conversion exception: {e}")
         return None
 
-# 使用示例
+# Usage example
 if __name__ == "__main__":
-    test_data = "北纬39°48'35.6\" 东经116°34'46.7\""
+    test_data = "North Latitude 39°48'35.6\" East Longitude 116°34'46.7\""
     diagnose_coordinate_data(test_data)
     test_coordinate_conversion("39°48'35.6\"")
 ```
 
-### 3. 系统资源问题
+### 3. System Resource Issues
 
-#### 问题：内存不足
+#### Problem: Insufficient Memory
 ```
-错误信息：MemoryError: Unable to allocate array
+Error Message: MemoryError: Unable to allocate array
 ```
 
-**内存监控脚本：**
+**Memory Monitoring Script:**
 ```python
 #!/usr/bin/env python3
 """
-内存使用监控工具
+Memory Usage Monitoring Tool
 """
 import psutil
 import gc
@@ -447,142 +447,142 @@ import os
 from functools import wraps
 
 def monitor_memory(func):
-    """内存监控装饰器"""
+    """Memory monitoring decorator"""
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # 获取初始内存状态
+        # Get initial memory status
         process = psutil.Process(os.getpid())
         initial_memory = process.memory_info().rss / 1024 / 1024  # MB
         
-        print(f"🔍 执行前内存: {initial_memory:.2f} MB")
+        print(f"🔍 Memory before execution: {initial_memory:.2f} MB")
         
         try:
             result = func(*args, **kwargs)
             return result
         finally:
-            # 强制垃圾回收
+            # Force garbage collection
             gc.collect()
             
-            # 获取最终内存状态
+            # Get final memory status
             final_memory = process.memory_info().rss / 1024 / 1024  # MB
             memory_delta = final_memory - initial_memory
             
-            print(f"🔍 执行后内存: {final_memory:.2f} MB")
-            print(f"🔍 内存变化: {memory_delta:+.2f} MB")
+            print(f"🔍 Memory after execution: {final_memory:.2f} MB")
+            print(f"🔍 Memory change: {memory_delta:+.2f} MB")
             
-            # 内存警告
-            if final_memory > 1000:  # 超过1GB
-                print("⚠️  内存使用较高，建议优化")
+            # Memory warning
+            if final_memory > 1000:  # Over 1GB
+                print("⚠️  High memory usage, optimization recommended")
     
     return wrapper
 
 def check_system_memory():
-    """检查系统内存状态"""
+    """Checks system memory status"""
     memory = psutil.virtual_memory()
     
-    print("💾 系统内存状态:")
-    print(f"  总内存: {memory.total / 1024**3:.2f} GB")
-    print(f"  可用内存: {memory.available / 1024**3:.2f} GB")
-    print(f"  使用率: {memory.percent:.1f}%")
+    print("💾 System Memory Status:")
+    print(f"  Total memory: {memory.total / 1024**3:.2f} GB")
+    print(f"  Available memory: {memory.available / 1024**3:.2f} GB")
+    print(f"  Usage: {memory.percent:.1f}%")
     
     if memory.percent > 80:
-        print("⚠️  系统内存使用率过高")
+        print("⚠️  System memory usage is too high")
         return False
     return True
 
-# 内存优化的数据处理函数
+# Memory-optimized data processing function
 @monitor_memory
 def memory_efficient_csv_processing(file_path, chunk_size=1000):
-    """内存友好的CSV处理"""
+    """Memory-friendly CSV processing"""
     import pandas as pd
     
     results = []
     
-    # 分块读取大文件
+    # Read large files in chunks
     for chunk in pd.read_csv(file_path, chunksize=chunk_size):
-        # 处理数据块
+        # Process data chunk
         processed_chunk = process_data_chunk(chunk)
         results.append(processed_chunk)
         
-        # 清理内存
+        # Clean up memory
         del chunk
         gc.collect()
     
     return pd.concat(results, ignore_index=True)
 
 def process_data_chunk(chunk):
-    """处理单个数据块"""
-    # 实际的数据处理逻辑
-    return chunk  # 简化示例
+    """Processes a single data chunk"""
+    # Actual data processing logic
+    return chunk  # Simplified example
 ```
 
-**解决方案：**
+**Solutions:**
 ```python
-# 方案1: 分块处理
+# Solution 1: Process in chunks
 def process_large_file_in_chunks(file_path, chunk_size=1000):
     import pandas as pd
     
     processed_data = []
     
     for chunk in pd.read_csv(file_path, chunksize=chunk_size):
-        # 处理单个块
+        # Process single chunk
         processed_chunk = your_processing_function(chunk)
         processed_data.append(processed_chunk)
         
-        # 释放内存
+        # Release memory
         del chunk
         gc.collect()
     
     return pd.concat(processed_data, ignore_index=True)
 
-# 方案2: 使用生成器
+# Solution 2: Use generators
 def data_generator(file_path):
-    """数据生成器，节省内存"""
+    """Data generator, saves memory"""
     with open(file_path, 'r') as f:
         for line in f:
             yield process_line(line)
 
-# 方案3: 增加虚拟内存
+# Solution 3: Increase virtual memory
 # Linux/macOS:
 # sudo fallocate -l 4G /swapfile
 # sudo mkswap /swapfile
 # sudo swapon /swapfile
 ```
 
-#### 问题：磁盘空间不足
+#### Problem: Insufficient Disk Space
 ```
-错误信息：OSError: [Errno 28] No space left on device
+Error Message: OSError: [Errno 28] No space left on device
 ```
 
-**磁盘空间检查脚本：**
+**Disk Space Check Script:**
 ```python
 #!/usr/bin/env python3
 """
-磁盘空间监控工具
+Disk Space Monitoring Tool
 """
 import shutil
 import os
 from pathlib import Path
 
 def check_disk_space(path="."):
-    """检查磁盘空间"""
+    """Checks disk space"""
     total, used, free = shutil.disk_usage(path)
     
-    print(f"💽 磁盘空间状态 ({path}):")
-    print(f"  总空间: {total / 1024**3:.2f} GB")
-    print(f"  已使用: {used / 1024**3:.2f} GB")
-    print(f"  可用空间: {free / 1024**3:.2f} GB")
-    print(f"  使用率: {used/total*100:.1f}%")
+    print(f"💽 Disk Space Status ({path}):")
+    print(f"  Total space: {total / 1024**3:.2f} GB")
+    print(f"  Used: {used / 1024**3:.2f} GB")
+    print(f"  Available space: {free / 1024**3:.2f} GB")
+    print(f"  Usage: {used/total*100:.1f}%")
     
-    # 空间不足警告
-    if free < 1024**3:  # 小于1GB
-        print("⚠️  磁盘空间不足！")
+    # Low space warning
+    if free < 1024**3:  # Less than 1GB
+        print("⚠️  Insufficient disk space!")
         return False
     
     return True
 
 def cleanup_temp_files():
-    """清理临时文件"""
+    """Cleans up temporary files"""
     temp_patterns = [
         "*.tmp",
         "*.temp", 
@@ -602,47 +602,47 @@ def cleanup_temp_files():
                     size = file_path.stat().st_size
                     file_path.unlink()
                     total_cleaned += size
-                    print(f"删除文件: {file_path}")
+                    print(f"Deleting file: {file_path}")
                 elif file_path.is_dir():
                     import shutil
                     size = sum(f.stat().st_size for f in file_path.rglob('*') if f.is_file())
                     shutil.rmtree(file_path)
                     total_cleaned += size
-                    print(f"删除目录: {file_path}")
+                    print(f"Deleting directory: {file_path}")
             except Exception as e:
-                print(f"无法删除 {file_path}: {e}")
+                print(f"Unable to delete {file_path}: {e}")
     
-    print(f"💾 总共清理了 {total_cleaned / 1024**2:.2f} MB")
+    print(f"💾 Total cleaned: {total_cleaned / 1024**2:.2f} MB")
 
 def estimate_output_size(input_file):
-    """估算输出文件大小"""
+    """Estimates output file size"""
     input_size = Path(input_file).stat().st_size
     
-    # 根据处理类型估算（这里是简化的估算）
+    # Estimate based on processing type (simplified estimation here)
     estimated_multiplier = {
-        '.csv': 1.2,    # CSV转DAT通常略大
-        '.pdf': 0.1,    # PDF提取文本通常小很多
-        '.dat': 1.0,    # DAT格式修复大小不变
+        '.csv': 1.2,    # CSV to DAT is usually slightly larger
+        '.pdf': 0.1,    # PDF text extraction is usually much smaller
+        '.dat': 1.0,    # DAT format repair size unchanged
     }
     
     suffix = Path(input_file).suffix.lower()
     multiplier = estimated_multiplier.get(suffix, 1.0)
     
     estimated_size = input_size * multiplier
-    print(f"📊 预估输出大小: {estimated_size / 1024**2:.2f} MB")
+    print(f"📊 Estimated output size: {estimated_size / 1024**2:.2f} MB")
     
     return estimated_size
 ```
 
-### 4. 性能优化故障排除
+### 4. Performance Optimization Troubleshooting
 
-#### 问题：处理速度过慢
+#### Problem: Processing Speed Too Slow
 
-**性能分析工具：**
+**Performance Analysis Tool:**
 ```python
 #!/usr/bin/env python3
 """
-性能分析工具
+Performance Analysis Tool
 """
 import time
 import cProfile
@@ -650,13 +650,13 @@ import pstats
 from functools import wraps
 
 def profile_performance(func):
-    """性能分析装饰器"""
+    """Performance profiling decorator"""
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # 创建性能分析器
+        # Create profiler
         pr = cProfile.Profile()
         
-        # 开始分析
+        # Start profiling
         pr.enable()
         start_time = time.time()
         
@@ -664,32 +664,32 @@ def profile_performance(func):
             result = func(*args, **kwargs)
             return result
         finally:
-            # 停止分析
+            # Stop profiling
             end_time = time.time()
             pr.disable()
             
-            # 输出性能报告
-            print(f"⏱️  执行时间: {end_time - start_time:.2f} 秒")
+            # Output performance report
+            print(f"⏱️  Execution time: {end_time - start_time:.2f} seconds")
             
-            # 保存详细报告
+            # Save detailed report
             stats = pstats.Stats(pr)
             stats.sort_stats('cumulative')
             
-            print("\n🔍 性能热点 (前10个函数):")
+            print("\n🔍 Performance Hotspots (Top 10 functions):")
             stats.print_stats(10)
             
-            # 保存报告到文件
+            # Save report to file
             stats.dump_stats(f'performance_profile_{int(time.time())}.prof')
     
     return wrapper
 
-# 使用示例
+# Usage example
 @profile_performance
 def slow_function():
-    """示例慢函数"""
+    """Example slow function"""
     import pandas as pd
     
-    # 模拟慢操作
+    # Simulate slow operation
     data = []
     for i in range(100000):
         data.append({'id': i, 'value': i**2})
@@ -698,51 +698,51 @@ def slow_function():
     return df.groupby('id').sum()
 
 def benchmark_different_approaches():
-    """对比不同实现方法的性能"""
+    """Compares performance of different implementation approaches"""
     import pandas as pd
     
-    # 测试数据
+    # Test data
     test_data = list(range(10000))
     
-    # 方法1: 普通循环
+    # Method 1: Regular loop
     start_time = time.time()
     result1 = []
     for i in test_data:
         result1.append(i * 2)
     time1 = time.time() - start_time
     
-    # 方法2: 列表推导
+    # Method 2: List comprehension
     start_time = time.time()
     result2 = [i * 2 for i in test_data]
     time2 = time.time() - start_time
     
-    # 方法3: NumPy
+    # Method 3: NumPy
     import numpy as np
     start_time = time.time()
     result3 = (np.array(test_data) * 2).tolist()
     time3 = time.time() - start_time
     
-    print("🏃 性能对比:")
-    print(f"  普通循环: {time1:.4f} 秒")
-    print(f"  列表推导: {time2:.4f} 秒")
-    print(f"  NumPy: {time3:.4f} 秒")
+    print("🏃 Performance Comparison:")
+    print(f"  Regular loop: {time1:.4f} seconds")
+    print(f"  List comprehension: {time2:.4f} seconds")
+    print(f"  NumPy: {time3:.4f} seconds")
     
-    # 找出最快的方法
-    times = {'普通循环': time1, '列表推导': time2, 'NumPy': time3}
+    # Find the fastest method
+    times = {'Regular loop': time1, 'List comprehension': time2, 'NumPy': time3}
     fastest = min(times, key=times.get)
-    print(f"🏆 最快方法: {fastest}")
+    print(f"🏆 Fastest method: {fastest}")
 ```
 
-## 🔬 高级诊断工具
+## 🔬 Advanced Diagnostic Tools
 
-### 综合诊断脚本
+### Comprehensive Diagnostic Script
 
-创建 `diagnose_nav_data.py`：
+Create `diagnose_nav_data.py`:
 
 ```python
 #!/usr/bin/env python3
 """
-Nav-data 综合诊断工具
+Nav-data Comprehensive Diagnostic Tool
 """
 import sys
 import os
@@ -752,7 +752,7 @@ from pathlib import Path
 import importlib
 
 class NavDataDiagnostic:
-    """Nav-data 诊断工具类"""
+    """Nav-data Diagnostic Tool Class"""
     
     def __init__(self):
         self.issues = []
@@ -760,47 +760,47 @@ class NavDataDiagnostic:
         self.info = []
     
     def log_issue(self, message):
-        """记录问题"""
+        """Logs an issue"""
         self.issues.append(message)
         print(f"❌ {message}")
     
     def log_warning(self, message):
-        """记录警告"""
+        """Logs a warning"""
         self.warnings.append(message)
         print(f"⚠️  {message}")
     
     def log_info(self, message):
-        """记录信息"""
+        """Logs information"""
         self.info.append(message)
         print(f"ℹ️  {message}")
     
     def check_python_environment(self):
-        """检查Python环境"""
-        print("\n🐍 Python环境检查:")
+        """Checks Python environment"""
+        print("\n🐍 Python Environment Check:")
         
-        # Python版本
+        # Python version
         version = sys.version_info
         version_str = f"{version.major}.{version.minor}.{version.micro}"
-        print(f"  Python版本: {version_str}")
+        print(f"  Python version: {version_str}")
         
         if version.major < 3 or (version.major == 3 and version.minor < 6):
-            self.log_issue(f"Python版本过低 ({version_str})，需要3.6+")
+            self.log_issue(f"Python version too low ({version_str}), 3.6+ required")
         else:
-            self.log_info(f"Python版本符合要求 ({version_str})")
+            self.log_info(f"Python version meets requirements ({version_str})")
         
-        # 虚拟环境
+        # Virtual environment
         if hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
-            self.log_info("正在使用虚拟环境")
+            self.log_info("Using virtual environment")
         else:
-            self.log_warning("未使用虚拟环境，建议使用虚拟环境")
+            self.log_warning("Not using a virtual environment, recommend using one")
         
-        # Python路径
-        print(f"  Python路径: {sys.executable}")
-        print(f"  包搜索路径: {len(sys.path)} 个路径")
+        # Python path
+        print(f"  Python path: {sys.executable}")
+        print(f"  Package search paths: {len(sys.path)} paths")
     
     def check_dependencies(self):
-        """检查依赖包"""
-        print("\n📦 依赖包检查:")
+        """Checks dependency packages"""
+        print("\n📦 Dependency Package Check:")
         
         required_packages = {
             'pandas': '1.3.0',
@@ -817,45 +817,45 @@ class NavDataDiagnostic:
                 version = getattr(module, '__version__', '未知')
                 print(f"  ✅ {package}: {version}")
                 
-                # TODO: 版本比较逻辑
+                # TODO: Version comparison logic
                 
             except ImportError:
-                self.log_issue(f"缺少依赖包: {package}")
+                self.log_issue(f"Missing dependency package: {package}")
     
     def check_system_resources(self):
-        """检查系统资源"""
-        print("\n💻 系统资源检查:")
+        """Checks system resources"""
+        print("\n💻 System Resource Check:")
         
-        # 操作系统
+        # Operating system
         system_info = platform.system()
-        print(f"  操作系统: {system_info} {platform.release()}")
+        print(f"  Operating system: {system_info} {platform.release()}")
         
-        # 内存检查
+        # Memory check
         try:
             import psutil
             memory = psutil.virtual_memory()
-            print(f"  总内存: {memory.total / 1024**3:.2f} GB")
-            print(f"  可用内存: {memory.available / 1024**3:.2f} GB")
+            print(f"  Total memory: {memory.total / 1024**3:.2f} GB")
+            print(f"  Available memory: {memory.available / 1024**3:.2f} GB")
             
-            if memory.available < 2 * 1024**3:  # 小于2GB
-                self.log_warning("可用内存较少，可能影响大文件处理")
+            if memory.available < 2 * 1024**3:  # Less than 2GB
+                self.log_warning("Low available memory, may affect large file processing")
         except ImportError:
-            self.log_warning("无法检查内存状态（缺少psutil）")
+            self.log_warning("Unable to check memory status (psutil missing)")
         
-        # 磁盘空间
+        # Disk space
         try:
             import shutil
             total, used, free = shutil.disk_usage('.')
-            print(f"  磁盘空间: {free / 1024**3:.2f} GB 可用")
+            print(f"  Disk space: {free / 1024**3:.2f} GB available")
             
-            if free < 1024**3:  # 小于1GB
-                self.log_warning("磁盘空间不足")
+            if free < 1024**3:  # Less than 1GB
+                self.log_warning("Insufficient disk space")
         except Exception as e:
-            self.log_warning(f"无法检查磁盘空间: {e}")
+            self.log_warning(f"Unable to check disk space: {e}")
     
     def check_project_structure(self):
-        """检查项目结构"""
-        print("\n📁 项目结构检查:")
+        """Checks project structure"""
+        print("\n📁 Project Structure Check:")
         
         required_dirs = [
             'Airway',
@@ -868,9 +868,9 @@ class NavDataDiagnostic:
             if Path(dirname).exists():
                 print(f"  ✅ {dirname}/")
             else:
-                self.log_issue(f"缺少目录: {dirname}/")
+                self.log_issue(f"Missing directory: {dirname}/")
         
-        # 检查关键文件
+        # Check key files
         key_files = [
             'Airway/airway.py',
             'PDF extract/utils.py',
@@ -881,84 +881,84 @@ class NavDataDiagnostic:
             if Path(filepath).exists():
                 print(f"  ✅ {filepath}")
             else:
-                self.log_issue(f"缺少文件: {filepath}")
+                self.log_issue(f"Missing file: {filepath}")
     
     def check_common_issues(self):
-        """检查常见问题"""
-        print("\n🔍 常见问题检查:")
+        """Checks common issues"""
+        print("\n🔍 Common Issues Check:")
         
-        # 检查文件编码
+        # Check file encoding
         csv_files = list(Path('.').glob('**/*.csv'))
         if csv_files:
-            print(f"  发现 {len(csv_files)} 个CSV文件")
-            # TODO: 编码检查
+            print(f"  Found {len(csv_files)} CSV files")
+            # TODO: Encoding check
         
-        # 检查日志文件
+        # Check log files
         log_files = list(Path('.').glob('**/*.log'))
         if log_files:
-            print(f"  发现 {len(log_files)} 个日志文件")
+            print(f"  Found {len(log_files)} log files")
             
-            # 检查最近的错误
-            for log_file in log_files[-3:]:  # 检查最近3个日志
+            # Check recent errors
+            for log_file in log_files[-3:]:  # Check last 3 logs
                 try:
                     with open(log_file, 'r', encoding='utf-8', errors='ignore') as f:
                         lines = f.readlines()
                         error_lines = [line for line in lines[-50:] if 'ERROR' in line.upper()]
                         if error_lines:
-                            print(f"    ⚠️  {log_file} 中发现 {len(error_lines)} 个错误")
+                            print(f"    ⚠️  Found {len(error_lines)} errors in {log_file}")
                 except Exception as e:
-                    print(f"    无法读取 {log_file}: {e}")
+                    print(f"    Unable to read {log_file}: {e}")
     
     def generate_report(self):
-        """生成诊断报告"""
+        """Generates diagnostic report"""
         print("\n" + "="*50)
-        print("📋 诊断报告摘要")
+        print("📋 Diagnostic Report Summary")
         print("="*50)
         
-        print(f"严重问题: {len(self.issues)} 个")
+        print(f"Critical Issues: {len(self.issues)}")
         for issue in self.issues:
             print(f"  ❌ {issue}")
         
-        print(f"\n警告信息: {len(self.warnings)} 个")
+        print(f"\nWarning Messages: {len(self.warnings)}")
         for warning in self.warnings:
             print(f"  ⚠️  {warning}")
         
-        print(f"\n信息提示: {len(self.info)} 个")
+        print(f"\nInformational Messages: {len(self.info)}")
         for info in self.info:
             print(f"  ℹ️  {info}")
         
-        # 总体状态
+        # Overall Status
         if not self.issues:
             if not self.warnings:
-                print("\n🎉 系统状态良好！")
+                print("\n🎉 System status is good!")
             else:
-                print("\n✅ 系统基本正常，建议关注警告信息")
+                print("\n✅ System is generally normal, consider addressing warnings")
         else:
-            print("\n🚨 发现严重问题，需要修复后才能正常使用")
+            print("\n🚨 Critical issues found, needs to be fixed before normal use")
         
-        # 保存报告
+        # Save report
         report_file = f"diagnostic_report_{int(time.time())}.txt"
         with open(report_file, 'w', encoding='utf-8') as f:
-            f.write("Nav-data 诊断报告\n")
+            f.write("Nav-data Diagnostic Report\n")
             f.write("="*50 + "\n\n")
             
-            f.write("严重问题:\n")
+            f.write("Critical Issues:\n")
             for issue in self.issues:
                 f.write(f"- {issue}\n")
             
-            f.write("\n警告信息:\n")
+            f.write("\nWarning Messages:\n")
             for warning in self.warnings:
                 f.write(f"- {warning}\n")
             
-            f.write("\n信息提示:\n")
+            f.write("\nInformational Messages:\n")
             for info in self.info:
                 f.write(f"- {info}\n")
         
-        print(f"\n📄 详细报告已保存到: {report_file}")
+        print(f"\n📄 Detailed report saved to: {report_file}")
     
     def run_full_diagnostic(self):
-        """运行完整诊断"""
-        print("🔬 Nav-data 系统诊断")
+        """Runs full diagnostic"""
+        print("🔬 Nav-data System Diagnostic")
         print("="*50)
         
         self.check_python_environment()
@@ -969,15 +969,15 @@ class NavDataDiagnostic:
         self.generate_report()
 
 def main():
-    """主函数"""
+    """Main function"""
     diagnostic = NavDataDiagnostic()
     
     try:
         diagnostic.run_full_diagnostic()
     except KeyboardInterrupt:
-        print("\n\n诊断被用户中断")
+        print("\n\nDiagnostic interrupted by user")
     except Exception as e:
-        print(f"\n\n诊断过程出现异常: {e}")
+        print(f"\n\nAn exception occurred during diagnosis: {e}")
         import traceback
         traceback.print_exc()
 
@@ -986,37 +986,37 @@ if __name__ == "__main__":
     main()
 ```
 
-### 使用诊断工具
+### Using the Diagnostic Tool
 
 ```bash
-# 运行完整诊断
+# Run full diagnostic
 python diagnose_nav_data.py
 
-# 查看诊断报告
+# View diagnostic report
 cat diagnostic_report_*.txt
 
-# 基于诊断结果采取行动
-# 如果有严重问题，按照报告建议进行修复
-# 如果只有警告，可以继续使用但建议优化
+# Take action based on diagnostic results
+# If critical issues exist, fix according to report suggestions
+# If only warnings exist, you can continue using but optimization is recommended
 ```
 
-## 📞 寻求帮助
+## 📞 Seeking Help
 
-### 报告问题时请提供：
+### When reporting an issue, please provide:
 
-1. **完整的错误信息**
-2. **系统环境信息**（运行诊断工具获取）
-3. **重现步骤**
-4. **输入数据样例**（如可分享）
-5. **预期结果 vs 实际结果**
+1.  **Complete error message**
+2.  **System environment information** (obtained by running the diagnostic tool)
+3.  **Steps to reproduce**
+4.  **Sample input data** (if shareable)
+5.  **Expected results vs. actual results**
 
-### 联系渠道：
+### Contact Channels:
 - [GitHub Issues](https://github.com/your-repo/nav-data/issues)
-- [FAQ文档](./faq.md)
-- [社区讨论](https://github.com/your-repo/nav-data/discussions)
+- [FAQ Document](./faq.md)
+- [Community Discussions](https://github.com/your-repo/nav-data/discussions)
 
 ---
 
-**记住：大多数问题都有解决方案！** 🛠️ 
+**Remember: Most problems have solutions!** 🛠️ 
 
-通过系统性的诊断和故障排除，您可以快速解决 Nav-data 使用中遇到的问题。如果问题仍然存在，请不要犹豫向社区寻求帮助。 
+Through systematic diagnosis and troubleshooting, you can quickly resolve issues encountered during Nav-data usage. If problems persist, do not hesitate to seek help from the community.

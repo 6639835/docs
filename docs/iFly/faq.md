@@ -1,200 +1,200 @@
-# ❓ iFly 导航数据转换器常见问题
+# ❓ iFly Navigation Data Converter FAQ
 
-## 🔧 安装和配置
+## 🔧 Installation and Configuration
 
-### Q: 我需要什么软件才能运行转换器？
+### Q: What software do I need to run the converter?
 
-**A:** 您需要以下软件：
-- **Python 3.8+** (推荐 Python 3.9 或更高版本)
-- **iFly 737 MAX 8** 已安装在 Microsoft Flight Simulator 中
-- **Fenix A320** (用于获取导航数据库)
-- **NAIP RTE_SEG.csv** 航路段数据文件
+**A:** You need the following software:
+- **Python 3.8+** (Python 3.9 or higher recommended)
+- **iFly 737 MAX 8** installed in Microsoft Flight Simulator
+- **Fenix A320** (for obtaining the navigation database)
+- **NAIP RTE_SEG.csv** route segment data file
 
-### Q: 如何安装所需的 Python 依赖包？
+### Q: How do I install the required Python dependencies?
 
-**A:** 在项目目录中运行：
+**A:** Run in the project directory:
 ```bash
 pip install rich pathlib typing pygeomag pandas tqdm geographiclib
 ```
 
-或者如果有 requirements.txt 文件：
+Or if there's a requirements.txt file:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Q: 程序提示找不到 iFly 安装路径怎么办？
+### Q: What if the program prompts that the iFly installation path cannot be found?
 
-**A:** 您可以：
-1. **手动指定路径**：在程序提示时输入完整的 iFly 安装路径
-2. **检查安装位置**：确认 iFly 737 MAX 8 正确安装在以下位置之一：
+**A:** You can:
+1. **Manually specify the path**: Enter the complete iFly installation path when prompted by the program
+2. **Check installation location**: Confirm that iFly 737 MAX 8 is correctly installed in one of the following locations:
    - `Community\ifly-aircraft-737max8\`
    - `Official\asobo-aircraft-ifly-737max8\`
-3. **重新安装 iFly**：如果路径异常，请重新安装 iFly 737 MAX 8
+3. **Reinstall iFly**: If the path is incorrect, please reinstall iFly 737 MAX 8
 
-## 📊 数据处理
+## 📊 Data Processing
 
-### Q: 什么是 AIRAC 周期？为什么重要？
+### Q: What is an AIRAC cycle? Why is it important?
 
-**A:** AIRAC (Aeronautical Information Regulation and Control) 是国际民航组织规定的 28 天航空信息更新周期。每个周期都有唯一的 4 位数标识（如 2508），确保导航数据的时效性和准确性。
+**A:** AIRAC (Aeronautical Information Regulation and Control) is a 28-day aeronautical information update cycle mandated by ICAO (International Civil Aviation Organization). Each cycle has a unique 4-digit identifier (e.g., 2508), ensuring the timeliness and accuracy of navigation data.
 
-### Q: 磁偏角是如何计算的？
+### Q: How is magnetic declination calculated?
 
-**A:** 转换器使用 **pygeomag** 库的 **WMM-2025** (World Magnetic Model) 地磁模型进行高精度磁偏角计算：
-- **本地计算**：无需网络连接
-- **高精度**：精确到小数点后多位
-- **实时更新**：基于当前日期和坐标
+**A:** The converter uses the **WMM-2025** (World Magnetic Model) geomagnetic model from the **pygeomag** library for high-precision magnetic declination calculation:
+- **Local calculation**: No internet connection required
+- **High precision**: Accurate to multiple decimal places
+- **Real-time update**: Based on the current date and coordinates
 
-### Q: 为什么需要 NAIP RTE_SEG.csv 文件？
+### Q: Why is the NAIP RTE_SEG.csv file needed?
 
-**A:** 这个文件包含中国民航的航路段数据，用于：
-- 补充 iFly 缺失的中国航路信息
-- 提供准确的航路点坐标
-- 确保与实际航路网络的一致性
+**A:** This file contains route segment data for Chinese civil aviation, used for:
+- Supplementing missing Chinese route information in iFly
+- Providing accurate waypoint coordinates
+- Ensuring consistency with the actual route network
 
-### Q: 转换后的数据放在哪里？
+### Q: Where is the converted data stored?
 
-**A:** 数据会被放置在以下位置：
-- **航路数据**：`Community\ifly-aircraft-737max8\Data\navdata\Permanent\WPNAVRTE.txt`
-- **终端程序**：`Community\ifly-aircraft-737max8\Data\navdata\Supplemental\`
-- **AIRAC 标识**：`FMC_Ident.txt`
+**A:** The data will be placed in the following locations:
+- **Route data**: `Community\ifly-aircraft-737max8\Data\navdata\Permanent\WPNAVRTE.txt`
+- **Terminal procedures**: `Community\ifly-aircraft-737max8\Data\navdata\Supplemental\`
+- **AIRAC Identifier**: `FMC_Ident.txt`
 
-## 🐛 故障排除
+## 🐛 Troubleshooting
 
-### Q: 程序运行时出现 "数据库连接失败" 错误？
+### Q: The program shows a "Database connection failed" error during runtime?
 
-**A:** 请检查：
-1. **文件路径**：确认 Fenix 数据库文件路径正确
-2. **文件权限**：确保文件可读
-3. **文件完整性**：尝试重新获取 Fenix 数据库文件
-4. **磁盘空间**：确保有足够的可用空间
+**A:** Please check:
+1. **File path**: Confirm that the Fenix database file path is correct
+2. **File permissions**: Ensure the file is readable
+3. **File integrity**: Try re-acquiring the Fenix database file
+4. **Disk space**: Ensure there is enough free space
 
-### Q: 磁偏角计算很慢怎么办？
+### Q: What if magnetic declination calculation is slow?
 
-**A:** 这通常是正常的：
-- **首次运行**：地磁模型初始化需要时间
-- **大量数据**：航路点多时计算时间较长
-- **系统性能**：较老的硬件处理速度较慢
+**A:** This is usually normal:
+- **First run**: Geomagnetic model initialization takes time
+- **Large data volume**: Calculation takes longer with many waypoints
+- **System performance**: Older hardware processes slower
 
-优化建议：
-- 使用 SSD 硬盘
-- 确保充足的内存 (推荐 8GB+)
-- 关闭不必要的后台程序
+Optimization suggestions:
+- Use an SSD
+- Ensure sufficient memory (8GB+ recommended)
+- Close unnecessary background programs
 
-### Q: 转换完成后 iFly 中看不到新数据？
+### Q: After conversion, new data is not visible in iFly?
 
-**A:** 请尝试：
-1. **重启模拟器**：完全退出并重新启动 MSFS
-2. **检查文件位置**：确认文件写入到正确目录
-3. **清除缓存**：删除 iFly 的缓存文件
-4. **检查权限**：确保程序有写入 iFly 目录的权限
+**A:** Please try:
+1. **Restart simulator**: Fully exit and restart MSFS
+2. **Check file location**: Confirm that files are written to the correct directory
+3. **Clear cache**: Delete iFly's cache files
+4. **Check permissions**: Ensure the program has write permissions to the iFly directory
 
-### Q: 出现编码错误怎么办？
+### Q: What if an encoding error occurs?
 
-**A:** 这通常与字符编码相关：
-1. **确保 Python 环境支持 UTF-8**
-2. **检查 CSV 文件编码**：确认为 UTF-8 格式
-3. **更新 Python 版本**：使用最新的 Python 版本
+**A:** This is usually related to character encoding:
+1. **Ensure Python environment supports UTF-8**
+2. **Check CSV file encoding**: Confirm it is UTF-8 format
+3. **Update Python version**: Use the latest Python version
 
-## 📈 性能和优化
+## 📈 Performance and Optimization
 
-### Q: 如何提高转换速度？
+### Q: How to improve conversion speed?
 
-**A:** 性能优化建议：
-- **使用 SSD**：固态硬盘显著提升 I/O 性能
-- **增加内存**：推荐 8GB+ RAM
-- **关闭杀毒软件**：临时关闭实时扫描
-- **使用较新的 Python 版本**：Python 3.9+ 性能更好
+**A:** Performance optimization suggestions:
+- **Use SSD**: Solid-state drives significantly improve I/O performance
+- **Increase memory**: 8GB+ RAM recommended
+- **Disable antivirus software**: Temporarily turn off real-time scanning
+- **Use a newer Python version**: Python 3.9+ offers better performance
 
-### Q: 内存使用过高怎么办？
+### Q: What if memory usage is too high?
 
-**A:** 内存优化方案：
-1. **分批处理**：处理大文件时使用分批模式
-2. **关闭其他程序**：释放系统内存
-3. **检查数据大小**：确认数据文件大小合理
-4. **使用 64 位 Python**：避免 32 位内存限制
+**A:** Memory optimization solutions:
+1. **Batch processing**: Use batch mode when processing large files
+2. **Close other programs**: Free up system memory
+3. **Check data size**: Confirm data file size is reasonable
+4. **Use 64-bit Python**: Avoid 32-bit memory limitations
 
-### Q: 可以批量处理多个数据库吗？
+### Q: Can multiple databases be processed in batches?
 
-**A:** 当前版本不直接支持批量处理，但您可以：
-1. **多次运行程序**：逐个处理数据库文件
-2. **编写脚本**：创建自动化批处理脚本
-3. **等待更新**：v2.1.0 将支持批量处理功能
+**A:** The current version does not directly support batch processing, but you can:
+1. **Run the program multiple times**: Process database files one by one
+2. **Write a script**: Create an automated batch processing script
+3. **Wait for updates**: v2.1.0 will support batch processing functionality
 
-## 🔄 数据管理
+## 🔄 Data Management
 
-### Q: 如何备份原始数据？
+### Q: How to back up original data?
 
-**A:** 强烈建议转换前备份：
+**A:** It is highly recommended to back up before conversion:
 ```bash
-# 备份 iFly 原始数据
+# Back up iFly original data
 cp -r "Community\ifly-aircraft-737max8\Data\navdata" "backup_navdata"
 ```
 
-### Q: 如何恢复原始数据？
+### Q: How to restore original data?
 
-**A:** 如果需要恢复：
-1. **删除转换后的文件**
-2. **从备份恢复**：
+**A:** If you need to restore:
+1. **Delete converted files**
+2. **Restore from backup**:
    ```bash
    rm -r "Community\ifly-aircraft-737max8\Data\navdata"
    cp -r "backup_navdata" "Community\ifly-aircraft-737max8\Data\navdata"
    ```
-3. **重新安装 iFly**：最彻底的恢复方法
+3. **Reinstall iFly**: The most thorough recovery method
 
-### Q: 如何验证数据转换是否成功？
+### Q: How to verify if data conversion was successful?
 
-**A:** 验证方法：
-1. **检查文件存在**：确认新文件已生成
-2. **查看文件大小**：新文件应该比原文件大
-3. **模拟器测试**：在 MSFS 中加载 iFly 737 测试
-4. **FMC 验证**：检查 FMC 中的航路和程序数据
+**A:** Verification methods:
+1. **Check file existence**: Confirm that new files have been generated
+2. **Check file size**: New files should be larger than the original files
+3. **Simulator test**: Load iFly 737 in MSFS for testing
+4. **FMC verification**: Check route and procedure data in the FMC
 
-## 🆘 技术支持
+## 🆘 Technical Support
 
-### Q: 在哪里可以获得帮助？
+### Q: Where can I get help?
 
-**A:** 获取帮助的渠道：
-1. **查看日志**：检查 `converter.log` 文件
-2. **文档查阅**：阅读完整的使用指南
-3. **GitHub Issues**：在项目页面报告问题
-4. **社区论坛**：参与飞行模拟社区讨论
+**A:** Channels for getting help:
+1. **Check logs**: Examine the `converter.log` file
+2. **Consult documentation**: Read the complete user guide
+3. **GitHub Issues**: Report problems on the project page
+4. **Community forums**: Participate in flight simulation community discussions
 
-### Q: 如何报告 Bug？
+### Q: How to report a Bug?
 
-**A:** 报告问题时请提供：
-- **详细的错误描述**
-- **完整的错误日志**
-- **系统环境信息** (OS, Python 版本等)
-- **重现步骤**
-- **相关的截图或文件**
+**A:** When reporting an issue, please provide:
+- **Detailed error description**
+- **Complete error log**
+- **System environment information** (OS, Python version, etc.)
+- **Steps to reproduce**
+- **Relevant screenshots or files**
 
-### Q: 项目是开源的吗？
+### Q: Is the project open source?
 
-**A:** 是的！项目遵循开源协议：
-- **查看源代码**：GitHub 仓库公开
-- **贡献代码**：欢迎提交 Pull Request
-- **功能建议**：在 Issues 中提出功能请求
-- **文档改进**：帮助完善文档
+**A:** Yes! The project follows an open-source license:
+- **View source code**: GitHub repository is public
+- **Contribute code**: Pull Requests are welcome
+- **Feature suggestions**: Submit feature requests in Issues
+- **Documentation improvements**: Help improve the documentation
 
-## 🔮 未来功能
+## 🔮 Future Features
 
-### Q: 计划添加哪些新功能？
+### Q: What new features are planned?
 
-**A:** 即将推出的功能：
-- **GUI 界面** (v2.1.0)
-- **批量处理** (v2.1.0)
-- **数据验证工具** (v2.2.0)
-- **云端处理** (v3.0.0)
-- **多格式支持** (v3.0.0)
+**A:** Upcoming features:
+- **GUI Interface** (v2.1.0)
+- **Batch processing** (v2.1.0)
+- **Data validation tool** (v2.2.0)
+- **Cloud processing** (v3.0.0)
+- **Multi-format support** (v3.0.0)
 
-### Q: 如何获取版本更新？
+### Q: How to get version updates?
 
-**A:** 保持更新：
-1. **关注 GitHub**：Star 项目获取更新通知
-2. **订阅发布**：启用 Release 通知
-3. **定期检查**：每月检查一次新版本
-4. **自动更新**：未来版本将支持自动更新
+**A:** Stay updated:
+1. **Follow on GitHub**: Star the project to get update notifications
+2. **Subscribe to releases**: Enable Release notifications
+3. **Regular checks**: Check for new versions once a month
+4. **Automatic updates**: Future versions will support automatic updates
 
 ---
 
-**找不到您问题的答案？** 请查看 [故障排除指南](troubleshooting.md) 或在 GitHub Issues 中提问！🆘
+**Can't find an answer to your question?** Please check the [troubleshooting guide](troubleshooting.md) or ask on GitHub Issues! 🆘

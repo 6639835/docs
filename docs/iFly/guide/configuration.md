@@ -1,25 +1,25 @@
-# ⚙️ iFly 导航数据转换器配置指南
+# ⚙️ iFly Navigation Data Converter Configuration Guide
 
-本指南详细介绍了 iFly 导航数据转换器的各种配置选项，帮助您根据需求优化转换过程。
+This guide details the various configuration options for the iFly Navigation Data Converter, helping you optimize the conversion process according to your needs.
 
-## 🎯 配置概览
+## 🎯 Configuration Overview
 
-转换器提供了灵活的配置系统，支持：
-- **📁 路径配置** - 自定义输入和输出路径
-- **📊 处理参数** - 调整数据处理精度和范围
-- **⚡ 性能优化** - 内存和处理速度优化
-- **🔍 验证选项** - 数据完整性验证设置
+The converter provides a flexible configuration system that supports:
+- **📁 Path Configuration** - Customizing input and output paths
+- **📊 Processing Parameters** - Adjusting data processing precision and scope
+- **⚡ Performance Optimization** - Memory and processing speed optimization
+- **🔍 Validation Options** - Data integrity validation settings
 
-## 📋 配置方式
+## 📋 Configuration Methods
 
-### 1. 交互式配置 (推荐)
+### 1. Interactive Configuration (Recommended)
 ```bash
-# 运行转换器，按提示配置
+# Run the converter and configure as prompted
 python main.py
 ```
 
-### 2. 配置文件
-创建 `config.json` 文件：
+### 2. Configuration File
+Create a `config.json` file:
 ```json
 {
     "fenix_db_path": "/path/to/nd.db3",
@@ -31,32 +31,32 @@ python main.py
 }
 ```
 
-### 3. 环境变量
+### 3. Environment Variables
 ```bash
 export IFLY_FENIX_DB="/path/to/nd.db3"
 export IFLY_CSV_FILE="/path/to/RTE_SEG.csv"
 export IFLY_INSTALL_PATH="/path/to/ifly-aircraft-737max8"
 ```
 
-## 🔧 核心配置选项
+## 🔧 Core Configuration Options
 
-### 文件路径配置
+### File Path Configuration
 
-#### Fenix 数据库路径
-**参数名**: `fenix_db_path`  
-**描述**: Fenix A320 导航数据库文件位置  
-**默认值**: 自动检测  
+#### Fenix Database Path
+**Parameter Name**: `fenix_db_path`  
+**Description**: Location of the Fenix A320 navigation database file  
+**Default Value**: Auto-detect  
 
-**常见位置:**
+**Common Locations:**
 ```bash
 # Windows
 %APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320\SimObjects\Airplanes\FenixA320\navdata\nd.db3
 
-# 自定义路径示例
+# Custom path example
 /Users/username/Documents/Fenix/navdata/nd.db3
 ```
 
-**验证方法:**
+**Validation Method:**
 ```python
 import sqlite3
 def validate_fenix_db(db_path):
@@ -68,136 +68,136 @@ def validate_fenix_db(db_path):
         required_tables = ['Airports', 'Runways', 'Waypoints', 'Terminals']
         return all(table in tables for table in required_tables)
     except Exception as e:
-        print(f"数据库验证失败: {e}")
+        print(f"Database validation failed: {e}")
         return False
 ```
 
-#### NAIP CSV 文件路径
-**参数名**: `csv_file_path`  
-**描述**: 中国民航航路段数据文件  
-**格式要求**: UTF-8 编码的 CSV 文件  
+#### NAIP CSV File Path
+**Parameter Name**: `csv_file_path`  
+**Description**: Chinese Civil Aviation Route Segment Data File  
+**Format Requirements**: UTF-8 encoded CSV file  
 
-**文件结构示例:**
+**File Structure Example:**
 ```csv
 ROUTE_ID,SEQUENCE_NUMBER,WAYPOINT_ID,LATITUDE,LONGITUDE,MAG_VARIATION
 A1,1,ZSAM,39.916667,116.383333,7.2
 A1,2,VOR01,39.833333,116.500000,7.1
 ```
 
-**必需列:**
-- `WAYPOINT_ID`: 航路点标识符
-- `LATITUDE`: 纬度 (十进制度)
-- `LONGITUDE`: 经度 (十进制度)
-- `ROUTE_ID`: 航路标识符
+**Required Columns:**
+- `WAYPOINT_ID`: Waypoint Identifier
+- `LATITUDE`: Latitude (Decimal Degrees)
+- `LONGITUDE`: Longitude (Decimal Degrees)
+- `ROUTE_ID`: Route Identifier
 
-#### iFly 安装路径
-**参数名**: `ifly_path`  
-**描述**: iFly 737 MAX 8 安装目录  
-**自动检测**: 支持  
+#### iFly Installation Path
+**Parameter Name**: `ifly_path`  
+**Description**: iFly 737 MAX 8 Installation Directory  
+**Auto-detection**: Supported  
 
-**检测顺序:**
-1. Community 包: `Community\ifly-aircraft-737max8\`
-2. Official 包: `Official\asobo-aircraft-ifly-737max8\`
-3. 手动指定路径
+**Detection Order:**
+1. Community Package: `Community\ifly-aircraft-737max8\`
+2. Official Package: `Official\asobo-aircraft-ifly-737max8\`
+3. Manually specified path
 
-## ⚙️ 处理参数配置
+## ⚙️ Processing Parameter Configuration
 
-### 终端程序 ID 范围
+### Terminal Procedure ID Range
 
-#### 起始 ID 设置
-**参数名**: `terminal_id_start`  
-**描述**: 终端程序起始 ID 编号  
-**默认值**: `1000`  
-**范围**: `1 - 9999`  
+#### Starting ID Setting
+**Parameter Name**: `terminal_id_start`  
+**Description**: Starting ID number for terminal procedures  
+**Default Value**: `1000`  
+**Range**: `1 - 9999`  
 
-**设置建议:**
+**Suggested Settings:**
 ```python
-# 根据机场数量设置
-small_airports = 1000   # < 50 个机场
-medium_airports = 2000  # 50-200 个机场  
-large_airports = 5000   # > 200 个机场
+# Set according to airport count
+small_airports = 1000   # < 50 airports
+medium_airports = 2000  # 50-200 airports  
+large_airports = 5000   # > 200 airports
 ```
 
-#### ID 分配策略
+#### ID Assignment Strategy
 ```python
 def calculate_terminal_ids(airport_count, start_id=1000):
-    """计算终端程序 ID 分配"""
-    # 每个机场预留 20 个 ID
+    """Calculate terminal procedure ID assignment"""
+    # Reserve 20 IDs per airport
     id_per_airport = 20
     total_ids_needed = airport_count * id_per_airport
     
     if start_id + total_ids_needed > 9999:
-        print("⚠️ 警告: ID 范围可能不足")
+        print("⚠️ Warning: ID range may be insufficient")
         return start_id, 9999
     
     return start_id, start_id + total_ids_needed
 ```
 
-### 坐标精度配置
+### Coordinate Precision Configuration
 
-#### 精度设置
-**参数名**: `coordinate_precision`  
-**描述**: 坐标小数点位数  
-**默认值**: `8`  
-**范围**: `4 - 12`  
+#### Precision Setting
+**Parameter Name**: `coordinate_precision`  
+**Description**: Number of decimal places for coordinates  
+**Default Value**: `8`  
+**Range**: `4 - 12`  
 
-**精度对比:**
-| 精度 | 误差范围 | 适用场景 |
-|------|----------|----------|
-| 4 位 | ~11 米 | 基础导航 |
-| 6 位 | ~1.1 米 | 标准导航 |
-| 8 位 | ~1.1 厘米 | 高精度导航 |
-| 10 位 | ~1.1 毫米 | 极高精度 |
+**Precision Comparison:**
+| Precision | Error Range | Applicable Scenario |
+|-----------|-------------|---------------------|
+| 4 digits  | ~11 meters  | Basic Navigation    |
+| 6 digits  | ~1.1 meters | Standard Navigation |
+| 8 digits  | ~1.1 cm     | High-Precision Navigation |
+| 10 digits | ~1.1 mm     | Ultra-High Precision|
 
-**设置示例:**
+**Setting Example:**
 ```python
-# 不同精度的坐标示例
-coord_4 = 39.9167  # 4 位精度
-coord_6 = 39.916667  # 6 位精度  
-coord_8 = 39.91666700  # 8 位精度
+# Coordinate examples with different precisions
+coord_4 = 39.9167  # 4-digit precision
+coord_6 = 39.916667  # 6-digit precision  
+coord_8 = 39.91666700  # 8-digit precision
 ```
 
-### 磁偏角计算配置
+### Magnetic Declination Calculation Configuration
 
-#### WMM 模型参数
-**模型版本**: WMM-2025  
-**更新频率**: 每 5 年  
-**计算精度**: 0.1 度  
+#### WMM Model Parameters
+**Model Version**: WMM-2025  
+**Update Frequency**: Every 5 years  
+**Calculation Precision**: 0.1 degrees  
 
-**计算参数:**
+**Calculation Parameters:**
 ```python
 {
     "model_year": 2025,
-    "altitude": 0,  # 海平面高度 (米)
-    "calculation_date": "auto",  # 自动使用当前日期
-    "use_local_time": true  # 使用本地时间
+    "altitude": 0,  # Sea level altitude (meters)
+    "calculation_date": "auto",  # Automatically use current date
+    "use_local_time": true  # Use local time
 }
 ```
 
-#### 磁偏角验证
+#### Magnetic Declination Validation
 ```python
 def validate_magnetic_declination(declination):
-    """验证磁偏角值合理性"""
-    # 全球磁偏角范围约为 -30° 到 +30°
+    """Validate the reasonableness of magnetic declination value"""
+    # Global magnetic declination range is approximately -30° to +30°
     if -30.0 <= declination <= 30.0:
         return True
     else:
-        print(f"⚠️ 异常磁偏角值: {declination}°")
+        print(f"⚠️ Abnormal magnetic declination value: {declination}°")
         return False
 ```
 
-## 🚀 性能优化配置
+## 🚀 Performance Optimization Configuration
 
-### 内存管理
+### Memory Management
 
-#### 批处理大小
-**参数名**: `batch_size`  
-**描述**: 单批处理的记录数量  
-**默认值**: `1000`  
-**建议设置:**
+#### Batch Size
+**Parameter Name**: `batch_size`  
+**Description**: Number of records processed in a single batch  
+**Default Value**: `1000`  
+**Suggested Settings:**
 
 ```python
-# 根据可用内存调整
+# Adjust based on available memory
 import psutil
 
 def get_optimal_batch_size():
@@ -205,66 +205,66 @@ def get_optimal_batch_size():
     memory_gb = available_memory / (1024**3)
     
     if memory_gb < 4:
-        return 500   # 4GB 以下
+        return 500   # Below 4GB
     elif memory_gb < 8:
         return 1000  # 4-8GB
     else:
-        return 2000  # 8GB 以上
+        return 2000  # Above 8GB
 ```
 
-#### 内存监控
+#### Memory Monitoring
 ```python
 def monitor_memory_usage():
-    """监控内存使用情况"""
+    """Monitor memory usage"""
     import psutil
     memory = psutil.virtual_memory()
-    print(f"内存使用率: {memory.percent}%")
-    print(f"可用内存: {memory.available / (1024**2):.1f} MB")
+    print(f"Memory usage: {memory.percent}%")
+    print(f"Available memory: {memory.available / (1024**2):.1f} MB")
 ```
 
-### 并发处理配置
+### Concurrent Processing Configuration
 
-#### 线程数设置
-**参数名**: `max_workers`  
-**描述**: 最大并发线程数  
-**默认值**: CPU 核心数  
+#### Thread Count Setting
+**Parameter Name**: `max_workers`  
+**Description**: Maximum number of concurrent threads  
+**Default Value**: Number of CPU cores  
 
-**设置策略:**
+**Setting Strategy:**
 ```python
 import os
 
 def get_optimal_workers():
     cpu_count = os.cpu_count()
     
-    # 保留一个核心给系统
+    # Reserve one core for the system
     if cpu_count <= 2:
         return 1
     elif cpu_count <= 4:
         return cpu_count - 1
     else:
-        return min(cpu_count - 2, 8)  # 最多 8 个线程
+        return min(cpu_count - 2, 8)  # Maximum 8 threads
 ```
 
-#### I/O 优化
-```python
+#### I/O Optimization
+```json
 {
-    "use_ssd_optimization": true,    # SSD 优化
-    "buffer_size": 8192,            # 缓冲区大小 (字节)
-    "enable_compression": false,     # 临时文件压缩
-    "temp_dir": "/tmp"              # 临时目录
+    "use_ssd_optimization": true,    # SSD optimization
+    "buffer_size": 8192,            # Buffer size (bytes)
+    "enable_compression": false,     # Temporary file compression
+    "temp_dir": "/tmp"              # Temporary directory
 }
 ```
 
-## 🔍 验证和质量控制
+## 🔍 Validation and Quality Control
 
-### 数据验证配置
+### Data Validation Configuration
 
-#### 验证等级
-**参数名**: `validation_level`  
-**描述**: 数据验证强度  
-**选项**: `basic`, `standard`, `strict`  
+#### Validation Level
+**Parameter Name**: `validation_level`  
+**Description**: Data validation intensity  
+**Options**: `basic`, `standard`, `strict`  
 
-**验证内容:**
+**Validation Content:**
 ```python
 validation_levels = {
     "basic": [
@@ -288,54 +288,54 @@ validation_levels = {
 }
 ```
 
-#### 错误处理策略
-**参数名**: `error_handling`  
-**选项**: `stop`, `skip`, `fix`  
+#### Error Handling Strategy
+**Parameter Name**: `error_handling`  
+**Options**: `stop`, `skip`, `fix`  
 
 ```python
 error_strategies = {
-    "stop": "遇到错误立即停止",
-    "skip": "跳过错误记录继续处理", 
-    "fix": "尝试自动修复错误"
+    "stop": "Stop immediately upon error",
+    "skip": "Skip erroneous records and continue processing", 
+    "fix": "Attempt to automatically fix errors"
 }
 ```
 
-### 输出质量控制
+### Output Quality Control
 
-#### 文件命名规则
+#### File Naming Rules
 ```python
 output_naming = {
-    "use_timestamp": true,          # 使用时间戳
-    "include_version": true,        # 包含版本号
-    "airac_suffix": true,          # 添加 AIRAC 后缀
-    "backup_original": true        # 备份原始文件
+    "use_timestamp": true,          # Use timestamp
+    "include_version": true,        # Include version number
+    "airac_suffix": true,          # Add AIRAC suffix
+    "backup_original": true        # Backup original file
 }
 
-# 生成的文件名示例:
+# Example generated filenames:
 # WPNAVRTE_2024-12-15_v2.0_2508.txt
 # FMC_Ident_2024-12-15_v2.0_2508.txt
 ```
 
-## 📅 AIRAC 周期配置
+## 📅 AIRAC Cycle Configuration
 
-### 自动计算设置
-**参数名**: `airac_auto_calculate`  
-**默认值**: `true`  
-**时区**: UTC+8 (北京时间)  
+### Automatic Calculation Settings
+**Parameter Name**: `airac_auto_calculate`  
+**Default Value**: `true`  
+**Timezone**: UTC+8 (Beijing Time)  
 
 ```python
 airac_config = {
     "auto_calculate": true,
     "timezone": "Asia/Shanghai",
-    "reference_date": "2024-01-11",  # AIRAC 2401 起始日期
-    "cycle_days": 28,                # 标准周期天数
-    "format": "YYWW"                # 格式: 年年周周
+    "reference_date": "2024-01-11",  # AIRAC 2401 start date
+    "cycle_days": 28,                # Standard cycle days
+    "format": "YYWW"                # Format: YearYearWeekWeek
 }
 ```
 
-### 手动设置
+### Manual Setting
 ```python
-# 手动指定 AIRAC 周期
+# Manually specify AIRAC cycle
 manual_airac = {
     "cycle": "2508",
     "effective_date": "2025-02-20",
@@ -343,44 +343,44 @@ manual_airac = {
 }
 ```
 
-## 🎛️ 高级配置
+## 🎛️ Advanced Configuration
 
-### 日志配置
+### Logging Configuration
 ```python
 logging_config = {
     "level": "INFO",               # DEBUG, INFO, WARNING, ERROR
-    "file": "converter.log",       # 日志文件名
-    "max_size": "10MB",           # 最大文件大小
-    "backup_count": 3,            # 备份文件数量
+    "file": "converter.log",       # Log file name
+    "max_size": "10MB",           # Maximum file size
+    "backup_count": 3,            # Number of backup files
     "format": "%(asctime)s - %(levelname)s - %(message)s"
 }
 ```
 
-### 界面配置
+### UI Configuration
 ```python
 ui_config = {
-    "theme": "dark",              # 主题: dark, light, auto
-    "progress_style": "bar",      # 进度条样式: bar, spinner
-    "color_scheme": "rich",       # 配色方案
-    "show_details": true,         # 显示详细信息
-    "animation": true            # 启用动画效果
+    "theme": "dark",              # Theme: dark, light, auto
+    "progress_style": "bar",      # Progress bar style: bar, spinner
+    "color_scheme": "rich",       # Color scheme
+    "show_details": true,         # Show details
+    "animation": true            # Enable animation effects
 }
 ```
 
-### 调试配置
+### Debug Configuration
 ```python
 debug_config = {
-    "enable_debug": false,        # 启用调试模式
-    "save_intermediate": false,   # 保存中间结果
-    "verbose_logging": false,     # 详细日志
-    "performance_profiling": false, # 性能分析
-    "memory_tracking": false     # 内存跟踪
+    "enable_debug": false,        # Enable debug mode
+    "save_intermediate": false,   # Save intermediate results
+    "verbose_logging": false,     # Verbose logging
+    "performance_profiling": false, # Performance profiling
+    "memory_tracking": false     # Memory tracking
 }
 ```
 
-## 📝 配置文件模板
+## 📝 Configuration File Templates
 
-### 完整配置示例
+### Complete Configuration Example
 ```json
 {
     "paths": {
@@ -431,7 +431,7 @@ debug_config = {
 }
 ```
 
-### 最小配置示例
+### Minimal Configuration Example
 ```json
 {
     "fenix_db_path": "/path/to/nd.db3",
@@ -440,16 +440,16 @@ debug_config = {
 }
 ```
 
-## 🛠️ 配置工具
+## 🛠️ Configuration Tools
 
-### 配置验证脚本
+### Configuration Validation Script
 ```python
 def validate_config(config_path):
-    """验证配置文件有效性"""
+    """Validate configuration file validity"""
     import json
     import jsonschema
     
-    # 配置架构
+    # Configuration schema
     schema = {
         "type": "object",
         "properties": {
@@ -465,20 +465,20 @@ def validate_config(config_path):
             config = json.load(f)
         
         jsonschema.validate(config, schema)
-        print("✅ 配置验证通过")
+        print("✅ Configuration validation passed")
         return True
     except Exception as e:
-        print(f"❌ 配置验证失败: {e}")
+        print(f"❌ Configuration validation failed: {e}")
         return False
 ```
 
-### 配置生成器
+### Configuration Generator
 ```python
 def generate_config_template():
-    """生成配置模板"""
+    """Generate configuration template"""
     template = {
-        "fenix_db_path": "请输入 Fenix 数据库路径",
-        "csv_file_path": "请输入 CSV 文件路径", 
+        "fenix_db_path": "Please enter Fenix database path",
+        "csv_file_path": "Please enter CSV file path", 
         "ifly_path": "auto_detect",
         "terminal_id_start": 1000,
         "coordinate_precision": 8
@@ -487,9 +487,9 @@ def generate_config_template():
     with open('config_template.json', 'w', encoding='utf-8') as f:
         json.dump(template, f, indent=2, ensure_ascii=False)
     
-    print("配置模板已生成: config_template.json")
+    print("Configuration template generated: config_template.json")
 ```
 
 ---
 
-**下一步**: 配置完成后，请查看 [使用说明](usage.md) 开始您的第一次数据转换！🚀
+**Next Steps**: After completing the configuration, please refer to the [Usage Instructions](usage.md) to start your first data conversion! 🚀

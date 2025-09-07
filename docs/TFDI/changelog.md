@@ -1,253 +1,253 @@
-# 📝 TFDI 导航数据转换器更新日志
+# 📝 TFDI Navigation Data Converter Changelog
 
-## 🆕 v1.0.0 (2024-12-当前版本)
+## 🆕 v1.0.0 (2024-12-Current Version)
 
-### ✨ 全新功能
-- **🎨 Rich CLI 界面**：现代化彩色终端用户界面
-- **🔄 Fenix 到 TFDI 转换**：支持将 Fenix A320 导航数据库转换为 TFDI MD-11 兼容格式
-- **📊 全面数据处理**：支持所有 Fenix 数据库表的完整转换
-- **🧭 坐标标准化**：自动坐标精度处理和列名标准化
-- **🔍 FAF 点检测**：智能 Final Approach Fix 点识别
-- **📦 JSON 输出**：生成 TFDI 兼容的 JSON 格式数据文件
-- **🗜️ 7z 压缩**：自动创建压缩包便于分发和存储
+### ✨ New Features
+- **🎨 Rich CLI Interface**: Modern, colored terminal user interface
+- **🔄 Fenix to TFDI Conversion**: Supports converting Fenix A320 navigation databases to TFDI MD-11 compatible format
+- **📊 Comprehensive Data Processing**: Supports full conversion of all Fenix database tables
+- **🧭 Coordinate Standardization**: Automatic coordinate precision handling and column name standardization
+- **🔍 FAF Point Detection**: Intelligent Final Approach Fix point identification
+- **📦 JSON Output**: Generates TFDI-compatible JSON format data files
+- **🗜️ 7z Compression**: Automatically creates compressed archives for easy distribution and storage
 
-### 🔧 核心特性
-- **📋 完整验证**：数据库完整性和格式验证
-- **🏗️ 企业级架构**：模块化设计和完整的错误处理
-- **⚡ 性能优化**：SQLite WAL 模式和批处理优化
-- **💾 内存高效**：流式处理大型数据集
-- **🔄 缓存机制**：航路点数据缓存提升性能
+### 🔧 Core Features
+- **📋 Full Validation**: Database integrity and format validation
+- **🏗️ Enterprise-Grade Architecture**: Modular design and comprehensive error handling
+- **⚡ Performance Optimization**: SQLite WAL mode and batch processing optimizations
+- **💾 Memory Efficient**: Stream processing for large datasets
+- **🔄 Caching Mechanism**: Waypoint data caching for improved performance
 
-### 📊 支持的数据表
+### 📊 Supported Data Tables
 
-#### 核心导航数据
-- **Airports** - 机场基本信息和通信频率
-- **Runways** - 跑道信息和进近数据
-- **Waypoints** - 航路点坐标和定义
-- **Navaids** - 导航设备数据
+#### Core Navigation Data
+- **Airports** - Basic airport information and communication frequencies
+- **Runways** - Runway information and approach data
+- **Waypoints** - Waypoint coordinates and definitions
+- **Navaids** - Navigation aid data
 
-#### 航路网络
-- **Airways** - 航路定义和属性
-- **AirwayLegs** - 航路段详细信息
+#### Airway Network
+- **Airways** - Airway definitions and properties
+- **AirwayLegs** - Airway leg details
 
-#### 终端程序
-- **Terminals** - 终端程序定义
-- **TerminalLegs** - 终端程序腿段数据
-- **TerminalLegsEx** - 扩展终端程序段数据
+#### Terminal Procedures
+- **Terminals** - Terminal procedure definitions
+- **TerminalLegs** - Terminal procedure leg data
+- **TerminalLegsEx** - Extended terminal procedure leg data
 
-#### 精密进近
-- **ILSes** - ILS 进近程序数据
+#### Precision Approaches
+- **ILSes** - ILS approach procedure data
 
-#### 查找表
-- **AirportLookup** - 机场查找引用表
-- **NavaidLookup** - 导航设备查找表
-- **WaypointLookup** - 航路点查找表
+#### Lookup Tables
+- **AirportLookup** - Airport lookup reference table
+- **NavaidLookup** - Navaid lookup table
+- **WaypointLookup** - Waypoint lookup table
 
-### 🎛️ 技术改进
-- **类型提示**：完整的 Python 类型注解
-- **文档完整**：详细的 API 文档和使用指南
-- **日志记录**：Rich 增强的日志系统
-- **配置管理**：灵活的配置选项和自定义设置
+### 🎛️ Technical Improvements
+- **Type Hinting**: Complete Python type annotations
+- **Comprehensive Documentation**: Detailed API documentation and user guide
+- **Logging**: Rich-enhanced logging system
+- **Configuration Management**: Flexible configuration options and custom settings
 
-### 📁 输出文件结构
+### 📁 Output File Structure
 ```
 Primary.7z
-├── AirportLookup.json      # 机场查找数据
-├── Airports.json           # 机场信息
-├── AirwayLegs.json        # 航路段数据
-├── Airways.json           # 航路定义
-├── Ilses.json             # ILS 进近数据
-├── NavaidLookup.json      # 导航设备查找数据
-├── Navaids.json           # 导航设备数据
-├── Runways.json           # 跑道信息
-├── Terminals.json         # 终端程序数据
-├── WaypointLookup.json    # 航路点查找数据
-├── Waypoints.json         # 航路点定义
-└── ProcedureLegs/         # 终端程序段目录
-    ├── TermID_1.json      # 终端 ID 1 程序
-    ├── TermID_2.json      # 终端 ID 2 程序
-    └── ...                # 其他终端程序
+├── AirportLookup.json      # Airport lookup data
+├── Airports.json           # Airport information
+├── AirwayLegs.json        # Airway leg data
+├── Airways.json           # Airway definitions
+├── Ilses.json             # ILS approach data
+├── NavaidLookup.json      # Navaid lookup data
+├── Navaids.json           # Navaid data
+├── Runways.json           # Runway information
+├── Terminals.json         # Terminal procedure data
+├── WaypointLookup.json    # Waypoint lookup data
+├── Waypoints.json         # Waypoint definitions
+└── ProcedureLegs/         # Terminal procedure legs directory
+    ├── TermID_1.json      # Terminal ID 1 procedure
+    ├── TermID_2.json      # Terminal ID 2 procedure
+    └── ...                # Other terminal procedures
 ```
 
 ---
 
-## 🚀 即将发布的功能
+## 🚀 Upcoming Features
 
-### v1.1.0 (计划中 - 2025 Q1)
-- **🖥️ GUI 界面**：桌面图形用户界面
-- **📦 批量处理**：支持多个数据库文件同时转换
-- **🔍 数据验证工具**：增强的数据完整性检查和报告
-- **📊 转换统计**：详细的转换过程统计和报告
-- **⚙️ 高级配置**：更多自定义配置选项
+### v1.1.0 (Planned - 2025 Q1)
+- **🖥️ GUI Interface**: Desktop graphical user interface
+- **📦 Batch Processing**: Supports converting multiple database files simultaneously
+- **🔍 Data Validation Tools**: Enhanced data integrity checks and reporting
+- **📊 Conversion Statistics**: Detailed conversion process statistics and reports
+- **⚙️ Advanced Configuration**: More custom configuration options
 
-### v1.2.0 (计划中 - 2025 Q2)
-- **🌐 在线更新**：自动检查和下载更新
-- **📝 配置文件支持**：保存和加载用户配置预设
-- **🔧 插件系统**：支持第三方格式扩展
-- **📈 性能分析**：内置性能监控和优化建议
-- **🔄 增量更新**：支持数据库增量更新转换
+### v1.2.0 (Planned - 2025 Q2)
+- **🌐 Online Updates**: Automatic check and download for updates
+- **📝 Configuration File Support**: Save and load user configuration presets
+- **🔧 Plugin System**: Support for third-party format extensions
+- **📈 Performance Analysis**: Built-in performance monitoring and optimization recommendations
+- **🔄 Incremental Updates**: Supports incremental database update conversion
 
-### v2.0.0 (长期规划 - 2025 Q3)
-- **☁️ 云端处理**：支持云端数据转换服务
-- **🤖 AI 辅助**：智能数据优化和错误修复
-- **📊 实时监控**：实时转换状态和性能监控
-- **🌍 多语言支持**：国际化界面和文档
-- **🔌 API 接口**：RESTful API 支持
+### v2.0.0 (Long-Term Planning - 2025 Q3)
+- **☁️ Cloud Processing**: Supports cloud-based data conversion services
+- **🤖 AI Assistance**: Intelligent data optimization and error correction
+- **📊 Real-time Monitoring**: Real-time conversion status and performance monitoring
+- **🌍 Multilingual Support**: Internationalized interface and documentation
+- **🔌 API Interface**: RESTful API support
 
 ---
 
-## 📊 版本对比表
+## 📊 Version Comparison Table
 
-| 功能特性 | v1.0.0 | v1.1.0 (计划) | v2.0.0 (计划) |
+| Feature | v1.0.0 | v1.1.0 (Planned) | v2.0.0 (Planned) |
 |---------|--------|---------------|---------------|
-| Rich CLI 界面 | ✅ | ✅ | ✅ |
-| Fenix 数据转换 | ✅ | ✅ | ✅ |
-| JSON 输出格式 | ✅ | ✅ | ✅ |
-| 7z 压缩 | ✅ | ✅ | ✅ |
-| GUI 界面 | ❌ | ✅ | ✅ |
-| 批量处理 | ❌ | ✅ | ✅ |
-| 插件系统 | ❌ | ✅ | ✅ |
-| 云端处理 | ❌ | ❌ | ✅ |
-| AI 辅助 | ❌ | ❌ | ✅ |
-| API 接口 | ❌ | ❌ | ✅ |
+| Rich CLI Interface | ✅ | ✅ | ✅ |
+| Fenix Data Conversion | ✅ | ✅ | ✅ |
+| JSON Output Format | ✅ | ✅ | ✅ |
+| 7z Compression | ✅ | ✅ | ✅ |
+| GUI Interface | ❌ | ✅ | ✅ |
+| Batch Processing | ❌ | ✅ | ✅ |
+| Plugin System | ❌ | ✅ | ✅ |
+| Cloud Processing | ❌ | ❌ | ✅ |
+| AI Assistance | ❌ | ❌ | ✅ |
+| API Interface | ❌ | ❌ | ✅ |
 
 ---
 
-## 🐛 已知问题
+## 🐛 Known Issues
 
-### v1.0.0 当前已知问题
-1. **大型数据库处理**：超过 500MB 的数据库可能导致内存使用过高
-2. **特殊字符处理**：某些非标准字符可能影响 JSON 序列化
-3. **并发访问**：多个转换器实例同时访问同一数据库可能冲突
-4. **错误恢复**：转换过程中断后无法从断点恢复
+### v1.0.0 Current Known Issues
+1. **Large Database Handling**: Databases exceeding 500MB may lead to excessive memory usage
+2. **Special Character Handling**: Certain non-standard characters may affect JSON serialization
+3. **Concurrent Access**: Multiple converter instances accessing the same database simultaneously may cause conflicts
+4. **Error Recovery**: Unable to resume from a breakpoint after a conversion interruption
 
-### 修复计划
-- **内存优化** (v1.1.0)：引入流式处理和更高效的内存管理
-- **字符编码** (v1.1.0)：改进 Unicode 和特殊字符处理
-- **并发控制** (v1.2.0)：添加数据库锁定和队列机制
-- **断点续传** (v1.2.0)：实现转换进度保存和恢复功能
-
----
-
-## 📈 性能改进记录
-
-### v1.0.0 性能基准
-- **小型数据库** (< 50MB)：2-5 分钟
-- **中型数据库** (50-200MB)：5-15 分钟  
-- **大型数据库** (200-500MB)：15-45 分钟
-- **内存使用**：峰值 2-4GB
-- **CPU 利用率**：单核心 60-80%
-
-### 优化目标 (v1.1.0)
-- **处理速度**：提升 30-50%
-- **内存使用**：减少 40-60%
-- **并发支持**：多核心并行处理
-- **压缩效率**：提升 20-30%
+### Fix Plan
+- **Memory Optimization** (v1.1.0): Introduction of stream processing and more efficient memory management
+- **Character Encoding** (v1.1.0): Improved Unicode and special character handling
+- **Concurrency Control** (v1.2.0): Addition of database locking and queue mechanisms
+- **Resume Capability** (v1.2.0): Implementation of conversion progress saving and resuming functionality
 
 ---
 
-## 🔄 兼容性支持
+## 📈 Performance Improvement Log
 
-### 数据库版本支持
-| Fenix 版本 | 数据库版本 | 支持状态 | 备注 |
+### v1.0.0 Performance Benchmarks
+- **Small Databases** (< 50MB): 2-5 minutes
+- **Medium Databases** (50-200MB): 5-15 minutes
+- **Large Databases** (200-500MB): 15-45 minutes
+- **Memory Usage**: Peak 2-4GB
+- **CPU Utilization**: Single core 60-80%
+
+### Optimization Goals (v1.1.0)
+- **Processing Speed**: 30-50% improvement
+- **Memory Usage**: 40-60% reduction
+- **Concurrency Support**: Multi-core parallel processing
+- **Compression Efficiency**: 20-30% improvement
+
+---
+
+## 🔄 Compatibility Support
+
+### Database Version Support
+| Fenix Version | Database Version | Support Status | Notes |
 |-----------|------------|----------|------|
-| v1.0.x | nd.db3 v1.0 | ✅ 完全支持 | 初始版本 |
-| v1.1.x | nd.db3 v1.1 | ✅ 完全支持 | 表结构兼容 |
-| v1.2.x | nd.db3 v1.2 | ⚠️ 部分支持 | 新表需要更新 |
-| v2.0.x | nd.db3 v2.0 | 🔄 开发中 | v1.1.0 支持 |
+| v1.0.x | nd.db3 v1.0 | ✅ Fully Supported | Initial Version |
+| v1.1.x | nd.db3 v1.1 | ✅ Fully Supported | Table structure compatible |
+| v1.2.x | nd.db3 v1.2 | ⚠️ Partially Supported | New tables require update |
+| v2.0.x | nd.db3 v2.0 | 🔄 Under Development | v1.1.0 Support |
 
-### TFDI 版本兼容性
-| TFDI MD-11 版本 | JSON 格式版本 | 支持状态 | 测试状态 |
+### TFDI Version Compatibility
+| TFDI MD-11 Version | JSON Format Version | Support Status | Test Status |
 |----------------|---------------|----------|----------|
-| v1.0.x | JSON v1.0 | ✅ 完全兼容 | ✅ 已测试 |
-| v1.1.x | JSON v1.1 | ✅ 完全兼容 | ✅ 已测试 |
-| v1.2.x | JSON v1.2 | ⚠️ 需验证 | 🧪 测试中 |
+| v1.0.x | JSON v1.0 | ✅ Fully Compatible | ✅ Tested |
+| v1.1.x | JSON v1.1 | ✅ Fully Compatible | ✅ Tested |
+| v1.2.x | JSON v1.2 | ⚠️ Verification Needed | 🧪 Under Testing |
 
 ---
 
-## 📢 发布信息
+## 📢 Release Information
 
-### 下载渠道
-- **GitHub Releases**: 官方发布页面
-- **直接下载**: 稳定版本压缩包
-- **源码安装**: 克隆仓库自行构建
+### Download Channels
+- **GitHub Releases**: Official release page
+- **Direct Download**: Stable version archive
+- **Source Installation**: Clone repository and build yourself
 
-### 升级指导
+### Upgrade Guide
 
-#### 从源码升级
+#### Upgrade from Source
 ```bash
-# 1. 备份当前配置
+# 1. Back up current configuration
 cp config.json config.json.backup
 
-# 2. 拉取最新代码
+# 2. Pull latest code
 git pull origin main
 
-# 3. 更新依赖
+# 3. Update dependencies
 pip install -r requirements.txt --upgrade
 
-# 4. 验证安装
+# 4. Verify installation
 python -m pytest tests/
 ```
 
-#### 使用发布包升级
+#### Upgrade using Release Package
 ```bash
-# 1. 下载新版本
+# 1. Download new version
 wget https://github.com/repo/releases/download/v1.0.0/tfdi-converter-v1.0.0.zip
 
-# 2. 解压到新目录
+# 2. Unzip to new directory
 unzip tfdi-converter-v1.0.0.zip -d tfdi-converter-new/
 
-# 3. 迁移配置文件
+# 3. Migrate configuration files
 cp tfdi-converter-old/config.json tfdi-converter-new/
 
-# 4. 测试新版本
+# 4. Test new version
 cd tfdi-converter-new/
 python main.py --version
 ```
 
-### 支持政策
-- **最新版本**：提供完整技术支持和新功能
-- **前一主版本**：提供安全更新和关键修复
-- **更早版本**：仅社区支持，建议升级
+### Support Policy
+- **Latest Version**: Full technical support and new features provided
+- **Previous Major Version**: Security updates and critical fixes provided
+- **Older Versions**: Community support only, upgrade recommended
 
 ---
 
-## 📋 版本规划路线图
+## 📋 Version Roadmap
 
-### 2025 年发展计划
+### 2025 Development Plan
 
-#### Q1 2025: 用户体验提升
-- GUI 界面开发
-- 批量处理功能
-- 配置管理改进
-- 性能优化
+#### Q1 2025: User Experience Enhancement
+- GUI interface development
+- Batch processing feature
+- Configuration management improvements
+- Performance optimization
 
-#### Q2 2025: 功能扩展
-- 插件系统架构
-- 数据验证增强
-- 格式支持扩展
-- 错误处理改进
+#### Q2 2025: Feature Expansion
+- Plugin system architecture
+- Enhanced data validation
+- Expanded format support
+- Error handling improvements
 
-#### Q3 2025: 云服务集成
-- 云端处理平台
-- API 接口开发
-- 实时协作功能
-- 移动端支持
+#### Q3 2025: Cloud Service Integration
+- Cloud processing platform
+- API interface development
+- Real-time collaboration features
+- Mobile support
 
-#### Q4 2025: AI 和自动化
-- 智能数据优化
-- 自动错误修复
-- 预测性维护
-- 机器学习集成
+#### Q4 2025: AI and Automation
+- Intelligent data optimization
+- Automatic error correction
+- Predictive maintenance
+- Machine learning integration
 
-### 长期愿景 (2026+)
-- **生态系统建设**：构建完整的导航数据处理生态
-- **标准化推进**：参与行业标准制定
-- **社区发展**：建立活跃的开发者社区
-- **商业化服务**：提供专业级商业服务
+### Long-Term Vision (2026+)
+- **Ecosystem Building**: Constructing a complete navigation data processing ecosystem
+- **Standardization Advancement**: Participating in industry standard development
+- **Community Development**: Establishing an active developer community
+- **Commercial Services**: Providing professional-grade commercial services
 
 ---
 
-**感谢您关注 TFDI 导航数据转换器的发展！** 
+**Thank you for following the development of the TFDI Navigation Data Converter!**
 
-我们致力于为 TFDI MD-11 和飞行模拟社区提供最好的导航数据转换解决方案。🚁✨
+We are committed to providing the best navigation data conversion solution for the TFDI MD-11 and flight simulation community. 🚁✨

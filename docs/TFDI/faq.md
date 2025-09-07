@@ -1,389 +1,400 @@
-# ❓ TFDI 导航数据转换器常见问题
+# ❓ TFDI Navigation Data Converter FAQ
 
-## 🔧 安装和配置
+## 🔧 Installation and Configuration
 
-### Q: 我需要安装哪些软件才能使用转换器？
+### Q: What software do I need to install to use the converter?
 
-**A:** 您需要以下软件环境：
-- **Python 3.8+** (推荐 3.9 或更高版本)
-- **TFDI MD-11** 已安装在 Microsoft Flight Simulator 中
-- **Fenix A320** (用于获取导航数据库文件)
-- 必要的 Python 依赖包（通过 requirements.txt 安装）
+**A:** You need the following software environment:
+- **Python 3.8+** (3.9 or higher recommended)
+- **TFDI MD-11** installed in Microsoft Flight Simulator
+- **Fenix A320** (for obtaining navigation database files)
+- Required Python dependency packages (installed via requirements.txt)
 
-### Q: 如何获取 Fenix 导航数据库文件？
+### Q: How do I obtain the Fenix navigation database file?
 
-**A:** Fenix 数据库文件通常位于：
+**A:** The Fenix database file is usually located at:
 ```
 %APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320\SimObjects\Airplanes\FenixA320\navdata\nd.db3
 ```
 
-**注意事项：**
-- 确保 Fenix A320 已安装并至少运行过一次
-- 数据库文件大小通常为 50-200MB
-- 文件必须是完整且未损坏的 SQLite 数据库
+**Notes:**
+- Ensure Fenix A320 is installed and has been run at least once
+- The database file size is typically 50-200MB
+- The file must be a complete and undamaged SQLite database
 
-### Q: 转换器支持哪些版本的 Fenix 和 TFDI？
+### Q: What versions of Fenix and TFDI does the converter support?
 
-**A:** 当前支持版本：
+**A:** Currently supported versions:
 - **Fenix A320**: v1.0.x - v1.2.x
 - **TFDI MD-11**: v1.0.x - v1.2.x
-- **数据库格式**: SQLite 3.x
+- **Database Format**: SQLite 3.x
 
-**版本兼容性：**
-- ✅ 完全兼容：Fenix v1.1.x + TFDI v1.1.x
-- ⚠️ 需要验证：最新版本可能需要等待兼容性更新
-- ❌ 不支持：过旧的 Beta 版本
+**Version Compatibility:**
+- ✅ Fully compatible: Fenix v1.1.x + TFDI v1.1.x
+- ⚠️ Requires verification: Latest versions may need to wait for compatibility updates
+- ❌ Not supported: Outdated Beta versions
 
-## 📊 数据转换
+## 📊 Data Conversion
 
-### Q: 转换过程需要多长时间？
+### Q: How long does the conversion process take?
 
-**A:** 转换时间取决于数据库大小：
-- **小型数据库** (< 50MB): 2-5 分钟
-- **中型数据库** (50-200MB): 5-15 分钟
-- **大型数据库** (200-500MB): 15-45 分钟
+**A:** Conversion time depends on the database size:
+- **Small database** (< 50MB): 2-5 minutes
+- **Medium database** (50-200MB): 5-15 minutes
+- **Large database** (200-500MB): 15-45 minutes
 
-**影响因素：**
-- 硬盘类型（SSD 比 HDD 快 2-3 倍）
-- 可用内存（建议 8GB+）
-- CPU 性能（多核心有优势）
-- 系统负载（关闭不必要程序）
+**Influencing Factors:**
+- Hard drive type (SSD is 2-3 times faster than HDD)
+- Available RAM (8GB+ recommended)
+- CPU performance (multi-core has advantages)
+- System load (close unnecessary programs)
 
-### Q: 什么是终端 ID，如何设置？
+### Q: What is a Terminal ID, and how is it set?
 
-**A:** 终端 ID 是 TFDI 系统中用于标识终端程序的唯一编号。
+**A:** A Terminal ID is a unique number used in the TFDI system to identify terminal procedures.
 
-**设置建议：**
+**Suggested Settings:**
 ```
-起始 ID: 1000 (默认)
-ID 范围: 1-999999
-推荐范围: 1000-9000 (留有扩展空间)
+Start ID: 1000 (default)
+ID Range: 1-999999
+Recommended Range: 1000-9000 (for expansion)
 ```
 
-**分配策略：**
-- 每个机场预留 20-50 个 ID
-- 按地区分组分配（如亚洲区域 1000-3000）
-- 避免与现有 TFDI 数据冲突
+**Allocation Strategy:**
+- Reserve 20-50 IDs per airport
+- Allocate by region (e.g., Asia region 1000-3000)
+- Avoid conflicts with existing TFDI data
 
-### Q: 转换后的文件保存在哪里？
+### Q: Where are the converted files saved?
 
-**A:** 转换器会生成一个 `Primary.7z` 压缩包，包含：
+**A:** The converter generates a `Primary.7z` archive containing:
 
 ```
 Primary.7z
-├── AirportLookup.json      # 机场查找数据
-├── Airports.json           # 机场信息
-├── AirwayLegs.json        # 航路段数据
-├── Airways.json           # 航路定义
-├── Ilses.json             # ILS 进近数据
-├── NavaidLookup.json      # 导航设备查找
-├── Navaids.json           # 导航设备数据
-├── Runways.json           # 跑道信息
-├── Terminals.json         # 终端程序数据
-├── WaypointLookup.json    # 航路点查找
-├── Waypoints.json         # 航路点定义
-└── ProcedureLegs/         # 程序段目录
+├── AirportLookup.json      # Airport lookup data
+├── Airports.json           # Airport information
+├── AirwayLegs.json        # Airway leg data
+├── Airways.json           # Airway definitions
+├── Ilses.json             # ILS approach data
+├── NavaidLookup.json      # Navaid lookup
+├── Navaids.json           # Navaid data
+├── Runways.json           # Runway information
+├── Terminals.json         # Terminal procedure data
+├── WaypointLookup.json    # Waypoint lookup
+├── Waypoints.json         # Waypoint definitions
+└── ProcedureLegs/         # Procedure leg directory
     ├── TermID_1.json
     ├── TermID_2.json
     └── ...
 ```
 
-### Q: FAF 点检测是什么？为什么重要？
+### Q: What is FAF point detection, and why is it important?
 
-**A:** FAF (Final Approach Fix) 是精密进近程序中的最终进近定位点。
+**A:** FAF (Final Approach Fix) is the Final Approach Fix in a precision approach procedure.
 
-**重要性：**
-- 标记精密进近的开始点
-- VNAV 计算的关键参考点
-- 影响自动驾驶仪的进近模式
+**Importance:**
+- Marks the start of the precision approach
+- A critical reference point for VNAV calculations
+- Affects autopilot approach modes
 
-**检测标准：**
-- VNAV 角度 ≤ 2.5° (可配置)
-- 位于进近程序的最后阶段
-- 具有高度限制信息
+**Detection Criteria:**
+- VNAV angle ≤ 2.5° (configurable)
+- Located in the final stage of the approach procedure
+- Has altitude restriction information
 
-## 🐛 故障排除
+## 🐛 Troubleshooting
 
-### Q: 出现 "数据库文件损坏" 错误怎么办？
+### Q: What should I do if a "database file corrupted" error occurs?
 
-**错误信息：**
+**A:**
+**Error Message:**
 ```
 SQLite Error: database disk image is malformed
-数据库文件可能已损坏
+The database file may be corrupted
 ```
 
-**解决方案：**
-1. **重新获取数据库**：
+**Solutions:**
+1. **Re-obtain the database:**
    ```bash
-   # 删除可能损坏的文件
+   # Delete potentially corrupted file
    rm path/to/nd.db3
    
-   # 重新启动 Fenix A320 让其重新生成
+   # Restart Fenix A320 to regenerate it
    ```
 
-2. **验证文件完整性**：
+2. **Verify file integrity:**
    ```python
    import sqlite3
    
    try:
        conn = sqlite3.connect('nd.db3')
        conn.execute('PRAGMA integrity_check')
-       print("数据库完整性检查通过")
+       print("Database integrity check passed")
    except Exception as e:
-       print(f"数据库损坏: {e}")
+       print(f"Database corrupted: {e}")
    ```
 
-3. **使用数据库修复工具**：
+3. **Use a database repair tool:**
    ```bash
-   # 使用 SQLite 工具尝试修复
+   # Attempt repair using SQLite tool
    sqlite3 nd.db3 ".dump" | sqlite3 nd_repaired.db3
    ```
 
-### Q: 转换器卡在某个步骤不动怎么办？
+### Q: What should I do if the converter gets stuck at a certain step?
 
-**常见卡住的步骤：**
-- 数据库验证阶段
-- 大表数据处理阶段
-- JSON 序列化阶段
-- 压缩打包阶段
+**A:**
+**Common stuck steps:**
+- Database validation phase
+- Large table data processing phase
+- JSON serialization phase
+- Compression and packaging phase
 
-**排查方法：**
+**Troubleshooting methods:**
 ```bash
-# 1. 检查系统资源
+# 1. Check system resources
 top  # Linux/macOS
-# 或任务管理器 (Windows)
+# Or Task Manager (Windows)
 
-# 2. 查看日志文件
+# 2. View log file
 tail -f converter.log
 
-# 3. 检查磁盘空间
+# 3. Check disk space
 df -h  # Linux/macOS
-# 或在 Windows 中检查驱动器空间
+# Or check drive space in Windows
 ```
 
-**解决方案：**
-1. **重启转换器**：完全退出后重新启动
-2. **增加内存**：关闭其他程序释放内存
-3. **检查权限**：确保有写入权限
-4. **分步调试**：使用调试模式查看详细信息
+**Solutions:**
+1. **Restart the converter**: Exit completely and restart
+2. **Increase memory**: Close other programs to free up RAM
+3. **Check permissions**: Ensure write permissions
+4. **Step-by-step debugging**: Use debug mode to view detailed information
 
-### Q: 转换后的 JSON 文件在 TFDI 中无法识别？
+### Q: The converted JSON files are not recognized by TFDI?
 
-**可能原因：**
-1. **版本不兼容**：TFDI 版本与 JSON 格式版本不匹配
-2. **文件损坏**：压缩或传输过程中文件损坏
-3. **格式错误**：JSON 格式不符合 TFDI 标准
-4. **编码问题**：字符编码不正确
+**A:**
+**Possible reasons:**
+1. **Version incompatibility**: TFDI version does not match JSON format version
+2. **File corruption**: File corrupted during compression or transfer
+3. **Incorrect format**: JSON format does not comply with TFDI standards
+4. **Encoding issue**: Incorrect character encoding
 
-**验证步骤：**
+**Verification steps:**
 ```bash
-# 1. 验证 JSON 格式
+# 1. Validate JSON format
 python -m json.tool Primary/Airports.json
 
-# 2. 检查文件大小
+# 2. Check file size
 ls -lh Primary/
 
-# 3. 验证压缩包完整性
+# 3. Verify archive integrity
 7z t Primary.7z
 ```
 
-**修复方法：**
-1. **重新转换**：删除输出文件夹后重新转换
-2. **手动解压**：解压 7z 文件检查内容
-3. **版本更新**：确保使用最新版本的转换器
-4. **联系支持**：如问题持续存在，请报告 Bug
+**Repair methods:**
+1. **Re-convert**: Delete the output folder and convert again
+2. **Manually decompress**: Decompress the 7z file and check its contents
+3. **Update version**: Ensure using the latest version of the converter
+4. **Contact support**: If the problem persists, please report a bug
 
-## 📈 性能优化
+## 📈 Performance Optimization
 
-### Q: 如何提高转换速度？
+### Q: How to improve conversion speed?
 
-**硬件优化：**
-- **使用 SSD**：固态硬盘比机械硬盘快 3-5 倍
-- **增加内存**：推荐 8GB+ RAM
-- **多核 CPU**：支持并行处理
-- **关闭杀毒**：临时关闭实时扫描
+**A:**
+**Hardware optimization:**
+- **Use an SSD**: Solid-state drives are 3-5 times faster than HDDs
+- **Increase memory**: 8GB+ RAM recommended
+- **Multi-core CPU**: Supports parallel processing
+- **Disable antivirus**: Temporarily disable real-time scanning
 
-**软件优化：**
+**Software optimization:**
 ```python
-# 调整配置参数
+# Adjust configuration parameters
 config = ConverterConfig(
-    coordinate_precision=6,    # 降低精度提升速度
-    batch_size=2000,          # 增加批处理大小
-    enable_compression=False,  # 禁用实时压缩
-    max_workers=4             # 设置并行线程数
+    coordinate_precision=6,    # Reduce precision to increase speed
+    batch_size=2000,          # Increase batch size
+    enable_compression=False,  # Disable real-time compression
+    max_workers=4             # Set number of parallel threads
 )
 ```
 
-**环境优化：**
+**Environment optimization:**
 ```bash
-# 设置环境变量
-export PYTHONOPTIMIZE=1       # 启用字节码优化
-export SQLITE_TEMP_STORE=3    # 使用内存临时存储
+# Set environment variables
+export PYTHONOPTIMIZE=1       # Enable bytecode optimization
+export SQLITE_TEMP_STORE=3    # Use in-memory temporary storage
 ```
 
-### Q: 内存使用过高怎么办？
+### Q: What should I do if memory usage is too high?
 
-**监控内存使用：**
+**A:**
+**Monitor memory usage:**
 ```python
 import psutil
 
 def monitor_memory():
     memory = psutil.virtual_memory()
-    print(f"内存使用率: {memory.percent}%")
-    print(f"可用内存: {memory.available // 1024**2} MB")
+    print(f"Memory usage: {memory.percent}%")
+    print(f"Available memory: {memory.available // 1024**2} MB")
 ```
 
-**优化策略：**
-1. **减少批处理大小**：
+**Optimization strategies:**
+1. **Reduce batch size**:
    ```python
-   config.batch_size = 500  # 从默认 1000 减少到 500
+   config.batch_size = 500  # Reduce from default 1000 to 500
    ```
 
-2. **分步处理**：
+2. **Process in steps**:
    ```python
-   # 分批处理大表
+   # Process large tables in batches
    tables = ['Airports', 'Runways', 'Waypoints']
    for table in tables:
        converter.process_table(table)
-       gc.collect()  # 强制垃圾回收
+       gc.collect()  # Force garbage collection
    ```
 
-3. **流式处理**：启用流式处理模式处理大文件
+3. **Stream processing**: Enable stream processing mode for large files
 
-### Q: 可以同时运行多个转换器实例吗？
+### Q: Can multiple converter instances be run simultaneously?
 
-**技术上可行，但有限制：**
-- **数据库锁定**：SQLite 不支持多个写入连接
-- **资源竞争**：多实例会竞争 CPU 和内存
-- **磁盘 I/O**：可能导致磁盘瓶颈
+**A:**
+**Technically feasible, but with limitations:**
+- **Database locking**: SQLite does not support multiple write connections
+- **Resource contention**: Multiple instances will compete for CPU and memory
+- **Disk I/O**: May lead to disk bottlenecks
 
-**推荐做法：**
+**Recommended practice:**
 ```bash
-# 串行处理多个数据库
+# Process multiple databases sequentially
 python converter.py --input db1.db3 --output output1/
 python converter.py --input db2.db3 --output output2/
 
-# 或使用批处理脚本
+# Or use a batch script
 for db in *.db3; do
     python converter.py --input "$db" --output "output_${db%.*}/"
 done
 ```
 
-## 🔍 数据验证
+## 🔍 Data Validation
 
-### Q: 如何验证转换结果的正确性？
+### Q: How to verify the correctness of the conversion results?
 
-**自动验证工具：**
+**A:**
+**Automated validation tool:**
 ```python
-# 使用内置验证器
+# Use the built-in validator
 from tfdi_converter.validation import DataValidator
 
 validator = DataValidator()
 result = validator.validate_output("Primary.7z")
 
 if result.is_valid:
-    print("✅ 验证通过")
+    print("✅ Validation passed")
 else:
-    print("❌ 验证失败:")
+    print("❌ Validation failed:")
     for error in result.errors:
         print(f"  - {error}")
 ```
 
-**手动验证清单：**
-- [ ] **文件完整性**：所有必需的 JSON 文件都存在
-- [ ] **数据数量**：记录数量合理且无异常减少
-- [ ] **坐标范围**：纬度 [-90, 90]，经度 [-180, 180]
-- [ ] **引用完整性**：外键关系保持完整
-- [ ] **特殊字符**：UTF-8 编码正确处理
+**Manual validation checklist:**
+- [ ] **File integrity**: All required JSON files exist
+- [ ] **Data quantity**: Record count is reasonable with no abnormal reduction
+- [ ] **Coordinate range**: Latitude [-90, 90], Longitude [-180, 180]
+- [ ] **Referential integrity**: Foreign key relationships remain intact
+- [ ] **Special characters**: UTF-8 encoding handled correctly
 
-**TFDI 中验证：**
-1. 安装转换后的数据包
-2. 创建飞行计划测试航路
-3. 检查 FMC 中的程序显示
-4. 验证导航设备频率和位置
+**Validation in TFDI:**
+1. Install the converted data package
+2. Create a flight plan to test routes
+3. Check procedure display in the FMC
+4. Verify navaid frequencies and positions
 
-### Q: 转换后数据量明显减少是什么原因？
+### Q: Why is there a significant reduction in data volume after conversion?
 
-**可能原因：**
-1. **数据过滤**：转换器过滤了不兼容或无效的数据
-2. **区域限制**：可能只转换了特定区域的数据
-3. **格式限制**：某些 Fenix 特有格式无法转换
-4. **版本差异**：不同版本的数据结构差异
+**A:**
+**Possible reasons:**
+1. **Data filtering**: The converter filtered out incompatible or invalid data
+2. **Regional restrictions**: Only data for specific regions might have been converted
+3. **Format limitations**: Certain Fenix-specific formats cannot be converted
+4. **Version differences**: Data structure differences between versions
 
-**检查方法：**
+**Checking method:**
 ```python
-# 比较转换前后的记录数量
+# Compare record counts before and after conversion
 def compare_record_counts(fenix_db, tfdi_json_dir):
-    # 统计 Fenix 数据库记录
+    # Count Fenix database records
     fenix_counts = count_fenix_records(fenix_db)
     
-    # 统计 TFDI JSON 记录
+    # Count TFDI JSON records
     tfdi_counts = count_tfdi_records(tfdi_json_dir)
     
-    # 对比结果
+    # Compare results
     for table, fenix_count in fenix_counts.items():
         tfdi_count = tfdi_counts.get(table, 0)
         ratio = tfdi_count / fenix_count if fenix_count > 0 else 0
         print(f"{table}: {fenix_count} → {tfdi_count} ({ratio:.1%})")
 ```
 
-## 🆘 获取帮助
+## 🆘 Getting Help
 
-### Q: 在哪里可以获得技术支持？
+### Q: Where can I get technical support?
 
-**官方支持渠道：**
-- **GitHub Issues**: 报告 Bug 和功能请求
-- **GitHub Discussions**: 使用问题和一般讨论
-- **项目文档**: 查阅完整的用户指南
-- **示例代码**: 参考项目中的示例
+**A:**
+**Official support channels:**
+- **GitHub Issues**: Report bugs and feature requests
+- **GitHub Discussions**: For questions and general discussions
+- **Project documentation**: Consult the complete user guide
+- **Example code**: Refer to examples in the project
 
-**社区支持：**
-- **飞行模拟论坛**: 相关飞行模拟社区
-- **Discord 群组**: 实时交流和互助
-- **QQ/微信群**: 中文用户交流群
+**Community support:**
+- **Flight simulation forums**: Relevant flight simulation communities
+- **Discord groups**: Real-time communication and mutual assistance
+- **QQ/WeChat groups**: Chinese user communication groups
 
-### Q: 如何报告问题或建议新功能？
+### Q: How to report issues or suggest new features?
 
-**问题报告流程：**
-1. **搜索现有问题**：避免重复报告
-2. **收集信息**：
-   - 详细的错误描述
-   - 完整的错误日志
-   - 系统环境信息
-   - 重现步骤
-3. **创建 Issue**：使用提供的模板
-4. **提供示例**：如果可能，提供最小重现示例
+**A:**
+**Issue reporting process:**
+1. **Search existing issues**: Avoid duplicate reports
+2. **Gather information**:
+   - Detailed error description
+   - Complete error log
+   - System environment information
+   - Steps to reproduce
+3. **Create an Issue**: Use the provided template
+4. **Provide examples**: If possible, provide a minimal reproducible example
 
-**功能建议：**
-- 详细描述新功能的用途
-- 说明功能的预期行为
-- 考虑对现有用户的影响
-- 提供实现建议（如果有的话）
+**Feature suggestions:**
+- Describe the purpose of the new feature in detail
+- Explain the expected behavior of the feature
+- Consider the impact on existing users
+- Provide implementation suggestions (if any)
 
-### Q: 可以贡献代码吗？如何参与开发？
+### Q: Can I contribute code? How can I participate in development?
 
-**贡献方式：**
-- **Bug 修复**：修复已知问题
-- **新功能开发**：实现新的转换功能
-- **性能优化**：提升转换速度和效率
-- **文档改进**：完善用户文档和 API 文档
-- **测试增强**：增加测试用例和覆盖率
+**A:**
+**Contribution methods:**
+- **Bug fixes**: Fix known issues
+- **New feature development**: Implement new conversion functionalities
+- **Performance optimization**: Improve conversion speed and efficiency
+- **Documentation improvements**: Enhance user and API documentation
+- **Test enhancements**: Increase test cases and coverage
 
-**参与步骤：**
-1. **Fork 项目**：创建自己的项目分支
-2. **设置开发环境**：按照贡献指南配置
-3. **选择任务**：从 Issues 中选择适合的任务
-4. **开发和测试**：编写代码并确保测试通过
-5. **提交 PR**：创建 Pull Request 并等待审查
+**Participation steps:**
+1. **Fork the project**: Create your own project branch
+2. **Set up development environment**: Configure according to the contribution guide
+3. **Choose a task**: Select a suitable task from Issues
+4. **Develop and test**: Write code and ensure tests pass
+5. **Submit a PR**: Create a Pull Request and await review
 
-**贡献要求：**
-- 遵循项目的编码规范
-- 提供充分的测试覆盖
-- 更新相关文档
-- 使用清晰的提交信息
+**Contribution requirements:**
+- Follow the project's coding standards
+- Provide adequate test coverage
+- Update relevant documentation
+- Use clear commit messages
 
 ---
 
-**找不到答案？** 
+**Can't find an answer?** 
 
-请在 [GitHub Issues](https://github.com/your-org/tfdi-converter/issues) 中搜索或创建新问题，我们会尽快回复！🚁✨
+Please search or create a new issue on [GitHub Issues](https://github.com/your-org/tfdi-converter/issues), and we will reply as soon as possible! 🚁✨

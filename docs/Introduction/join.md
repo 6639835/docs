@@ -1,115 +1,115 @@
-# 如何加入我们 🤝
+# How to Join Us 🤝
 
-欢迎加入 Nav-data 社区！我们是一群热爱航空的开发者和飞行爱好者，致力于为飞行模拟器提供高质量的导航数据。
-
----
-
-## 🎯 加入方式
-
-### 开发者贡献
-如果你有编程技能，欢迎参与项目开发：
-
-- **Fork 项目仓库**：访问我们的 [GitHub 仓库](https://github.com/nav-data)
-- **提交代码**：修复 Bug、添加新功能或改进文档
-- **代码审查**：参与 Pull Request 的讨论和审查
-
-### 数据贡献
-帮助我们收集和验证导航数据：
-
-- **数据验证**：测试现有数据的准确性
-- **机场信息**：提供最新的机场和航路信息
-- **错误报告**：发现并报告数据中的错误
-
-### 文档维护
-改进项目文档质量：
-
-- **翻译工作**：帮助翻译文档到其他语言
-- **教程编写**：创建详细的使用教程和指南
-- **FAQ 维护**：整理常见问题和解答
+Welcome to the Nav-data community! We are a group of aviation enthusiasts and developers dedicated to providing high-quality navigation data for flight simulators.
 
 ---
 
-## 📋 贡献要求
+## 🎯 Ways to Contribute
 
-### 技能要求
-- **基础技能**：熟悉 Git 和 GitHub 工作流程
-- **编程技能**：Python、JavaScript 或相关技术栈（可选）
-- **航空知识**：对飞行模拟器和导航系统有基本了解
+### Developer Contributions
+If you have programming skills, you are welcome to participate in project development:
 
-### 行为准则
-- 遵循开源社区的基本礼仪
-- 尊重其他贡献者的工作和意见
-- 保持积极和建设性的沟通
+- **Fork the Project Repository**: Visit our [GitHub Repository](https://github.com/nav-data)
+- **Submit Code**: Fix bugs, add new features, or improve documentation
+- **Code Review**: Participate in Pull Request discussions and reviews
+
+### Data Contributions
+Help us collect and validate navigation data:
+
+- **Data Validation**: Test the accuracy of existing data
+- **Airport Information**: Provide the latest airport and route information
+- **Error Reporting**: Discover and report errors in the data
+
+### Documentation Maintenance
+Improve the quality of project documentation:
+
+- **Translation Work**: Help translate documentation into other languages
+- **Tutorial Writing**: Create detailed usage tutorials and guides
+- **FAQ Maintenance**: Organize frequently asked questions and answers
 
 ---
 
-## 🛠️ 开始贡献
+## 📋 Contribution Requirements
 
-### 1. 设置开发环境
+### Skill Requirements
+- **Basic Skills**: Familiarity with Git and GitHub workflow
+- **Programming Skills**: Python, JavaScript, or related tech stack (optional)
+- **Aviation Knowledge**: Basic understanding of flight simulators and navigation systems
+
+### Code of Conduct
+- Follow basic etiquette of open-source communities
+- Respect the work and opinions of other contributors
+- Maintain positive and constructive communication
+
+---
+
+## 🛠️ Start Contributing
+
+### 1. Set Up Your Development Environment
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone https://github.com/nav-data/docs.git
 cd docs
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 启动开发服务器
+# Start the development server
 npm run dev
 ```
 
-### 2. 选择任务
-- 查看 [Issues](https://github.com/nav-data/docs/issues) 列表
-- 寻找标有 `good first issue` 的任务
-- 或者提出你自己的改进建议
+### 2. Choose a Task
+- Check the [Issues](https://github.com/nav-data/docs/issues) list
+- Look for tasks labeled `good first issue`
+- Or propose your own improvement suggestions
 
-### 3. 提交贡献
-- 创建新分支：`git checkout -b feature/your-feature`
-- 进行修改并提交：`git commit -m "描述你的更改"`
-- 推送分支：`git push origin feature/your-feature`
-- 创建 Pull Request
+### 3. Submit Your Contribution
+- Create a new branch: `git checkout -b feature/your-feature`
+- Make changes and commit: `git commit -m "Describe your changes"`
+- Push your branch: `git push origin feature/your-feature`
+- Create a Pull Request
 
 ---
 
-## 💬 联系我们
+## 💬 Contact Us
 
 ### GitHub
-- **主仓库**：[nav-data/docs](https://github.com/nav-data/docs)
-- **Issues**：报告问题或建议功能
-- **Discussions**：社区讨论和问答
+- **Main Repository**: [nav-data/docs](https://github.com/nav-data/docs)
+- **Issues**: Report problems or suggest features
+- **Discussions**: Community discussions and Q&A
 
-### 其他方式
-- **邮箱**：contact@nav-data.org
-- **QQ 群**：123456789（飞行模拟器导航数据交流群）
-
----
-
-## 🏆 贡献者福利
-
-### 认可和奖励
-- **贡献者列表**：你的名字将出现在项目贡献者列表中
-- **特殊徽章**：为活跃贡献者提供特殊的 GitHub 徽章
-- **技术成长**：在真实项目中提升技术能力
-
-### 社区特权
-- **优先支持**：遇到技术问题时获得优先帮助
-- **新功能预览**：率先体验新功能和数据更新
-- **技术交流**：与其他航空爱好者和开发者交流
+### Other Ways
+- **Email**: contact@nav-data.org
+- **QQ Group**: 123456789 (Flight Simulator Navigation Data Exchange Group)
 
 ---
 
-## 📚 学习资源
+## 🏆 Contributor Benefits
 
-### 新手指南
-- [Git 基础教程](https://git-scm.com/book/zh/v2)
-- [GitHub 工作流程](https://guides.github.com/introduction/flow/)
-- [VitePress 文档](https://vitepress.dev/)
+### Recognition and Rewards
+- **Contributor List**: Your name will appear in the project's contributor list
+- **Special Badges**: Special GitHub badges for active contributors
+- **Technical Growth**: Enhance your technical skills in real-world projects
 
-### 航空知识
-- [ICAO 航空术语](https://www.icao.int/Pages/glossary.aspx)
-- [导航系统介绍](https://en.wikipedia.org/wiki/Aircraft_navigation)
-- [飞行模拟器社区](https://www.avsim.com/)
+### Community Privileges
+- **Priority Support**: Get priority assistance when encountering technical issues
+- **New Feature Previews**: Be among the first to experience new features and data updates
+- **Technical Exchange**: Interact with other aviation enthusiasts and developers
 
 ---
 
-> 🎉 **准备好了吗？** 立即访问我们的 [GitHub 仓库](https://github.com/nav-data) 开始你的贡献之旅！
+## 📚 Learning Resources
+
+### Novice Guides
+- [Git Basics Tutorial](https://git-scm.com/book/zh/v2)
+- [GitHub Workflow](https://guides.github.com/introduction/flow/)
+- [VitePress Documentation](https://vitepress.dev/)
+
+### Aviation Knowledge
+- [ICAO Aviation Terms](https://www.icao.int/Pages/glossary.aspx)
+- [Introduction to Navigation Systems](https://en.wikipedia.org/wiki/Aircraft_navigation)
+- [Flight Simulator Community](https://www.avsim.com/)
+
+---
+
+> 🎉 **Ready to get started?** Visit our [GitHub Repository](https://github.com/nav-data) now to begin your contribution journey!

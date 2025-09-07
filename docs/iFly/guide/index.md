@@ -1,187 +1,187 @@
-# 🛫 iFly 导航数据转换器用户指南
+# 🛫 iFly Navigation Data Converter User Guide
 
-iFly 导航数据转换器是一个专业的航空导航数据转换工具，专门设计用于将 Fenix A320 导航数据库转换为 iFly 737 MAX 8 导航数据库格式。本工具具有现代化的 CLI 界面和高精度的数据处理能力。
+The iFly Navigation Data Converter is a professional aviation navigation data conversion tool, specifically designed to convert Fenix A320 navigation databases into the iFly 737 MAX 8 navigation database format. This tool features a modern CLI interface and high-precision data processing capabilities.
 
-## 📖 快速导览
+## 📖 Quick Tour
 
-### 🎯 核心功能
-- **🎨 现代化界面** - 基于 Rich 库的彩色终端界面，实时进度显示
-- **🧭 高精度磁偏角** - 使用 pygeomag 的 WMM-2025 地磁模型进行本地计算
-- **📅 智能 AIRAC 管理** - 动态计算和管理航空信息修订周期
-- **⚡ 性能优化** - 并发处理和内存优化，支持大型数据文件
-- **🛡️ 企业级质量** - 完整的类型提示、错误处理和测试覆盖
+### 🎯 Core Features
+- **🎨 Modern Interface** - Color terminal interface based on the Rich library, with real-time progress display
+- **🧭 High-Precision Magnetic Declination** - Local calculation using pygeomag's WMM-2025 geomagnetic model
+- **📅 Smart AIRAC Management** - Dynamically calculates and manages Aviation Information Revision Cycles
+- **⚡ Performance Optimization** - Concurrent processing and memory optimization, supporting large data files
+- **🛡️ Enterprise-Grade Quality** - Comprehensive type hinting, error handling, and test coverage
 
-### ✈️ 支持的飞机型号
-- **iFly 737 MAX 8** - Microsoft Flight Simulator 中的高仿真波音 737 MAX 8
-- **数据来源** - Fenix A320 导航数据库 (nd.db3)
-- **航路数据** - NAIP RTE_SEG.csv 中国民航航路段数据
+### ✈️ Supported Aircraft Models
+- **iFly 737 MAX 8** - High-fidelity Boeing 737 MAX 8 in Microsoft Flight Simulator
+- **Data Source** - Fenix A320 navigation database (nd.db3)
+- **Route Data** - NAIP RTE_SEG.csv China Civil Aviation Route Segment Data
 
-### 📊 数据类型覆盖
-- **🛣️ 航路数据** - 高空/低空航路、航路点坐标、磁偏角
-- **🏢 终端程序** - SID、STAR、进近程序、离场程序
-- **🧭 导航设备** - VOR/DME、NDB、ILS 数据
-- **📅 AIRAC 周期** - 自动计算和管理数据有效期
+### 📊 Data Type Coverage
+- **🛣️ Route Data** - High/low altitude routes, waypoint coordinates, magnetic declination
+- **🏢 Terminal Procedures** - SID, STAR, approach procedures, departure procedures
+- **🧭 Navigation Aids** - VOR/DME, NDB, ILS data
+- **📅 AIRAC Cycle** - Automatic calculation and management of data validity
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1️⃣ 系统要求检查
+### 1️⃣ System Requirements Check
 ```bash
-# 检查 Python 版本 (需要 3.8+)
+# Check Python version (requires 3.8+)
 python --version
 
-# 检查可用内存 (推荐 4GB+)
-# Windows: 任务管理器 → 性能 → 内存
-# macOS: 活动监视器 → 内存
+# Check available memory (recommended 4GB+)
+# Windows: Task Manager → Performance → Memory
+# macOS: Activity Monitor → Memory
 # Linux: free -h
 ```
 
-### 2️⃣ 准备必要文件
-- ✅ **Fenix 导航数据库** (`nd.db3`)
+### 2️⃣ Prepare Required Files
+- ✅ **Fenix Navigation Database** (`nd.db3`)
   ```
   %APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320\SimObjects\Airplanes\FenixA320\navdata\nd.db3
   ```
-- ✅ **NAIP 航路数据** (`RTE_SEG.csv`)
-  - 从中国民航数据服务网站获取
-  - 确保文件编码为 UTF-8
-- ✅ **iFly 737 MAX 8** 已安装在 MSFS 中
+- ✅ **NAIP Route Data** (`RTE_SEG.csv`)
+  - Obtain from China Civil Aviation Data Service website
+  - Ensure file encoding is UTF-8
+- ✅ **iFly 737 MAX 8** installed in MSFS
 
-### 3️⃣ 快速安装和运行
+### 3️⃣ Quick Installation and Run
 ```bash
-# 1. 安装依赖包
+# 1. Install dependency packages
 pip install rich pathlib typing pygeomag pandas tqdm geographiclib
 
-# 2. 运行转换器
+# 2. Run converter
 python main.py
 
-# 3. 按照界面提示操作
-# → 选择 Fenix 数据库文件
-# → 选择 NAIP CSV 文件
-# → 设置终端程序 ID 范围
-# → 等待转换完成
+# 3. Follow on-screen prompts
+# → Select Fenix database file
+# → Select NAIP CSV file
+# → Set terminal procedure ID range
+# → Wait for conversion to complete
 ```
 
-## 📚 文档导航
+## 📚 Documentation Navigation
 
-### 🚀 基础使用
-1. **[安装指南](installation.md)** - 详细的环境配置和依赖安装
-   - Python 环境配置
-   - 依赖包安装
-   - 系统要求验证
-   - 常见安装问题解决
+### 🚀 Basic Usage
+1. **[Installation Guide](installation.md)** - Detailed environment configuration and dependency installation
+   - Python Environment Configuration
+   - Dependency Package Installation
+   - System Requirements Verification
+   - Troubleshooting Common Installation Issues
 
-2. **[配置说明](configuration.md)** - 配置文件和参数详解
-   - 转换器配置选项
-   - 路径设置指南
-   - AIRAC 周期配置
-   - 性能优化参数
+2. **[Configuration Guide](configuration.md)** - Detailed explanation of configuration files and parameters
+   - Converter Configuration Options
+   - Path Settings Guide
+   - AIRAC Cycle Configuration
+   - Performance Optimization Parameters
 
-3. **[使用说明](usage.md)** - 完整的操作流程和示例
-   - 交互式操作指南
-   - 批量处理方法
-   - 数据验证步骤
-   - 输出文件说明
+3. **[Usage Instructions](usage.md)** - Complete operation process and examples
+   - Interactive Operation Guide
+   - Batch Processing Method
+   - Data Validation Steps
+   - Output File Description
 
-### 🆘 帮助与支持
-- **[常见问题](../faq.md)** - 用户最关心的问题解答
-- **[故障排除](../troubleshooting.md)** - 问题诊断和解决方案
+### 🆘 Help and Support
+- **[Frequently Asked Questions](../faq.md)** - Answers to the most common user questions
+- **[Troubleshooting](../troubleshooting.md)** - Problem diagnosis and solutions
 
-### 🔧 进阶内容
-- **[技术架构](../architecture.md)** - 系统设计和工作原理
-- **[贡献指南](../contributing.md)** - 开发参与和代码规范
-- **[更新日志](../changelog.md)** - 版本历史和新功能
-- **[许可证信息](../license.md)** - 使用条款和法律说明
+### 🔧 Advanced Content
+- **[Technical Architecture](../architecture.md)** - System design and working principles
+- **[Contribution Guide](../contributing.md)** - Development participation and code standards
+- **[Changelog](../changelog.md)** - Version history and new features
+- **[License Information](../license.md)** - Terms of use and legal notes
 
-## 🎨 界面预览
+## 🎨 Interface Preview
 
-### 欢迎界面
+### Welcome Interface
 ```
-╔═══════════════════════════════════════ 🛩️  航空导航数据转换工具  ✈️ ═══════════════════════════════════════╗
+╔═══════════════════════════════════════ 🛩️  Aviation Navigation Data Conversion Tool  ✈️ ═══════════════════════════════════════╗
 ║                                                                                                          ║
-║                                      Fenix到iFly航空导航数据转换器                                       ║
-║                                          高质量、现代化的转换体验                                         ║
+║                                      Fenix to iFly Aviation Navigation Data Converter                                       ║
+║                                          High-quality, modern conversion experience                                         ║
 ║                                                                                                          ║
-╚═══════════════════════════════════════ Powered by Rich • 版本 2.0 ═══════════════════════════════════════╝
+╚═══════════════════════════════════════ Powered by Rich • Version 2.0 ═══════════════════════════════════════╝
 ```
 
-### 进度显示
+### Progress Display
 ```
-╭─────────────────────────────────────────────── 🔄 处理航路数据 ────────────────────────────────────────────────╮
-│ 正在计算磁偏角...                                                                                            │
+╭─────────────────────────────────────────────── 🔄 Processing Route Data ────────────────────────────────────────────────╮
+│ Calculating magnetic declination...                                                                            │
 │ ████████████████████████████████████████ 1,247/1,500 (83%) 0:02:15                                        │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-### 完成摘要
+### Completion Summary
 ```
-┌─────────────────────────────────────────── ✅ 转换完成 ───────────────────────────────────────────────┐
+┌─────────────────────────────────────────── ✅ Conversion Complete ───────────────────────────────────────────────┐
 │                                                                                                        │
-│  🛣️  航路数据: 1,500 个航路点已处理                                                                    │
-│  🏢  终端程序: 245 个程序已转换                                                                         │
-│  📅  AIRAC 周期: 2508 (有效期至 2025-02-27)                                                             │
-│  📁  输出位置: Community\ifly-aircraft-737max8\Data\navdata\                                            │
+│  🛣️  Route Data: 1,500 waypoints processed                                                                    │
+│  🏢  Terminal Procedures: 245 procedures converted                                                                         │
+│  📅  AIRAC Cycle: 2508 (valid until 2025-02-27)                                                             │
+│  📁  Output Location: Community\ifly-aircraft-737max8\Data\navdata\                                            │
 │                                                                                                        │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## ⚠️ 重要提醒
+## ⚠️ Important Notice
 
-### 数据合规性
-本工具仅用于模拟飞行目的，请确保您的使用符合相关法律法规：
-- **🎯 仅限模拟** - 严禁用于实际航空导航
-- **📋 遵守协议** - 确认数据来源的合法性
-- **🔒 非商业用途** - 仅用于个人学习和娱乐
+### Data Compliance
+This tool is for flight simulation purposes only; please ensure your use complies with relevant laws and regulations:
+- **🎯 Simulation Only** - Strictly prohibited for actual aviation navigation
+- **📋 Adhere to Agreements** - Confirm the legality of data sources
+- **🔒 Non-Commercial Use** - For personal learning and entertainment only
 
-### 技术要求
-- **🐍 Python 3.8+** - 推荐使用 Python 3.9 或更高版本
-- **💾 内存要求** - 至少 4GB RAM（推荐 8GB）
-- **💿 存储空间** - 至少 500MB 可用空间
-- **🖥️ 操作系统** - Windows 10/11, macOS 10.15+, Linux
+### Technical Requirements
+- **🐍 Python 3.8+** - Python 3.9 or higher recommended
+- **💾 Memory Requirements** - At least 4GB RAM (8GB recommended)
+- **💿 Storage Space** - At least 500MB available space
+- **🖥️ Operating System** - Windows 10/11, macOS 10.15+, Linux
 
-### 数据安全
-- **💾 备份原始数据** - 转换前请备份 iFly 原始导航数据
-- **🔍 验证结果** - 转换后在模拟器中验证数据正确性
-- **📅 定期更新** - 建议每 28 天更新一次 AIRAC 数据
-- **🔒 权限管理** - 确保程序有足够的文件写入权限
+### Data Security
+- **💾 Back up Original Data** - Please back up iFly original navigation data before conversion
+- **🔍 Verify Results** - Verify data correctness in the simulator after conversion
+- **📅 Regular Updates** - Recommended to update AIRAC data every 28 days
+- **🔒 Permission Management** - Ensure the program has sufficient file write permissions
 
-## 🎯 使用场景
+## 🎯 Usage Scenarios
 
-### 🎓 飞行模拟爱好者
-- **✈️ 增强体验** - 获得更准确的中国空域导航数据
-- **🎮 真实飞行** - 体验基于真实航路的飞行程序
-- **📚 学习工具** - 了解现代航空导航系统
+### 🎓 Flight Simulation Enthusiasts
+- **✈️ Enhanced Experience** - Obtain more accurate Chinese airspace navigation data
+- **🎮 Realistic Flight** - Experience flight procedures based on real routes
+- **📚 Learning Tool** - Understand modern aviation navigation systems
 
-### 👨‍🏫 航空教学
-- **🎓 培训用途** - 提供准确的教学用导航数据
-- **📊 标准化** - 符合国际民航组织 (ICAO) 标准
-- **🔄 实时更新** - 基于最新的 AIRAC 周期数据
+### 👨‍🏫 Aviation Education
+- **🎓 Training Purposes** - Provide accurate navigation data for teaching
+- **📊 Standardization** - Compliant with International Civil Aviation Organization (ICAO) standards
+- **🔄 Real-time Updates** - Based on the latest AIRAC cycle data
 
-### 👨‍💻 开发者
-- **🔧 API 参考** - 清晰的代码结构和文档
-- **🧩 模块化** - 易于扩展和定制的设计
-- **🧪 测试完善** - 完整的测试覆盖和质量保证
+### 👨‍💻 Developers
+- **🔧 API Reference** - Clear code structure and documentation
+- **🧩 Modularity** - Design that is easy to extend and customize
+- **🧪 Comprehensive Testing** - Complete test coverage and quality assurance
 
-## 🆘 获取帮助
+## 🆘 Getting Help
 
-如果在使用过程中遇到问题：
+If you encounter issues during use:
 
-1. **📚 查阅文档** - 首先查看相关章节的详细说明
-2. **🔍 检查日志** - 查看生成的 `converter.log` 文件
-3. **🧪 验证环境** - 使用内置验证工具检查系统配置
-4. **💬 社区支持** - 在 GitHub Issues 中报告问题或参与讨论
+1. **📚 Consult Documentation** - First, check the detailed instructions in relevant sections
+2. **🔍 Check Logs** - View the generated `converter.log` file
+3. **🧪 Verify Environment** - Use the built-in verification tool to check system configuration
+4. **💬 Community Support** - Report issues or participate in discussions on GitHub Issues
 
-### 快速诊断命令
+### Quick Diagnosis Commands
 ```bash
-# 检查 Python 环境
+# Check Python environment
 python --version
 python -c "import rich, pandas, pygeomag; print('所有依赖已安装')"
 
-# 验证文件权限
+# Verify file permissions
 ls -la /path/to/ifly/navdata/
 
-# 查看最新日志
+# View latest log
 tail -n 50 converter.log
 ```
 
 ---
 
-**下一步**: 前往 [安装指南](installation.md) 开始配置您的开发环境，或直接查看 [使用说明](usage.md) 快速上手！🚀
+**Next Step**: Go to [Installation Guide](installation.md) to start configuring your development environment, or directly view [Usage Instructions](usage.md) to quickly get started! 🚀

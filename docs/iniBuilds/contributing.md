@@ -1,117 +1,117 @@
-# 🤝 贡献指南
+# 🤝 Contributing Guide
 
-欢迎您为Nav-data项目做出贡献！本指南将帮助您了解如何参与项目开发、提交代码和改进建议。
+Welcome to contribute to the Nav-data project! This guide will help you understand how to participate in project development, submit code, and propose improvements.
 
-## 🎯 贡献方式
+## 🎯 Ways to Contribute
 
-### 📝 您可以通过以下方式做出贡献：
+### 📝 You can contribute in the following ways:
 
-- **🐛 报告Bug**：发现问题并提供详细的重现步骤
-- **💡 功能建议**：提出新功能或改进现有功能的想法
-- **📖 文档改进**：完善文档、修正错误、添加示例
-- **🔧 代码贡献**：修复Bug、实现新功能、性能优化
-- **🧪 测试支持**：添加测试用例、改进测试覆盖率
-- **🌐 本地化**：翻译文档、支持更多语言和地区
+-   **🐛 Report Bugs**: Discover issues and provide detailed reproduction steps
+-   **💡 Feature Suggestions**: Propose new features or ideas to improve existing ones
+-   **📖 Documentation Improvement**: Enhance documentation, correct errors, add examples
+-   **🔧 Code Contribution**: Fix bugs, implement new features, optimize performance
+-   **🧪 Testing Support**: Add test cases, improve test coverage
+-   **🌐 Localization**: Translate documentation, support more languages and regions
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 📋 开发环境设置
+### 📋 Development Environment Setup
 
-1. **Fork 项目仓库**
-   ```bash
-   # 在 GitHub 上 Fork 项目
-   # 然后克隆到本地
-   git clone https://github.com/Nav-data/docs.git
-   cd docs
-   ```
+1.  **Fork the Project Repository**
+    ```bash
+    # Fork the project on GitHub
+    # Then clone it locally
+    git clone https://github.com/Nav-data/docs.git
+    cd docs
+    ```
 
-2. **设置开发环境**
-   ```bash
-   # 创建虚拟环境
-   python -m venv venv
-   
-   # 激活虚拟环境
-   # Windows:
-   venv\Scripts\activate
-   # macOS/Linux:
-   source venv/bin/activate
-   
-   # 安装依赖
-   pip install -r requirements.txt
-   pip install -r requirements-dev.txt  # 开发依赖
-   ```
+2.  **Set up Development Environment**
+    ```bash
+    # Create a virtual environment
+    python -m venv venv
+    
+    # Activate the virtual environment
+    # Windows:
+    venv\Scripts\activate
+    # macOS/Linux:
+    source venv/bin/activate
+    
+    # Install dependencies
+    pip install -r requirements.txt
+    pip install -r requirements-dev.txt  # Development dependencies
+    ```
 
-3. **安装Git钩子**
-   ```bash
-   # 安装pre-commit钩子
-   pre-commit install
-   ```
+3.  **Install Git Hooks**
+    ```bash
+    # Install pre-commit hooks
+    pre-commit install
+    ```
 
-### 🔄 开发工作流
+### 🔄 Development Workflow
 
-1. **创建分支**
-   ```bash
-   git checkout -b feature/your-feature-name
-   # 或者
-   git checkout -b fix/bug-description
-   ```
+1.  **Create a Branch**
+    ```bash
+    git checkout -b feature/your-feature-name
+    # Or
+    git checkout -b fix/bug-description
+    ```
 
-2. **进行开发**
-   - 编写代码
-   - 添加测试
-   - 更新文档
-   - 运行测试确保通过
+2.  **Develop**
+    -   Write code
+    -   Add tests
+    -   Update documentation
+    -   Run tests to ensure they pass
 
-3. **提交代码**
-   ```bash
-   git add .
-   git commit -m "feat: add new navigation data processor"
-   ```
+3.  **Commit Code**
+    ```bash
+    git add .
+    git commit -m "feat: add new navigation data processor"
+    ```
 
-4. **推送并创建PR**
-   ```bash
-   git push origin feature/your-feature-name
-   # 在GitHub上创建Pull Request
-   ```
+4.  **Push and Create a PR**
+    ```bash
+    git push origin feature/your-feature-name
+    # Create a Pull Request on GitHub
+    ```
 
-## 📋 代码规范
+## 📋 Code Standards
 
-### 🐍 Python代码风格
+### 🐍 Python Code Style
 
-我们遵循[PEP 8](https://pep8.org/)标准，并使用以下工具：
+We follow [PEP 8](https://pep8.org/) standards and use the following tools:
 
-#### **代码格式化**
+#### **Code Formatting**
 ```bash
-# 使用 black 进行代码格式化
+# Use black for code formatting
 black *.py
 
-# 使用 isort 整理import
+# Use isort to sort imports
 isort *.py
 ```
 
-#### **代码检查**
+#### **Code Linting**
 ```bash
-# 使用 flake8 进行代码检查
+# Use flake8 for code checking
 flake8 *.py
 
-# 使用 pylint 进行静态分析
+# Use pylint for static analysis
 pylint *.py
 ```
 
-### 📝 代码规范要求
+### 📝 Code Standard Requirements
 
-#### **1. 函数和类命名**
+#### **1. Function and Class Naming**
 ```python
-# ✅ 正确的命名
+# ✅ Correct Naming
 def process_airports(csv_file_path: str, db_path: str) -> None:
-    """处理机场数据"""
+    """Processes airport data"""
     pass
 
 class CoordinateCache:
-    """坐标缓存类"""
+    """Coordinate cache class"""
     pass
 
-# ❌ 错误的命名
+# ❌ Incorrect Naming
 def processAirports(csvFile, dbPath):
     pass
 
@@ -119,20 +119,20 @@ class coordinateCache:
     pass
 ```
 
-#### **2. 文档字符串**
+#### **2. Docstrings**
 ```python
 def get_magnetic_variation(lat: float, lon: float) -> float:
     """
-    计算指定坐标的磁偏角
+    Calculates magnetic variation for the given coordinates.
     
-    参数:
-        lat (float): 纬度（十进制度）
-        lon (float): 经度（十进制度）
+    Parameters:
+        lat (float): Latitude (decimal degrees)
+        lon (float): Longitude (decimal degrees)
     
-    返回:
-        float: 磁偏角（度），保留1位小数
+    Returns:
+        float: Magnetic variation (degrees), rounded to 1 decimal place.
     
-    示例:
+    Example:
         >>> get_magnetic_variation(39.9042, 116.4074)
         -6.2
     """
@@ -140,25 +140,25 @@ def get_magnetic_variation(lat: float, lon: float) -> float:
     return round(result.d, 1)
 ```
 
-#### **3. 类型注解**
+#### **3. Type Annotations**
 ```python
 from typing import Dict, List, Optional, Tuple
 
 def parse_dat_file(file_path: str) -> List[Dict[str, str]]:
-    """解析DAT文件并返回记录列表"""
+    """Parses a DAT file and returns a list of records."""
     records = []
-    # 处理逻辑
+    # Processing logic
     return records
 
 def find_coordinates(
     identifier: str, 
     icao_code: Optional[str] = None
 ) -> Tuple[float, float]:
-    """查找坐标，返回经纬度元组"""
+    """Finds coordinates, returns a (latitude, longitude) tuple."""
     return lat, lon
 ```
 
-#### **4. 错误处理**
+#### **4. Error Handling**
 ```python
 import logging
 
@@ -166,33 +166,33 @@ logger = logging.getLogger(__name__)
 
 def process_data_file(file_path: str) -> bool:
     """
-    处理数据文件
+    Processes a data file.
     
-    返回:
-        bool: 处理是否成功
+    Returns:
+        bool: True if processing was successful, False otherwise.
     """
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
-            # 处理逻辑
+            # Processing logic
             data = file.read()
             
-        logger.info(f"成功处理文件: {file_path}")
+        logger.info(f"Successfully processed file: {file_path}")
         return True
         
     except FileNotFoundError:
-        logger.error(f"文件未找到: {file_path}")
+        logger.error(f"File not found: {file_path}")
         return False
     except PermissionError:
-        logger.error(f"文件权限不足: {file_path}")
+        logger.error(f"Insufficient file permissions: {file_path}")
         return False
     except Exception as e:
-        logger.error(f"处理文件时发生未知错误: {e}")
+        logger.error(f"An unknown error occurred while processing the file: {e}")
         return False
 ```
 
-#### **5. 常量定义**
+#### **5. Constant Definitions**
 ```python
-# 在模块顶部定义常量
+# Define constants at the top of the module
 SUPPORTED_ICAO_REGIONS = {
     'ZB', 'ZS', 'ZJ', 'ZG', 'ZY', 'ZL', 'ZU', 'ZW', 'ZP', 'ZH',
     'VM', 'VH', 'RK'
@@ -202,40 +202,40 @@ DEFAULT_BATCH_SIZE = 1000
 COORDINATE_PRECISION = 8
 DATABASE_TIMEOUT = 30
 
-# 在函数中使用
+# Used in function
 def process_waypoints(icao_code: str) -> bool:
     if icao_code not in SUPPORTED_ICAO_REGIONS:
-        logger.warning(f"不支持的ICAO区域: {icao_code}")
+        logger.warning(f"Unsupported ICAO region: {icao_code}")
         return False
-    # 处理逻辑
+    # Processing logic
 ```
 
-## 🧪 测试要求
+## 🧪 Testing Requirements
 
-### 📊 测试覆盖率
+### 📊 Test Coverage
 
-- **最低要求**：新代码测试覆盖率 ≥ 80%
-- **目标**：整体项目测试覆盖率 ≥ 90%
+-   **Minimum requirement**: New code test coverage ≥ 80%
+-   **Goal**: Overall project test coverage ≥ 90%
 
-### 🛠️ 测试工具
+### 🛠️ Testing Tools
 
 ```bash
-# 运行所有测试
+# Run all tests
 pytest
 
-# 运行特定测试文件
+# Run a specific test file
 pytest tests/test_airports.py
 
-# 生成覆盖率报告
+# Generate coverage report
 pytest --cov=. --cov-report=html
 
-# 查看覆盖率报告
+# View coverage report
 open htmlcov/index.html
 ```
 
-### ✅ 测试示例
+### ✅ Test Examples
 
-#### **单元测试**
+#### **Unit Tests**
 ```python
 import unittest
 from unittest.mock import patch, MagicMock
@@ -244,19 +244,19 @@ from airports import get_magnetic_variation, convert_dms_to_decimal
 class TestAirports(unittest.TestCase):
     
     def test_convert_dms_to_decimal_north(self):
-        """测试北纬DMS转换"""
+        """Test North latitude DMS conversion"""
         result = convert_dms_to_decimal("N390842.12")
         self.assertAlmostEqual(result, 39.145033, places=6)
     
     def test_convert_dms_to_decimal_south(self):
-        """测试南纬DMS转换"""
+        """Test South latitude DMS conversion"""
         result = convert_dms_to_decimal("S390842.12")
         self.assertAlmostEqual(result, -39.145033, places=6)
     
     @patch('airports.geo_mag')
     def test_get_magnetic_variation(self, mock_geomag):
-        """测试磁偏角计算"""
-        # 设置模拟返回值
+        """Test magnetic variation calculation"""
+        # Set mock return value
         mock_result = MagicMock()
         mock_result.d = -6.234
         mock_geomag.calculate.return_value = mock_result
@@ -270,7 +270,7 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-#### **集成测试**
+#### **Integration Tests**
 ```python
 import tempfile
 import sqlite3
@@ -280,24 +280,24 @@ from airports import process_airports
 class TestAirportsIntegration(unittest.TestCase):
     
     def setUp(self):
-        """测试前设置"""
+        """Setup before tests"""
         self.temp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')
         self.temp_db.close()
         self.db_path = self.temp_db.name
     
     def tearDown(self):
-        """测试后清理"""
+        """Cleanup after tests"""
         os.unlink(self.db_path)
     
     def test_process_airports_integration(self):
-        """测试机场数据处理集成"""
+        """Test airport data processing integration"""
         csv_file = "test_data/sample_airports.csv"
         lookup_file = "test_data/sample_icao.txt"
         
-        # 执行处理
+        # Execute processing
         process_airports(csv_file, lookup_file, self.db_path)
         
-        # 验证结果
+        # Verify results
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
@@ -306,299 +306,299 @@ class TestAirportsIntegration(unittest.TestCase):
         
         self.assertGreater(count, 0)
         
-        # 验证数据质量
+        # Verify data quality
         cursor.execute("""
             SELECT COUNT(*) FROM tbl_airports 
             WHERE airport_latitude IS NULL OR airport_longitude IS NULL
         """)
         null_coords = cursor.fetchone()[0]
         
-        self.assertEqual(null_coords, 0, "不应存在空坐标")
+        self.assertEqual(null_coords, 0, "No null coordinates should exist")
         
         conn.close()
 ```
 
-### 📝 测试数据
+### 📝 Test Data
 
-测试数据应放在`tests/test_data/`目录下：
+Test data should be placed in the`tests/test_data/` directory:
 
 ```
 tests/
 ├── test_data/
-│   ├── sample_airports.csv      # 样本机场数据
-│   ├── sample_runways.csv       # 样本跑道数据
-│   ├── sample_earth_fix.dat     # 样本航路点数据
-│   ├── sample_earth_nav.dat     # 样本导航台数据
-│   └── sample_icao.txt          # 样本ICAO查找表
-├── test_airports.py             # 机场模块测试
-├── test_runways.py              # 跑道模块测试
-├── test_waypoints.py            # 航路点模块测试
-└── conftest.py                  # pytest配置
+│   ├── sample_airports.csv      # Sample airport data
+│   ├── sample_runways.csv       # Sample runway data
+│   ├── sample_earth_fix.dat     # Sample earth fix data
+│   ├── sample_earth_nav.dat     # Sample earth nav data
+│   └── sample_icao.txt          # Sample ICAO lookup table
+├── test_airports.py             # Airport module tests
+├── test_runways.py              # Runway module tests
+├── test_waypoints.py            # Waypoint module tests
+└── conftest.py                  # pytest configuration
 ```
 
-## 🐛 Bug报告
+## 🐛 Bug Reports
 
-### 📋 Bug报告模板
+### 📋 Bug Report Template
 
-使用以下模板报告Bug：
+Use the following template to report bugs:
 
 ```markdown
-## Bug描述
-简明扼要地描述问题
+## Bug Description
+Briefly describe the issue
 
-## 重现步骤
-1. 运行命令 `python XP2INI_NDB_Converter.py`
-2. 选择配置 '...'
-3. 观察到错误 '...'
+## Reproduction Steps
+1. Run command `python XP2INI_NDB_Converter.py`
+2. Select configuration '...'
+3. Observe error '...'
 
-## 预期行为
-描述您预期应该发生什么
+## Expected Behavior
+Describe what you expected to happen
 
-## 实际行为
-描述实际发生了什么
+## Actual Behavior
+Describe what actually happened
 
-## 环境信息
-- 操作系统: Windows 11 22H2
-- Python版本: 3.11.5
-- MSFS版本: 2024
-- 飞机插件: PMDG 777
+## Environment Information
+- Operating System: Windows 11 22H2
+- Python Version: 3.11.5
+- MSFS Version: 2024
+- Aircraft Addon: PMDG 777
 
-## 错误日志
+## Error Log
 ```
-粘贴相关的错误信息和日志
-```
-
-## 其他信息
-任何其他有助于诊断问题的信息
+Paste relevant error messages and logs
 ```
 
-### 🔍 Bug分类
+## Additional Information
+Any other information that may help diagnose the issue
+```
 
-| 优先级 | 标签 | 描述 |
-|--------|------|------|
-| 🔴 Critical | `priority:critical` | 导致程序崩溃或数据损坏 |
-| 🟠 High | `priority:high` | 影响主要功能，有变通方案 |
-| 🟡 Medium | `priority:medium` | 影响次要功能或用户体验 |
-| 🟢 Low | `priority:low` | 小问题，不影响核心功能 |
+### 🔍 Bug Classification
 
-## 💡 功能建议
+| Priority | Label                 | Description                               |
+| -------- | --------------------- | ----------------------------------------- |
+| 🔴 Critical | `priority:critical`   | Causes program crash or data corruption   |
+| 🟠 High   | `priority:high`       | Affects primary functionality, workaround available |
+| 🟡 Medium  | `priority:medium`     | Affects minor functionality or user experience |
+| 🟢 Low    | `priority:low`        | Minor issue, does not affect core functionality |
 
-### 📋 功能建议模板
+## 💡 Feature Suggestions
+
+### 📋 Feature Suggestion Template
 
 ```markdown
-## 功能概述
-简要描述建议的功能
+## Feature Overview
+Briefly describe the proposed feature
 
-## 使用场景
-描述什么情况下需要这个功能
+## Use Case
+Describe the circumstances under which this feature is needed
 
-## 详细描述
-详细说明功能的实现方式和预期效果
+## Detailed Description
+Elaborate on how the feature would be implemented and its expected effects
 
-## 替代方案
-是否考虑过其他解决方案？
+## Alternatives Considered
+Have you considered any alternative solutions?
 
-## 额外信息
-任何有助于理解建议的其他信息
+## Additional Information
+Any other information that helps understand the suggestion
 ```
 
-### 🎯 功能分类
+### 🎯 Feature Classification
 
-| 类型 | 标签 | 描述 |
-|------|------|------|
-| ✨ Enhancement | `type:enhancement` | 改进现有功能 |
-| 🚀 Feature | `type:feature` | 全新功能 |
-| 📊 Performance | `type:performance` | 性能优化 |
-| 📖 Documentation | `type:documentation` | 文档改进 |
+| Type           | Label                   | Description              |
+| -------------- | ----------------------- | ------------------------ |
+| ✨ Enhancement | `type:enhancement`      | Improve existing functionality |
+| 🚀 Feature     | `type:feature`          | Brand new feature        |
+| 📊 Performance | `type:performance`      | Performance optimization |
+| 📖 Documentation | `type:documentation`    | Documentation improvement |
 
-## 📖 文档贡献
+## 📖 Documentation Contributions
 
-### 📝 文档规范
+### 📝 Documentation Standards
 
-1. **Markdown格式**：使用标准Markdown语法
-2. **VitePress兼容**：确保front matter正确
-3. **中英文混合**：技术术语保留英文，说明使用中文
-4. **代码示例**：提供完整、可运行的代码示例
+1.  **Markdown Format**: Use standard Markdown syntax
+2.  **VitePress Compatibility**: Ensure front matter is correct
+3.  **Mixed Chinese and English**: Keep technical terms in English, explanations in Chinese
+4.  **Code Examples**: Provide complete, runnable code examples
 
-### 🎨 文档风格指南
+### 🎨 Documentation Style Guide
 
 ```markdown
 ---
-title: 页面标题
-description: 页面描述
+title: Page Title
+description: Page Description
 ---
 
-# 🎯 主标题
+# 🎯 Main Title
 
-简介段落，说明本文档的目的和范围。
+Introductory paragraph, explaining the purpose and scope of this document.
 
-## 📋 二级标题
+## 📋 Secondary Title
 
-### 三级标题
+### Tertiary Title
 
-使用合适的表情符号和层次结构。
+Use appropriate emojis and hierarchical structure.
 
-#### 代码示例
+#### Code Example
 
 ```python
-# 提供完整的代码示例
+# Provide a complete code example
 def example_function():
-    return "示例"
+    return "Example"
 ```
 
-#### 注意事项
+#### Important Notes
 
-> ⚠️ **重要提示**：重要信息使用引用块突出显示
+> ⚠️ **Important Note**: Highlight important information using blockquotes
 
-#### 列表格式
+#### List Format
 
-- ✅ 使用表情符号增强可读性
-- 📝 保持列表项简洁明了
-- 🔗 适当添加内部链接
+-   ✅ Enhance readability with emojis
+-   📝 Keep list items concise and clear
+-   🔗 Add internal links where appropriate
 ```
 
-## 🔄 Pull Request流程
+## 🔄 Pull Request Workflow
 
-### 📋 PR检查清单
+### 📋 PR Checklist
 
-提交PR前请确认：
+Before submitting your PR, please ensure:
 
-- [ ] 🧪 **所有测试通过**：`pytest`
-- [ ] 📊 **测试覆盖率达标**：新代码覆盖率 ≥ 80%
-- [ ] 🎨 **代码格式正确**：`black`、`isort`、`flake8`
-- [ ] 📖 **文档已更新**：API变更需更新文档
-- [ ] 🏷️ **提交信息规范**：遵循Conventional Commits
-- [ ] 🔗 **链接相关Issue**：在PR描述中引用
+-   [ ] 🧪 **All tests pass**: `pytest`
+-   [ ] 📊 **Test coverage meets standards**: New code coverage ≥ 80%
+-   [ ] 🎨 **Code is correctly formatted**: `black`, `isort`, `flake8`
+-   [ ] 📖 **Documentation is updated**: API changes require documentation updates
+-   [ ] 🏷️ **Commit message follows standards**: Adhere to Conventional Commits
+-   [ ] 🔗 **Link relevant issues**: Reference in the PR description
 
-### 📝 PR模板
+### 📝 PR Template
 
 ```markdown
-## 变更概述
-简要描述本次PR的目的和主要变更
+## Changes Overview
+Briefly describe the purpose and main changes of this PR
 
-## 变更类型
-- [ ] 🐛 Bug修复
-- [ ] ✨ 新功能
-- [ ] 📖 文档更新
-- [ ] 🎨 代码重构
-- [ ] ⚡ 性能优化
-- [ ] 🧪 测试改进
+## Change Type
+- [ ] 🐛 Bug fix
+- [ ] ✨ New feature
+- [ ] 📖 Documentation update
+- [ ] 🎨 Code refactor
+- [ ] ⚡ Performance optimization
+- [ ] 🧪 Test improvement
 
-## 详细说明
-详细描述实现方式和技术细节
+## Detailed Explanation
+Describe the implementation method and technical details in detail
 
-## 测试
-说明如何测试这些变更
+## Testing
+Explain how these changes were tested
 
-## 相关Issue
-关闭 #123
+## Related Issue
+Closes #123
 
-## 检查清单
-- [ ] 测试通过
-- [ ] 代码格式正确
-- [ ] 文档已更新
-- [ ] 变更日志已更新
+## Checklist
+- [ ] Tests pass
+- [ ] Code formatted correctly
+- [ ] Documentation updated
+- [ ] Changelog updated
 ```
 
-### 🏷️ 提交信息规范
+### 🏷️ Commit Message Guidelines
 
-遵循[Conventional Commits](https://www.conventionalcommits.org/)规范：
+Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ```bash
-# 功能添加
+# Feature addition
 feat: add support for AIRAC 2024 data format
 
-# Bug修复
+# Bug fix
 fix: resolve coordinate conversion precision issue
 
-# 文档更新
+# Documentation update
 docs: update installation guide for Windows 11
 
-# 性能优化
+# Performance optimization
 perf: optimize magnetic variation calculation
 
-# 代码重构
+# Code refactor
 refactor: restructure database connection handling
 
-# 测试添加
+# Test addition
 test: add unit tests for waypoint processing
 
-# 构建相关
+# Build-related
 build: update dependencies to latest versions
 ```
 
-## 🌟 认可贡献者
+## 🌟 Contributor Recognition
 
-### 🏆 贡献者等级
+### 🏆 Contributor Tiers
 
-| 等级 | 要求 | 权限 |
-|------|------|------|
-| 👋 Contributor | 1+ 有效PR | 基本贡献者 |
-| 🎖️ Regular Contributor | 5+ 有效PR | 优先code review |
-| 🌟 Core Contributor | 10+ 有效PR + 长期参与 | Issue triage权限 |
-| 👑 Maintainer | 核心开发者 | 完整仓库权限 |
+| Tier                  | Requirements                     | Permissions             |
+| --------------------- | -------------------------------- | ----------------------- |
+| 👋 Contributor        | 1+ valid PR                      | Basic Contributor       |
+| 🎖️ Regular Contributor | 5+ valid PRs                     | Prioritized code review |
+| 🌟 Core Contributor   | 10+ valid PRs + long-term involvement | Issue triage permissions |
+| 👑 Maintainer          | Core Developer                   | Full repository permissions |
 
-### 📜 贡献者名录
+### 📜 Contributor Roster
 
-我们在README中维护贡献者名录，感谢每一位贡献者的努力！
+We maintain a list of contributors in the README, thanking everyone for their efforts!
 
 ```markdown
-## 🙏 感谢贡献者
+## 🙏 Thanks to Contributors
 
 <a href="https://github.com/your-repo/nav-data/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=your-repo/nav-data" />
 </a>
 ```
 
-## 🤔 获取帮助
+## 🤔 Getting Help
 
-### 💬 交流渠道
+### 💬 Communication Channels
 
-- **📧 邮件**：project@nav-data.org
-- **💬 讨论区**：GitHub Discussions
-- **🐛 问题报告**：GitHub Issues
-- **📖 文档问题**：直接提PR修改
+-   **📧 Email**: project@nav-data.org
+-   **💬 Discussions Forum**: GitHub Discussions
+-   **🐛 Issue Reports**: GitHub Issues
+-   **📖 Documentation Issues**: Submit PRs directly
 
-### 📚 学习资源
+### 📚 Learning Resources
 
-- [Python官方文档](https://docs.python.org/)
-- [SQLite文档](https://sqlite.org/docs.html)
-- [航空导航原理](https://www.faa.gov/air_traffic/publications/)
-- [ARINC 424标准](https://www.arinc.com/)
+-   [Python Official Documentation](https://docs.python.org/)
+-   [SQLite Documentation](https://sqlite.org/docs.html)
+-   [Principles of Aeronautical Navigation](https://www.faa.gov/air_traffic/publications/)
+-   [ARINC 424 Standard](https://www.arinc.com/)
 
-### 🎓 新手指南
+### 🎓 Newbie Guide
 
-如果您是第一次参与开源项目：
+If you're participating in an open-source project for the first time:
 
-1. 📖 **阅读代码**：先理解项目结构和核心功能
-2. 🐛 **从小做起**：从修复文档错误或小bug开始
-3. 🤝 **积极交流**：不要害怕提问和寻求帮助
-4. 📈 **持续学习**：关注项目动态，学习最佳实践
+1.  📖 **Read the code**: First, understand the project structure and core functionalities
+2.  🐛 **Start small**: Begin by fixing documentation errors or minor bugs
+3.  🤝 **Communicate actively**: Don't be afraid to ask questions and seek help
+4.  📈 **Keep learning**: Stay updated with project developments and learn best practices
 
-## 📄 行为准则
+## 📄 Code of Conduct
 
-### 🤝 我们的承诺
+### 🤝 Our Commitments
 
-为了营造开放和欢迎的环境，我们承诺：
+To foster an open and welcoming environment, we pledge:
 
-- **🌈 包容性**：欢迎不同背景和观点的参与者
-- **🤝 尊重**：尊重不同意见和经验
-- **📚 学习导向**：帮助新手成长和学习
-- **🎯 专业性**：专注于技术讨论和项目改进
+-   **🌈 Inclusivity**: Welcome participants of diverse backgrounds and perspectives
+-   **🤝 Respect**: Respect different opinions and experiences
+-   **📚 Learning-oriented**: Help newcomers grow and learn
+-   **🎯 Professionalism**: Focus on technical discussions and project improvements
 
-### ❌ 不可接受的行为
+### ❌ Unacceptable Behavior
 
-- 人身攻击或侮辱性言论
-- 骚扰或歧视行为
-- 发布他人私人信息
-- 其他不专业或不合适的行为
+-   Personal attacks or insulting remarks
+-   Harassment or discriminatory behavior
+-   Publishing others' private information
+-   Other unprofessional or inappropriate conduct
 
-### 📞 举报机制
+### 📞 Reporting Mechanism
 
-如遇到违反行为准则的情况，请联系项目维护者：
-- 📧 邮件：conduct@nav-data.org
-- 📱 私信：GitHub私信联系维护者
+If you encounter any violations of the Code of Conduct, please contact the project maintainers:
+-   📧 Email: conduct@nav-data.org
+-   📱 Private Message: Contact maintainers via GitHub private message
 
 ---
 
-感谢您考虑为Nav-data项目做出贡献！每一个贡献都让航空模拟社区变得更好。🛫 
+Thank you for considering contributing to the Nav-data project! Every contribution makes the aviation simulation community better. 🛫

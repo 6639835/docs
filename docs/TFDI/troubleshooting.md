@@ -1,91 +1,91 @@
-# 🛠️ TFDI 导航数据转换器故障排除
+# 🛠️ TFDI Navigation Data Converter Troubleshooting
 
-## 🚨 常见错误及解决方案
+## 🚨 Common Errors and Solutions
 
-### 1. 环境和安装问题
+### 1. Environment and Installation Issues
 
-#### ❌ Python 环境问题
+#### ❌ Python Environment Issues
 
-**错误信息：**
+**Error Message:**
 ```
 ModuleNotFoundError: No module named 'rich'
 ImportError: No module named 'pandas'
 ```
 
-**解决方案：**
+**Solution:**
 ```bash
-# 1. 验证 Python 版本
-python --version  # 确保 ≥ 3.8
+# 1. Verify Python version
+python --version  # Ensure ≥ 3.8
 
-# 2. 升级 pip
+# 2. Upgrade pip
 python -m pip install --upgrade pip
 
-# 3. 安装依赖
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. 验证安装
-python -c "import rich, pandas; print('依赖安装成功')"
+# 4. Verify installation
+python -c "import rich, pandas; print('Dependencies installed successfully')"
 ```
 
-#### ❌ 权限错误
+#### ❌ Permission Error
 
-**错误信息：**
+**Error Message:**
 ```
 PermissionError: [Errno 13] Permission denied
-无法创建输出目录
+Cannot create output directory
 ```
 
-**解决方案：**
+**Solution:**
 ```bash
-# Windows - 以管理员身份运行
-# 右键命令提示符 → "以管理员身份运行"
+# Windows - Run as administrator
+# Right-click Command Prompt → "Run as administrator"
 
-# macOS/Linux - 使用 sudo 或修改权限
+# macOS/Linux - Use sudo or modify permissions
 sudo python converter.py
-# 或
+# Or
 chmod 755 /path/to/output/directory
 ```
 
-### 2. 数据库访问问题
+### 2. Database Access Issues
 
-#### ❌ 数据库文件不存在
+#### ❌ Database File Not Found
 
-**错误信息：**
+**Error Message:**
 ```
 FileNotFoundError: [Errno 2] No such file or directory: 'nd.db3'
-无法找到 Fenix 数据库文件
+Fenix database file not found
 ```
 
-**解决方案：**
-1. **检查 Fenix 安装**：
-   ```bash
-   # 常见路径
-   %APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320\
-   ```
+**Solution:**
+1.  **Check Fenix Installation**:
+    ```bash
+    # Common path
+    %APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320\
+    ```
 
-2. **手动定位文件**：
-   ```bash
-   # Windows
-   dir /s nd.db3
-   
-   # macOS/Linux
-   find ~ -name "nd.db3" 2>/dev/null
-   ```
+2.  **Manually locate file**:
+    ```bash
+    # Windows
+    dir /s nd.db3
+    
+    # macOS/Linux
+    find ~ -name "nd.db3" 2>/dev/null
+    ```
 
-3. **重新生成数据库**：
-   - 启动 MSFS
-   - 加载 Fenix A320
-   - 等待导航数据加载完成
+3.  **Regenerate Database**:
+    *   Start MSFS
+    *   Load Fenix A320
+    *   Wait for navigation data to load
 
-#### ❌ 数据库损坏
+#### ❌ Database Corruption
 
-**错误信息：**
+**Error Message:**
 ```
 sqlite3.DatabaseError: database disk image is malformed
-数据库文件已损坏
+Database file is corrupted
 ```
 
-**诊断方法：**
+**Diagnosis Method:**
 ```python
 import sqlite3
 
@@ -96,36 +96,36 @@ def check_database_integrity(db_path):
         cursor.execute("PRAGMA integrity_check")
         result = cursor.fetchone()
         if result[0] == "ok":
-            print("✅ 数据库完整性正常")
+            print("✅ Database integrity is OK")
         else:
-            print(f"❌ 数据库损坏: {result[0]}")
+            print(f"❌ Database corrupted: {result[0]}")
     except Exception as e:
-        print(f"❌ 无法访问数据库: {e}")
+        print(f"❌ Unable to access database: {e}")
     finally:
         conn.close()
 ```
 
-**修复方案：**
+**Repair Solution:**
 ```bash
-# 1. 备份损坏的数据库
+# 1. Back up the corrupted database
 cp nd.db3 nd.db3.backup
 
-# 2. 尝试 SQLite 修复
+# 2. Attempt SQLite repair
 sqlite3 nd.db3 ".dump" | sqlite3 nd_repaired.db3
 
-# 3. 如果修复失败，重新获取数据库
-# 删除文件并重新启动 Fenix
+# 3. If repair fails, re-acquire database
+# Delete file and restart Fenix
 ```
 
-#### ❌ 数据库表结构不兼容
+#### ❌ Database Table Schema Incompatibility
 
-**错误信息：**
+**Error Message:**
 ```
 sqlite3.OperationalError: no such table: Terminals
-数据库缺少必要的表
+Database is missing required tables
 ```
 
-**验证脚本：**
+**Validation Script:**
 ```python
 def validate_database_schema(db_path):
     required_tables = [
@@ -141,53 +141,53 @@ def validate_database_schema(db_path):
     
     missing_tables = set(required_tables) - existing_tables
     if missing_tables:
-        print(f"❌ 缺少表: {missing_tables}")
+        print(f"❌ Missing tables: {missing_tables}")
         return False
     
-    print("✅ 数据库结构验证通过")
+    print("✅ Database schema validation passed")
     return True
 ```
 
-### 3. 内存和性能问题
+### 3. Memory and Performance Issues
 
-#### ❌ 内存不足
+#### ❌ Out of Memory
 
-**错误信息：**
+**Error Message:**
 ```
 MemoryError: Unable to allocate array
-内存不足，无法处理数据
+Insufficient memory to process data
 ```
 
-**监控内存使用：**
+**Monitor Memory Usage:**
 ```python
 import psutil
 import gc
 
 def monitor_memory_usage():
     memory = psutil.virtual_memory()
-    print(f"总内存: {memory.total // 1024**3} GB")
-    print(f"已用内存: {memory.used // 1024**3} GB")
-    print(f"可用内存: {memory.available // 1024**3} GB")
-    print(f"使用率: {memory.percent}%")
+    print(f"Total Memory: {memory.total // 1024**3} GB")
+    print(f"Used Memory: {memory.used // 1024**3} GB")
+    print(f"Available Memory: {memory.available // 1024**3} GB")
+    print(f"Usage Rate: {memory.percent}%")
 
 def optimize_memory():
-    # 强制垃圾回收
+    # Force garbage collection
     gc.collect()
     
-    # 清理 pandas 缓存
+    # Clear pandas cache
     import pandas as pd
     pd.reset_option('all')
 ```
 
-**解决方案：**
+**Solution:**
 ```python
-# 1. 减少批处理大小
+# 1. Reduce batch size
 config = ConverterConfig(
-    batch_size=500,  # 从默认 1000 减少
-    coordinate_precision=6  # 降低精度
+    batch_size=500,  # Reduce from default 1000
+    coordinate_precision=6  # Lower precision
 )
 
-# 2. 启用流式处理
+# 2. Enable streaming
 def process_large_table_streaming(table_name):
     chunk_size = 1000
     offset = 0
@@ -203,17 +203,17 @@ def process_large_table_streaming(table_name):
             break
             
         process_chunk(chunk)
-        del chunk  # 释放内存
+        del chunk  # Free memory
         gc.collect()
         
         offset += chunk_size
 ```
 
-#### ❌ 处理速度过慢
+#### ❌ Slow Processing Speed
 
-**症状：** 转换过程长时间停留在某个步骤
+**Symptoms:** Conversion process remains stuck at a certain step for a long time
 
-**性能诊断：**
+**Performance Diagnosis:**
 ```python
 import time
 import cProfile
@@ -222,27 +222,27 @@ def profile_conversion():
     profiler = cProfile.Profile()
     profiler.enable()
     
-    # 执行转换
+    # Execute conversion
     converter.convert(db_path, terminal_id)
     
     profiler.disable()
     profiler.dump_stats('conversion_profile.prof')
 
-# 分析性能瓶颈
+# Analyze performance bottlenecks
 # python -m cProfile -o profile.prof converter.py
 # python -c "import pstats; pstats.Stats('profile.prof').sort_stats('cumulative').print_stats(10)"
 ```
 
-**优化建议：**
+**Optimization Suggestions:**
 ```python
-# 1. SQLite 性能优化
+# 1. SQLite performance optimization
 def optimize_sqlite_connection(conn):
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
     conn.execute("PRAGMA cache_size=10000")
     conn.execute("PRAGMA temp_store=MEMORY")
 
-# 2. 并行处理
+# 2. Parallel processing
 from concurrent.futures import ThreadPoolExecutor
 
 def parallel_table_processing():
@@ -254,62 +254,62 @@ def parallel_table_processing():
             future = executor.submit(process_table, table)
             futures.append(future)
         
-        # 等待所有任务完成
+        # Wait for all tasks to complete
         for future in futures:
             future.result()
 ```
 
-### 4. 数据转换问题
+### 4. Data Conversion Issues
 
-#### ❌ 坐标数据异常
+#### ❌ Abnormal Coordinate Data
 
-**错误信息：**
+**Error Message:**
 ```
 ValueError: Invalid coordinate value: latitude=91.5
-坐标超出有效范围
+Coordinates out of valid range
 ```
 
-**验证和修复：**
+**Validation and Repair:**
 ```python
 def validate_and_fix_coordinates(df):
-    """验证和修复坐标数据"""
+    """Validates and fixes coordinate data"""
     initial_count = len(df)
     
-    # 检查纬度范围 [-90, 90]
+    # Check latitude range [-90, 90]
     invalid_lat = (df['Latitude'] < -90) | (df['Latitude'] > 90)
     if invalid_lat.any():
-        print(f"发现 {invalid_lat.sum()} 个无效纬度值")
+        print(f"Found {invalid_lat.sum()} invalid latitude values")
         df = df[~invalid_lat]
     
-    # 检查经度范围 [-180, 180]
+    # Check longitude range [-180, 180]
     invalid_lon = (df['Longitude'] < -180) | (df['Longitude'] > 180)
     if invalid_lon.any():
-        print(f"发现 {invalid_lon.sum()} 个无效经度值")
+        print(f"Found {invalid_lon.sum()} invalid longitude values")
         df = df[~invalid_lon]
     
     removed_count = initial_count - len(df)
     if removed_count > 0:
-        print(f"⚠️ 移除了 {removed_count} 个无效坐标记录")
+        print(f"⚠️ Removed {removed_count} invalid coordinate records")
     
     return df
 ```
 
-#### ❌ JSON 序列化失败
+#### ❌ JSON Serialization Failure
 
-**错误信息：**
+**Error Message:**
 ```
 TypeError: Object of type 'datetime' is not JSON serializable
-JSON 序列化错误
+JSON serialization error
 ```
 
-**解决方案：**
+**Solution:**
 ```python
 import json
 from datetime import datetime
 import numpy as np
 
 class CustomJSONEncoder(json.JSONEncoder):
-    """自定义 JSON 编码器"""
+    """Custom JSON encoder"""
     
     def default(self, obj):
         if isinstance(obj, datetime):
@@ -322,35 +322,35 @@ class CustomJSONEncoder(json.JSONEncoder):
             return obj.tolist()
         return super().default(obj)
 
-# 使用自定义编码器
+# Use custom encoder
 def safe_json_dump(data, file_path):
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, cls=CustomJSONEncoder, 
                  ensure_ascii=False, indent=2)
 ```
 
-#### ❌ 字符编码问题
+#### ❌ Character Encoding Issues
 
-**错误信息：**
+**Error Message:**
 ```
 UnicodeDecodeError: 'utf-8' codec can't decode byte
-字符编码错误
+Character encoding error
 ```
 
-**解决方案：**
+**Solution:**
 ```python
 import chardet
 
 def detect_and_convert_encoding(file_path):
-    """检测并转换文件编码"""
-    # 检测编码
+    """Detects and converts file encoding"""
+    # Detect encoding
     with open(file_path, 'rb') as f:
         raw_data = f.read()
         encoding = chardet.detect(raw_data)['encoding']
     
-    print(f"检测到编码: {encoding}")
+    print(f"Detected encoding: {encoding}")
     
-    # 转换为 UTF-8
+    # Convert to UTF-8
     with open(file_path, 'r', encoding=encoding) as f:
         content = f.read()
     
@@ -358,78 +358,78 @@ def detect_and_convert_encoding(file_path):
         f.write(content)
 
 def safe_string_handling(text):
-    """安全的字符串处理"""
+    """Safe string handling"""
     if isinstance(text, bytes):
-        # 尝试多种编码
+        # Try multiple encodings
         for encoding in ['utf-8', 'gbk', 'latin1']:
             try:
                 return text.decode(encoding)
             except UnicodeDecodeError:
                 continue
-        # 如果都失败，使用错误处理
+        # If all fail, use error handling
         return text.decode('utf-8', errors='replace')
     return str(text)
 ```
 
-### 5. 输出文件问题
+### 5. Output File Issues
 
-#### ❌ 压缩包创建失败
+#### ❌ Archive Creation Failed
 
-**错误信息：**
+**Error Message:**
 ```
 py7zr.exceptions.Bad7zFile: not a 7z file
-压缩包创建失败
+Archive creation failed
 ```
 
-**解决方案：**
+**Solution:**
 ```python
 import py7zr
 import shutil
 from pathlib import Path
 
 def safe_create_archive(source_dir, archive_path):
-    """安全创建压缩包"""
+    """Safely creates an archive"""
     try:
-        # 确保源目录存在
+        # Ensure source directory exists
         if not Path(source_dir).exists():
-            raise FileNotFoundError(f"源目录不存在: {source_dir}")
+            raise FileNotFoundError(f"Source directory does not exist: {source_dir}")
         
-        # 删除已存在的压缩包
+        # Delete existing archive
         if Path(archive_path).exists():
             Path(archive_path).unlink()
         
-        # 创建压缩包
+        # Create archive
         with py7zr.SevenZipFile(archive_path, 'w') as archive:
             archive.writeall(source_dir, ".")
         
-        print(f"✅ 压缩包创建成功: {archive_path}")
+        print(f"✅ Archive created successfully: {archive_path}")
         return True
         
     except Exception as e:
-        print(f"❌ 压缩包创建失败: {e}")
+        print(f"❌ Archive creation failed: {e}")
         
-        # 回退方案：创建 ZIP 文件
+        # Fallback solution: Create ZIP file
         try:
             shutil.make_archive(
                 str(Path(archive_path).with_suffix('')), 
                 'zip', 
                 source_dir
             )
-            print("✅ 已创建 ZIP 格式备用文件")
+            print("✅ ZIP format backup file created")
             return True
         except Exception as zip_error:
-            print(f"❌ ZIP 创建也失败: {zip_error}")
+            print(f"❌ ZIP creation also failed: {zip_error}")
             return False
 ```
 
-#### ❌ 文件大小异常
+#### ❌ Abnormal File Size
 
-**症状：** 输出文件过小或过大
+**Symptoms:** Output files are too small or too large
 
-**检查方法：**
+**Check Method:**
 ```python
 def validate_output_files(output_dir):
-    """验证输出文件"""
+    """Validates output files"""
     expected_files = [
         'Airports.json', 'Runways.json', 'Waypoints.json',
         'Navaids.json', 'Airways.json', 'AirwayLegs.json',
@@ -449,64 +449,64 @@ def validate_output_files(output_dir):
         else:
             file_info[file_name] = {'exists': False}
     
-    # 打印文件信息
-    print("📁 输出文件检查:")
+    # Print file information
+    print("📁 Output File Check:")
     for file_name, info in file_info.items():
         if info['exists']:
             if info.get('empty', False):
-                print(f"⚠️ {file_name}: 空文件")
+                print(f"⚠️ {file_name}: Empty file")
             else:
                 print(f"✅ {file_name}: {info['size_mb']:.2f} MB")
         else:
-            print(f"❌ {file_name}: 文件缺失")
+            print(f"❌ {file_name}: File missing")
     
     return file_info
 ```
 
-## 🔍 诊断工具
+## 🔍 Diagnostic Tools
 
-### 1. 系统环境检查
+### 1. System Environment Check
 
 ```python
 def system_diagnostics():
-    """系统环境诊断"""
+    """System environment diagnostics"""
     import platform
     import sys
     import psutil
     
-    print("🔍 系统环境诊断")
+    print("🔍 System Environment Diagnostics")
     print("=" * 50)
     
-    # 操作系统信息
-    print(f"操作系统: {platform.system()} {platform.release()}")
-    print(f"架构: {platform.machine()}")
+    # Operating System Information
+    print(f"Operating System: {platform.system()} {platform.release()}")
+    print(f"Architecture: {platform.machine()}")
     
-    # Python 环境
-    print(f"Python 版本: {sys.version}")
-    print(f"Python 路径: {sys.executable}")
+    # Python Environment
+    print(f"Python Version: {sys.version}")
+    print(f"Python Path: {sys.executable}")
     
-    # 硬件信息
-    print(f"CPU 核心数: {psutil.cpu_count()}")
+    # Hardware Information
+    print(f"CPU Cores: {psutil.cpu_count()}")
     memory = psutil.virtual_memory()
-    print(f"总内存: {memory.total // 1024**3} GB")
-    print(f"可用内存: {memory.available // 1024**3} GB")
+    print(f"Total Memory: {memory.total // 1024**3} GB")
+    print(f"Available Memory: {memory.available // 1024**3} GB")
     
-    # 磁盘空间
+    # Disk Space
     disk = psutil.disk_usage('.')
-    print(f"磁盘总空间: {disk.total // 1024**3} GB")
-    print(f"磁盘可用空间: {disk.free // 1024**3} GB")
+    print(f"Total Disk Space: {disk.total // 1024**3} GB")
+    print(f"Available Disk Space: {disk.free // 1024**3} GB")
 ```
 
-### 2. 依赖包验证
+### 2. Dependency Verification
 
 ```python
 def verify_dependencies():
-    """验证依赖包"""
+    """Verifies dependency packages"""
     required_packages = [
         'rich', 'pandas', 'py7zr', 'sqlite3'
     ]
     
-    print("📦 依赖包验证")
+    print("📦 Dependency Package Verification")
     print("=" * 30)
     
     for package in required_packages:
@@ -515,12 +515,12 @@ def verify_dependencies():
             version = getattr(module, '__version__', 'Unknown')
             print(f"✅ {package}: {version}")
         except ImportError:
-            print(f"❌ {package}: 未安装")
+            print(f"❌ {package}: Not installed")
         except Exception as e:
-            print(f"⚠️ {package}: 错误 - {e}")
+            print(f"⚠️ {package}: Error - {e}")
 ```
 
-### 3. 性能监控工具
+### 3. Performance Monitoring Tools
 
 ```python
 import time
@@ -528,7 +528,7 @@ import threading
 from contextlib import contextmanager
 
 class PerformanceMonitor:
-    """性能监控器"""
+    """Performance monitor"""
     
     def __init__(self):
         self.metrics = {}
@@ -536,7 +536,7 @@ class PerformanceMonitor:
     
     @contextmanager
     def measure(self, operation_name):
-        """测量操作耗时"""
+        """Measures operation duration"""
         start_time = time.time()
         start_memory = psutil.virtual_memory().used
         
@@ -552,7 +552,7 @@ class PerformanceMonitor:
             }
     
     def start_monitoring(self):
-        """开始实时监控"""
+        """Starts real-time monitoring"""
         self.monitoring = True
         
         def monitor():
@@ -561,8 +561,8 @@ class PerformanceMonitor:
                 memory = psutil.virtual_memory()
                 
                 print(f"\r🔄 CPU: {cpu_percent:5.1f}% | "
-                      f"内存: {memory.percent:5.1f}% | "
-                      f"可用: {memory.available//1024**2:,} MB", 
+                      f"Memory: {memory.percent:5.1f}% | "
+                      f"Available: {memory.available//1024**2:,} MB", 
                       end='', flush=True)
                 
                 time.sleep(1)
@@ -571,13 +571,13 @@ class PerformanceMonitor:
         monitor_thread.start()
     
     def stop_monitoring(self):
-        """停止监控"""
+        """Stops monitoring"""
         self.monitoring = False
-        print()  # 换行
+        print()  # Newline
     
     def print_summary(self):
-        """打印性能摘要"""
-        print("\n📊 性能摘要:")
+        """Prints performance summary"""
+        print("\n📊 Performance Summary:")
         print("-" * 40)
         
         for operation, metrics in self.metrics.items():
@@ -587,89 +587,89 @@ class PerformanceMonitor:
             print(f"{operation:20s}: {duration:8.2f}s | "
                   f"{memory_mb:+8.1f}MB")
 
-# 使用示例
+# Usage example
 monitor = PerformanceMonitor()
 monitor.start_monitoring()
 
-with monitor.measure("数据库验证"):
+with monitor.measure("Database Validation"):
     validate_database(db_path)
 
-with monitor.measure("数据转换"):
+with monitor.measure("Data Conversion"):
     convert_data()
 
 monitor.stop_monitoring()
 monitor.print_summary()
 ```
 
-## 📋 故障排除清单
+## 📋 Troubleshooting Checklist
 
-### 🔧 预转换检查
-- [ ] Python 版本 ≥ 3.8
-- [ ] 所有依赖包已安装且版本正确
-- [ ] Fenix 数据库文件存在且完整
-- [ ] 足够的可用内存 (推荐 4GB+)
-- [ ] 足够的磁盘空间 (推荐 1GB+)
-- [ ] 输出目录有写入权限
+### 🔧 Pre-Conversion Checks
+- [ ] Python version ≥ 3.8
+- [ ] All dependency packages installed and versions correct
+- [ ] Fenix database file exists and is intact
+- [ ] Sufficient available memory (4GB+ recommended)
+- [ ] Sufficient disk space (1GB+ recommended)
+- [ ] Output directory has write permissions
 
-### 📊 转换过程检查
-- [ ] 数据库连接成功
-- [ ] 所有必需表都存在
-- [ ] 坐标数据在有效范围内
-- [ ] 内存使用在合理范围内
-- [ ] 没有出现权限错误
-- [ ] 临时文件正常创建
+### 📊 Conversion Process Checks
+- [ ] Database connection successful
+- [ ] All required tables exist
+- [ ] Coordinate data within valid range
+- [ ] Memory usage within reasonable limits
+- [ ] No permission errors occurred
+- [ ] Temporary files created correctly
 
-### 📁 后转换验证
-- [ ] 所有 JSON 文件已生成
-- [ ] 文件大小合理（不为空或异常大）
-- [ ] JSON 格式有效
-- [ ] 压缩包创建成功
-- [ ] 临时文件已清理
-- [ ] 日志无严重错误
+### 📁 Post-Conversion Validation
+- [ ] All JSON files generated
+- [ ] File sizes are reasonable (not empty or abnormally large)
+- [ ] JSON format is valid
+- [ ] Archive created successfully
+- [ ] Temporary files cleaned up
+- [ ] Logs show no critical errors
 
-## 🆘 获取帮助
+## 🆘 Getting Help
 
-### 自助诊断
-1. **运行诊断工具**：
-   ```python
-   from tfdi_converter.diagnostics import run_full_diagnostics
-   run_full_diagnostics()
-   ```
+### Self-Diagnosis
+1.  **Run diagnostic tools**:
+    ```python
+    from tfdi_converter.diagnostics import run_full_diagnostics
+    run_full_diagnostics()
+    ```
 
-2. **查看详细日志**：
-   ```bash
-   tail -f converter.log
-   grep -i error converter.log
-   ```
+2.  **View detailed logs**:
+    ```bash
+    tail -f converter.log
+    grep -i error converter.log
+    ```
 
-3. **检查系统资源**：
-   ```bash
-   # Windows
-   taskmgr
-   
-   # macOS
-   activity monitor
-   
-   # Linux
-   top
-   htop
-   ```
+3.  **Check system resources**:
+    ```bash
+    # Windows
+    taskmgr
+    
+    # macOS
+    activity monitor
+    
+    # Linux
+    top
+    htop
+    ```
 
-### 社区支持
-- **GitHub Issues**: 报告 Bug 和技术问题
-- **GitHub Discussions**: 使用问题和经验分享
-- **项目文档**: 查阅完整使用指南
+### Community Support
+- **GitHub Issues**: Report bugs and technical issues
+- **GitHub Discussions**: Usage questions and experience sharing
+- **Project Documentation**: Refer to the complete user guide
 
-### 报告问题时请提供：
-- **完整错误日志**
-- **系统环境信息**
-- **转换器版本**
-- **数据库信息**（大小、AIRAC 等）
-- **重现步骤**
-- **相关配置文件**
+### When reporting an issue, please provide:
+- **Complete error log**
+- **System environment information**
+- **Converter version**
+- **Database information** (size, AIRAC, etc.)
+- **Reproduction steps**
+- **Relevant configuration files**
 
 ---
 
-**遇到未解决的问题？** 
+**Encountered an unresolved issue?** 
 
-请在 [GitHub Issues](https://github.com/your-org/tfdi-converter/issues) 中创建新问题，我们会尽快协助解决！🚁✨
+Please create a new issue in [GitHub Issues](https://github.com/your-org/tfdi-converter/issues), and we will assist you as soon as possible!🚁✨

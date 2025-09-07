@@ -1,42 +1,42 @@
-# 📥 安装指南
+# 📥 Installation Guide
 
-本指南将详细介绍如何在不同操作系统上安装和配置 Nav-data 导航数据转换工具。
+This guide will detail how to install and configure the Nav-data navigation data conversion tool on different operating systems.
 
-## 🔧 系统要求
+## 🔧 System Requirements
 
-### 最低配置
-- **Python**: 3.8 或更高版本
-- **内存**: 4GB RAM
-- **存储**: 2GB 可用空间
-- **网络**: 稳定的互联网连接（用于下载依赖）
+### Minimum Requirements
+- **Python**: 3.8 or higher
+- **Memory**: 4GB RAM
+- **Storage**: 2GB available space
+- **Network**: Stable internet connection (for downloading dependencies)
 
-### 推荐配置
-- **Python**: 3.9+ (推荐 3.11)
-- **内存**: 8GB RAM 或更多
-- **存储**: 5GB 可用空间
-- **处理器**: 多核心 CPU（用于并行处理）
+### Recommended Requirements
+- **Python**: 3.9+ (3.11 recommended)
+- **Memory**: 8GB RAM or more
+- **Storage**: 5GB available space
+- **Processor**: Multi-core CPU (for parallel processing)
 
-### 支持的操作系统
-- **Windows**: Windows 10/11 (64位)
-- **macOS**: macOS 10.15 Catalina 或更高版本
-- **Linux**: Ubuntu 18.04+, CentOS 7+, 或其他兼容发行版
+### Supported Operating Systems
+- **Windows**: Windows 10/11 (64-bit)
+- **macOS**: macOS 10.15 Catalina or higher
+- **Linux**: Ubuntu 18.04+, CentOS 7+, or other compatible distributions
 
-## 📋 预备工作
+## 📋 Prerequisites
 
-### 1. 安装 Python
+### 1. Install Python
 
 #### Windows
-1. 访问 [Python 官网](https://www.python.org/downloads/windows/)
-2. 下载最新的 Python 3.11.x 版本
-3. 运行安装程序，确保勾选 "Add Python to PATH"
-4. 验证安装：
+1. Visit the [Python official website](https://www.python.org/downloads/windows/)
+2. Download the latest Python 3.11.x version
+3. Run the installer, ensure "Add Python to PATH" is checked
+4. Verify installation:
 ```cmd
 python --version
 pip --version
 ```
 
 #### macOS
-使用 Homebrew（推荐）：
+Using Homebrew (recommended):
 ```bash
 # 安装 Homebrew（如果尚未安装）
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -62,9 +62,9 @@ python3.11 --version
 pip3.11 --version
 ```
 
-### 2. 获取项目代码
+### 2. Get Project Code
 
-#### 方法 A: 使用 Git (推荐)
+#### Method A: Using Git (recommended)
 ```bash
 # 克隆仓库
 git clone https://github.com/Nav-data/docs.git
@@ -73,14 +73,14 @@ git clone https://github.com/Nav-data/docs.git
 cd docs
 ```
 
-#### 方法 B: 下载压缩包
-1. 访问 GitHub 仓库页面
-2. 点击 "Code" > "Download ZIP"
-3. 解压到目标目录
+#### Method B: Download ZIP
+1. Visit the GitHub repository page
+2. Click "Code" > "Download ZIP"
+3. Unzip to the target directory
 
-## 🐍 Python 环境配置
+## 🐍 Python Environment Configuration
 
-### 1. 创建虚拟环境
+### 1. Create Virtual Environment
 
 #### Windows
 ```cmd
@@ -112,7 +112,7 @@ source nav-data-env/bin/activate
 which python
 ```
 
-### 2. 安装项目依赖
+### 2. Install Project Dependencies
 
 ```bash
 # 确保虚拟环境已激活
@@ -123,7 +123,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. 验证依赖安装
+### 3. Verify Dependency Installation
 
 ```python
 # 运行 Python 并测试导入
@@ -133,13 +133,13 @@ import sqlite3
 import pygeomag
 import tqdm
 import chardet
-print('所有依赖包安装成功！')
+print('All dependencies installed successfully!')
 "
 ```
 
-## 📁 数据源配置
+## 📁 Data Source Configuration
 
-### 1. 创建数据目录结构
+### 1. Create Data Directory Structure
 
 ```bash
 # 创建数据目录
@@ -148,22 +148,22 @@ mkdir -p data/output
 mkdir -p logs
 ```
 
-目录结构应如下：
+The directory structure should be as follows:
 ```
 Nav-data/
 ├── data/
 │   ├── input/
-│   │   ├── naip/          # NAIP CSV 数据文件
-│   │   ├── xplane/        # X-Plane DAT 文件
-│   │   └── cifp/          # CIFP 程序数据文件
-│   └── output/            # 生成的数据库文件
-├── logs/                  # 日志文件
+│   │   ├── naip/          # NAIP CSV data files
+│   │   ├── xplane/        # X-Plane DAT files
+│   │   └── cifp/          # CIFP procedure data files
+│   └── output/            # Generated database files
+├── logs/                  # Log files
 └── ...
 ```
 
-### 2. 配置文件路径
+### 2. Configure File Paths
 
-复制并编辑配置文件（可选）：
+Copy and edit the configuration file (optional):
 ```bash
 # 复制示例配置文件
 cp config/paths.example.py config/paths.py
@@ -173,82 +173,82 @@ nano config/paths.py  # Linux/macOS
 notepad config/paths.py  # Windows
 ```
 
-## 🛠️ Microsoft Flight Simulator 配置
+## 🛠️ Microsoft Flight Simulator Configuration
 
-### 1. 定位 MSFS Community 文件夹
+### 1. Locate MSFS Community Folder
 
-#### Microsoft Store 版本
+#### Microsoft Store Version
 ```
-C:\Users\[用户名]\AppData\Local\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache\Packages\Community
-```
-
-#### Steam 版本
-```
-C:\Users\[用户名]\AppData\Roaming\Microsoft Flight Simulator\Packages\Community
+C:\Users\[Username]\AppData\Local\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache\Packages\Community
 ```
 
-#### Xbox Game Pass 版本
+#### Steam Version
 ```
-C:\Users\[用户名]\AppData\Local\Packages\Microsoft.FlightDashboard_8wekyb3d8bbwe\LocalCache\Packages\Community
+C:\Users\[Username]\AppData\Roaming\Microsoft Flight Simulator\Packages\Community
 ```
 
-### 2. 验证 PMDG 飞机安装
-
-确认以下目录存在：
+#### Xbox Game Pass Version
 ```
-[Community文件夹]/
+C:\Users\[Username]\AppData\Local\Packages\Microsoft.FlightDashboard_8wekyb3d8bbwe\LocalCache\Packages\Community
+```
+
+### 2. Verify PMDG Aircraft Installation
+
+Confirm the following directories exist:
+```
+[Community Folder]/
 ├── pmdg-aircraft-737/     # PMDG 737
 ├── pmdg-aircraft-738/     # PMDG 737-800
 ├── pmdg-aircraft-77w/     # PMDG 777-300ER
 └── ...
 ```
 
-### 3. 备份原有导航数据
+### 3. Back up Original Navdata
 
 ```bash
-# 为每架 PMDG 飞机备份原有数据
-# 示例：PMDG 737-800
-cd "C:\Users\[用户名]\...\Community\pmdg-aircraft-738\Config"
+# Back up original data for each PMDG aircraft
+# Example: PMDG 737-800
+cd "C:\Users\[Username]\...\Community\pmdg-aircraft-738\Config"
 rename Navdata Navdata_backup_original
 ```
 
-## ✅ 安装验证
+## ✅ Installation Verification
 
-### 1. 运行基础测试
+### 1. Run Basic Tests
 
 ```bash
 # 激活虚拟环境
 source nav-data-env/bin/activate  # macOS/Linux
 # 或 nav-data-env\Scripts\activate  # Windows
 
-# 运行基础测试
+# Run basic tests
 python -c "
 import sys
-print(f'Python版本: {sys.version}')
+print(f'Python version: {sys.version}')
 
-# 测试关键依赖
+# Test key dependencies
 import pandas as pd
-print(f'Pandas版本: {pd.__version__}')
+print(f'Pandas version: {pd.__version__}')
 
 import sqlite3
-print('SQLite3: 可用')
+print('SQLite3: Available')
 
 import pygeomag
-print('PyGeoMag: 可用')
+print('PyGeoMag: Available')
 
-print('✅ 所有组件安装成功！')
+print('✅ All components installed successfully!')
 "
 ```
 
-### 2. 验证数据库创建
+### 2. Verify Database Creation
 
 ```bash
-# 测试数据库创建功能
+# Test database creation function
 python -c "
 import sqlite3
 import os
 
-# 创建测试数据库
+# Create test database
 test_db = 'data/output/test.s3db'
 os.makedirs(os.path.dirname(test_db), exist_ok=True)
 
@@ -257,91 +257,91 @@ cursor = conn.cursor()
 cursor.execute('CREATE TABLE test (id INTEGER PRIMARY KEY)')
 conn.close()
 
-print('✅ 数据库创建功能正常')
+print('✅ Database creation function is working')
 os.remove(test_db)
 "
 ```
 
-### 3. 检查文件权限
+### 3. Check File Permissions
 
 #### Windows
-确保有以下目录的写入权限：
-- 项目目录及子目录
-- MSFS Community 文件夹
-- MSFS 缓存目录
+Ensure write permissions for the following directories:
+- Project directory and subdirectories
+- MSFS Community Folder
+- MSFS Cache directory
 
 #### macOS/Linux
 ```bash
-# 检查项目目录权限
+# Check project directory permissions
 ls -la Nav-data/
 
-# 如需修改权限
+# To modify permissions
 chmod -R 755 Nav-data/
 ```
 
-## 🔍 故障排除
+## 🔍 Troubleshooting
 
-### 常见问题及解决方案
+### Common Issues and Solutions
 
-#### 1. Python 版本不兼容
-**问题**: "python: command not found" 或版本过低
-**解决**: 
-- 确认 Python 3.8+ 正确安装
-- 在某些系统上使用 `python3` 而非 `python`
+#### 1. Python Version Incompatibility
+**Problem**: "python: command not found" or version too low
+**Solution**:
+- Confirm Python 3.8+ is correctly installed
+- Use `python3` instead of `python` on some systems
 
-#### 2. pip 安装依赖失败
-**问题**: 依赖安装时出现编译错误
-**解决**:
+#### 2. pip Dependency Installation Failure
+**Problem**: Compilation errors during dependency installation
+**Solution**:
 ```bash
-# 升级构建工具
+# Upgrade build tools
 pip install --upgrade pip setuptools wheel
 
-# 对于特定包的问题
-pip install --no-cache-dir --force-reinstall [包名]
+# For issues with specific packages
+pip install --no-cache-dir --force-reinstall [package_name]
 ```
 
-#### 3. pygeomag 安装问题
-**问题**: pygeomag 编译失败
-**解决**:
+#### 3. pygeomag Installation Issues
+**Problem**: pygeomag compilation failed
+**Solution**:
 ```bash
-# Windows: 安装 Microsoft C++ Build Tools
-# macOS: 安装 Xcode Command Line Tools
+# Windows: Install Microsoft C++ Build Tools
+# macOS: Install Xcode Command Line Tools
 xcode-select --install
 
-# Linux: 安装编译依赖
+# Linux: Install compilation dependencies
 sudo apt install build-essential python3-dev
 ```
 
-#### 4. 权限问题
-**问题**: 无法写入 MSFS 目录
-**解决**:
-- 以管理员身份运行 (Windows)
-- 检查目录权限 (macOS/Linux)
-- 暂时关闭防病毒软件实时保护
+#### 4. Permission Issues
+**Problem**: Unable to write to MSFS directory
+**Solution**:
+- Run as administrator (Windows)
+- Check directory permissions (macOS/Linux)
+- Temporarily disable real-time protection of antivirus software
 
-#### 5. 内存不足
-**问题**: 处理大数据文件时内存不足
-**解决**:
-- 增加虚拟内存/交换空间
-- 关闭其他应用程序
-- 分批处理数据文件
+#### 5. Insufficient Memory
+**Problem**: Insufficient memory when processing large data files
+**Solution**:
+- Increase virtual memory/swap space
+- Close other applications
+- Process data files in batches
 
-### 日志文件位置
+### Log File Locations
 
-如遇问题，请检查以下日志：
-- `logs/PMDG_*.log` - 各模块处理日志
-- `logs/db_validation.log` - 数据库验证日志
-- `data/output/missing_airports_data.txt` - 缺失数据记录
+If you encounter issues, please check the following logs:
+- `logs/PMDG_*.log` - Log for each module's processing
+- `logs/db_validation.log` - Database validation log
+- `data/output/missing_airports_data.txt` - Missing data records
 
-## 📞 获取帮助
+## 📞 Get Help
 
-如果安装过程中遇到问题：
+If you encounter issues during installation:
 
-1. **查看错误信息** - 仔细阅读终端输出的错误信息
-2. **检查系统要求** - 确认系统满足最低要求
-3. **查阅文档** - 参考本指南的故障排除部分
-4. **提交 Issue** - 在 GitHub 仓库中提交详细的问题报告
+1. **Check error messages** - Carefully read the error messages from the terminal output
+2. **Check system requirements** - Confirm your system meets the minimum requirements
+3. **Consult documentation** - Refer to the troubleshooting section of this guide
+4. **Submit an Issue** - Submit a detailed problem report in the GitHub repository
 
 ---
 
-**下一步**: 继续阅读[配置说明](configuration.md)了解如何配置数据源。 
+**Next Steps**: Continue reading [Configuration Instructions](configuration.md) to learn how to configure data sources.

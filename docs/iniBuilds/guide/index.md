@@ -1,113 +1,113 @@
-# 🧭 使用指南
+# 🧭 User Guide
 
-欢迎使用Nav-data航空导航数据转换工具！本指南将帮助您完整掌握这个专业的航空导航数据处理系统。
+Welcome to the Nav-data aviation navigation data conversion tool! This guide will help you fully master this professional aviation navigation data processing system.
 
-## 📋 快速导航
+## 📋 Quick Navigation
 
-### 🚀 新手入门
-- [**安装指南**](./installation.md) - 系统要求与完整安装流程
-- [**配置说明**](./configuration.md) - 数据源配置与AIRAC周期设置
-- [**使用说明**](./usage.md) - 数据转换与部署的完整流程
+### 🚀 Getting Started
+- [**Installation Guide**](./installation.md) - System Requirements and Full Installation Process
+- [**Configuration Instructions**](./configuration.md) - Data Source Configuration and AIRAC Cycle Settings
+- [**Usage Instructions**](./usage.md) - Complete Data Conversion and Deployment Process
 
-### 🆘 帮助与支持
-- [**常见问题**](../faq.md) - 用户最关心的问题解答  
-- [**故障排除**](../troubleshooting.md) - 问题诊断和解决方案
+### 🆘 Help and Support
+- [**FAQ**](../faq.md) - Answers to Frequently Asked Questions
+- [**Troubleshooting**](../troubleshooting.md) - Problem Diagnosis and Solutions
 
-### 🔧 高级主题
-- [**架构说明**](../architecture.md) - 系统架构与技术实现
+### 🔧 Advanced Topics
+- [**Architecture Description**](../architecture.md) - System Architecture and Technical Implementation
 
-## 🎯 项目概述
+## 🎯 Project Overview
 
-Nav-data是一个专业的航空导航数据转换工具，专门为Microsoft Flight Simulator的高级插件提供实时、准确的导航数据支持。
+Nav-data is a professional aviation navigation data conversion tool, specifically designed to provide real-time, accurate navigation data support for advanced add-ons in Microsoft Flight Simulator.
 
-### 🏆 核心优势
+### 🏆 Core Advantages
 
-#### ✈️ 专业级数据精度
-- **AIRAC标准兼容**：严格遵循国际民航组织28天AIRAC周期
-- **高精度坐标**：支持8位小数精度的地理坐标
-- **磁偏角计算**：使用WMM（世界磁偏角模型）进行实时计算
-- **多标准支持**：兼容ARINC 424、X-Plane和NAIP数据格式
+#### ✈️ Professional-Grade Data Accuracy
+- **AIRAC Standard Compliance**: Strictly adheres to the International Civil Aviation Organization's 28-day AIRAC cycle
+- **High-Precision Coordinates**: Supports geographical coordinates with 8 decimal places of precision
+- **Magnetic Variation Calculation**: Uses WMM (World Magnetic Model) for real-time calculation
+- **Multi-Standard Support**: Compatible with ARINC 424, X-Plane, and NAIP data formats
 
-#### 🔄 智能数据处理
-- **多源数据融合**：整合NAIP、X-Plane、CIFP多种数据源
-- **智能数据验证**：自动检测和修复数据完整性问题
-- **增量更新支持**：高效的差异化数据更新机制
-- **并行处理优化**：多进程并行处理大规模数据集
+#### 🔄 Intelligent Data Processing
+- **Multi-Source Data Fusion**: Integrates multiple data sources including NAIP, X-Plane, CIFP
+- **Intelligent Data Validation**: Automatically detects and fixes data integrity issues
+- **Incremental Update Support**: Efficient differential data update mechanism
+- **Parallel Processing Optimization**: Multi-process parallel processing for large-scale datasets
 
-#### 🛫 广泛兼容性
-- **MSFS 2020 & 2024**：完全支持两个版本的Microsoft Flight Simulator
-- **多发行平台**：兼容Steam版、Microsoft Store版、Xbox版
-- **顶级插件支持**：专门优化iniBuilds和PMDG高端插件
+#### 🛫 Extensive Compatibility
+- **MSFS 2020 & 2024**: Fully supports both versions of Microsoft Flight Simulator
+- **Multi-Platform Release**: Compatible with Steam Edition, Microsoft Store Edition, Xbox Edition
+- **Premium Add-on Support**: Specifically optimized for iniBuilds and PMDG high-end add-ons
 
-### 📊 支持的导航数据类型
+### 📊 Supported Navigation Data Types
 
-| 数据类型 | 英文名称 | 标准代码 | 描述 |
+| Data Type | English Name | Standard Code | Description |
 |---------|---------|---------|------|
-| 机场信息 | Airports | APT | 机场ICAO代码、坐标、磁偏角 |
-| 跑道数据 | Runways | RWY | 跑道标识、方向、长度、表面类型 |
-| VHF导航台 | VHF Navaids | VHF | VOR、DME、TACAN导航台频率 |
-| NDB导航台 | NDB Navaids | NDB | 非定向信标台频率和覆盖范围 |
-| 航路点 | Waypoints | FIX | 航路点坐标和区域分类 |
-| 航路系统 | Airways | AWY | 高空、低空航路及连接关系 |
-| 离场程序 | SIDs | SID | 标准仪表离场程序 |
-| 进场程序 | STARs | STAR | 标准终端到达路线 |
-| 进近程序 | Approaches | IAP | 各类仪表进近程序 |
-| 着陆系统 | ILS/GLS | GS | 仪表着陆系统引导信息 |
+| Airport Information | Airports | APT | Airport ICAO code, coordinates, magnetic variation |
+| Runway Data | Runways | RWY | Runway identifier, direction, length, surface type |
+| VHF Navaids | VHF Navaids | VHF | VOR, DME, TACAN navaid frequencies |
+| NDB Navaids | NDB Navaids | NDB | Non-directional beacon frequencies and coverage |
+| Waypoints | Waypoints | FIX | Waypoint coordinates and airspace classification |
+| Airways System | Airways | AWY | High-altitude, low-altitude airways and connections |
+| Departure Procedures | SIDs | SID | Standard Instrument Departures |
+| Arrival Procedures | STARs | STAR | Standard Terminal Arrival Routes |
+| Approach Procedures | Approaches | IAP | Various instrument approach procedures |
+| Landing System | ILS/GLS | GS | Instrument Landing System guidance information |
 
-### 🌍 覆盖区域
+### 🌍 Coverage Areas
 
-本工具主要覆盖以下ICAO区域：
+This tool primarily covers the following ICAO regions:
 
-- **中国大陆**：ZB, ZS, ZJ, ZG, ZY, ZL, ZU, ZW, ZP, ZH
-- **东南亚**：VM (越南), VH (香港)
-- **东北亚**：RK (韩国部分)
+- **Mainland China**: ZB, ZS, ZJ, ZG, ZY, ZL, ZU, ZW, ZP, ZH
+- **Southeast Asia**: VM (Vietnam), VH (Hong Kong)
+- **Northeast Asia**: RK (Part of South Korea)
 
-### 🎯 支持的飞机插件
+### 🎯 Supported Aircraft Add-ons
 
-#### iniBuilds 系列
-- **Airbus A350-900** - 长程宽体客机
-- **Airbus A350-900ULR** - 超长程版本
-- **Airbus A350-1000** - 加长版本
+#### iniBuilds Series
+- **Airbus A350-900** - Long-haul Wide-body Airliner
+- **Airbus A350-900ULR** - Ultra Long Range Version
+- **Airbus A350-1000** - Stretched Version
 
-#### PMDG 系列
-- **Boeing 737-600/700/800/900** - 窄体客机系列
-- **Boeing 777-300ER** - 宽体长程客机
-- **Boeing 777F** - 货运版本
+#### PMDG Series
+- **Boeing 737-600/700/800/900** - Narrow-body Airliner Series
+- **Boeing 777-300ER** - Wide-body Long-range Airliner
+- **Boeing 777F** - Cargo Version
 
-## 🚦 开始使用
+## 🚦 Start Using
 
-### 前置要求检查
+### Prerequisite Check
 
-在开始之前，请确保您具备：
+Before you begin, please ensure you have:
 
-- [ ] **Microsoft Flight Simulator 2020或2024**（任意版本）
-- [ ] **Python 3.8+** 开发环境
-- [ ] **有效的导航数据订阅**（Navigraph或Aerosoft NavDataPro）
-- [ ] **目标飞机插件**（iniBuilds A350或PMDG 737/777）
-- [ ] **管理员权限**（用于文件系统访问）
+- [ ] **Microsoft Flight Simulator 2020 or 2024** (any version)
+- [ ] **Python 3.8+** development environment
+- [ ] **Valid navigation data subscription** (Navigraph or Aerosoft NavDataPro)
+- [ ] **Target aircraft add-on** (iniBuilds A350 or PMDG 737/777)
+- [ ] **Administrator privileges** (for file system access)
 
-### 📖 推荐学习路径
+### 📖 Recommended Learning Path
 
-1. **📥 环境准备** → [安装指南](./installation.md)
-2. **⚙️ 数据配置** → [配置说明](./configuration.md)  
-3. **🔄 执行转换** → [使用说明](./usage.md)
-4. **🛠️ 深入理解** → [架构说明](../architecture.md)
+1. **📥 Environment Preparation** → [Installation Guide](./installation.md)
+2. **⚙️ Data Configuration** → [Configuration Instructions](./configuration.md)
+3. **🔄 Perform Conversion** → [Usage Instructions](./usage.md)
+4. **🛠️ In-depth Understanding** → [Architecture Description](../architecture.md)
 
-## ⚡ 快速开始
+## ⚡ Quick Start
 
-如果您已经有经验，可以直接跳转到：
+If you already have experience, you can jump directly to:
 
 ```bash
-# 快速安装依赖
+# Quick install dependencies
 pip install -r requirements.txt
 
-# 运行转换工具
+# Run conversion tool
 python XP2INI_NDB_Converter.py
 ```
 
-## 📞 获取帮助
-- **💡 功能建议**：参考[贡献指南](../contributing.md)
+## 📞 Get Help
+- **💡 Feature Suggestions**: Refer to [Contributing Guide](../contributing.md)
 
 ---
 
-准备好了吗？让我们从[安装指南](./installation.md)开始您的Nav-data之旅！ 🚀 
+Ready to begin? Let's start your Nav-data journey with the [Installation Guide](./installation.md)! 🚀

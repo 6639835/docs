@@ -1,247 +1,247 @@
-# 🔧 故障排除指南
+# 🔧 Troubleshooting Guide
 
-本指南涵盖了使用 Nav-data PMDG 转换工具时可能遇到的常见问题及其解决方案。按问题类型分类，便于快速定位和解决。
+This guide covers common issues that may arise when using the Nav-data PMDG conversion tool and their solutions. It is categorized by issue type for quick identification and resolution.
 
 ---
 
-## 🚨 安装问题
+## 🚨 Installation Issues
 
-### ❌ Python 环境问题
+### ❌ Python Environment Issues
 
-#### **问题**: `python: command not found` 或 `'python' 不是内部或外部命令`
-**症状**: 
+#### **Issue**: `python: command not found` or `'python' is not recognized as an internal or external command`
+**Symptoms**:
 ```bash
 'python' is not recognized as an internal or external command
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 验证Python安装
+# 1. Verify Python installation
 python --version
-# 或
+# or
 python3 --version
 
-# 2. 检查PATH环境变量
+# 2. Check PATH environment variable
 echo $PATH  # Linux/macOS
 echo %PATH%  # Windows
 
-# 3. 重新安装Python (推荐从官网下载)
+# 3. Reinstall Python (recommended to download from official website)
 # https://www.python.org/downloads/
 ```
 
-#### **问题**: 依赖包安装失败
-**症状**:
+#### **Issue**: Dependency package installation failed
+**Symptoms**:
 ```bash
 ERROR: Could not find a version that satisfies the requirement
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 更新pip
+# 1. Update pip
 python -m pip install --upgrade pip
 
-# 2. 使用国内镜像源 (中国用户)
+# 2. Use domestic mirror source (for Chinese users)
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 3. 清理pip缓存
+# 3. Clear pip cache
 pip cache purge
 
-# 4. 使用虚拟环境
+# 4. Use a virtual environment
 python -m venv nav_data_env
 source nav_data_env/bin/activate  # Linux/macOS
 nav_data_env\Scripts\activate     # Windows
 ```
 
-### ❌ 权限问题
+### ❌ Permission Issues
 
-#### **问题**: 访问 MSFS 目录被拒绝
-**症状**:
+#### **Issue**: Access to MSFS directory denied
+**Symptoms**:
 ```
 PermissionError: [Errno 13] Permission denied
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# Windows用户
-# 1. 以管理员身份运行命令提示符
-# 2. 或者修改目录权限
-icacls "C:\Users\[用户名]\AppData\Local\Packages" /grant Users:F /T
+# Windows users
+# 1. Run Command Prompt as administrator
+# 2. Or modify directory permissions
+icacls "C:\Users\[username]\AppData\Local\Packages" /grant Users:F /T
 
-# 检查MSFS目录权限
-# 右键目录 -> 属性 -> 安全 -> 编辑 -> 添加完全控制权限
+# Check MSFS directory permissions
+# Right-click directory -> Properties -> Security -> Edit -> Add Full Control permissions
 ```
 
 ---
 
-## 🔄 转换问题
+## 🔄 Conversion Issues
 
-### ❌ 数据文件问题
+### ❌ Data File Issues
 
-#### **问题**: 无法找到AIRAC数据文件
-**症状**:
+#### **Issue**: AIRAC data file not found
+**Symptoms**:
 ```
 FileNotFoundError: AIRAC data file not found
 ```
 
-**诊断步骤**:
+**Diagnostic Steps**:
 ```bash
-# 1. 验证文件路径
+# 1. Verify file path
 ls -la ./input/AIRAC2024-01/  # Linux/macOS
 dir .\input\AIRAC2024-01\     # Windows
 
-# 2. 检查文件权限
-ls -la *.dat *.txt *.xml      # 检查数据文件
+# 2. Check file permissions
+ls -la *.dat *.txt *.xml      # Check data files
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 确认数据文件格式和位置
+# 1. Confirm data file format and location
 mkdir -p ./input/AIRAC2024-01
-# 将AIRAC数据文件放入正确目录
+# Place AIRAC data files in the correct directory
 
-# 2. 验证文件完整性
+# 2. Verify file integrity
 python validate_data.py --check-integrity --input-dir=./input/AIRAC2024-01
 ```
 
-#### **问题**: 数据格式不兼容
-**症状**:
+#### **Issue**: Incompatible data format
+**Symptoms**:
 ```
 ValueError: Unsupported data format or corrupted file
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 检查支持的格式
+# 1. Check supported formats
 python converter.py --list-supported-formats
 
-# 2. 转换数据格式
+# 2. Convert data format
 python format_converter.py --input=old_format.dat --output=new_format.xml --format=ARINC424
 
-# 3. 使用调试模式获取详细信息
+# 3. Use debug mode for detailed information
 python converter.py --debug --verbose --input=problematic_file.dat
 ```
 
-### ❌ 转换过程错误
+### ❌ Conversion Process Errors
 
-#### **问题**: 内存不足错误
-**症状**:
+#### **Issue**: Out of memory error
+**Symptoms**:
 ```
 MemoryError: Unable to allocate array
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 分块处理大型数据集
+# 1. Process large datasets in chunks
 python converter.py --batch-size=1000 --memory-limit=4GB
 
-# 2. 启用数据流处理
+# 2. Enable data streaming
 python converter.py --streaming-mode --temp-dir=/tmp/nav_data
 
-# 3. 增加虚拟内存 (Windows)
-# 控制面板 -> 系统 -> 高级系统设置 -> 虚拟内存
+# 3. Increase virtual memory (Windows)
+# Control Panel -> System -> Advanced system settings -> Virtual memory
 
-# 4. 优化系统资源
-# 关闭不必要的程序
-# 清理临时文件
+# 4. Optimize system resources
+# Close unnecessary programs
+# Clean temporary files
 ```
 
-#### **问题**: 坐标转换错误
-**症状**:
+#### **Issue**: Coordinate conversion error
+**Symptoms**:
 ```
 CoordinateTransformError: Invalid coordinate conversion
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 验证坐标系统设置
+# 1. Verify coordinate system settings
 python converter.py --coordinate-system=WGS84 --verify-coordinates
 
-# 2. 使用备用转换方法
+# 2. Use an alternative conversion method
 python converter.py --coordinate-method=alternative --precision=8
 
-# 3. 检查磁偏角设置
+# 3. Check magnetic declination settings
 python converter.py --magnetic-model=WMM2020 --declination-check
 ```
 
 ---
 
-## ⚙️ 配置问题
+## ⚙️ Configuration Issues
 
-### ❌ PMDG 集成问题
+### ❌ PMDG Integration Issues
 
-#### **问题**: PMDG 飞机无法识别导航数据
-**症状**: FMC显示"NAV DATA NOT FOUND"或导航点无法加载
+#### **Issue**: PMDG aircraft cannot recognize navigation data
+**Symptoms**: FMC displays "NAV DATA NOT FOUND" or navigation points fail to load
 
-**诊断步骤**:
+**Diagnostic Steps**:
 ```bash
-# 1. 检查PMDG数据目录
+# 1. Check PMDG data directory
 dir "C:\Users\%USERNAME%\AppData\Local\Packages\Microsoft.FlightSimulator_*\LocalCache\PMDG\"
 
-# 2. 验证数据库文件
+# 2. Verify database files
 python verify_pmdg_db.py --check-tables --check-indexes
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 确认PMDG数据路径
-python converter.py --pmdg-path="C:\Users\[用户名]\AppData\Local\Packages\Microsoft.FlightSimulator_[ID]\LocalCache\PMDG"
+# 1. Confirm PMDG data path
+python converter.py --pmdg-path="C:\Users\[username]\AppData\Local\Packages\Microsoft.FlightSimulator_[ID]\LocalCache\PMDG"
 
-# 2. 重新生成数据库索引
+# 2. Regenerate database indexes
 python rebuild_indexes.py --database=pmdg_nav.db
 
-# 3. 检查文件权限
-icacls "PMDG数据目录" /grant Users:F /T
+# 3. Check file permissions
+icacls "PMDG data directory" /grant Users:F /T
 
-# 4. 重启MSFS和PMDG飞机
+# 4. Restart MSFS and PMDG aircraft
 ```
 
-#### **问题**: 数据版本不匹配
-**症状**: PMDG显示旧的AIRAC周期或数据不更新
+#### **Issue**: Data version mismatch
+**Symptoms**: PMDG displays an old AIRAC cycle or data is not updated
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 强制更新AIRAC标识
+# 1. Force AIRAC identifier update
 python converter.py --force-airac-update --airac-cycle=2024-01
 
-# 2. 清除缓存
+# 2. Clear cache
 python clear_cache.py --pmdg-cache --nav-cache
 
-# 3. 验证AIRAC周期
+# 3. Verify AIRAC cycle
 python verify_airac.py --current-cycle --check-validity
 ```
 
 ---
 
-## 🚀 性能问题
+## 🚀 Performance Issues
 
-### ❌ 转换速度慢
+### ❌ Slow Conversion Speed
 
-#### **问题**: 转换过程异常缓慢
-**可能原因**:
-- 硬盘I/O瓶颈
-- 内存不足
-- CPU使用率低
-- 网络延迟（在线验证）
+#### **Issue**: Conversion process is unusually slow
+**Possible causes**:
+- Hard disk I/O bottleneck
+- Insufficient memory
+- Low CPU utilization
+- Network latency (online validation)
 
-**优化方案**:
+**Optimization Solutions**:
 ```bash
-# 1. 启用多进程处理
+# 1. Enable multiprocessing
 python converter.py --parallel=4 --workers=auto
 
-# 2. 使用SSD临时目录
+# 2. Use SSD for temporary directory
 python converter.py --temp-dir="D:\SSD_Temp" --keep-temp-files=false
 
-# 3. 禁用不必要的验证
+# 3. Disable unnecessary validation
 python converter.py --skip-validation --no-online-check
 
-# 4. 优化I/O操作
+# 4. Optimize I/O operations
 python converter.py --buffer-size=64MB --async-io
 ```
 
-### ❌ 内存使用过高
+### ❌ High Memory Usage
 
-#### **问题**: 转换过程消耗大量内存
-**监控内存使用**:
+#### **Issue**: Conversion process consumes large amounts of memory
+**Monitor memory usage**:
 ```bash
 # Windows
 tasklist /fi "imagename eq python.exe"
@@ -250,197 +250,197 @@ tasklist /fi "imagename eq python.exe"
 top -p $(pgrep python)
 ```
 
-**解决方案**:
+**Solution**:
 ```bash
-# 1. 启用流式处理
+# 1. Enable streaming
 python converter.py --streaming --chunk-size=10MB
 
-# 2. 限制内存使用
+# 2. Limit memory usage
 python converter.py --max-memory=2GB --gc-threshold=100MB
 
-# 3. 分阶段处理
+# 3. Process in stages
 python converter.py --process-by-region --region-size=small
 ```
 
 ---
 
-## 🔍 数据验证问题
+## 🔍 Data Validation Issues
 
-### ❌ 数据完整性检查失败
+### ❌ Data Integrity Check Failed
 
-#### **问题**: 验证工具报告数据不完整
-**症状**:
+#### **Issue**: Validation tool reports incomplete data
+**Symptoms**:
 ```
 ValidationError: Missing required navigation points
 ```
 
-**诊断工具**:
+**Diagnostic Tools**:
 ```bash
-# 1. 运行完整验证
+# 1. Run comprehensive validation
 python validate_data.py --comprehensive --output-report=validation_report.html
 
-# 2. 检查特定数据类型
+# 2. Check specific data types
 python validate_data.py --check-airports --check-navaids --check-airways
 
-# 3. 比较与参考数据
+# 3. Compare with reference data
 python compare_data.py --reference=official_data.xml --current=converted_data.db
 ```
 
-**修复方案**:
+**Repair Solutions**:
 ```bash
-# 1. 重新下载源数据
-# 确保AIRAC数据完整和最新
+# 1. Redownload source data
+# Ensure AIRAC data is complete and up-to-date
 
-# 2. 使用修复工具
+# 2. Use repair tool
 python repair_data.py --fix-missing --interpolate-gaps
 
-# 3. 手动补充缺失数据
+# 3. Manually supplement missing data
 python manual_fix.py --add-missing-waypoints --config=fixes.json
 ```
 
-### ❌ 坐标精度问题
+### ❌ Coordinate Precision Issues
 
-#### **问题**: 导航点位置不准确
-**检查方法**:
+#### **Issue**: Navigation point position inaccurate
+**Checking Methods**:
 ```bash
-# 1. 验证特定航点坐标
+# 1. Verify specific waypoint coordinates
 python check_waypoint.py --icao=ZSPD --waypoint=SASAN
 
-# 2. 对比多个数据源
+# 2. Compare multiple data sources
 python compare_coordinates.py --sources=navigraph,aerosoft --output=coordinate_diff.csv
 
-# 3. 生成偏差报告
+# 3. Generate deviation report
 python deviation_report.py --threshold=0.001 --output=deviations.html
 ```
 
 ---
 
-## 📊 日志分析
+## 📊 Log Analysis
 
-### 🔍 理解日志文件
+### 🔍 Understanding Log Files
 
-#### **日志级别说明**:
-- **DEBUG**: 详细调试信息
-- **INFO**: 一般处理信息
-- **WARNING**: 警告信息，不影响功能
-- **ERROR**: 错误信息，需要关注
-- **CRITICAL**: 严重错误，处理中断
+#### **Log Level Description**:
+- **DEBUG**: Detailed debug information
+- **INFO**: General processing information
+- **WARNING**: Warning messages, do not affect functionality
+- **ERROR**: Error messages, require attention
+- **CRITICAL**: Critical errors, processing interrupted
 
-#### **常见日志模式**:
+#### **Common Log Patterns**:
 ```bash
-# 查找错误日志
+# Find error logs
 grep "ERROR\|CRITICAL" converter.log
 
-# 统计警告数量
+# Count warnings
 grep -c "WARNING" converter.log
 
-# 分析处理时间
+# Analyze processing time
 grep "Processing time" converter.log | tail -10
 ```
 
-### 🔧 日志配置
+### 🔧 Log Configuration
 
-#### **增加日志详细程度**:
+#### **Increase Log Detail Level**:
 ```bash
-# 启用详细日志
+# Enable detailed logs
 python converter.py --log-level=DEBUG --log-format=detailed
 
-# 分离不同类型日志
+# Separate different log types
 python converter.py --log-split --error-log=errors.log --debug-log=debug.log
 ```
 
 ---
 
-## 🆘 紧急修复
+## 🆘 Emergency Fixes
 
-### 🚨 数据损坏恢复
+### 🚨 Data Corruption Recovery
 
-#### **步骤1**: 立即备份
+#### **Step 1**: Immediate Backup
 ```bash
-# 备份当前状态
+# Backup current state
 cp -r ./output ./backup_$(date +%Y%m%d_%H%M%S)  # Linux/macOS
 xcopy .\output .\backup_%date:~0,4%%date:~5,2%%date:~8,2%_%time:~0,2%%time:~3,2% /E /I  # Windows
 ```
 
-#### **步骤2**: 从备份恢复
+#### **Step 2**: Restore from Backup
 ```bash
-# 恢复最近的有效备份
+# Restore the most recent valid backup
 python restore_backup.py --list-backups
 python restore_backup.py --restore=backup_20240115_1430 --target=./output
 ```
 
-#### **步骤3**: 验证恢复
+#### **Step 3**: Verify Restoration
 ```bash
-# 验证恢复的数据
+# Verify restored data
 python validate_data.py --quick-check --report-only-errors
 ```
 
-### 🚨 重置为默认状态
+### 🚨 Reset to Default State
 
-#### **完全重置**:
+#### **Full Reset**:
 ```bash
-# 警告：这将删除所有转换的数据
+# Warning: This will delete all converted data
 python reset_tool.py --full-reset --confirm
 
-# 重新下载默认配置
+# Redownload default configuration
 python setup.py --download-config --reset-settings
 
-# 重新运行初始化
+# Rerun initialization
 python init.py --first-time-setup
 ```
 
 ---
 
-## 📞 获取进一步帮助
+## 📞 Getting Further Help
 
-### 📝 报告问题时请提供
+### 📝 When reporting issues, please provide
 
-1. **系统信息**:
-   ```bash
-   python --version
-   python system_info.py --full-report
-   ```
+1.  **System Information**:
+    ```bash
+    python --version
+    python system_info.py --full-report
+    ```
 
-2. **错误日志**:
-   - 完整的错误堆栈跟踪
-   - 相关的警告信息
-   - 处理前后的日志片段
+2.  **Error Logs**:
+    - Full error stack trace
+    - Relevant warning messages
+    - Log snippets before and after processing
 
-3. **环境信息**:
-   - 操作系统版本
-   - MSFS版本和安装方式
-   - PMDG飞机版本
-   - 数据源和AIRAC周期
+3.  **Environment Information**:
+    - Operating system version
+    - MSFS version and installation method
+    - PMDG aircraft version
+    - Data source and AIRAC cycle
 
-4. **重现步骤**:
-   - 详细的操作步骤
-   - 输入的命令和参数
-   - 预期结果 vs 实际结果
+4.  **Reproduction Steps**:
+    - Detailed operating steps
+    - Input commands and parameters
+    - Expected results vs. actual results
 
-### 🔗 联系方式
+### 🔗 Contact Information
 
-- **GitHub Issues**: [提交问题报告](https://github.com/nav-data/docs/issues/new)
-- **社区论坛**: [参与讨论](https://github.com/nav-data/docs/discussions)
-- **紧急支持**: support@nav-data.org
+- **GitHub Issues**: [Submit an issue report](https://github.com/nav-data/docs/issues/new)
+- **Community Forum**: [Participate in discussions](https://github.com/nav-data/docs/discussions)
+- **Emergency Support**: support@nav-data.org
 
 ---
 
-## 🔄 预防措施
+## 🔄 Preventative Measures
 
-### ✅ 最佳实践清单
+### ✅ Best Practices Checklist
 
-- [ ] **定期备份**数据和配置
-- [ ] **使用最新版本**的转换工具
-- [ ] **验证数据**在每次转换后
-- [ ] **监控日志**了解潜在问题
-- [ ] **保持环境**清洁和更新
-- [ ] **文档记录**自定义配置
+- [ ] **Regularly back up** data and configuration
+- [ ] **Use the latest version** of the conversion tool
+- [ ] **Validate data** after each conversion
+- [ ] **Monitor logs** for potential issues
+- [ ] **Keep environment** clean and updated
+- [ ] **Document** custom configurations
 
-### 📅 维护计划
+### 📅 Maintenance Schedule
 
-- **每周**: 检查日志文件，清理临时文件
-- **每月**: 更新AIRAC数据，验证工具版本
-- **每季度**: 完整系统检查，性能优化
-- **重要更新时**: 完整备份，谨慎升级
+- **Weekly**: Check log files, clean temporary files
+- **Monthly**: Update AIRAC data, verify tool version
+- **Quarterly**: Full system check, performance optimization
+- **Upon major updates**: Full backup, cautious upgrade
 
-记住：预防胜于治疗！定期维护可以避免大部分问题的发生。 
+Remember: Prevention is better than cure! Regular maintenance can prevent most issues from occurring.

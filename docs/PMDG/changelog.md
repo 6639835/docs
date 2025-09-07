@@ -1,375 +1,375 @@
-# 📝 更新日志
+# 📝 Changelog
 
-Nav-data 的所有重要变更都记录在这个文件中。
+All significant changes to Nav-data are documented in this file.
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
-项目遵循 [语义化版本控制](https://semver.org/lang/zh-CN/)。
+The format is based on [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/).
 
-## [未发布] - 即将推出
+## [Unreleased] - Upcoming
 
-### 🚀 新增
-- 新的可视化数据验证报告
-- 支持多线程数据库写入优化
-- 增加数据处理进度监控
+### 🚀 Added
+- New visual data validation report
+- Support for multi-threaded database write optimization
+- Added data processing progress monitoring
 
-### 🔧 改进
-- 优化内存使用，支持更大的数据集
-- 改进错误消息的可读性
-- 增强配置文件验证
+### 🔧 Improved
+- Optimized memory usage, supporting larger datasets
+- Improved error message readability
+- Enhanced configuration file validation
 
-### 🐛 修复
-- 修复特殊字符在机场名称中的处理问题
-- 解决并发处理时的数据竞争问题
+### 🐛 Fixed
+- Fixed issue with special character handling in airport names
+- Resolved data race issues during concurrent processing
 
 ---
 
 ## [2.1.0] - 2024-12-24
 
-### 🚀 新增功能
-- **智能航路合并算法** - 实现了高级的航路数据合并逻辑，支持自动检测公共航路点并智能插入缺失航段
-- **数据库验证工具** - 添加了 `db_validator.py`，提供全面的数据库完整性检查和质量报告
-- **并发处理支持** - 多线程处理大型数据集，显著提升处理速度
-- **磁差计算集成** - 集成 pygeomag 库，提供精确的磁偏角计算
-- **进度监控** - 添加了 tqdm 进度条，实时显示处理进度
+### 🚀 New Features
+- **Smart Route Merging Algorithm** - Implemented advanced route data merging logic, supporting automatic detection of common waypoints and intelligent insertion of missing segments
+- **Database Validation Tool** - Added `db_validator.py`, providing comprehensive database integrity checks and quality reports
+- **Concurrent Processing Support** - Multi-threaded processing for large datasets, significantly improving processing speed
+- **Magnetic Variation Calculation Integration** - Integrated pygeomag library, providing precise magnetic declination calculations
+- **Progress Monitoring** - Added tqdm progress bar, showing real-time processing progress
 
-### 🔧 改进优化
-- **内存管理优化** - 实现批处理机制，大幅降低内存占用
-- **坐标转换精度** - 提升 DMS 到十进制度的转换精度至8位小数
-- **错误处理增强** - 更详细的错误日志和异常处理机制
-- **数据验证加强** - 增加了坐标范围验证和 ICAO 代码格式检查
-- **代码模块化** - 重构代码结构，提高可维护性
+### 🔧 Improvements
+- **Memory Management Optimization** - Implemented batch processing mechanism, significantly reducing memory footprint
+- **Coordinate Conversion Precision** - Improved DMS to decimal degrees conversion precision to 8 decimal places
+- **Enhanced Error Handling** - More detailed error logging and exception handling mechanisms
+- **Strengthened Data Validation** - Added coordinate range validation and ICAO code format checks
+- **Code Modularization** - Refactored code structure to improve maintainability
 
-### 🐛 问题修复
-- 修复了 CSV 文件编码检测问题，正确处理 Latin-1 编码
-- 解决了重复记录导致的数据库约束冲突
-- 修复了航路点坐标精度丢失问题
-- 解决了大文件处理时的内存溢出问题
-- 修复了 Windows 路径分隔符兼容性问题
+### 🐛 Bug Fixes
+- Fixed CSV file encoding detection issue, correctly handling Latin-1 encoding
+- Resolved database constraint conflicts caused by duplicate records
+- Fixed waypoint coordinate precision loss issue
+- Resolved memory overflow issues when processing large files
+- Fixed Windows path separator compatibility issue
 
-### 📚 文档更新
-- 完全重写了技术文档，包含详细的架构说明
-- 添加了完整的安装和配置指南
-- 新增了故障排除和 FAQ 部分
-- 更新了 API 文档和代码示例
+### 📚 Documentation Updates
+- Completely rewrote technical documentation, including detailed architectural descriptions
+- Added comprehensive installation and configuration guides
+- Added troubleshooting and FAQ sections
+- Updated API documentation and code examples
 
-### 🔒 安全性改进
-- 添加了输入路径验证，防止路径遍历攻击
-- 增强了 SQL 输入清理机制
-- 改进了文件权限检查
+### 🔒 Security Improvements
+- Added input path validation to prevent path traversal attacks
+- Enhanced SQL input sanitization mechanism
+- Improved file permission checks
 
 ---
 
 ## [2.0.0] - 2024-11-15
 
-### 🚀 重大更新
-- **完全重构的数据处理引擎** - 从头设计的模块化架构
-- **PMDG 777 支持** - 扩展支持 PMDG 777-300ER 和 777F
-- **新的数据库架构** - 优化的表结构，更好的性能和兼容性
-- **中国地区数据专项支持** - 针对中国民航数据进行特别优化
+### 🚀 Major Updates
+- **Completely Refactored Data Processing Engine** - Modular architecture designed from scratch
+- **PMDG 777 Support** - Extended support for PMDG 777-300ER and 777F
+- **New Database Schema** - Optimized table structure for better performance and compatibility
+- **China Region Data Specific Support** - Specially optimized for Chinese civil aviation data
 
-### 🔧 技术改进
-- **Python 3.8+ 支持** - 更新到现代 Python 版本
-- **类型注解** - 全面添加类型提示，提高代码质量
-- **异步处理** - 引入异步数据处理能力
-- **配置管理** - 新的配置系统，支持 YAML 配置文件
+### 🔧 Technical Improvements
+- **Python 3.8+ Support** - Updated to modern Python versions
+- **Type Hinting** - Comprehensive addition of type hints to improve code quality
+- **Asynchronous Processing** - Introduced asynchronous data processing capabilities
+- **Configuration Management** - New configuration system, supporting YAML configuration files
 
-### 📊 数据处理增强
-- **多源数据集成** - 支持 NAIP、X-Plane、CIFP 多种数据源
-- **坐标系统统一** - 标准化的坐标转换和验证
-- **数据质量保证** - 完整的数据验证和清理流程
+### 📊 Data Processing Enhancements
+- **Multi-source Data Integration** - Supports NAIP, X-Plane, CIFP multiple data sources
+- **Unified Coordinate System** - Standardized coordinate conversion and validation
+- **Data Quality Assurance** - Comprehensive data validation and cleansing process
 
-### 🛠️ 工具改进
-- **命令行界面优化** - 更友好的 CLI 工具
-- **批处理支持** - 支持批量处理多个数据文件
-- **日志系统升级** - 结构化日志，更好的调试支持
+### 🛠️ Tool Improvements
+- **Command-Line Interface Optimization** - More user-friendly CLI tools
+- **Batch Processing Support** - Supports batch processing of multiple data files
+- **Logging System Upgrade** - Structured logging for better debugging support
 
-### 💔 破坏性变更
-- **最低 Python 版本要求** - 需要 Python 3.8 或更高版本
-- **配置文件格式变更** - 新的 YAML 配置格式
-- **API 接口重构** - 部分函数和类的接口发生变化
-- **依赖项更新** - 更新了多个核心依赖包
+### 💔 Breaking Changes
+- **Minimum Python Version Requirement** - Requires Python 3.8 or higher
+- **Configuration File Format Change** - New YAML configuration format
+- **API Interface Refactoring** - Interfaces for some functions and classes have changed
+- **Dependency Updates** - Updated multiple core dependency packages
 
-### 🗑️ 移除功能
-- 移除了对 Python 2.7 的支持
-- 删除了过时的 XML 配置格式支持
-- 移除了实验性的网络数据源功能
+### 🗑️ Removed Features
+- Removed support for Python 2.7
+- Removed support for deprecated XML configuration format
+- Removed experimental network data source feature
 
 ---
 
 ## [1.5.2] - 2024-10-10
 
-### 🐛 修复
-- 修复 AIRAC 2410 数据兼容性问题
-- 解决 PMDG 737-900 数据库路径问题
-- 修复日志文件编码问题
+### 🐛 Fixed
+- Fixed AIRAC 2410 data compatibility issue
+- Resolved PMDG 737-900 database path issue
+- Fixed log file encoding issue
 
-### 🔧 改进
-- 优化数据库连接池管理
-- 改进错误消息的中文显示
-- 更新了机场名称查找数据库
+### 🔧 Improved
+- Optimized database connection pool management
+- Improved Chinese display of error messages
+- Updated airport name lookup database
 
 ---
 
 ## [1.5.1] - 2024-09-28
 
-### 🐛 修复
-- 修复 MSFS Steam 版本路径检测
-- 解决跑道方向计算精度问题
-- 修复特殊字符导致的 CSV 解析错误
+### 🐛 Fixed
+- Fixed MSFS Steam version path detection
+- Resolved runway direction calculation precision issue
+- Fixed CSV parsing errors caused by special characters
 
-### 📚 文档
-- 更新安装指南中的 MSFS 路径说明
-- 添加常见问题的解决方案
+### 📚 Documentation
+- Updated MSFS path instructions in the installation guide
+- Added solutions to common issues
 
 ---
 
 ## [1.5.0] - 2024-09-15
 
-### 🚀 新增
-- **AIRAC 2409 支持** - 支持最新的航空信息法规周期
-- **跑道数据增强** - 添加跑道表面类型和坡度信息
-- **自动备份功能** - 自动备份原有导航数据
-- **数据验证报告** - 生成详细的数据处理报告
+### 🚀 Added
+- **AIRAC 2409 Support** - Supports the latest AIRAC cycle
+- **Runway Data Enhancements** - Added runway surface type and slope information
+- **Automatic Backup Feature** - Automatically backs up original navigation data
+- **Data Validation Report** - Generates detailed data processing reports
 
-### 🔧 改进
-- 提升大型机场数据处理速度
-- 优化内存使用效率
-- 改进用户界面的反馈信息
+### 🔧 Improved
+- Improved processing speed for large airport data
+- Optimized memory usage efficiency
+- Improved user interface feedback
 
-### 🐛 修复
-- 修复高海拔机场高程数据错误
-- 解决某些特殊机场 ICAO 代码处理问题
-- 修复跑道长度单位转换错误
+### 🐛 Fixed
+- Fixed elevation data errors for high-altitude airports
+- Resolved ICAO code handling issues for certain special airports
+- Fixed runway length unit conversion errors
 
 ---
 
 ## [1.4.1] - 2024-08-20
 
-### 🐛 修复
-- 修复 Windows 11 兼容性问题
-- 解决数据库锁定问题
-- 修复中文路径处理错误
+### 🐛 Fixed
+- Fixed Windows 11 compatibility issue
+- Resolved database locking issue
+- Fixed Chinese path handling error
 
-### 🔧 改进
-- 提升启动速度
-- 优化错误提示信息
+### 🔧 Improved
+- Improved startup speed
+- Optimized error messages
 
 ---
 
 ## [1.4.0] - 2024-08-05
 
-### 🚀 新增
-- **多语言支持基础** - 添加国际化框架
-- **数据导出功能** - 支持导出为多种格式
-- **性能监控** - 添加处理性能统计
+### 🚀 Added
+- **Multilingual Support Foundation** - Added internationalization framework
+- **Data Export Feature** - Supports export to multiple formats
+- **Performance Monitoring** - Added processing performance statistics
 
-### 🔧 改进
-- **数据库优化** - 重新设计索引结构，查询速度提升 40%
-- **内存管理** - 减少内存占用 30%
-- **用户体验** - 改进错误提示和状态显示
+### 🔧 Improved
+- **Database Optimization** - Redesigned index structure, improving query speed by 40%
+- **Memory Management** - Reduced memory footprint by 30%
+- **User Experience** - Improved error prompts and status display
 
-### 🐛 修复
-- 修复航路点重复问题
-- 解决 ILS 频率精度问题
-- 修复时区处理错误
+### 🐛 Fixed
+- Fixed duplicate waypoint issue
+- Resolved ILS frequency precision issue
+- Fixed timezone handling errors
 
 ---
 
 ## [1.3.2] - 2024-07-12
 
-### 🐛 修复
-- 修复 PMDG 737 MAX 系列兼容性
-- 解决夏令时对 AIRAC 日期的影响
-- 修复某些导航设备频率显示问题
+### 🐛 Fixed
+- Fixed PMDG 737 MAX series compatibility
+- Resolved the impact of Daylight Saving Time on AIRAC dates
+- Fixed frequency display issues for certain navigation equipment
 
 ---
 
 ## [1.3.1] - 2024-06-28
 
-### 🐛 修复
-- 修复 macOS 路径处理问题
-- 解决 CSV 文件 BOM 标记问题
-- 修复航路连接验证错误
+### 🐛 Fixed
+- Fixed macOS path handling issue
+- Resolved CSV file BOM mark issue
+- Fixed route connection validation error
 
-### 🔧 改进
-- 提升文件读取速度
-- 优化日志输出格式
+### 🔧 Improved
+- Improved file read speed
+- Optimized log output format
 
 ---
 
 ## [1.3.0] - 2024-06-15
 
-### 🚀 新增
-- **Linux 支持** - 扩展对 Linux 系统的支持
-- **配置验证** - 添加配置文件语法检查
-- **数据统计** - 生成详细的数据处理统计信息
+### 🚀 Added
+- **Linux Support** - Extended support for Linux systems
+- **Configuration Validation** - Added configuration file syntax checking
+- **Data Statistics** - Generated detailed data processing statistics
 
-### 🔧 改进
-- **跨平台兼容性** - 统一不同操作系统的行为
-- **错误恢复** - 增强数据处理的容错能力
-- **代码质量** - 重构核心模块，提高代码质量
+### 🔧 Improved
+- **Cross-platform Compatibility** - Unified behavior across different operating systems
+- **Error Recovery** - Enhanced data processing fault tolerance
+- **Code Quality** - Refactored core modules to improve code quality
 
-### 🐛 修复
-- 修复非 ASCII 字符处理问题
-- 解决大文件处理超时问题
-- 修复数据库事务处理错误
+### 🐛 Fixed
+- Fixed non-ASCII character handling issue
+- Resolved large file processing timeout issue
+- Fixed database transaction processing error
 
 ---
 
 ## [1.2.1] - 2024-05-20
 
-### 🐛 修复
-- 修复 AIRAC 日期计算错误
-- 解决某些机场坐标转换问题
-- 修复进度显示不准确的问题
+### 🐛 Fixed
+- Fixed AIRAC date calculation error
+- Resolved coordinate conversion issues for certain airports
+- Fixed inaccurate progress display issue
 
 ---
 
 ## [1.2.0] - 2024-05-05
 
-### 🚀 新增
-- **AIRAC 2405 支持** - 支持最新导航数据周期
-- **批处理模式** - 支持处理多个数据文件
-- **数据差异检测** - 比较不同版本数据的差异
+### 🚀 Added
+- **AIRAC 2405 Support** - Supports the latest navigation data cycle
+- **Batch Processing Mode** - Supports processing multiple data files
+- **Data Difference Detection** - Compares differences between different data versions
 
-### 🔧 改进
-- **处理速度** - 数据处理速度提升 25%
-- **内存优化** - 优化大数据集的内存使用
-- **日志详细程度** - 提供更详细的处理日志
+### 🔧 Improved
+- **Processing Speed** - Data processing speed improved by 25%
+- **Memory Optimization** - Optimized memory usage for large datasets
+- **Logging Verbosity** - Provides more detailed processing logs
 
-### 🐛 修复
-- 修复航路高度限制处理
-- 解决 VOR/DME 频率重复问题
-- 修复机场标高数据精度
+### 🐛 Fixed
+- Fixed route altitude restriction handling
+- Resolved VOR/DME frequency duplication issue
+- Fixed airport elevation data precision
 
 ---
 
 ## [1.1.2] - 2024-04-18
 
-### 🐛 修复
-- 修复 Windows 长路径支持问题
-- 解决特殊字符编码错误
-- 修复数据库连接超时问题
+### 🐛 Fixed
+- Fixed Windows long path support issue
+- Resolved special character encoding error
+- Fixed database connection timeout issue
 
 ---
 
 ## [1.1.1] - 2024-04-05
 
-### 🐛 修复
-- 修复 PMDG 737-800 数据库路径问题
-- 解决 ILS 下滑道角度计算错误
-- 修复某些航路点缺失问题
+### 🐛 Fixed
+- Fixed PMDG 737-800 database path issue
+- Resolved ILS glideslope angle calculation error
+- Fixed missing waypoint issues for some waypoints
 
-### 📚 文档
-- 更新安装指南
-- 添加故障排除章节
+### 📚 Documentation
+- Updated installation guide
+- Added troubleshooting chapter
 
 ---
 
 ## [1.1.0] - 2024-03-22
 
-### 🚀 新增
-- **STAR 程序支持** - 添加标准终端到达程序处理
-- **进近程序** - 支持仪表进近程序数据
-- **数据验证增强** - 更严格的数据完整性检查
+### 🚀 Added
+- **STAR Procedure Support** - Added Standard Terminal Arrival Procedure handling
+- **Approach Procedures** - Supports instrument approach procedure data
+- **Enhanced Data Validation** - More stringent data integrity checks
 
-### 🔧 改进
-- **SID 程序优化** - 改进标准仪表离场程序处理
-- **坐标精度** - 提高坐标计算精度
-- **错误处理** - 更好的错误信息和恢复机制
+### 🔧 Improved
+- **SID Procedure Optimization** - Improved Standard Instrument Departure procedure handling
+- **Coordinate Precision** - Improved coordinate calculation precision
+- **Error Handling** - Better error messages and recovery mechanisms
 
-### 🐛 修复
-- 修复 NDB 频率范围验证
-- 解决航路连接断开问题
-- 修复跑道磁方位计算
+### 🐛 Fixed
+- Fixed NDB frequency range validation
+- Resolved route disconnection issue
+- Fixed runway magnetic bearing calculation
 
 ---
 
 ## [1.0.0] - 2024-03-01
 
-### 🎉 首次正式发布
+### 🎉 First Official Release
 
-#### 🚀 核心功能
-- **PMDG 737 系列完整支持** - 支持所有 PMDG 737 变体
-- **完整的导航数据转换** - 机场、跑道、导航设备、航路数据
-- **中国地区优化** - 专门针对中国民航数据进行优化
-- **AIRAC 2403 支持** - 支持 2024 年 3 月航空信息周期
+#### 🚀 Core Features
+- **Full PMDG 737 Series Support** - Supports all PMDG 737 variants
+- **Comprehensive Navigation Data Conversion** - Airport, runway, navigation aid, and route data
+- **China Region Optimization** - Specifically optimized for Chinese civil aviation data
+- **AIRAC 2403 Support** - Supports the March 2024 AIRAC cycle
 
-#### 🛠️ 技术特性
-- **SQLite 数据库** - PMDG 兼容的数据库格式
-- **多源数据支持** - 支持 NAIP 和 X-Plane 数据源
-- **自动化处理** - 一键式数据转换流程
-- **数据验证** - 完整的数据质量检查
+#### 🛠️ Technical Features
+- **SQLite Database** - PMDG-compatible database format
+- **Multi-source Data Support** - Supports NAIP and X-Plane data sources
+- **Automated Processing** - One-click data conversion process
+- **Data Validation** - Comprehensive data quality checks
 
-#### 📊 支持的数据类型
-- 机场基础信息 (ICAO 代码、坐标、名称)
-- 跑道数据 (长度、宽度、方向、表面)
-- VOR/DME 导航设备
-- NDB 导航信标
-- 航路点和航路网络
-- ILS 仪表着陆系统
+#### 📊 Supported Data Types
+- Basic airport information (ICAO code, coordinates, name)
+- Runway data (length, width, direction, surface)
+- VOR/DME navigation aids
+- NDB navigation beacons
+- Waypoints and route network
+- ILS Instrument Landing System
 
-#### 🎯 支持的飞机
+#### 🎯 Supported Aircraft
 - PMDG 737-600
-- PMDG 737-700  
+- PMDG 737-700
 - PMDG 737-800
 - PMDG 737-900
 
-#### 🌍 支持的地区
-- 中国大陆 (ICAO 代码 ZB, ZG, ZS, ZJ, ZY, ZL, ZH, ZU, ZP, ZW)
+#### 🌍 Supported Regions
+- Mainland China (ICAO codes ZB, ZG, ZS, ZJ, ZY, ZL, ZH, ZU, ZP, ZW)
 
 ---
 
-## 版本规划
+## Version Planning
 
-### 🔮 未来版本计划
+### 🔮 Future Version Plans
 
-#### v2.2.0 (计划 2025 Q1)
-- **iniBuilds 飞机支持** - 扩展支持 iniBuilds 系列飞机
-- **实时数据更新** - 支持在线 AIRAC 数据更新
-- **图形用户界面** - 添加桌面 GUI 应用
-- **云端数据源** - 支持云端数据源集成
+#### v2.2.0 (Planned 2025 Q1)
+- **iniBuilds Aircraft Support** - Extended support for iniBuilds aircraft series
+- **Real-time Data Updates** - Supports online AIRAC data updates
+- **Graphical User Interface** - Added desktop GUI application
+- **Cloud Data Sources** - Supports cloud data source integration
 
-#### v2.3.0 (计划 2025 Q2)
-- **全球数据支持** - 扩展到全球范围的导航数据
-- **自定义插件系统** - 支持第三方插件开发
-- **数据分析工具** - 内置数据分析和可视化
-- **REST API** - 提供 Web API 接口
+#### v2.3.0 (Planned 2025 Q2)
+- **Global Data Support** - Extended to global navigation data
+- **Custom Plugin System** - Supports third-party plugin development
+- **Data Analysis Tools** - Built-in data analysis and visualization
+- **REST API** - Provides Web API interface
 
-#### v3.0.0 (计划 2025 Q4)
-- **下一代架构** - 基于微服务的分布式架构
-- **机器学习优化** - 智能数据处理和优化
-- **多模拟器支持** - 支持 P3D、FSX 等其他模拟器
-- **企业级功能** - 高可用性、负载均衡等企业功能
-
----
-
-## 📋 更新说明
-
-### 🔖 版本号规则
-我们使用语义化版本控制 (SemVer)：
-- **主版本号** (X.y.z) - 不兼容的 API 修改
-- **次版本号** (x.Y.z) - 向下兼容的功能新增
-- **修订号** (x.y.Z) - 向下兼容的问题修正
-
-### 🏷️ 变更类型说明
-- **🚀 新增 (Added)** - 新功能
-- **🔧 改进 (Changed)** - 已有功能的修改
-- **🗑️ 弃用 (Deprecated)** - 即将移除的功能
-- **🗑️ 移除 (Removed)** - 已移除的功能
-- **🐛 修复 (Fixed)** - 问题修复
-- **🔒 安全 (Security)** - 安全性相关修复
-
-### 📅 发布周期
-- **主版本** - 每年 1-2 次重大更新
-- **次版本** - 每季度功能更新
-- **修订版本** - 根据需要发布 bug 修复
-
-### 🔗 获取更新
-- **GitHub Releases** - 获取最新版本和详细变更日志
-- **自动通知** - 订阅发布通知以获取第一时间更新
-- **Beta 测试** - 参与 Beta 测试计划体验新功能
+#### v3.0.0 (Planned 2025 Q4)
+- **Next-Generation Architecture** - Microservices-based distributed architecture
+- **Machine Learning Optimization** - Intelligent data processing and optimization
+- **Multi-Simulator Support** - Supports other simulators like P3D, FSX
+- **Enterprise-Grade Features** - High availability, load balancing, and other enterprise features
 
 ---
 
-**注意**: 如需查看特定版本的详细变更，请访问 [GitHub Releases](https://github.com/Nav-data/releases) 页面。 
+## 📋 Update Notes
+
+### 🔖 Version Numbering Rules
+We use Semantic Versioning (SemVer):
+- **MAJOR version** (X.y.z) - Incompatible API changes
+- **MINOR version** (x.Y.z) - Backward-compatible feature additions
+- **PATCH version** (x.y.Z) - Backward-compatible bug fixes
+
+### 🏷️ Change Type Descriptions
+- **🚀 Added** - New features
+- **🔧 Changed** - Modifications to existing features
+- **🗑️ Deprecated** - Features that will be removed soon
+- **🗑️ Removed** - Features that have been removed
+- **🐛 Fixed** - Bug fixes
+- **🔒 Security** - Security-related fixes
+
+### 📅 Release Cycle
+- **Major Versions** - 1-2 major updates annually
+- **Minor Versions** - Quarterly feature updates
+- **Patch Versions** - Bug fixes released as needed
+
+### 🔗 Getting Updates
+- **GitHub Releases** - Get the latest version and detailed changelog
+- **Automatic Notifications** - Subscribe to release notifications for timely updates
+- **Beta Testing** - Participate in the Beta testing program to experience new features
+
+---
+
+**Note**: For detailed changes of a specific version, please visit the [GitHub Releases](https://github.com/Nav-data/releases) page.

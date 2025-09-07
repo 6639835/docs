@@ -1,274 +1,274 @@
-# 🔧 TFDI 导航数据转换器安装指南
+# 🔧 TFDI Navigation Data Converter Installation Guide
 
-本指南将详细介绍如何安装和配置 TFDI 导航数据转换器，确保您的系统环境能够顺利运行转换器。
+This guide will detail how to install and configure the TFDI Navigation Data Converter, ensuring your system environment can run the converter smoothly.
 
-## 📋 系统要求
+## 📋 System Requirements
 
-### 💻 硬件要求
-| 组件 | 最低要求 | 推荐配置 |
-|------|----------|----------|
-| **处理器** | 双核 2.0GHz | 四核 3.0GHz+ |
-| **内存** | 4GB RAM | 8GB+ RAM |
-| **存储** | 1GB 可用空间 | 5GB+ 可用空间 |
-| **网络** | 仅下载时需要 | 稳定网络连接 |
+### 💻 Hardware Requirements
+| Component   | Minimum Requirement | Recommended Configuration |
+|-------------|---------------------|---------------------------|
+| **Processor** | Dual-core 2.0GHz    | Quad-core 3.0GHz+         |
+| **RAM**     | 4GB RAM             | 8GB+ RAM                  |
+| **Storage** | 1GB Available Space | 5GB+ Available Space      |
+| **Network** | Required for download only | Stable network connection |
 
-### 🖥️ 操作系统支持
+### 🖥️ Operating System Support
 - **Windows**: Windows 10 (2004+) / Windows 11
-- **macOS**: macOS 10.15 Catalina 或更高版本
-- **Linux**: Ubuntu 18.04+, CentOS 8+, 或其他主流发行版
+- **macOS**: macOS 10.15 Catalina or later
+- **Linux**: Ubuntu 18.04+, CentOS 8+, or other mainstream distributions
 
-### 🐍 Python 环境要求
-- **Python 版本**: 3.8.0 或更高版本
-- **推荐版本**: Python 3.9.x 或 3.10.x
-- **包管理器**: pip 21.0+ (通常随 Python 安装)
+### 🐍 Python Environment Requirements
+- **Python Version**: 3.8.0 or later
+- **Recommended Version**: Python 3.9.x or 3.10.x
+- **Package Manager**: pip 21.0+ (usually installed with Python)
 
-## 🚀 快速安装
+## 🚀 Quick Installation
 
-### Windows 用户
+### Windows Users
 
-#### 1️⃣ 安装 Python
+#### 1️⃣ Install Python
 
-**方法一：Microsoft Store (推荐)**
+**Method 1: Microsoft Store (Recommended)**
 ```bash
-# 1. 打开 Microsoft Store
-# 2. 搜索 "Python 3.10"
-# 3. 点击安装 Python 3.10
-# 4. 验证安装
+# 1. Open Microsoft Store
+# 2. Search for "Python 3.10"
+# 3. Click Install Python 3.10
+# 4. Verify installation
 python --version
 pip --version
 ```
 
-**方法二：官网下载**
+**Method 2: Official Website Download**
 ```bash
-# 1. 访问 https://www.python.org/downloads/windows/
-# 2. 下载 Python 3.10.x (64-bit)
-# 3. 运行安装程序
-#    ✅ 勾选 "Add Python to PATH"
-#    ✅ 勾选 "Install pip"
-# 4. 验证安装
+# 1. Visit https://www.python.org/downloads/windows/
+# 2. Download Python 3.10.x (64-bit)
+# 3. Run the installer
+#    ✅ Check "Add Python to PATH"
+#    ✅ Check "Install pip"
+# 4. Verify installation
 python --version
 ```
 
-#### 2️⃣ 安装转换器依赖
+#### 2️⃣ Install Converter Dependencies
 
 ```bash
-# 打开命令提示符或 PowerShell
-# 升级 pip
+# Open Command Prompt or PowerShell
+# Upgrade pip
 python -m pip install --upgrade pip
 
-# 安装必需依赖
+# Install required dependencies
 pip install rich pandas py7zr
 
-# 验证安装
-python -c "import rich, pandas, py7zr; print('✅ 所有依赖安装成功!')"
+# Verify installation
+python -c "import rich, pandas, py7zr; print('✅ All dependencies installed successfully!')"
 ```
 
-#### 3️⃣ 下载转换器
+#### 3️⃣ Download Converter
 
 ```bash
-# 方法一：下载发布包
-# 访问 GitHub Releases 页面下载最新版本
+# Method 1: Download release package
+# Visit the GitHub Releases page to download the latest version
 
-# 方法二：克隆源码 (需要 Git)
+# Method 2: Clone source code (requires Git)
 git clone https://github.com/your-org/tfdi-nav-converter.git
 cd tfdi-nav-converter
 
-# 验证转换器
+# Verify converter
 python Fenix2TFDINavDataConverter.py --help
 ```
 
-### macOS 用户
+### macOS Users
 
-#### 1️⃣ 安装 Python
+#### 1️⃣ Install Python
 
-**方法一：Homebrew (推荐)**
+**Method 1: Homebrew (Recommended)**
 ```bash
-# 安装 Homebrew (如果尚未安装)
+# Install Homebrew (if not already installed)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# 安装 Python
+# Install Python
 brew install python@3.10
 
-# 验证安装
+# Verify installation
 python3 --version
 pip3 --version
 
-# 创建符号链接 (可选)
+# Create symbolic links (optional)
 ln -sf $(which python3) /usr/local/bin/python
 ln -sf $(which pip3) /usr/local/bin/pip
 ```
 
-**方法二：官网下载**
+**Method 2: Official Website Download**
 ```bash
-# 1. 访问 https://www.python.org/downloads/macos/
-# 2. 下载 Python 3.10.x for macOS
-# 3. 安装 .pkg 文件
-# 4. 验证安装
+# 1. Visit https://www.python.org/downloads/macos/
+# 2. Download Python 3.10.x for macOS
+# 3. Install the .pkg file
+# 4. Verify installation
 python3 --version
 ```
 
-#### 2️⃣ 安装转换器依赖
+#### 2️⃣ Install Converter Dependencies
 
 ```bash
-# 升级 pip
+# Upgrade pip
 python3 -m pip install --upgrade pip
 
-# 安装依赖
+# Install dependencies
 pip3 install rich pandas py7zr
 
-# 验证安装
-python3 -c "import rich, pandas, py7zr; print('✅ 依赖安装完成!')"
+# Verify installation
+python3 -c "import rich, pandas, py7zr; print('✅ Dependencies installed!')"
 ```
 
-#### 3️⃣ 下载和设置转换器
+#### 3️⃣ Download and Set Up Converter
 
 ```bash
-# 下载转换器
+# Download converter
 curl -L -o tfdi-converter.zip https://github.com/your-org/tfdi-converter/archive/main.zip
 unzip tfdi-converter.zip
 cd tfdi-converter-main
 
-# 或使用 Git
+# Or use Git
 git clone https://github.com/your-org/tfdi-nav-converter.git
 cd tfdi-nav-converter
 
-# 验证安装
+# Verify installation
 python3 Fenix2TFDINavDataConverter.py --version
 ```
 
-### Linux 用户
+### Linux Users
 
-#### 1️⃣ 安装 Python
+#### 1️⃣ Install Python
 
 **Ubuntu/Debian:**
 ```bash
-# 更新包列表
+# Update package list
 sudo apt update
 
-# 安装 Python 3.10 和相关工具
+# Install Python 3.10 and related tools
 sudo apt install python3.10 python3.10-pip python3.10-venv python3.10-dev
 
-# 安装 build-essential (某些包需要编译)
+# Install build-essential (some packages require compilation)
 sudo apt install build-essential
 
-# 创建符号链接
+# Create symbolic links
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
 sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3.10 1
 
-# 验证安装
+# Verify installation
 python --version
 pip --version
 ```
 
 **CentOS/RHEL 8+:**
 ```bash
-# 启用 PowerTools 仓库
+# Enable PowerTools repository
 sudo dnf config-manager --set-enabled powertools
 
-# 安装 Python 3.10
+# Install Python 3.10
 sudo dnf install python3.10 python3.10-pip python3.10-devel
 
-# 安装开发工具
+# Install development tools
 sudo dnf groupinstall "Development Tools"
 
-# 验证安装
+# Verify installation
 python3.10 --version
 pip3.10 --version
 ```
 
 **Arch Linux:**
 ```bash
-# 安装 Python
+# Install Python
 sudo pacman -S python python-pip
 
-# 安装开发工具
+# Install development tools
 sudo pacman -S base-devel
 
-# 验证安装
+# Verify installation
 python --version
 pip --version
 ```
 
-#### 2️⃣ 安装转换器依赖
+#### 2️⃣ Install Converter Dependencies
 
 ```bash
-# 升级 pip
+# Upgrade pip
 python -m pip install --upgrade pip
 
-# 安装依赖
+# Install dependencies
 pip install rich pandas py7zr
 
-# 如果遇到权限问题，使用用户安装
+# If permission issues occur, install for user
 pip install --user rich pandas py7zr
 
-# 验证安装
-python -c "import rich, pandas, py7zr; print('✅ 依赖安装成功!')"
+# Verify installation
+python -c "import rich, pandas, py7zr; print('✅ Dependencies installed successfully!')"
 ```
 
-#### 3️⃣ 下载转换器
+#### 3️⃣ Download Converter
 
 ```bash
-# 使用 wget 下载
+# Download using wget
 wget https://github.com/your-org/tfdi-converter/archive/main.zip
 unzip main.zip
 cd tfdi-converter-main
 
-# 或使用 git
+# Or use git
 git clone https://github.com/your-org/tfdi-nav-converter.git
 cd tfdi-nav-converter
 
-# 设置执行权限
+# Set execute permissions
 chmod +x Fenix2TFDINavDataConverter.py
 
-# 验证安装
+# Verify installation
 python Fenix2TFDINavDataConverter.py --version
 ```
 
-## 📦 详细依赖说明
+## 📦 Detailed Dependency Description
 
-### 核心依赖包
+### Core Dependencies
 
-| 包名 | 版本要求 | 用途 | 安装命令 |
-|------|----------|------|----------|
-| **rich** | ≥ 12.0.0 | 现代化 CLI 界面 | `pip install rich` |
-| **pandas** | ≥ 1.3.0 | 数据处理和分析 | `pip install pandas` |
-| **py7zr** | ≥ 0.18.0 | 7z 压缩文件处理 | `pip install py7zr` |
+| Package Name | Version Requirement | Purpose                 | Installation Command |
+|--------------|---------------------|-------------------------|----------------------|
+| **rich**     | ≥ 12.0.0            | Modern CLI interface    | `pip install rich`   |
+| **pandas**   | ≥ 1.3.0             | Data processing and analysis | `pip install pandas` |
+| **py7zr**    | ≥ 0.18.0            | 7z archive file handling | `pip install py7zr`  |
 
-### 标准库依赖 (无需额外安装)
+### Standard Library Dependencies (No extra installation required)
 
-| 模块 | 用途 |
-|------|------|
-| **sqlite3** | SQLite 数据库访问 |
-| **json** | JSON 数据序列化 |
-| **pathlib** | 文件路径处理 |
-| **logging** | 日志记录 |
-| **dataclasses** | 数据类支持 |
-| **concurrent.futures** | 并发处理 |
+| Module             | Purpose                 |
+|--------------------|-------------------------|
+| **sqlite3**        | SQLite database access  |
+| **json**           | JSON data serialization |
+| **pathlib**        | File path handling      |
+| **logging**        | Logging                 |
+| **dataclasses**    | Data class support      |
+| **concurrent.futures** | Concurrency handling    |
 
-### 可选依赖
+### Optional Dependencies
 
 ```bash
-# 开发相关依赖 (仅开发者需要)
+# Development-related dependencies (for developers only)
 pip install pytest flake8 mypy black pre-commit
 
-# 性能监控依赖
+# Performance monitoring dependency
 pip install psutil
 
-# 进度条增强
+# Progress bar enhancement
 pip install tqdm
 ```
 
-## 🔍 安装验证
+## 🔍 Installation Verification
 
-### 完整验证脚本
+### Full Verification Script
 
-创建验证脚本 `verify_tfdi_installation.py`：
+Create the verification script `verify_tfdi_installation.py`:
 
 ```python
 #!/usr/bin/env python3
 """
-TFDI 导航数据转换器安装验证脚本
-检查系统环境、依赖包和转换器功能
+TFDI Navigation Data Converter Installation Verification Script
+Checks system environment, dependencies, and converter functionality
 """
 
 import sys
@@ -277,27 +277,27 @@ import platform
 from pathlib import Path
 
 def check_python_version():
-    """检查 Python 版本"""
+    """Checks Python version"""
     version = sys.version_info
-    print(f"🐍 Python 版本: {version.major}.{version.minor}.{version.micro}")
+    print(f"🐍 Python Version: {version.major}.{version.minor}.{version.micro}")
     
     if version >= (3, 8):
-        print("✅ Python 版本符合要求 (>= 3.8)")
+        print("✅ Python version meets requirements (>= 3.8)")
         return True
     else:
-        print("❌ Python 版本过低，需要 3.8 或更高版本")
-        print("   请升级 Python 后重试")
+        print("❌ Python version is too old, 3.8 or higher is required")
+        print("   Please upgrade Python and try again")
         return False
 
 def check_dependencies():
-    """检查必需依赖包"""
+    """Checks required dependencies"""
     required_packages = {
-        'rich': '现代化 CLI 界面',
-        'pandas': '数据处理库',
-        'py7zr': '7z 压缩处理'
+        'rich': 'Modern CLI interface',
+        'pandas': 'Data processing library',
+        'py7zr': '7z compression handling'
     }
     
-    print("\n📦 检查依赖包:")
+    print("\n📦 Checking dependencies:")
     all_ok = True
     
     for package, description in required_packages.items():
@@ -306,63 +306,63 @@ def check_dependencies():
             version = getattr(module, '__version__', 'Unknown')
             print(f"✅ {package:<10} {version:<15} ({description})")
         except ImportError:
-            print(f"❌ {package:<10} 未安装        ({description})")
+            print(f"❌ {package:<10} Not installed        ({description})")
             all_ok = False
         except Exception as e:
-            print(f"⚠️ {package:<10} 错误: {e}")
+            print(f"⚠️ {package:<10} Error: {e}")
             all_ok = False
     
     return all_ok
 
 def check_optional_dependencies():
-    """检查可选依赖"""
+    """Checks optional dependencies"""
     optional_packages = {
-        'psutil': '系统监控',
-        'tqdm': '进度条增强'
+        'psutil': 'System monitoring',
+        'tqdm': 'Progress bar enhancement'
     }
     
-    print("\n🔧 检查可选依赖:")
+    print("\n🔧 Checking optional dependencies:")
     for package, description in optional_packages.items():
         try:
             module = importlib.import_module(package)
             version = getattr(module, '__version__', 'Unknown')
             print(f"✅ {package:<10} {version:<15} ({description})")
         except ImportError:
-            print(f"⚪ {package:<10} 未安装        ({description}) - 可选")
+            print(f"⚪ {package:<10} Not installed        ({description}) - Optional")
 
 def check_system_resources():
-    """检查系统资源"""
-    print("\n💾 检查系统资源:")
+    """Checks system resources"""
+    print("\n💾 Checking system resources:")
     
     try:
         import psutil
         
-        # 检查内存
+        # Check memory
         memory = psutil.virtual_memory()
         memory_gb = memory.total // (1024**3)
-        print(f"💿 总内存: {memory_gb} GB")
+        print(f"💿 Total RAM: {memory_gb} GB")
         
         if memory_gb >= 4:
-            print("✅ 内存充足 (>= 4GB)")
+            print("✅ Sufficient RAM (>= 4GB)")
         else:
-            print("⚠️ 内存可能不足，推荐 4GB+")
+            print("⚠️ RAM might be insufficient, 4GB+ recommended")
         
-        # 检查磁盘空间
+        # Check disk space
         disk = psutil.disk_usage('.')
         free_gb = disk.free // (1024**3)
-        print(f"💿 可用磁盘空间: {free_gb} GB")
+        print(f"💿 Available disk space: {free_gb} GB")
         
         if free_gb >= 1:
-            print("✅ 磁盘空间充足 (>= 1GB)")
+            print("✅ Sufficient disk space (>= 1GB)")
         else:
-            print("⚠️ 磁盘空间不足，需要至少 1GB")
+            print("⚠️ Insufficient disk space, at least 1GB required")
             
     except ImportError:
-        print("⚪ 无法检查系统资源 (psutil 未安装)")
+        print("⚪ Unable to check system resources (psutil not installed)")
 
 def check_converter_accessibility():
-    """检查转换器文件可访问性"""
-    print("\n🔧 检查转换器文件:")
+    """Checks converter file accessibility"""
+    print("\n🔧 Checking converter files:")
     
     converter_files = [
         'Fenix2TFDINavDataConverter.py',
@@ -375,53 +375,53 @@ def check_converter_accessibility():
             size_kb = file_path.stat().st_size // 1024
             print(f"✅ {file_name:<35} ({size_kb} KB)")
         else:
-            print(f"⚠️ {file_name:<35} 文件不存在")
+            print(f"⚠️ {file_name:<35} File does not exist")
 
 def test_basic_functionality():
-    """测试基本功能"""
-    print("\n🧪 测试基本功能:")
+    """Tests basic functionality"""
+    print("\n🧪 Testing basic functionality:")
     
     try:
-        # 测试 Rich 界面
+        # Test Rich interface
         from rich.console import Console
         console = Console()
-        console.print("✅ Rich 界面测试", style="green")
+        console.print("✅ Rich interface test", style="green")
         
-        # 测试 Pandas 数据处理
+        # Test Pandas data processing
         import pandas as pd
         df = pd.DataFrame({'test': [1, 2, 3]})
         assert len(df) == 3
-        print("✅ Pandas 数据处理测试通过")
+        print("✅ Pandas data processing test passed")
         
-        # 测试 py7zr 压缩功能
+        # Test py7zr compression functionality
         import py7zr
-        print("✅ py7zr 压缩功能可用")
+        print("✅ py7zr compression functionality available")
         
-        # 测试 SQLite 连接
+        # Test SQLite connection
         import sqlite3
         conn = sqlite3.connect(':memory:')
         conn.close()
-        print("✅ SQLite 数据库连接测试通过")
+        print("✅ SQLite database connection test passed")
         
         return True
         
     except Exception as e:
-        print(f"❌ 功能测试失败: {e}")
+        print(f"❌ Functionality test failed: {e}")
         return False
 
 def main():
-    """主验证函数"""
-    print("🔍 TFDI 导航数据转换器安装验证")
+    """Main verification function"""
+    print("🔍 TFDI Navigation Data Converter Installation Verification")
     print("=" * 60)
     
-    # 检查项目列表
+    # List of checks
     checks = [
-        ("Python 版本", check_python_version),
-        ("必需依赖", check_dependencies),
-        ("可选依赖", check_optional_dependencies),
-        ("系统资源", check_system_resources),
-        ("转换器文件", check_converter_accessibility),
-        ("基本功能", test_basic_functionality),
+        ("Python Version", check_python_version),
+        ("Required Dependencies", check_dependencies),
+        ("Optional Dependencies", check_optional_dependencies),
+        ("System Resources", check_system_resources),
+        ("Converter Files", check_converter_accessibility),
+        ("Basic Functionality", test_basic_functionality),
     ]
     
     all_passed = True
@@ -430,15 +430,15 @@ def main():
     for name, check_func in checks:
         try:
             result = check_func()
-            if name in ["Python 版本", "必需依赖", "基本功能"]:
+            if name in ["Python Version", "Required Dependencies", "Basic Functionality"]:
                 if not result:
                     critical_passed = False
                     all_passed = False
             elif result is False:
                 all_passed = False
         except Exception as e:
-            print(f"❌ {name} 检查失败: {e}")
-            if name in ["Python 版本", "必需依赖"]:
+            print(f"❌ {name} check failed: {e}")
+            if name in ["Python Version", "Required Dependencies"]:
                 critical_passed = False
             all_passed = False
     
@@ -446,135 +446,135 @@ def main():
     
     if critical_passed:
         if all_passed:
-            print("🎉 所有检查通过！转换器可以正常使用。")
-            print("\n📝 下一步:")
-            print("   1. 准备 Fenix 导航数据库文件 (nd.db3)")
-            print("   2. 运行转换器: python Fenix2TFDINavDataConverter.py")
+            print("🎉 All checks passed! The converter can be used normally.")
+            print("\n📝 Next steps:")
+            print("   1. Prepare Fenix navigation database file (nd.db3)")
+            print("   2. Run the converter: python Fenix2TFDINavDataConverter.py")
             return 0
         else:
-            print("✅ 核心功能可用，部分可选功能可能受限。")
-            print("   转换器可以正常使用，建议安装缺失的可选依赖。")
+            print("✅ Core functionality available, some optional features may be limited.")
+            print("   The converter can be used normally, but it is recommended to install missing optional dependencies.")
             return 0
     else:
-        print("❌ 关键检查未通过，请解决上述问题后重试。")
-        print("\n🔧 常见解决方案:")
-        print("   • 升级 Python 版本: https://python.org/downloads")
-        print("   • 安装依赖: pip install rich pandas py7zr")
-        print("   • 检查网络连接和权限设置")
+        print("❌ Critical checks failed, please resolve the issues above and try again.")
+        print("\n🔧 Common solutions:")
+        print("   • Upgrade Python version: https://python.org/downloads")
+        print("   • Install dependencies: pip install rich pandas py7zr")
+        print("   • Check network connection and permission settings")
         return 1
 
 if __name__ == "__main__":
     exit(main())
 ```
 
-运行验证脚本：
+Run the verification script:
 ```bash
 python verify_tfdi_installation.py
 ```
 
-### 快速验证命令
+### Quick Verification Commands
 
 ```bash
-# 1. 检查 Python 版本
+# 1. Check Python version
 python --version
 
-# 2. 检查 pip 版本  
+# 2. Check pip version  
 pip --version
 
-# 3. 验证核心依赖
+# 3. Verify core dependencies
 python -c "import rich; print(f'Rich: {rich.__version__}')"
 python -c "import pandas; print(f'Pandas: {pandas.__version__}')"
 python -c "import py7zr; print(f'py7zr: {py7zr.__version__}')"
 
-# 4. 测试 Rich 界面
-python -c "from rich.console import Console; Console().print('🎉 Rich 测试成功!', style='bold green')"
+# 4. Test Rich interface
+python -c "from rich.console import Console; Console().print('🎉 Rich test successful!', style='bold green')"
 
-# 5. 测试转换器启动
+# 5. Test converter startup
 python Fenix2TFDINavDataConverter.py --version
 ```
 
-## 🔧 常见安装问题
+## 🔧 Common Installation Issues
 
-### 问题 1: Python 版本过低
+### Issue 1: Python Version Too Old
 
-**症状:**
+**Symptoms:**
 ```
-SyntaxError: invalid syntax (使用了新语法特性)
+SyntaxError: invalid syntax (used new syntax features)
 TypeError: 'type' object is not subscriptable
 ```
 
-**解决方案:**
+**Solution:**
 ```bash
-# 检查当前版本
+# Check current version
 python --version
 
-# 如果版本 < 3.8，需要升级
-# Windows: 从 python.org 下载新版本
+# If version < 3.8, an upgrade is required
+# Windows: Download new version from python.org
 # macOS: brew upgrade python  
-# Linux: 参考上述安装指南更新
+# Linux: Refer to the installation guide above to update
 ```
 
-### 问题 2: pip 安装失败
+### Issue 2: pip Installation Failure
 
-**症状:**
+**Symptoms:**
 ```
 ERROR: Could not find a version that satisfies the requirement
 WARNING: Retrying... Connection broken
 ```
 
-**解决方案:**
+**Solution:**
 ```bash
-# 升级 pip
+# Upgrade pip
 python -m pip install --upgrade pip
 
-# 使用国内镜像源
+# Use an alternative package index
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ rich pandas py7zr
 
-# 清除缓存重试
+# Clear cache and retry
 pip cache purge
 pip install rich pandas py7zr
 
-# 检查网络连接
+# Check network connection
 ping pypi.org
 ```
 
-### 问题 3: 权限错误
+### Issue 3: Permission Error
 
-**症状:**
+**Symptoms:**
 ```
 PermissionError: [Errno 13] Permission denied
 Could not install packages due to an PermissionError
 ```
 
-**解决方案:**
+**Solution:**
 ```bash
-# Windows: 以管理员身份运行
-# 右键命令提示符 → "以管理员身份运行"
+# Windows: Run as administrator
+# Right-click Command Prompt → "Run as administrator"
 
-# macOS/Linux: 使用用户安装
+# macOS/Linux: Install for user
 pip install --user rich pandas py7zr
 
-# 或使用 sudo (不推荐)
+# Or use sudo (not recommended)
 sudo pip install rich pandas py7zr
 ```
 
-### 问题 4: 编译错误
+### Issue 4: Compilation Error
 
-**症状:**
+**Symptoms:**
 ```
 error: Microsoft Visual C++ 14.0 is required
 error: building wheel for package failed
 ```
 
-**解决方案:**
+**Solution:**
 
 **Windows:**
 ```bash
-# 安装 Microsoft C++ Build Tools
-# 访问: https://visualstudio.microsoft.com/visual-cpp-build-tools/
-# 下载并安装 "Build Tools for Visual Studio"
+# Install Microsoft C++ Build Tools
+# Visit: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+# Download and install "Build Tools for Visual Studio"
 
-# 或使用预编译包
+# Or use pre-compiled packages
 pip install --only-binary=all rich pandas py7zr
 ```
 
@@ -588,111 +588,111 @@ sudo dnf groupinstall "Development Tools"
 sudo dnf install python3-devel
 ```
 
-### 问题 5: 依赖冲突
+### Issue 5: Dependency Conflicts
 
-**症状:**
+**Symptoms:**
 ```
 ERROR: pip's dependency resolver does not currently support multiple versions
 ```
 
-**解决方案:**
+**Solution:**
 ```bash
-# 创建虚拟环境
+# Create a virtual environment
 python -m venv tfdi_env
 
-# 激活虚拟环境
+# Activate the virtual environment
 # Windows:
 tfdi_env\Scripts\activate
 # macOS/Linux:
 source tfdi_env/bin/activate
 
-# 在虚拟环境中安装
+# Install in the virtual environment
 pip install rich pandas py7zr
 
-# 验证安装
-python -c "import rich, pandas, py7zr; print('安装成功!')"
+# Verify installation
+python -c "import rich, pandas, py7zr; print('Installation successful!')"
 ```
 
-## 🎯 安装后续步骤
+## 🎯 Post-Installation Steps
 
-### 1. 环境配置
+### 1. Environment Configuration
 
-#### Windows 环境变量 (可选)
+#### Windows Environment Variables (Optional)
 ```batch
-# 添加 Python Scripts 目录到 PATH
+# Add Python Scripts directory to PATH
 set PATH=%PATH%;%USERPROFILE%\AppData\Local\Programs\Python\Python310\Scripts
 
-# 设置转换器目录
+# Set converter directory
 set TFDI_CONVERTER_HOME=C:\Users\%USERNAME%\tfdi-converter
 ```
 
-#### macOS/Linux 环境变量 (可选)
+#### macOS/Linux Environment Variables (Optional)
 ```bash
-# 添加到 ~/.bashrc 或 ~/.zshrc
+# Add to ~/.bashrc or ~/.zshrc
 export TFDI_CONVERTER_HOME="$HOME/tfdi-converter"
 export PATH="$PATH:$TFDI_CONVERTER_HOME"
 
-# 重载配置
-source ~/.bashrc  # 或 source ~/.zshrc
+# Reload configuration
+source ~/.bashrc  # Or source ~/.zshrc
 ```
 
-### 2. 准备数据文件
+### 2. Prepare Data Files
 
 ```bash
-# 检查 Fenix 数据库位置
-# Windows 常见路径:
+# Check Fenix database location
+# Common Windows path:
 dir "%APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320" /s | findstr nd.db3
 
 # macOS/Linux:
 find ~ -name "nd.db3" 2>/dev/null
 ```
 
-### 3. 创建工作目录
+### 3. Create Working Directory
 
 ```bash
-# 创建专用工作目录
+# Create a dedicated working directory
 mkdir ~/tfdi-conversion-workspace
 cd ~/tfdi-conversion-workspace
 
-# 创建子目录
+# Create subdirectories
 mkdir input output logs backups
 
-# 复制转换器到工作目录 (可选)
+# Copy converter to working directory (optional)
 cp /path/to/Fenix2TFDINavDataConverter.py .
 ```
 
-### 4. 首次运行测试
+### 4. First Run Test
 
 ```bash
-# 运行转换器帮助
+# Run converter help
 python Fenix2TFDINavDataConverter.py --help
 
-# 运行基本测试 (如果有测试数据)
+# Run basic tests (if test data available)
 python Fenix2TFDINavDataConverter.py --test
 
-# 查看版本信息
+# View version information
 python Fenix2TFDINavDataConverter.py --version
 ```
 
-## 📚 下一步
+## 📚 Next Steps
 
-安装完成后，请继续阅读：
+Once the installation is complete, please continue reading:
 
-1. **[配置说明](configuration.md)** - 了解转换器配置选项
-2. **[使用说明](usage.md)** - 开始您的第一次数据转换
-3. **[故障排除](../troubleshooting.md)** - 如果遇到问题时查看
+1.  **[Configuration Guide](configuration.md)** - Learn about converter configuration options
+2.  **[Usage Guide](usage.md)** - Start your first data conversion
+3.  **[Troubleshooting](../troubleshooting.md)** - Refer here if you encounter issues
 
-### 快速开始清单
+### Quick Start Checklist
 
-- [ ] ✅ Python 3.8+ 已安装
-- [ ] ✅ 必需依赖已安装 (rich, pandas, py7zr)
-- [ ] ✅ 转换器文件已下载
-- [ ] ✅ 安装验证通过
-- [ ] ✅ Fenix 数据库文件已准备
-- [ ] ✅ TFDI MD-11 已安装在 MSFS 中
+- [ ] ✅ Python 3.8+ installed
+- [ ] ✅ Required dependencies installed (rich, pandas, py7zr)
+- [ ] ✅ Converter files downloaded
+- [ ] ✅ Installation verified
+- [ ] ✅ Fenix database file prepared
+- [ ] ✅ TFDI MD-11 installed in MSFS
 
 ---
 
-**安装完成！** 🎉 
+**Installation Complete!** 🎉 
 
-现在您可以开始使用 TFDI 导航数据转换器了。如果遇到任何问题，请查看 [故障排除指南](../troubleshooting.md) 或在 GitHub Issues 中寻求帮助。🚁✨
+You can now start using the TFDI Navigation Data Converter. If you encounter any issues, please refer to the [Troubleshooting Guide](../troubleshooting.md) or seek help in GitHub Issues. 🚁✨

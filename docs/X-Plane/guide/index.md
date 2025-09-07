@@ -1,105 +1,105 @@
-# Nav-data 使用指南
+# Nav-data User Guide
 
-欢迎使用 **Nav-data** - 专业的航空导航数据转换工具！
+Welcome to **Nav-data** - your professional aviation navigation data conversion tool!
 
-## 🛩️ 项目概览
+## 🛩️ Project Overview
 
-Nav-data 是一个开源的航空导航数据处理与转换工具，专门为 X-Plane 飞行模拟器设计。该工具能够将中国民航的 NAIP（National Aeronautical Information Publication）数据转换为 X-Plane 可识别的标准格式，为飞行模拟器爱好者和航空专业人士提供准确、完整的中国空域导航数据。
+Nav-data is an open-source aviation navigation data processing and conversion tool, specifically designed for the X-Plane flight simulator. This tool can convert China Civil Aviation's NAIP (National Aeronautical Information Publication) data into a standard format recognizable by X-Plane, providing accurate and complete Chinese airspace navigation data for flight simulator enthusiasts and aviation professionals.
 
-## ✨ 核心功能
+## ✨ Core Features
 
-### 🛣️ 航路数据处理
-- **CSV 到 DAT 转换**：将 CSV 格式的航路数据转换为 X-Plane DAT 格式
-- **区域过滤**：智能过滤中国空域数据（支持 ZB、ZG、ZY、ZS、ZW、ZJ、ZP、ZL、ZH、ZU 等区域代码）
-- **导航点类型支持**：
-  - DESIGNATED_POINT（指定点）- 类型代码 11
-  - VOR/DME - 类型代码 3
-  - NDB - 类型代码 2
-- **AIRAC 周期管理**：自动计算和管理 AIRAC 数据有效周期
+### 🛣️ Route Data Processing
+- **CSV to DAT Conversion**: Converts CSV format route data to X-Plane DAT format
+- **Area Filtering**: Intelligently filters Chinese airspace data (supports area codes such as ZB, ZG, ZY, ZS, ZW, ZJ, ZP, ZL, ZH, ZU)
+- **Waypoint Type Support**:
+  - DESIGNATED_POINT (Designated Point) - Type Code 11
+  - VOR/DME - Type Code 3
+  - NDB - Type Code 2
+- **AIRAC Cycle Management**: Automatically calculates and manages AIRAC data effective periods
 
-### 📄 PDF 数据提取
-- **终端程序处理**：从 PDF 文件中提取和标准化航空程序数据
-- **航路点坐标提取**：自动提取航路点地理坐标信息
-- **多格式支持**：支持不同格式的 PDF 源文件处理
-- **数据验证**：内置数据完整性和准确性检验
+### 📄 PDF Data Extraction
+- **Terminal Procedure Processing**: Extracts and standardizes aviation procedure data from PDF files
+- **Waypoint Coordinate Extraction**: Automatically extracts waypoint geographical coordinate information
+- **Multi-format Support**: Supports processing of PDF source files in various formats
+- **Data Validation**: Built-in data integrity and accuracy checks
 
-### 🔧 数据修复与编码
-- **格式规范化**：修复和标准化 X-Plane CIFP 数据格式
-- **编码修复**：自动修复进近程序、SID、STAR 数据编码问题
-- **质量保证**：多重验证确保输出数据符合 X-Plane 标准
+### 🔧 Data Repair and Encoding
+- **Format Standardization**: Repairs and standardizes X-Plane CIFP data format
+- **Encoding Repair**: Automatically repairs approach procedures, SID, STAR data encoding issues
+- **Quality Assurance**: Multiple validations ensure output data complies with X-Plane standards
 
-## 🎯 适用用户
+## 🎯 Target Users
 
-### 飞行模拟器爱好者
-- 获得高质量的中国空域导航数据
-- 享受更真实的飞行体验
-- 支持使用 X-Plane 默认数据的各类飞机
+### Flight Simulator Enthusiasts
+- Obtain high-quality Chinese airspace navigation data
+- Enjoy a more realistic flight experience
+- Supports various aircraft using X-Plane default data
 
-### 航空专业人士
-- 训练和教学用途的精确导航数据
-- 符合国际民航组织（ICAO）标准
-- 基于权威 NAIP 数据源
+### Aviation Professionals
+- Accurate navigation data for training and teaching purposes
+- Compliant with International Civil Aviation Organization (ICAO) standards
+- Based on authoritative NAIP data sources
 
-### 开发者
-- 清晰的代码结构和 API 文档
-- 模块化设计便于扩展
-- 完善的错误处理和日志系统
+### Developers
+- Clear code structure and API documentation
+- Modular design for easy extensibility
+- Comprehensive error handling and logging system
 
-## 📊 数据标准支持
+## 📊 Data Standard Support
 
-### 国际标准
-- **ICAO 标准**：符合国际民航组织导航数据标准
-- **ARINC 424**：遵循 ARINC 424 导航数据库标准
-- **AIRAC 周期**：支持标准 28 天 AIRAC 更新周期
+### International Standards
+- **ICAO Standards**: Complies with International Civil Aviation Organization navigation data standards
+- **ARINC 424**: Adheres to ARINC 424 navigation database standards
+- **AIRAC Cycle**: Supports the standard 28-day AIRAC update cycle
 
-### X-Plane 格式
-- **CIFP 数据**：完整的 X-Plane CIFP（Coded Instrument Flight Procedures）格式支持
-- **DAT 文件**：标准 X-Plane DAT 格式输出
-- **兼容性**：支持 X-Plane 11 和 X-Plane 12
+### X-Plane Formats
+- **CIFP Data**: Full X-Plane CIFP (Coded Instrument Flight Procedures) format support
+- **DAT Files**: Standard X-Plane DAT format output
+- **Compatibility**: Supports X-Plane 11 and X-Plane 12
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 环境准备
-确保您的系统已安装 Python 3.6+ 和必要的依赖包。
+### 1. Environment Setup
+Ensure your system has Python 3.6+ and necessary dependencies installed.
 
-### 2. 数据准备
-准备好您的源数据文件（CSV 格式的航路数据或 PDF 格式的程序文件）。
+### 2. Data Preparation
+Prepare your source data files (CSV format route data or PDF format procedure files).
 
-### 3. 配置设置
-根据您的需求配置文件路径和处理参数。
+### 3. Configuration Settings
+Configure file paths and processing parameters according to your requirements.
 
-### 4. 数据转换
-运行相应的转换脚本开始数据处理。
+### 4. Data Conversion
+Run the corresponding conversion script to start data processing.
 
-## 📚 文档导航
+## 📚 Documentation Navigation
 
-### 基础使用
-- [安装指南](./installation.md) - 详细的安装和环境配置说明
-- [配置说明](./configuration.md) - 配置文件和参数详解
-- [使用说明](./usage.md) - 完整的操作流程和示例
+### Basic Usage
+- [Installation Guide](./installation.md) - Detailed installation and environment configuration instructions
+- [Configuration Guide](./configuration.md) - Detailed explanation of configuration files and parameters
+- [Usage Guide](./usage.md) - Complete operational procedures and examples
 
-### 技术详解
-- [架构说明](../architecture.md) - 系统架构和技术原理
-- [贡献指南](../contributing.md) - 参与项目开发的指南
-- [更新日志](../changelog.md) - 版本更新和改进记录
+### Technical Details
+- [Architecture Overview](../architecture.md) - System architecture and technical principles
+- [Contribution Guide](../contributing.md) - Guidelines for participating in project development
+- [Changelog](../changelog.md) - Version updates and improvements record
 
-## ⚠️ 重要提示
+## ⚠️ Important Notes
 
-### 数据准确性
-- 本工具基于公开的 NAIP 数据进行转换
-- 建议在实际飞行前验证关键导航数据
-- 定期更新数据以保持 AIRAC 周期同步
+### Data Accuracy
+- This tool performs conversions based on publicly available NAIP data
+- It is recommended to verify critical navigation data before actual flight
+- Regularly update data to stay synchronized with the AIRAC cycle
 
-### 使用限制
-- 仅用于飞行模拟和教学目的
-- 不得用于实际航空导航
-- 遵守相关法律法规和数据使用协议
+### Usage Restrictions
+- For flight simulation and educational purposes only
+- Not for actual aviation navigation
+- Comply with relevant laws, regulations, and data usage agreements
 
-### 技术支持
-- 查看 [FAQ 常见问题](./usage.md#faq)
-- 提交 [GitHub Issues](https://github.com/your-repo/nav-data/issues)
-- 参与社区讨论
+### Technical Support
+- Check [FAQ (Common Questions)](./usage.md#faq)
+- Submit [GitHub Issues](https://github.com/your-repo/nav-data/issues)
+- Participate in community discussions
 
 ---
 
-**立即开始您的导航数据转换之旅！** 📈 
+**Start your navigation data conversion journey now!** 📈

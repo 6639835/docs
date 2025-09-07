@@ -1,84 +1,84 @@
-# 🤝 TFDI 导航数据转换器贡献指南
+# 🤝 TFDI Navigation Data Converter Contribution Guide
 
-欢迎加入 TFDI 导航数据转换器项目！我们感谢每一位贡献者的参与，无论是代码贡献、文档完善、错误报告还是功能建议。
+Welcome to the TFDI Navigation Data Converter project! We appreciate the participation of every contributor, whether through code contributions, documentation improvements, bug reports, or feature suggestions.
 
-## 🌟 贡献方式
+## 🌟 Ways to Contribute
 
-### 💻 代码贡献
-- 🐛 **修复 Bug** - 解决已知问题和缺陷
-- ✨ **新功能开发** - 添加新的转换功能或改进
-- 📈 **性能优化** - 提升转换速度和内存使用效率
-- 🧪 **测试增强** - 增加测试用例和覆盖率
-- 📚 **文档改进** - 完善 API 文档和用户指南
+### 💻 Code Contributions
+- 🐛 **Bug Fixes** - Resolve known issues and defects
+- ✨ **New Feature Development** - Add new conversion functionalities or improvements
+- 📈 **Performance Optimization** - Enhance conversion speed and memory usage efficiency
+- 🧪 **Test Enhancement** - Increase test cases and coverage
+- 📚 **Documentation Improvement** - Improve API documentation and user guides
 
-### 📝 非代码贡献
-- 🐛 **问题报告** - 报告 Bug 和兼容性问题
-- 💡 **功能建议** - 提出新功能和改进建议
-- 📖 **文档撰写** - 编写教程、指南和示例
-- 🌐 **本地化** - 翻译界面和文档
-- 🎓 **社区支持** - 帮助其他用户解决问题
+### 📝 Non-Code Contributions
+- 🐛 **Issue Reporting** - Report bugs and compatibility issues
+- 💡 **Feature Suggestions** - Propose new features and improvements
+- 📖 **Documentation Writing** - Write tutorials, guides, and examples
+- 🌐 **Localization** - Translate UI and documentation
+- 🎓 **Community Support** - Help other users solve problems
 
-## 🚀 开发环境设置
+## 🚀 Development Environment Setup
 
-### 环境要求
+### Environment Requirements
 
 ```bash
-# Python 版本要求
-Python 3.8+ (推荐 3.9 或 3.10)
+# Python version requirement
+Python 3.8+ (3.9 or 3.10 recommended)
 
-# 操作系统支持
+# Operating system support
 Windows 10/11, macOS 10.15+, Linux (Ubuntu 18.04+)
 
-# 内存要求
-最低 4GB RAM (推荐 8GB+)
+# Memory requirements
+Minimum 4GB RAM (8GB+ recommended)
 ```
 
-### 快速开始
+### Quick Start
 
-#### 1. 克隆项目
+#### 1. Clone the Project
 ```bash
-# 克隆主仓库
+# Clone the main repository
 git clone https://github.com/your-org/tfdi-nav-converter.git
 cd tfdi-nav-converter
 
-# 或者克隆你的 Fork
+# Or clone your Fork
 git clone https://github.com/your-username/tfdi-nav-converter.git
 cd tfdi-nav-converter
 ```
 
-#### 2. 设置开发环境
+#### 2. Set up Development Environment
 ```bash
-# 创建虚拟环境
+# Create a virtual environment
 python -m venv venv
 
-# 激活虚拟环境
+# Activate the virtual environment
 # Windows:
 venv\Scripts\activate
 # macOS/Linux:
 source venv/bin/activate
 
-# 安装开发依赖
+# Install development dependencies
 pip install -r requirements-dev.txt
-pip install -e .  # 可编辑安装
+pip install -e .  # Editable install
 ```
 
-#### 3. 验证安装
+#### 3. Verify Installation
 ```bash
-# 运行测试套件
+# Run the test suite
 pytest
 
-# 运行代码质量检查
+# Run code quality checks
 flake8 src/
 mypy src/
 black --check src/
 
-# 运行转换器
+# Run the converter
 python -m tfdi_converter --help
 ```
 
-### 开发工具配置
+### Development Tool Configuration
 
-#### IDE 设置 (VS Code 推荐)
+#### IDE Settings (VS Code Recommended)
 ```json
 // .vscode/settings.json
 {
@@ -92,83 +92,83 @@ python -m tfdi_converter --help
 }
 ```
 
-#### 预提交钩子
+#### Pre-commit Hooks
 ```bash
-# 安装 pre-commit
+# Install pre-commit
 pip install pre-commit
 
-# 安装钩子
+# Install hooks
 pre-commit install
 
-# 手动运行所有钩子
+# Manually run all hooks
 pre-commit run --all-files
 ```
 
-## 📋 开发流程
+## 📋 Development Workflow
 
-### 1. 创建功能分支
+### 1. Create a Feature Branch
 
 ```bash
-# 确保主分支是最新的
+# Ensure the main branch is up to date
 git checkout main
 git pull origin main
 
-# 创建新的功能分支
+# Create a new feature branch
 git checkout -b feature/add-new-format-support
 
-# 或修复分支
+# Or a fix branch
 git checkout -b fix/memory-leak-in-processor
 ```
 
-### 2. 开发和测试
+### 2. Develop and Test
 
-#### 代码开发
+#### Code Development
 ```bash
-# 编写代码
-# ... 进行开发 ...
+# Write code
+# ... Proceed with development ...
 
-# 添加测试
+# Add tests
 # tests/test_new_feature.py
 
-# 更新文档
+# Update documentation
 # docs/api/new_feature.md
 ```
 
-#### 运行测试
+#### Run Tests
 ```bash
-# 运行所有测试
+# Run all tests
 pytest
 
-# 运行特定测试文件
+# Run a specific test file
 pytest tests/test_converter.py
 
-# 运行并生成覆盖率报告
+# Run and generate coverage report
 pytest --cov=tfdi_converter --cov-report=html
 
-# 运行性能测试
+# Run performance tests
 pytest tests/performance/ -m performance
 ```
 
-#### 代码质量检查
+#### Code Quality Checks
 ```bash
-# 格式化代码
+# Format code
 black src/ tests/
 
-# 排序导入
+# Sort imports
 isort src/ tests/
 
-# 静态分析
+# Static analysis
 flake8 src/ tests/
 mypy src/
 
-# 安全检查
+# Security checks
 bandit -r src/
 ```
 
-### 3. 提交代码
+### 3. Commit Code
 
-#### 提交信息规范
-使用 [Conventional Commits](https://www.conventionalcommits.org/) 规范：
+#### Commit Message Guidelines
+Use the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ```
 <type>[optional scope]: <description>
@@ -178,52 +178,52 @@ bandit -r src/
 [optional footer(s)]
 ```
 
-**提交类型：**
-- `feat`: 新功能
-- `fix`: Bug 修复
-- `docs`: 文档更新
-- `style`: 代码格式调整
-- `refactor`: 代码重构
-- `test`: 测试相关
-- `chore`: 构建过程或辅助工具变动
-- `perf`: 性能改进
+**Commit Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation update
+- `style`: Code style adjustments
+- `refactor`: Code refactoring
+- `test`: Test related
+- `chore`: Build process or auxiliary tool changes
+- `perf`: Performance improvement
 
-**提交示例：**
+**Commit Examples:**
 ```bash
-# 新功能
+# New feature
 git commit -m "feat(converter): add support for MSFS native format"
 
-# Bug 修复
+# Bug fix
 git commit -m "fix(parser): handle malformed coordinate data gracefully"
 
-# 文档更新
+# Documentation update
 git commit -m "docs(api): add examples for batch processing"
 
-# 性能改进
+# Performance improvement
 git commit -m "perf(processor): optimize memory usage in large dataset processing"
 ```
 
-### 4. 推送和创建 PR
+### 4. Push and Create PR
 
 ```bash
-# 推送分支到远程
+# Push branch to remote
 git push origin feature/add-new-format-support
 
-# 在 GitHub 上创建 Pull Request
-# 填写 PR 模板
-# 等待代码审查
+# Create Pull Request on GitHub
+# Fill out PR template
+# Wait for code review
 ```
 
-## 📝 代码规范
+## 📝 Code Style Guide
 
-### Python 编码规范
+### Python Coding Standards
 
-#### 1. 代码风格
+#### 1. Code Style
 ```python
-# 使用 Black 格式化器的默认设置
-# 行长度: 88 字符
-# 使用双引号
-# 函数间空两行
+# Use Black formatter's default settings
+# Line length: 88 characters
+# Use double quotes
+# Two blank lines between functions
 
 from typing import Dict, List, Optional, Union
 import logging
@@ -235,14 +235,14 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class ConversionConfig:
-    """转换配置类。
+    """Conversion configuration class.
     
-    用于管理 TFDI 转换器的各种配置参数。
+    Manages various configuration parameters for the TFDI converter.
     
     Attributes:
-        output_dir: 输出目录路径
-        coordinate_precision: 坐标精度
-        enable_validation: 是否启用数据验证
+        output_dir: Output directory path
+        coordinate_precision: Coordinate precision
+        enable_validation: Whether to enable data validation
     """
     output_dir: str = "Primary"
     coordinate_precision: int = 8
@@ -250,16 +250,16 @@ class ConversionConfig:
 
 
 class FenixDataProcessor:
-    """Fenix 数据处理器。
+    """Fenix data processor.
     
-    负责从 Fenix 数据库读取和处理导航数据。
+    Responsible for reading and processing navigation data from the Fenix database.
     """
     
     def __init__(self, config: ConversionConfig) -> None:
-        """初始化处理器。
+        """Initializes the processor.
         
         Args:
-            config: 转换配置对象
+            config: Conversion configuration object
         """
         self.config = config
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -268,16 +268,16 @@ class FenixDataProcessor:
         self, 
         waypoint_data: List[Dict[str, Union[str, float]]]
     ) -> List[Dict[str, Union[str, float]]]:
-        """处理航路点数据。
+        """Processes waypoint data.
         
         Args:
-            waypoint_data: 原始航路点数据列表
+            waypoint_data: List of raw waypoint data
             
         Returns:
-            处理后的航路点数据列表
+            List of processed waypoint data
             
         Raises:
-            DataProcessingError: 数据处理过程中发生错误
+            DataProcessingError: An error occurred during data processing
         """
         try:
             processed_data = []
@@ -286,21 +286,21 @@ class FenixDataProcessor:
                 processed_waypoint = self._normalize_waypoint(waypoint)
                 processed_data.append(processed_waypoint)
             
-            self.logger.info(f"成功处理 {len(processed_data)} 个航路点")
+            self.logger.info(f"Successfully processed {len(processed_data)} waypoints")
             return processed_data
             
         except Exception as e:
-            self.logger.error(f"航路点处理失败: {e}")
-            raise DataProcessingError(f"无法处理航路点数据: {e}") from e
+            self.logger.error(f"Waypoint processing failed: {e}")
+            raise DataProcessingError(f"Unable to process waypoint data: {e}") from e
     
     def _normalize_waypoint(
         self, waypoint: Dict[str, Union[str, float]]
     ) -> Dict[str, Union[str, float]]:
-        """标准化单个航路点数据。"""
-        # 实现标准化逻辑
+        """Normalizes a single waypoint data."""
+        # Implement normalization logic
         normalized = waypoint.copy()
         
-        # 标准化坐标精度
+        # Normalize coordinate precision
         if "latitude" in normalized:
             normalized["latitude"] = round(
                 float(normalized["latitude"]), 
@@ -310,68 +310,68 @@ class FenixDataProcessor:
         return normalized
 ```
 
-#### 2. 类型提示
+#### 2. Type Hinting
 ```python
 from typing import (
     Any, Dict, List, Optional, Union, 
     Callable, Iterator, TypeVar, Generic
 )
 
-# 类型别名
+# Type aliases
 ConfigDict = Dict[str, Any]
 WaypointData = Dict[str, Union[str, float]]
 ProcessingResult = List[WaypointData]
 
-# 泛型类型
+# Generic type
 T = TypeVar('T')
 
 class DataCache(Generic[T]):
-    """泛型数据缓存类"""
+    """Generic data cache class"""
     
     def __init__(self) -> None:
         self._cache: Dict[str, T] = {}
     
     def get(self, key: str) -> Optional[T]:
-        """获取缓存数据"""
+        """Get cached data"""
         return self._cache.get(key)
     
     def set(self, key: str, value: T) -> None:
-        """设置缓存数据"""
+        """Set cached data"""
         self._cache[key] = value
 ```
 
-#### 3. 错误处理
+#### 3. Error Handling
 ```python
 class TFDIConverterError(Exception):
-    """转换器基础异常类"""
+    """Base exception class for the converter"""
     pass
 
 
 class DataValidationError(TFDIConverterError):
-    """数据验证异常"""
+    """Data validation exception"""
     pass
 
 
 class DatabaseConnectionError(TFDIConverterError):
-    """数据库连接异常"""
+    """Database connection exception"""
     pass
 
 
 def safe_database_operation(operation: Callable[[], T]) -> Optional[T]:
-    """安全的数据库操作包装器"""
+    """Wrapper for safe database operations"""
     try:
         return operation()
     except sqlite3.Error as e:
-        logger.error(f"数据库操作失败: {e}")
-        raise DatabaseConnectionError(f"数据库操作失败: {e}") from e
+        logger.error(f"Database operation failed: {e}")
+        raise DatabaseConnectionError(f"Database operation failed: {e}") from e
     except Exception as e:
-        logger.error(f"未知错误: {e}")
+        logger.error(f"Unknown error: {e}")
         return None
 ```
 
-### 测试规范
+### Testing Guidelines
 
-#### 1. 测试结构
+#### 1. Test Structure
 ```python
 # tests/test_converter.py
 import pytest
@@ -384,11 +384,11 @@ from tfdi_converter.exceptions import DataValidationError
 
 
 class TestFenixToTFDIConverter:
-    """Fenix 到 TFDI 转换器测试类"""
+    """Fenix to TFDI Converter Test Class"""
     
     @pytest.fixture
     def sample_config(self) -> ConverterConfig:
-        """创建示例配置"""
+        """Create sample configuration"""
         return ConverterConfig(
             output_dir="test_output",
             coordinate_precision=6,
@@ -397,13 +397,13 @@ class TestFenixToTFDIConverter:
     
     @pytest.fixture
     def sample_database(self, tmp_path: Path) -> Path:
-        """创建示例数据库"""
+        """Create sample database"""
         db_path = tmp_path / "test.db3"
-        # 创建测试数据库的逻辑
+        # Logic to create test database
         return db_path
     
     def test_converter_initialization(self, sample_config):
-        """测试转换器初始化"""
+        """Test converter initialization"""
         converter = FenixToTFDIConverter(sample_config)
         
         assert converter.config == sample_config
@@ -412,7 +412,7 @@ class TestFenixToTFDIConverter:
     def test_database_validation_success(
         self, sample_config, sample_database
     ):
-        """测试数据库验证成功情况"""
+        """Test successful database validation"""
         converter = FenixToTFDIConverter(sample_config)
         
         result = converter.validate_database(sample_database)
@@ -420,7 +420,7 @@ class TestFenixToTFDIConverter:
         assert result is True
     
     def test_database_validation_failure(self, sample_config):
-        """测试数据库验证失败情况"""
+        """Test database validation failure"""
         converter = FenixToTFDIConverter(sample_config)
         invalid_db = Path("nonexistent.db3")
         
@@ -431,7 +431,7 @@ class TestFenixToTFDIConverter:
     def test_database_connection_error(
         self, mock_connect, sample_config, sample_database
     ):
-        """测试数据库连接错误"""
+        """Test database connection error"""
         mock_connect.side_effect = sqlite3.Error("连接失败")
         converter = FenixToTFDIConverter(sample_config)
         
@@ -442,7 +442,7 @@ class TestFenixToTFDIConverter:
     def test_large_database_performance(
         self, sample_config, large_test_database
     ):
-        """测试大型数据库性能"""
+        """Test large database performance"""
         import time
         
         converter = FenixToTFDIConverter(sample_config)
@@ -451,10 +451,10 @@ class TestFenixToTFDIConverter:
         converter.convert(large_test_database, start_terminal_id=1000)
         
         elapsed_time = time.time() - start_time
-        assert elapsed_time < 300  # 应在 5 分钟内完成
+        assert elapsed_time < 300  # Should complete within 5 minutes
 ```
 
-#### 2. 测试数据管理
+#### 2. Test Data Management
 ```python
 # tests/conftest.py
 import pytest
@@ -464,19 +464,19 @@ from pathlib import Path
 
 @pytest.fixture(scope="session")
 def test_data_dir() -> Path:
-    """测试数据目录"""
+    """Test data directory"""
     return Path(__file__).parent / "data"
 
 
 @pytest.fixture
 def sample_fenix_database(tmp_path: Path) -> Path:
-    """创建示例 Fenix 数据库"""
+    """Create sample Fenix database"""
     db_path = tmp_path / "sample_fenix.db3"
     
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # 创建测试表结构
+    # Create test table structure
     cursor.execute("""
         CREATE TABLE Airports (
             AirportID TEXT PRIMARY KEY,
@@ -486,7 +486,7 @@ def sample_fenix_database(tmp_path: Path) -> Path:
         )
     """)
     
-    # 插入测试数据
+    # Insert test data
     cursor.execute("""
         INSERT INTO Airports VALUES 
         ('ZBAA', 'Beijing Capital', 40.080111, 116.584556),
@@ -499,32 +499,33 @@ def sample_fenix_database(tmp_path: Path) -> Path:
     return db_path
 ```
 
-### 文档规范
+### Documentation Guidelines
 
-#### 1. API 文档
+#### 1. API Documentation
 ```python
 def convert_fenix_database(
     database_path: Path,
     output_dir: Path,
     config: Optional[ConverterConfig] = None
 ) -> ConversionResult:
-    """转换 Fenix 数据库到 TFDI 格式。
+    """Converts a Fenix database to TFDI format.
     
-    此函数接收 Fenix A320 导航数据库文件，将其转换为
-    TFDI MD-11 兼容的 JSON 格式文件集合。
+    This function takes a Fenix A320 navigation database file and converts it
+    into a collection of TFDI MD-11 compatible JSON format files.
     
     Args:
-        database_path: Fenix 数据库文件路径 (.db3 文件)
-        output_dir: 输出目录路径，转换后的文件将保存在此目录
-        config: 可选的转换配置对象，如果不提供则使用默认配置
+        database_path: Path to the Fenix database file (.db3 file)
+        output_dir: Output directory path where converted files will be saved
+        config: Optional conversion configuration object; default configuration
+                is used if not provided
     
     Returns:
-        ConversionResult: 包含转换结果和统计信息的对象
+        ConversionResult: An object containing conversion results and statistics
         
     Raises:
-        FileNotFoundError: 当数据库文件不存在时
-        DataValidationError: 当数据库格式不正确时
-        PermissionError: 当没有输出目录写入权限时
+        FileNotFoundError: If the database file does not exist
+        DataValidationError: If the database format is incorrect
+        PermissionError: If there is no write permission for the output directory
         
     Example:
         >>> from pathlib import Path
@@ -534,50 +535,50 @@ def convert_fenix_database(
         ...     database_path=Path("fenix_nav.db3"),
         ...     output_dir=Path("./output")
         ... )
-        >>> print(f"转换完成，处理了 {result.processed_records} 条记录")
+        >>> print(f"Conversion complete, processed {result.processed_records} records")
         
     Note:
-        转换过程可能需要几分钟时间，具体取决于数据库大小。
-        建议在转换前备份原始数据。
+        The conversion process may take several minutes, depending on the database size.
+        It is recommended to back up original data before conversion.
         
     See Also:
-        - :class:`ConverterConfig`: 转换配置选项
-        - :class:`ConversionResult`: 转换结果详情
+        - :class:`ConverterConfig`: Conversion configuration options
+        - :class:`ConversionResult`: Conversion result details
     """
     pass
 ```
 
-#### 2. 用户文档
+#### 2. User Documentation
 ```markdown
-# 使用示例
+# Usage Examples
 
-## 基础转换
+## Basic Conversion
 
 ```python
 from tfdi_converter import FenixToTFDIConverter, ConverterConfig
 
-# 创建配置
+# Create configuration
 config = ConverterConfig(
     output_dir="TFDI_Output",
     coordinate_precision=8
 )
 
-# 初始化转换器
+# Initialize converter
 converter = FenixToTFDIConverter(config)
 
-# 执行转换
+# Execute conversion
 result = converter.convert(
     database_path="path/to/fenix.db3",
     start_terminal_id=1000
 )
 
-print(f"转换完成！输出文件: {result.output_archive}")
+print(f"Conversion complete! Output file: {result.output_archive}")
 ```
 
-## 高级配置
+## Advanced Configuration
 
 ```python
-# 自定义配置
+# Custom configuration
 config = ConverterConfig(
     output_dir="Custom_Output",
     coordinate_precision=6,
@@ -586,183 +587,182 @@ config = ConverterConfig(
     compression_level=9
 )
 ```
-```
 
-## 🧪 测试指南
+## 🧪 Testing Guide
 
-### 测试策略
+### Testing Strategy
 
-#### 1. 单元测试
-- **覆盖率目标**: 90%+
-- **测试范围**: 所有公共方法和关键私有方法
-- **Mock 策略**: 隔离外部依赖（数据库、文件系统）
+#### 1. Unit Tests
+- **Coverage Target**: 90%+
+- **Test Scope**: All public methods and critical private methods
+- **Mock Strategy**: Isolate external dependencies (databases, file systems)
 
-#### 2. 集成测试  
-- **数据库集成**: 使用真实的测试数据库
-- **文件系统集成**: 测试实际的文件读写操作
-- **端到端测试**: 完整的转换流程测试
+#### 2. Integration Tests  
+- **Database Integration**: Use real test databases
+- **File System Integration**: Test actual file read/write operations
+- **End-to-End Tests**: Complete conversion workflow tests
 
-#### 3. 性能测试
-- **基准测试**: 记录不同数据集大小的处理时间
-- **内存测试**: 监控内存使用和泄漏
-- **并发测试**: 测试多线程和并发安全性
+#### 3. Performance Tests
+- **Benchmark Testing**: Record processing time for different dataset sizes
+- **Memory Testing**: Monitor memory usage and leaks
+- **Concurrency Testing**: Test multi-threading and concurrency safety
 
-### 运行测试
+### Run Tests
 
 ```bash
-# 快速测试（排除性能测试）
+# Quick tests (excluding performance tests)
 pytest -m "not performance"
 
-# 完整测试套件
+# Full test suite
 pytest
 
-# 特定模块测试
+# Specific module tests
 pytest tests/test_converter.py
 
-# 覆盖率测试
+# Coverage tests
 pytest --cov=tfdi_converter --cov-report=term-missing
 
-# 性能基准测试
+# Performance benchmark tests
 pytest tests/performance/ --benchmark-only
 ```
 
-## 📚 文档贡献
+## 📚 Documentation Contributions
 
-### 文档类型
+### Documentation Types
 
-#### 1. 用户文档
-- **安装指南**: 详细的安装步骤
-- **使用教程**: 从基础到高级的使用示例
-- **故障排除**: 常见问题和解决方案
-- **API 参考**: 完整的 API 文档
+#### 1. User Documentation
+- **Installation Guide**: Detailed installation steps
+- **Usage Tutorials**: Basic to advanced usage examples
+- **Troubleshooting**: Common issues and solutions
+- **API Reference**: Complete API documentation
 
-#### 2. 开发者文档
-- **架构设计**: 系统架构和设计理念
-- **贡献指南**: 本文档
-- **编码规范**: 代码风格和最佳实践
-- **发布流程**: 版本发布和维护流程
+#### 2. Developer Documentation
+- **Architecture Design**: System architecture and design philosophy
+- **Contribution Guide**: This document
+- **Coding Standards**: Code style and best practices
+- **Release Process**: Version release and maintenance workflow
 
-### 文档构建
+### Documentation Building
 
 ```bash
-# 安装文档依赖
+# Install documentation dependencies
 pip install -r docs/requirements.txt
 
-# 构建文档
+# Build documentation
 cd docs/
 make html
 
-# 实时预览
+# Live preview
 make livehtml
 ```
 
-## 🐛 问题报告
+## 🐛 Issue Reporting
 
-### 问题报告模板
+### Issue Report Template
 
 ```markdown
-**问题描述**
-清晰简洁地描述遇到的问题。
+**Problem Description**
+Clearly and concisely describe the problem encountered.
 
-**重现步骤**
-1. 执行 '...'
-2. 输入 '...'
-3. 查看错误 '...'
+**Steps to Reproduce**
+1. Perform '...'
+2. Enter '...'
+3. See error '...'
 
-**期望行为**
-描述您期望发生的情况。
+**Expected Behavior**
+Describe what you expected to happen.
 
-**实际行为**
-描述实际发生的情况。
+**Actual Behavior**
+Describe what actually happened.
 
-**环境信息**
-- OS: [如 Windows 11, macOS 12.0, Ubuntu 20.04]
-- Python: [如 3.9.16]
-- 转换器版本: [如 v1.0.0]
-- Fenix 版本: [如 v1.2.0]
-- TFDI 版本: [如 v1.1.0]
+**Environment Information**
+- OS: [e.g., Windows 11, macOS 12.0, Ubuntu 20.04]
+- Python: [e.g., 3.9.16]
+- Converter Version: [e.g., v1.0.0]
+- Fenix Version: [e.g., v1.2.0]
+- TFDI Version: [e.g., v1.1.0]
 
-**数据库信息**
-- 数据库大小: [如 150MB]
-- 记录数量: [如 ~50,000 条]
-- AIRAC 周期: [如 2508]
+**Database Information**
+- Database Size: [e.g., 150MB]
+- Number of Records: [e.g., ~50,000]
+- AIRAC Cycle: [e.g., 2508]
 
-**日志信息**
+**Log Information**
 ```
-粘贴相关的日志信息或错误堆栈
-```
-
-**附加文件**
-- 配置文件
-- 错误截图
-- 示例数据（如果可能）
+Paste relevant log information or error stack
 ```
 
-### 问题标签
+**Attachments**
+- Configuration file
+- Error screenshot
+- Sample data (if possible)
+```
 
-使用以下标签分类问题：
-- 🐛 `bug` - 错误报告
-- ✨ `enhancement` - 功能请求
-- 📚 `documentation` - 文档相关
-- ❓ `question` - 使用问题
-- 🔥 `urgent` - 紧急问题
-- 🆕 `good first issue` - 适合新贡献者
+### Issue Labels
 
-## 🏆 认可和奖励
+Use the following labels to categorize issues:
+- 🐛 `bug` - Bug report
+- ✨ `enhancement` - Feature request
+- 📚 `documentation` - Documentation related
+- ❓ `question` - Usage question
+- 🔥 `urgent` - Urgent issue
+- 🆕 `good first issue` - Suitable for new contributors
 
-### 贡献者认可
+## 🏆 Recognition and Rewards
 
-#### 1. 代码贡献者
-- **提交者列表**: README 和文档中的贡献者名单
-- **发布说明**: 在版本发布说明中特别感谢
-- **GitHub 统计**: 贡献统计和成就徽章
+### Contributor Recognition
 
-#### 2. 文档贡献者
-- **文档署名**: 在相关文档页面署名
-- **翻译认可**: 多语言版本的翻译者名单
-- **教程作者**: 社区教程的作者认可
+#### 1. Code Contributors
+- **Submitter List**: Contributor list in README and documentation
+- **Release Notes**: Special thanks in version release notes
+- **GitHub Statistics**: Contribution statistics and achievement badges
 
-#### 3. 社区贡献者
-- **问题报告**: 重要问题发现者的特别感谢
-- **测试贡献**: Beta 测试和质量保证贡献者
-- **推广贡献**: 社区推广和教育贡献者
+#### 2. Documentation Contributors
+- **Document Attribution**: Attribution on relevant documentation pages
+- **Translation Recognition**: Translator list for multi-language versions
+- **Tutorial Authors**: Author recognition for community tutorials
 
-### 特殊贡献奖励
+#### 3. Community Contributors
+- **Issue Reporting**: Special thanks to important issue discoverers
+- **Testing Contributions**: Beta testing and quality assurance contributors
+- **Promotion Contributions**: Community promotion and education contributors
 
-#### 月度贡献者
-- 每月评选突出贡献者
-- 在项目主页和社交媒体上宣传
-- 特殊的 GitHub 徽章和头衔
+### Special Contribution Awards
 
-#### 年度贡献者
-- 年度最佳贡献者评选
-- 特制纪念品和证书
-- 项目决策委员会邀请
+#### Monthly Contributor
+- Outstanding contributors selected monthly
+- Promoted on project homepage and social media
+- Special GitHub badges and titles
 
-## 📞 联系方式
+#### Annual Contributor
+- Annual best contributor selection
+- Custom souvenirs and certificates
+- Invitation to the project steering committee
 
-### 开发团队联系
+## 📞 Contact Information
 
-- **项目维护者**: @maintainer-username
-- **技术负责人**: @tech-lead-username  
-- **社区管理**: @community-manager-username
+### Development Team Contacts
 
-### 沟通渠道
+- **Project Maintainers**: @maintainer-username
+- **Technical Lead**: @tech-lead-username  
+- **Community Management**: @community-manager-username
 
-- **GitHub Issues**: 技术问题和功能请求
-- **GitHub Discussions**: 一般讨论和问答
-- **邮件列表**: dev@tfdi-converter.org
+### Communication Channels
+
+- **GitHub Issues**: Technical issues and feature requests
+- **GitHub Discussions**: General discussions and Q&A
+- **Mailing List**: dev@tfdi-converter.org
 - **Discord**: [邀请链接]
 
-### 响应时间承诺
+### Response Time Commitment
 
-- **Bug 报告**: 48 小时内响应
-- **功能请求**: 1 周内回复
-- **Pull Request**: 3 个工作日内审查
-- **社区问题**: 24 小时内回复
+- **Bug Reports**: Response within 48 hours
+- **Feature Requests**: Response within 1 week
+- **Pull Requests**: Review within 3 business days
+- **Community Questions**: Response within 24 hours
 
 ---
 
-**感谢您考虑为 TFDI 导航数据转换器做出贡献！** 
+**Thank you for considering contributing to the TFDI Navigation Data Converter!** 
 
-我们期待与您一起构建更好的飞行模拟工具。🚁✨
+We look forward to building better flight simulation tools with you. 🚁✨

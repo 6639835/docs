@@ -1,99 +1,99 @@
-# 🚁 TFDI 导航数据转换器用户指南
+# 🚁 TFDI Navigation Data Converter User Guide
 
-TFDI 导航数据转换器是一个专业的航空导航数据转换工具，专门设计用于将 Fenix A320 导航数据库转换为 TFDI MD-11 兼容的 JSON 格式。该工具具有现代化的 CLI 界面和高效的数据处理能力。
+TFDI Navigation Data Converter is a professional aviation navigation data conversion tool, specifically designed to convert Fenix A320 navigation databases into TFDI MD-11 compatible JSON format. This tool features a modern CLI interface and efficient data processing capabilities.
 
-## 📖 快速导览
+## 📖 Quick Tour
 
-### 🎯 核心功能
-- **🎨 Rich CLI 界面** - 现代化彩色终端界面，实时进度显示和状态反馈
-- **🔄 完整数据转换** - 支持所有 Fenix 数据库表的全面转换
-- **📊 智能数据处理** - 坐标标准化、列名规范化和数据完整性验证
-- **🔍 FAF 点检测** - 智能识别 Final Approach Fix 点，优化进近程序
-- **📦 JSON 输出** - 生成 TFDI 兼容的标准 JSON 格式文件
-- **🗜️ 自动压缩** - 创建便于分发的 7z 压缩包
+### 🎯 Core Features
+- **🎨 Rich CLI Interface** - Modern, colorized terminal interface with real-time progress display and status feedback
+- **🔄 Complete Data Conversion** - Supports comprehensive conversion of all Fenix database tables
+- **📊 Intelligent Data Processing** - Coordinate standardization, column name normalization, and data integrity validation
+- **🔍 FAF Point Detection** - Intelligently identifies Final Approach Fix points, optimizing approach procedures
+- **📦 JSON Output** - Generates standard TFDI-compatible JSON format files
+- **🗜️ Automatic Compression** - Creates 7z archives for easy distribution
 
-### ✈️ 支持的飞机型号
-- **TFDI MD-11** - Microsoft Flight Simulator 中的高仿真麦道 MD-11
-- **数据来源** - Fenix A320 导航数据库 (nd.db3)
-- **格式支持** - SQLite 数据库转 JSON 格式
+### ✈️ Supported Aircraft Models
+- **TFDI MD-11** - High-fidelity McDonnell Douglas MD-11 in Microsoft Flight Simulator
+- **Data Source** - Fenix A320 Navigation Database (nd.db3)
+- **Format Support** - SQLite Database to JSON Format
 
-### 📊 数据类型覆盖
-- **🏢 机场数据** - 机场信息、跑道数据、通信频率
-- **🧭 导航设备** - VOR/DME、NDB、ILS 设备数据
-- **🛣️ 航路网络** - 航路定义、航路段、航路点坐标
-- **🎯 终端程序** - SID、STAR、进近程序、离场程序
-- **🔗 查找表** - 各类数据的索引和关联表
+### 📊 Data Type Coverage
+- **🏢 Airport Data** - Airport information, runway data, communication frequencies
+- **🧭 Navigation Aids** - VOR/DME, NDB, ILS device data
+- **🛣️ Airway Network** - Airway definitions, airway segments, waypoint coordinates
+- **🎯 Terminal Procedures** - SID, STAR, approach procedures, departure procedures
+- **🔗 Lookup Tables** - Indexes and association tables for various data types
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1️⃣ 系统要求验证
+### 1️⃣ System Requirements Verification
 ```bash
-# 检查 Python 版本 (需要 3.8+)
+# Check Python version (3.8+ required)
 python --version
 
-# 验证可用内存 (推荐 4GB+)
-python -c "import psutil; print(f'可用内存: {psutil.virtual_memory().available//1024**3} GB')"
+# Verify available memory (4GB+ recommended)
+python -c "import psutil; print(f'Available Memory: {psutil.virtual_memory().available//1024**3} GB')"
 
-# 检查磁盘空间 (需要至少 1GB)
-python -c "import shutil; print(f'可用空间: {shutil.disk_usage(\".\")[2]//1024**3} GB')"
+# Check disk space (at least 1GB required)
+python -c "import shutil; print(f'Available Space: {shutil.disk_usage(\".\")[2]//1024**3} GB')"
 ```
 
-### 2️⃣ 准备必要文件
-- ✅ **Fenix 导航数据库** (`nd.db3`)
+### 2️⃣ Prepare Necessary Files
+- ✅ **Fenix Navigation Database** (`nd.db3`)
   ```
-  通常位置: %APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320\SimObjects\Airplanes\FenixA320\navdata\nd.db3
+  Typical location: %APPDATA%\Microsoft Flight Simulator\Packages\fenix-a320\SimObjects\Airplanes\FenixA320\navdata\nd.db3
   ```
-- ✅ **TFDI MD-11** 已安装在 MSFS 中
-- ✅ **转换器源码** 已下载到本地
+- ✅ **TFDI MD-11** installed in MSFS
+- ✅ **Converter source code** downloaded locally
 
-### 3️⃣ 一键启动转换
+### 3️⃣ One-Click Conversion
 ```bash
-# 1. 安装依赖
+# 1. Install dependencies
 pip install rich pandas py7zr
 
-# 2. 运行转换器
+# 2. Run the converter
 python Fenix2TFDINavDataConverter.py
 
-# 3. 按界面提示操作
-# → 输入 Fenix 数据库路径
-# → 设置终端程序起始 ID
-# → 等待转换完成
+# 3. Follow on-screen prompts
+# → Enter Fenix database path
+# → Set terminal procedure starting ID
+# → Wait for conversion to complete
 ```
 
-## 📚 文档导航
+## 📚 Documentation Navigation
 
-### 🚀 基础使用
-1. **[安装指南](installation.md)** - 详细的环境配置和依赖安装
-   - Python 环境设置
-   - 依赖包安装
-   - 系统兼容性检查
-   - 常见安装问题解决
+### 🚀 Basic Usage
+1.  **[Installation Guide](installation.md)** - Detailed environment setup and dependency installation
+    - Python Environment Setup
+    - Dependency Package Installation
+    - System Compatibility Check
+    - Troubleshooting Common Installation Issues
 
-2. **[配置说明](configuration.md)** - 转换器配置选项详解
-   - ConverterConfig 参数
-   - 数据库连接设置
-   - 输出格式配置
-   - 性能调优参数
+2.  **[Configuration Details](configuration.md)** - Detailed explanation of converter configuration options
+    - ConverterConfig Parameters
+    - Database Connection Settings
+    - Output Format Configuration
+    - Performance Tuning Parameters
 
-3. **[使用说明](usage.md)** - 完整的操作流程和示例
-   - 交互式转换流程
-   - 编程方式调用
-   - 批量处理方法
-   - 结果验证步骤
+3.  **[Usage Instructions](usage.md)** - Complete operation workflow and examples
+    - Interactive Conversion Process
+    - Programmatic Invocation
+    - Batch Processing Methods
+    - Result Validation Steps
 
-### 🆘 帮助与支持
-- **[常见问题](../faq.md)** - 用户常遇问题和解答
-- **[故障排除](../troubleshooting.md)** - 问题诊断和解决方案
+### 🆘 Help and Support
+- **[Frequently Asked Questions (FAQ)](../faq.md)** - Common user questions and answers
+- **[Troubleshooting](../troubleshooting.md)** - Problem diagnosis and solutions
 
-### 🔧 进阶内容
-- **[技术架构](../architecture.md)** - 系统设计和工作原理
-- **[贡献指南](../contributing.md)** - 开发参与和代码规范
-- **[更新日志](../changelog.md)** - 版本历史和新功能
-- **[许可证信息](../license.md)** - 使用条款和法律说明
+### 🔧 Advanced Topics
+- **[Technical Architecture](../architecture.md)** - System design and working principles
+- **[Contribution Guide](../contributing.md)** - Development participation and coding standards
+- **[Changelog](../changelog.md)** - Version history and new features
+- **[License Information](../license.md)** - Terms of use and legal disclaimers
 
-## 🎨 界面预览
+## 🎨 Interface Preview
 
-### 启动界面
+### Startup Interface
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
@@ -103,112 +103,112 @@ python Fenix2TFDINavDataConverter.py
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
 
-🔍 环境检查...
+🔍 Environment Check...
 ✅ Python 3.9.16
-✅ 依赖包完整
-✅ 内存充足
-✅ 磁盘空间足够
+✅ Dependencies complete
+✅ Sufficient memory
+✅ Sufficient disk space
 ```
 
-### 转换进度
+### Conversion Progress
 ```
-╭─────────────────────────────────────────── 📊 导出标准数据表 ───────────────────────────────────────────╮
+╭─────────────────────────────────────────── 📊 Exporting Standard Data Tables ───────────────────────────────────────────╮
 │                                                                                                         │
-│ 正在导出表格数据...                                                                                     │
+│ Exporting table data...                                                                                 │
 │                                                                                                         │
 │ ████████████████████████████████████████ 8/11 (73%) ⏱️ 0:03:42                                       │
 │                                                                                                         │
-│ 当前处理: Terminals 表 → 转换终端程序数据                                                              │
-│ 已完成: Airports, Runways, Waypoints, Navaids, Airways, AirwayLegs, ILSes                             │
+│ Currently processing: Terminals table → Converting terminal procedure data                               │
+│ Completed: Airports, Runways, Waypoints, Navaids, Airways, AirwayLegs, ILSes                             │
 │                                                                                                         │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-### 完成摘要
+### Completion Summary
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║                          转换成功                           ║
+║                          Conversion Successful                 ║
 ║                                                              ║
-║  ✓ 数据转换成功完成！                                        ║
+║  ✓ Data conversion completed successfully!                   ║
 ║                                                              ║
-║  📊 处理统计:                                                ║
-║  • 导出表格: 11 个                                          ║
-║  • 处理记录: 156,789 条                                      ║
-║  • 终端程序: 8,945 个                                        ║
-║  • 航路点: 45,234 个                                         ║
+║  📊 Processing Statistics:                                   ║
+║  • Exported Tables: 11                                       ║
+║  • Processed Records: 156,789                                ║
+║  • Terminal Procedures: 8,945                                ║
+║  • Waypoints: 45,234                                         ║
 ║                                                              ║
-║  📁 输出文件: Primary.7z (15.6 MB)                          ║
-║  🕒 总耗时: 4 分 23 秒                                       ║
+║  📁 Output File: Primary.7z (15.6 MB)                        ║
+║  🕒 Total Time: 4 minutes 23 seconds                         ║
 ║                                                              ║
-║  可以在 TFDI MD-11 中使用此文件进行导航。                    ║
+║  This file can be used for navigation in the TFDI MD-11.     ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-## ⚠️ 重要提醒
+## ⚠️ Important Reminders
 
-### 数据使用规范
-本工具仅用于模拟飞行目的，请确保您的使用符合相关规定：
-- **🎯 仅限模拟** - 严禁用于实际航空导航
-- **📋 遵守协议** - 确认 Fenix 和 TFDI 数据使用条款
-- **🔒 非商业用途** - 个人学习和娱乐使用
+### Data Usage Guidelines
+This tool is intended for flight simulation purposes only; please ensure your usage complies with relevant regulations:
+- **🎯 Simulation Only** - Strictly prohibited for actual aviation navigation
+- **📋 Comply with Agreements** - Confirm Fenix and TFDI data usage terms
+- **🔒 Non-Commercial Use** - For personal study and entertainment use
 
-### 技术要求
-- **🐍 Python 3.8+** - 推荐使用 Python 3.9 或更高版本
-- **💾 内存要求** - 至少 4GB RAM（推荐 8GB）
-- **💿 存储空间** - 至少 1GB 可用空间
-- **🖥️ 操作系统** - Windows 10/11, macOS 10.15+, Linux
+### Technical Requirements
+- **🐍 Python 3.8+** - Python 3.9 or higher recommended
+- **💾 Memory Requirements** - At least 4GB RAM (8GB recommended)
+- **💿 Storage Space** - At least 1GB of available space
+- **🖥️ Operating System** - Windows 10/11, macOS 10.15+, Linux
 
-### 数据安全
-- **💾 备份数据** - 转换前请备份重要数据
-- **🔍 验证结果** - 转换后验证数据完整性
-- **📅 版本管理** - 使用稳定版本进行重要转换
-- **🔒 文件权限** - 确保有足够的文件读写权限
+### Data Security
+- **💾 Backup Data** - Please back up important data before conversion
+- **🔍 Verify Results** - Verify data integrity after conversion
+- **📅 Version Management** - Use stable versions for important conversions
+- **🔒 File Permissions** - Ensure sufficient file read/write permissions
 
-## 🎯 适用场景
+## 🎯 Applicable Scenarios
 
-### 🎮 飞行模拟爱好者
-- **✈️ 增强体验** - 在 TFDI MD-11 中使用高质量导航数据
-- **🌍 全球覆盖** - 获得全球机场和航路信息
-- **📊 真实数据** - 基于专业航空数据库的精确信息
+### 🎮 Flight Simulation Enthusiasts
+- **✈️ Enhanced Experience** - Use high-quality navigation data in the TFDI MD-11
+- **🌍 Global Coverage** - Access global airport and airway information
+- **📊 Real-World Data** - Accurate information based on professional aviation databases
 
-### 👨‍🏫 航空教学
-- **🎓 培训用途** - 为航空教学提供标准化数据
-- **📚 学习工具** - 理解现代航空导航系统
-- **🔄 数据更新** - 定期更新保持数据时效性
+### 👨‍🏫 Aviation Education
+- **🎓 Training Purposes** - Provide standardized data for aviation education
+- **📚 Learning Tool** - Understand modern aviation navigation systems
+- **🔄 Data Updates** - Regular updates to maintain data currency
 
-### 👨‍💻 开发者
-- **🔧 数据处理** - 学习航空数据转换技术
-- **📝 格式研究** - 了解不同导航数据格式
-- **🧩 系统集成** - 将转换器集成到其他系统
+### 👨‍💻 Developers
+- **🔧 Data Processing** - Learn aviation data conversion techniques
+- **📝 Format Research** - Understand different navigation data formats
+- **🧩 System Integration** - Integrate the converter into other systems
 
-## 📊 数据输出说明
+## 📊 Data Output Description
 
-### JSON 文件结构
-转换完成后，将生成以下 JSON 文件：
+### JSON File Structure
+After conversion, the following JSON files will be generated:
 
 ```
-Primary.7z 内容:
-├── 📄 AirportLookup.json      # 机场查找索引 (~500KB)
-├── 📄 Airports.json           # 机场基本信息 (~2MB)
-├── 📄 AirwayLegs.json        # 航路段详细数据 (~3MB)
-├── 📄 Airways.json           # 航路定义 (~800KB)
-├── 📄 Ilses.json             # ILS 进近数据 (~1.5MB)
-├── 📄 NavaidLookup.json      # 导航设备索引 (~300KB)
-├── 📄 Navaids.json           # 导航设备数据 (~1.2MB)
-├── 📄 Runways.json           # 跑道信息 (~2.5MB)
-├── 📄 Terminals.json         # 终端程序定义 (~800KB)
-├── 📄 WaypointLookup.json    # 航路点索引 (~1MB)
-├── 📄 Waypoints.json         # 航路点数据 (~4MB)
-└── 📁 ProcedureLegs/         # 程序段目录
-    ├── TermID_1.json         # 终端程序段
+Primary.7z Contents:
+├── 📄 AirportLookup.json      # Airport lookup index (~500KB)
+├── 📄 Airports.json           # Airport basic information (~2MB)
+├── 📄 AirwayLegs.json        # Airway segment detailed data (~3MB)
+├── 📄 Airways.json           # Airway definitions (~800KB)
+├── 📄 Ilses.json             # ILS approach data (~1.5MB)
+├── 📄 NavaidLookup.json      # Navaid lookup index (~300KB)
+├── 📄 Navaids.json           # Navaid data (~1.2MB)
+├── 📄 Runways.json           # Runway information (~2.5MB)
+├── 📄 Terminals.json         # Terminal procedure definitions (~800KB)
+├── 📄 WaypointLookup.json    # Waypoint lookup index (~1MB)
+├── 📄 Waypoints.json         # Waypoint data (~4MB)
+└── 📁 ProcedureLegs/         # Procedure segment directory
+    ├── TermID_1.json         # Terminal procedure segments
     ├── TermID_2.json
     └── ...
 ```
 
-### 数据格式示例
+### Data Format Examples
 ```json
-// Airports.json 示例
+// Airports.json Example
 {
   "ZBAA": {
     "AirportID": "ZBAA",
@@ -220,7 +220,7 @@ Primary.7z 内容:
   }
 }
 
-// Waypoints.json 示例
+// Waypoints.json Example
 {
   "ELMAG": {
     "WaypointID": "ELMAG",
@@ -231,48 +231,48 @@ Primary.7z 内容:
 }
 ```
 
-## 🔄 更新和维护
+## 🔄 Updates and Maintenance
 
-### 数据更新频率
-- **定期更新**: 建议每 28 天更新一次（AIRAC 周期）
-- **版本跟踪**: 关注 Fenix 和 TFDI 的版本更新
-- **兼容性检查**: 更新前验证版本兼容性
+### Data Update Frequency
+- **Regular Updates**: Recommended to update every 28 days (AIRAC cycle)
+- **Version Tracking**: Follow Fenix and TFDI version updates
+- **Compatibility Check**: Verify version compatibility before updating
 
-### 转换器更新
-- **GitHub Releases**: 关注项目发布页面
-- **自动检查**: 定期检查转换器版本更新
-- **功能改进**: 参与社区反馈和功能建议
+### Converter Updates
+- **GitHub Releases**: Follow the project release page
+- **Automatic Check**: Regularly check for converter version updates
+- **Feature Improvements**: Participate in community feedback and feature suggestions
 
-## 🆘 获取帮助
+## 🆘 Get Help
 
-如果在使用过程中遇到问题：
+If you encounter issues during use:
 
-1. **📚 查阅文档** - 首先查看相关章节的详细说明
-2. **🔍 检查日志** - 查看生成的日志文件了解错误详情
-3. **🧪 运行诊断** - 使用内置诊断工具检查系统状态
-4. **💬 社区支持** - 在 GitHub Issues 中报告问题
+1.  **📚 Consult Documentation** - First, check the detailed explanations in relevant sections
+2.  **🔍 Check Logs** - View generated log files for error details
+3.  **🧪 Run Diagnostics** - Use the built-in diagnostic tools to check system status
+4.  **💬 Community Support** - Report issues in GitHub Issues
 
-### 快速诊断命令
+### Quick Diagnostic Commands
 ```bash
-# 检查转换器版本
+# Check converter version
 python Fenix2TFDINavDataConverter.py --version
 
-# 验证环境
-python -c "import rich, pandas, py7zr; print('环境正常')"
+# Verify environment
+python -c "import rich, pandas, py7zr; print('Environment OK')"
 
-# 测试数据库连接
-python -c "import sqlite3; sqlite3.connect('nd.db3').close(); print('数据库可访问')"
+# Test database connection
+python -c "import sqlite3; sqlite3.connect('nd.db3').close(); print('Database accessible')"
 ```
 
-### 性能监控
+### Performance Monitoring
 ```python
-# 监控系统资源
+# Monitor system resources
 import psutil
 print(f"CPU: {psutil.cpu_percent()}%")
-print(f"内存: {psutil.virtual_memory().percent}%")
-print(f"磁盘: {psutil.disk_usage('.').percent}%")
+print(f"Memory: {psutil.virtual_memory().percent}%")
+print(f"Disk: {psutil.disk_usage('.').percent}%")
 ```
 
 ---
 
-**下一步**: 前往 [安装指南](installation.md) 开始配置您的环境，或直接查看 [使用说明](usage.md) 快速上手转换过程！🚁✨
+**Next Step**: Head to the [Installation Guide](installation.md) to start configuring your environment, or directly view the [Usage Instructions](usage.md) to quickly get started with the conversion process! 🚁✨

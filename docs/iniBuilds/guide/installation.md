@@ -1,112 +1,112 @@
-# 📥 安装指南
+# 📥 Installation Guide
 
 <div class="installation-header">
   <div class="header-content">
-    <h2>Nav-data iniBuilds A350 安装向导</h2>
-    <p>本指南将引导您完成Nav-data航空导航数据转换工具的完整安装过程，确保系统环境配置正确。</p>
+    <h2>Nav-data iniBuilds A350 Installation Guide</h2>
+    <p>This guide will walk you through the complete installation process for the Nav-data aviation navigation data conversion tool, ensuring correct system environment configuration.</p>
   </div>
   <div class="progress-indicator">
     <div class="step active" data-step="1">
       <div class="step-number">1</div>
-      <div class="step-label">系统检查</div>
+      <div class="step-label">System Check</div>
     </div>
     <div class="step" data-step="2">
       <div class="step-number">2</div>
-      <div class="step-label">Python环境</div>
+      <div class="step-label">Python Environment</div>
     </div>
     <div class="step" data-step="3">
       <div class="step-number">3</div>
-      <div class="step-label">MSFS配置</div>
+      <div class="step-label">MSFS Configuration</div>
     </div>
     <div class="step" data-step="4">
       <div class="step-number">4</div>
-      <div class="step-label">验证完成</div>
+      <div class="step-label">Verification Complete</div>
     </div>
   </div>
 </div>
 
-## 🖥️ 系统要求
+## 🖥️ System Requirements
 
-### 📋 配置要求对比
+### 📋 Configuration Requirements Comparison
 
 <div class="requirements-comparison">
   <div class="req-column">
-    <h4>🟡 最低配置</h4>
+    <h4>🟡 Minimum Requirements</h4>
     <div class="req-card minimal">
       <div class="req-item">
         <span class="req-icon">💻</span>
         <div class="req-details">
-          <strong>操作系统</strong>
+          <strong>Operating System</strong>
           <span>Windows 10 1903+</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">🐍</span>
         <div class="req-details">
-          <strong>Python版本</strong>
+          <strong>Python Version</strong>
           <span>Python 3.8+</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">🧠</span>
         <div class="req-details">
-          <strong>内存</strong>
+          <strong>RAM</strong>
           <span>8GB RAM</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">💾</span>
         <div class="req-details">
-          <strong>存储空间</strong>
-          <span>2GB 可用空间</span>
+          <strong>Storage Space</strong>
+          <span>2GB Available Space</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">🌐</span>
         <div class="req-details">
-          <strong>网络</strong>
-          <span>宽带互联网连接</span>
+          <strong>Network</strong>
+          <span>Broadband Internet Connection</span>
         </div>
       </div>
     </div>
   </div>
   
   <div class="req-column">
-    <h4>🟢 推荐配置</h4>
+    <h4>🟢 Recommended Requirements</h4>
     <div class="req-card recommended">
       <div class="req-item">
         <span class="req-icon">💻</span>
         <div class="req-details">
-          <strong>操作系统</strong>
+          <strong>Operating System</strong>
           <span>Windows 11 22H2+</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">🐍</span>
         <div class="req-details">
-          <strong>Python版本</strong>
+          <strong>Python Version</strong>
           <span>Python 3.11+</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">🧠</span>
         <div class="req-details">
-          <strong>内存</strong>
+          <strong>RAM</strong>
           <span>16GB+ RAM</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">💾</span>
         <div class="req-details">
-          <strong>存储空间</strong>
-          <span>5GB+ 可用空间</span>
+          <strong>Storage Space</strong>
+          <span>5GB+ Available Space</span>
         </div>
       </div>
       <div class="req-item">
         <span class="req-icon">🌐</span>
         <div class="req-details">
-          <strong>网络</strong>
-          <span>稳定高速连接</span>
+          <strong>Network</strong>
+          <span>Stable High-Speed Connection</span>
         </div>
       </div>
     </div>
@@ -285,99 +285,99 @@
 }
 </style>
 
-### ✈️ 必需软件
+### ✈️ Required Software
 
-- [**Microsoft Flight Simulator**](https://www.flightsimulator.com/) (2020或2024版本)
-- [**Python 3.8+**](https://www.python.org/downloads/) 开发环境
-- 目标飞机插件：[**iniBuilds A350**](https://www.inibuilds.com/) 或 [**PMDG 737/777**](https://pmdg.com/)
+- [**Microsoft Flight Simulator**](https://www.flightsimulator.com/) (2020 or 2024 Version)
+- [**Python 3.8+**](https://www.python.org/downloads/) Development Environment
+- Target Aircraft Add-on: [**iniBuilds A350**](https://www.inibuilds.com/) or [**PMDG 737/777**](https://pmdg.com/)
 
-### 📊 数据源订阅（选择其一）
+### 📊 Data Source Subscription (Choose One)
 
-- [**Navigraph**](https://navigraph.com/) - 推荐，数据更新及时
-- [**Aerosoft NavDataPro**](https://www.aerosoft.com/en/microsoft-flight-simulator/msfs-tools/navigation-data/) - 价格实惠的替代方案
+- [**Navigraph**](https://navigraph.com/) - Recommended, timely data updates
+- [**Aerosoft NavDataPro**](https://www.aerosoft.com/en/microsoft-flight-simulator/msfs-tools/navigation-data/) - Affordable alternative
 
-## 🐍 Python环境安装
+## 🐍 Python Environment Installation
 
-### 步骤1：下载并安装Python
+### Step 1: Download and Install Python
 
-1. 访问 [Python官方网站](https://www.python.org/downloads/)
-2. 下载最新的Python 3.11版本（推荐）
-3. **重要**：安装时勾选"Add Python to PATH"选项
+1.  Visit the [Python Official Website](https://www.python.org/downloads/)
+2.  Download the latest Python 3.11 version (recommended)
+3.  **Important**: During installation, check the "Add Python to PATH" option
 
 ```powershell
-# 验证Python安装
+# Verify Python installation
 python --version
-# 应显示：Python 3.11.x
+# Should display: Python 3.11.x
 
-# 验证pip安装
+# Verify pip installation
 pip --version
-# 应显示pip版本信息
+# Should display pip version information
 ```
 
-### 步骤2：安装项目依赖
+### Step 2: Install Project Dependencies
 
 ```bash
-# 克隆或下载项目到本地
+# Clone or download the project locally
 cd /path/to/nav-data
 
-# 安装所需依赖包
+# Install required dependency packages
 pip install -r requirements.txt
 ```
 
-#### 依赖包说明
+#### Dependency Package Description
 
-| 包名 | 版本 | 用途 |
+| Package Name | Version | Purpose |
 |------|------|------|
-| `pandas` | ≥1.3.0 | 数据处理和分析 |
-| `requests` | ≥2.26.0 | HTTP请求处理 |
-| `tqdm` | ≥4.62.0 | 进度条显示 |
-| `chardet` | ≥4.0.0 | 字符编码检测 |
-| `ratelimit` | ≥2.2.1 | API请求限制 |
-| `pygeomag` | ≥0.9.0 | 地磁偏角计算 |
+| `pandas` | ≥1.3.0 | Data processing and analysis |
+| `requests` | ≥2.26.0 | HTTP request handling |
+| `tqdm` | ≥4.62.0 | Progress bar display |
+| `chardet` | ≥4.0.0 | Character encoding detection |
+| `ratelimit` | ≥2.2.1 | API request limiting |
+| `pygeomag` | ≥0.9.0 | Geomagnetic declination calculation |
 
-### 步骤3：验证安装
+### Step 3: Verify Installation
 
 ```python
-# 测试关键依赖
-python -c "import pandas, sqlite3, pygeomag; print('所有依赖安装成功！')"
+# Test critical dependencies
+python -c "import pandas, sqlite3, pygeomag; print('All dependencies installed successfully!')"
 ```
 
-## 🎮 Microsoft Flight Simulator配置
+## 🎮 Microsoft Flight Simulator Configuration
 
-### 🔍 确认MSFS安装位置
+### 🔍 Confirm MSFS Installation Location
 
-根据您的MSFS版本和购买渠道，Community文件夹位置如下：
+Depending on your MSFS version and purchase channel, the Community folder location is as follows:
 
 #### MSFS 2020
 
-**Microsoft Store版**
+**Microsoft Store Version**
 ```
 %LOCALAPPDATA%\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache\Packages\Community
 ```
 
-**Steam版**
+**Steam Version**
 ```
 %APPDATA%\Microsoft Flight Simulator\Packages\Community
 ```
 
 #### MSFS 2024
 
-**Microsoft Store版**
+**Microsoft Store Version**
 ```
 %LOCALAPPDATA%\Packages\Microsoft.Limitless_8wekyb3d8bbwe\LocalCache\Packages\Community
 ```
 
-**Steam版**
+**Steam Version**
 ```
 %APPDATA%\Microsoft Flight Simulator 2024\Packages\Community
 ```
 
-### 🛠️ 快速路径检测脚本
+### 🛠️ Quick Path Detection Script
 
-创建以下PowerShell脚本来自动检测您的MSFS安装：
+Create the following PowerShell script to automatically detect your MSFS installation:
 
 ```powershell
-# 保存为 detect_msfs.ps1
+# Save as detect_msfs.ps1
 $paths = @(
     "$env:LOCALAPPDATA\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache\Packages\Community",
     "$env:APPDATA\Microsoft Flight Simulator\Packages\Community",
@@ -387,130 +387,130 @@ $paths = @(
 
 foreach ($path in $paths) {
     if (Test-Path $path) {
-        Write-Host "找到MSFS Community文件夹: $path" -ForegroundColor Green
+        Write-Host "Found MSFS Community folder: $path" -ForegroundColor Green
     }
 }
 ```
 
-## ✈️ 飞机插件验证
+## ✈️ Aircraft Add-on Verification
 
-### iniBuilds A350验证
+### iniBuilds A350 Verification
 
-检查以下目录是否存在：
-
-```
-[Community文件夹]\inibuilds-aircraft-a350\Config\NavigationData\
-```
-
-### PMDG插件验证
-
-检查以下目录是否存在（根据您的PMDG飞机型号）：
+Check if the following directory exists:
 
 ```
-[Community文件夹]\pmdg-aircraft-737\Config\Navdata\
-[Community文件夹]\pmdg-aircraft-738\Config\Navdata\
-[Community文件夹]\pmdg-aircraft-77w\Config\Navdata\
-[Community文件夹]\pmdg-aircraft-77f\Config\Navdata\
+[Community Folder]\inibuilds-aircraft-a350\Config\NavigationData\
 ```
 
-## 📁 项目目录结构
+### PMDG Add-on Verification
 
-安装完成后，您的项目目录应该如下所示：
+Check if the following directories exist (depending on your PMDG aircraft model):
+
+```
+[Community Folder]\pmdg-aircraft-737\Config\Navdata\
+[Community Folder]\pmdg-aircraft-738\Config\Navdata\
+[Community Folder]\pmdg-aircraft-77w\Config\Navdata\
+[Community Folder]\pmdg-aircraft-77f\Config\Navdata\
+```
+
+## 📁 Project Directory Structure
+
+After installation, your project directory should look like this:
 
 ```
 nav-data/
-├── XP2INI_NDB_Converter.py    # 主转换程序
-├── requirements.txt           # Python依赖列表
-├── README.md                 # 项目说明
-├── LICENSE                   # 许可证文件
+├── XP2INI_NDB_Converter.py    # Main conversion program
+├── requirements.txt           # Python dependency list
+├── README.md                 # Project README
+├── LICENSE                   # License file
 │
 ├── 数据处理模块/
-│   ├── airports.py           # 机场数据处理
-│   ├── runways.py           # 跑道数据处理
-│   ├── vhfs.py              # VHF导航台处理
-│   ├── ndbs.py              # NDB导航台处理
-│   ├── enroute_waypoints.py # 航路点处理
-│   ├── terminal_waypoints.py# 终端点处理
-│   ├── sids.py              # SID程序处理
-│   ├── stars.py             # STAR程序处理
-│   ├── iaps.py              # 进近程序处理
-│   ├── airways.py           # 航路处理
-│   └── gs.py                # 着陆引导处理
+│   ├── airports.py           # Airport data processing
+│   ├── runways.py           # Runway data processing
+│   ├── vhfs.py              # VHF Navaid processing
+│   ├── ndbs.py              # NDB Navaid processing
+│   ├── enroute_waypoints.py # Enroute waypoint processing
+│   ├── terminal_waypoints.py# Terminal waypoint processing
+│   ├── sids.py              # SID procedure processing
+│   ├── stars.py             # STAR procedure processing
+│   ├── iaps.py              # Approach procedure processing
+│   ├── airways.py           # Airway processing
+│   └── gs.py                # Glide Slope processing
 │
-└── docs/                    # 文档目录
-    ├── guide/               # 使用指南
-    └── ...                  # 其他文档
+└── docs/                    # Documentation directory
+    ├── guide/               # User Guide
+    └── ...                  # Other documentation
 ```
 
-## 🔧 环境变量配置（可选）
+## 🔧 Environment Variable Configuration (Optional)
 
-为了更便捷的使用，您可以设置以下环境变量：
+For more convenient use, you can set the following environment variables:
 
 ```powershell
-# 设置MSFS Community路径
-setx MSFS_COMMUNITY_PATH "C:\Users\[用户名]\AppData\Local\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache\Packages\Community"
+# Set MSFS Community path
+setx MSFS_COMMUNITY_PATH "C:\Users\[Username]\AppData\Local\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache\Packages\Community"
 
-# 设置Nav-data工作目录
+# Set Nav-data working directory
 setx NAVDATA_WORKSPACE "C:\path\to\nav-data"
 ```
 
-## ✅ 安装验证清单
+## ✅ Installation Verification Checklist
 
-完成安装后，请确认以下项目：
+After completing the installation, please confirm the following items:
 
-- [ ] Python 3.8+已正确安装并添加到PATH
-- [ ] 所有依赖包已成功安装
-- [ ] MSFS Community文件夹已定位
-- [ ] 目标飞机插件已安装并验证
-- [ ] 项目文件已下载到本地目录
-- [ ] 具有足够的磁盘空间（至少2GB）
+-   [ ] Python 3.8+ is correctly installed and added to PATH
+-   [ ] All dependency packages are successfully installed
+-   [ ] MSFS Community folder is located
+-   [ ] Target aircraft add-on is installed and verified
+-   [ ] Project files are downloaded to the local directory
+-   [ ] Sufficient disk space is available (at least 2GB)
 
-## 🚨 常见安装问题
+## 🚨 Common Installation Issues
 
-### Python相关问题
+### Python-Related Issues
 
-**问题**：`'python' 不是内部或外部命令`
+**Issue**: `'python' is not recognized as an internal or external command`
 ```bash
-# 解决方案：重新安装Python并确保勾选"Add to PATH"
-# 或手动添加Python到系统PATH
+# Solution: Reinstall Python and ensure "Add to PATH" is checked
+# Or manually add Python to system PATH
 ```
 
-**问题**：`ModuleNotFoundError: No module named 'xxx'`
+**Issue**: `ModuleNotFoundError: No module named 'xxx'`
 ```bash
-# 解决方案：重新安装依赖
+# Solution: Reinstall dependencies
 pip install --upgrade -r requirements.txt
 ```
 
-### 权限问题
+### Permission Issues
 
-**问题**：无法访问MSFS文件夹
+**Issue**: Unable to access MSFS folder
 ```powershell
-# 解决方案：以管理员身份运行PowerShell/命令提示符
-# 右键点击 → "以管理员身份运行"
+# Solution: Run PowerShell/Command Prompt as administrator
+# Right-click → "Run as administrator"
 ```
 
-### 路径问题
+### Path Issues
 
-**问题**：找不到飞机插件目录
+**Issue**: Aircraft add-on directory not found
 ```bash
-# 解决方案：
-# 1. 确认飞机插件已正确安装
-# 2. 在MSFS中启动飞机一次以创建必要目录
-# 3. 检查插件是否在正确的Community文件夹中
+# Solution:
+# 1. Confirm the aircraft add-on is correctly installed
+# 2. Launch the aircraft in MSFS once to create necessary directories
+# 3. Check if the add-on is in the correct Community folder
 ```
 
-## 🔄 更新说明
+## 🔄 Update Instructions
 
-要更新Nav-data到最新版本：
+To update Nav-data to the latest version:
 
 ```bash
-# 拉取最新代码
+# Pull latest code
 git pull origin main
 
-# 更新依赖包
+# Update dependency packages
 pip install --upgrade -r requirements.txt
 ```
 
 ---
 
-安装完成！接下来请查看 [**配置说明**](./configuration.md) 来设置数据源和AIRAC周期。 
+Installation complete! Next, please refer to the [**Configuration Guide**](./configuration.md) to set up data sources and AIRAC cycles.

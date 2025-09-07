@@ -1,27 +1,27 @@
-# 🔄 使用说明
+# 🔄 Usage Guide
 
-本指南将带您完成Nav-data工具的完整使用流程，从数据转换到最终部署到飞机插件。
+This guide will walk you through the complete usage workflow of the Nav-data tool, from data conversion to final deployment to your aircraft add-ons.
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### ⚡ 一键转换
+### ⚡ One-Click Conversion
 
-如果您已经完成配置，可以直接运行主程序：
+If you have already completed the configuration, you can directly run the main program:
 
 ```bash
 python XP2INI_NDB_Converter.py
 ```
 
-程序将自动引导您完成整个转换过程。
+The program will automatically guide you through the entire conversion process.
 
-## 📝 详细操作流程
+## 📝 Detailed Workflow
 
-### 🎯 第一步：数据准备验证
+### 🎯 Step One: Data Preparation and Validation
 
-在开始转换前，确保所有必需的数据文件已就位：
+Before starting the conversion, ensure all required data files are in place:
 
 ```bash
-# 验证数据文件完整性
+# Verify data file integrity
 python -c "
 import os
 files = [
@@ -38,29 +38,29 @@ for f in files:
 "
 ```
 
-### 🔧 第二步：启动转换程序
+### 🔧 Step Two: Launch Conversion Program
 
-运行主转换程序并按照提示操作：
+Run the main conversion program and follow the prompts:
 
 ```bash
 python XP2INI_NDB_Converter.py
 ```
 
-### 📂 第三步：路径配置向导
+### 📂 Step Three: Path Configuration Wizard
 
-程序将引导您完成路径配置：
+The program will guide you through the path configuration:
 
-#### 3.1 基础目录设置
+#### 3.1 Base Directory Setup
 ```
-请输入基础目录路径（包含NAIP, NDBs和XP_Data文件夹）: 
+Please enter the base directory path (containing NAIP, NDBs, and XP_Data folders): 
 > C:\NavData\Workspace
 ```
 
-#### 3.2 自动路径检测
-程序会自动扫描并显示检测到的文件：
+#### 3.2 Automatic Path Detection
+The program will automatically scan and display the detected files:
 
 ```
-================= 开始路径配置 =================
+================= Starting Path Configuration =================
 ✅ NAIP_PATH: C:\NavData\Workspace\NAIP
 ✅ DB_OUTPUT_PATH: C:\NavData\Workspace\Output\e_dfd_PMDG.s3db
 ✅ FNX_NDB_PATH: C:\NavData\Workspace\NDBs\nd.db3
@@ -70,170 +70,170 @@ python XP2INI_NDB_Converter.py
 ✅ LOOKUP_TXT_PATH: C:\NavData\Workspace\ICAO.txt
 ```
 
-#### 3.3 路径确认
+#### 3.3 Path Confirmation
 ```
-是否确认以上路径全部正确？(Y/N): Y
-```
-
-### ⚙️ 第四步：数据处理流程
-
-转换程序将按以下顺序处理各类数据：
-
-#### 4.1 机场数据处理
-```
-开始处理机场数据...
-📍 正在解析机场基础信息
-🧭 计算机场磁偏角数据
-✅ 机场数据处理完成 (处理了 156 个机场)
+Are all the above paths correct? (Y/N): Y
 ```
 
-#### 4.2 跑道数据处理
+### ⚙️ Step Four: Data Processing Workflow
+
+The conversion program will process various data types in the following order:
+
+#### 4.1 Airport Data Processing
 ```
-开始处理跑道数据...
-🛬 正在处理跑道信息
-📐 计算跑道方向和坐标
-✅ 跑道数据处理完成 (处理了 312 条跑道)
+Starting airport data processing...
+📍 Parsing basic airport information
+🧭 Calculating airport magnetic variation data
+✅ Airport data processing complete (156 airports processed)
 ```
 
-#### 4.3 VHF导航台处理
+#### 4.2 Runway Data Processing
 ```
-开始处理VHF数据...
-📡 正在处理VOR/DME导航台
-🔢 计算导航台频率和覆盖范围
-✅ VHF数据处理完成 (处理了 89 个导航台)
-```
-
-#### 4.4 GS着陆引导系统
-```
-开始处理GS数据...
-🛬 正在处理ILS着陆系统
-📐 计算滑行坡度和位置
-✅ GS数据处理完成
+Starting runway data processing...
+🛬 Processing runway information
+📐 Calculating runway directions and coordinates
+✅ Runway data processing complete (312 runways processed)
 ```
 
-#### 4.5 NDB导航台处理
+#### 4.3 VHF Navaid Processing
 ```
-开始处理NDB数据...
-📻 正在处理非定向信标台
-🧭 计算NDB磁偏角
-✅ NDB数据处理完成 (处理了 45 个NDB)
-```
-
-#### 4.6 航路点数据处理
-```
-开始处理航路点数据...
-🗺️ 正在处理航路航路点
-✅ 航路点数据处理完成 (处理了 2,453 个点)
+Starting VHF data processing...
+📡 Processing VOR/DME navaids
+🔢 Calculating navaid frequencies and coverage
+✅ VHF data processing complete (89 navaids processed)
 ```
 
-#### 4.7 终端区域点处理
+#### 4.4 GS Landing System
 ```
-开始处理终端点数据...
-🏢 正在处理终端区域航路点
-✅ 终端点数据处理完成 (处理了 876 个点)
-```
-
-#### 4.8 SID离场程序处理
-```
-开始处理离场程序...
-🛫 正在处理SID程序
-📋 解析程序航路点和限制
-✅ 离场程序处理完成 (处理了 234 个程序)
+Starting GS data processing...
+🛬 Processing ILS landing systems
+📐 Calculating glide slope and position
+✅ GS data processing complete
 ```
 
-#### 4.9 STAR进场程序处理
+#### 4.5 NDB Navaid Processing
 ```
-开始处理进场程序...
-🛬 正在处理STAR程序
-📋 解析程序航路点和限制
-✅ 进场程序处理完成 (处理了 198 个程序)
-```
-
-#### 4.10 IAP进近程序处理
-```
-开始处理进近程序...
-🎯 正在处理进近程序
-📋 解析进近航路点和限制
-✅ 进近程序处理完成 (处理了 445 个程序)
+Starting NDB data processing...
+📻 Processing Non-Directional Beacons (NDBs)
+🧭 Calculating NDB magnetic variation
+✅ NDB data processing complete (45 NDBs processed)
 ```
 
-#### 4.11 航路数据处理
+#### 4.6 Waypoint Data Processing
 ```
-开始处理航路数据...
-🛣️ 正在处理高低空航路
-🔗 建立航路点连接关系
-✅ 航路数据处理完成 (处理了 167 条航路)
-```
-
-#### 4.12 数据库优化
-```
-🗜️ 正在压缩数据库...
-📊 删除临时索引...
-✅ 数据库优化完成
+Starting waypoint data processing...
+🗺️ Processing enroute waypoints
+✅ Waypoint data processing complete (2,453 points processed)
 ```
 
-### ⏱️ 第五步：处理完成
+#### 4.7 Terminal Waypoint Processing
+```
+Starting terminal point data processing...
+🏢 Processing terminal area waypoints
+✅ Terminal point data processing complete (876 points processed)
+```
+
+#### 4.8 SID Departure Procedure Processing
+```
+Starting departure procedure processing...
+🛫 Processing SID procedures
+📋 Parsing procedure waypoints and restrictions
+✅ Departure procedure processing complete (234 procedures processed)
+```
+
+#### 4.9 STAR Arrival Procedure Processing
+```
+Starting arrival procedure processing...
+🛬 Processing STAR procedures
+📋 Parsing procedure waypoints and restrictions
+✅ Arrival procedure processing complete (198 procedures processed)
+```
+
+#### 4.10 IAP Approach Procedure Processing
+```
+Starting approach procedure processing...
+🎯 Processing approach procedures
+📋 Parsing approach waypoints and restrictions
+✅ Approach procedure processing complete (445 procedures processed)
+```
+
+#### 4.11 Airway Data Processing
+```
+Starting airway data processing...
+🛣️ Processing high and low altitude airways
+🔗 Establishing waypoint connections
+✅ Airway data processing complete (167 airways processed)
+```
+
+#### 4.12 Database Optimization
+```
+🗜️ Compressing database...
+📊 Deleting temporary indices...
+✅ Database optimization complete
+```
+
+### ⏱️ Step Five: Processing Complete
 
 ```
 =====================================
-🎉 数据处理完成，用时 127.3 秒
-📄 输出文件：C:\NavData\Workspace\Output\e_dfd_PMDG.s3db
-📊 数据库大小：15.6 MB
-📈 处理统计：
-   - 机场: 156 个
-   - 跑道: 312 条
-   - VHF导航台: 89 个
-   - NDB导航台: 45 个
-   - 航路点: 3,329 个
-   - SID程序: 234 个
-   - STAR程序: 198 个
-   - 进近程序: 445 个
-   - 航路: 167 条
+🎉 Data processing complete, time taken: 127.3 seconds
+📄 Output file: C:\NavData\Workspace\Output\e_dfd_PMDG.s3db
+📊 Database size: 15.6 MB
+📈 Processing statistics:
+   - Airports: 156
+   - Runways: 312
+   - VHF Navaids: 89
+   - NDB Navaids: 45
+   - Waypoints: 3,329
+   - SID Procedures: 234
+   - STAR Procedures: 198
+   - Approach Procedures: 445
+   - Airways: 167
 =====================================
-按Enter键退出...
+Press Enter to exit...
 ```
 
-## 🚁 数据部署指南
+## 🚁 Data Deployment Guide
 
-### 📁 目标飞机识别
+### 📁 Target Aircraft Identification
 
-根据您使用的飞机插件选择对应的部署路径：
+Select the corresponding deployment path based on the aircraft add-on you are using:
 
-#### iniBuilds A350系列
+#### iniBuilds A350 Series
 ```
-[MSFS Community文件夹]\inibuilds-aircraft-a350\work\NavigationData\
-```
-
-#### PMDG 737系列
-```
-[MSFS Community文件夹]\pmdg-aircraft-737\Config\Navdata\
-[MSFS Community文件夹]\pmdg-aircraft-738\Config\Navdata\
-[MSFS Community文件夹]\pmdg-aircraft-739\Config\Navdata\
+[MSFS Community Folder]\inibuilds-aircraft-a350\work\NavigationData\
 ```
 
-#### PMDG 777系列
+#### PMDG 737 Series
 ```
-[MSFS Community文件夹]\pmdg-aircraft-77w\Config\Navdata\
-[MSFS Community文件夹]\pmdg-aircraft-77f\Config\Navdata\
+[MSFS Community Folder]\pmdg-aircraft-737\Config\Navdata\
+[MSFS Community Folder]\pmdg-aircraft-738\Config\Navdata\
+[MSFS Community Folder]\pmdg-aircraft-739\Config\Navdata\
 ```
 
-### 🔄 部署流程
+#### PMDG 777 Series
+```
+[MSFS Community Folder]\pmdg-aircraft-77w\Config\Navdata\
+[MSFS Community Folder]\pmdg-aircraft-77f\Config\Navdata\
+```
 
-#### 步骤1：备份现有数据
+### 🔄 Deployment Process
 
-**重要**：始终在部署新数据前创建备份！
+#### Step 1: Back Up Existing Data
+
+**IMPORTANT**: Always create a backup before deploying new data!
 
 ```powershell
-# 备份现有导航数据
+# Back up existing navigation data
 $targetDir = "C:\...\pmdg-aircraft-77w\Config\Navdata"
 $backupDir = "$targetDir" + "_backup_" + (Get-Date -Format "yyyyMMdd")
 Copy-Item $targetDir $backupDir -Recurse
-Write-Host "备份创建完成: $backupDir"
+Write-Host "Backup created: $backupDir"
 ```
 
-#### 步骤2：清空缓存目录
+#### Step 2: Clear Cache Directory
 
-清空MSFS的导航数据缓存：
+Clear the MSFS navigation data cache:
 
 **MSFS 2020 (Microsoft Store)**
 ```
@@ -255,64 +255,64 @@ Write-Host "备份创建完成: $backupDir"
 %APPDATA%\Microsoft Flight Simulator 2024\WASM\MSFS2024\[aircraft-folder]\work\NavigationData\
 ```
 
-#### 步骤3：部署新数据
+#### Step 3: Deploy New Data
 
-将转换后的数据库文件复制到目标位置：
+Copy the converted database file to the target location:
 
 ```bash
-# 复制数据库文件
-copy "C:\NavData\Workspace\Output\e_dfd_PMDG.s3db" "[目标导航数据目录]\"
+# Copy database file
+copy "C:\NavData\Workspace\Output\e_dfd_PMDG.s3db" "[Target Navigation Data Directory]\"
 ```
 
-#### 步骤4：验证部署
+#### Step 4: Verify Deployment
 
-启动MSFS并加载飞机，检查以下项目：
+Launch MSFS and load the aircraft, then check the following items:
 
-- [ ] FMC正常启动且无数据库错误
-- [ ] 能够查询机场信息（ICAO代码）
-- [ ] 能够规划航路（起点到终点）
-- [ ] SID/STAR程序可用且完整
-- [ ] 进近程序可选择且数据正确
+- [ ] FMC starts normally and without database errors
+- [ ] Able to query airport information (ICAO code)
+- [ ] Able to plan routes (origin to destination)
+- [ ] SID/STAR procedures are available and complete
+- [ ] Approach procedures are selectable and data is correct
 
-## 🔧 高级使用技巧
+## 🔧 Advanced Usage Tips
 
-### 📊 批量处理脚本
+### 📊 Batch Processing Script
 
-创建批处理脚本实现自动化操作：
+Create a batch script to automate operations:
 
 ```batch
 @echo off
 echo ======================================
-echo     Nav-data 自动转换脚本
+echo     Nav-data Automatic Conversion Script
 echo ======================================
 
 cd /d "C:\NavData\iniBuilds"
 
-echo 1. 开始数据转换...
+echo 1. Starting data conversion...
 python XP2INI_NDB_Converter.py
 
-echo 2. 备份现有数据...
+echo 2. Backing up existing data...
 set BACKUP_DIR=C:\NavData\Backup\%date:~0,4%%date:~5,2%%date:~8,2%
 mkdir "%BACKUP_DIR%"
 xcopy "C:\Users\%USERNAME%\AppData\...\inibuilds-aircraft-a350\work\NavigationData" "%BACKUP_DIR%" /E /I
 
-echo 3. 清空缓存...
+echo 3. Clearing cache...
 del /Q "C:\Users\%USERNAME%\AppData\...\inibuilds-aircraft-a350\work\NavigationData\*"
 
-echo 4. 部署新数据...
+echo 4. Deploying new data...
 copy "Output\e_dfd_PMDG.s3db" "C:\Users\%USERNAME%\AppData\...\inibuilds-aircraft-a350\work\NavigationData\"
 
-echo 5. 完成！
+echo 5. Complete!
 pause
 ```
 
-### 🔄 定期更新工作流
+### 🔄 Scheduled Update Workflow
 
-设置自动更新流程：
+Set up an automatic update process:
 
 ```python
 #!/usr/bin/env python3
-"""自动更新工作流"""
+"""Automatic update workflow"""
 
 import schedule
 import time
@@ -320,55 +320,55 @@ import subprocess
 from datetime import datetime
 
 def update_navdata():
-    """执行导航数据更新"""
-    print(f"🔄 开始更新导航数据 - {datetime.now()}")
+    """Performs navigation data update"""
+    print(f"🔄 Starting navigation data update - {datetime.now()}")
     
     try:
-        # 运行转换程序
+        # Run the conversion program
         result = subprocess.run(['python', 'XP2INI_NDB_Converter.py'], 
                               capture_output=True, text=True)
         
         if result.returncode == 0:
-            print("✅ 导航数据更新成功！")
-            # 这里可以添加自动部署逻辑
+            print("✅ Navigation data updated successfully!")
+            # Automatic deployment logic can be added here
         else:
-            print("❌ 更新失败：", result.stderr)
+            print("❌ Update failed:", result.stderr)
             
     except Exception as e:
-        print(f"❌ 更新异常：{e}")
+        print(f"❌ Update exception: {e}")
 
-# 每28天运行一次（AIRAC周期）
+# Run every 28 days (AIRAC cycle)
 schedule.every(28).days.do(update_navdata)
 
-# 保持脚本运行
-print("📅 导航数据自动更新调度器已启动")
+# Keep the script running
+print("📅 Navigation data automatic update scheduler started")
 while True:
     schedule.run_pending()
-    time.sleep(3600)  # 每小时检查一次
+    time.sleep(3600)  # Check every hour
 ```
 
-### 🔍 数据质量验证
+### 🔍 Data Quality Validation
 
-创建验证脚本检查输出数据质量：
+Create a validation script to check output data quality:
 
 ```python
 #!/usr/bin/env python3
-"""数据质量验证脚本"""
+"""Data quality validation script"""
 
 import sqlite3
 import os
 
 def validate_database(db_path):
-    """验证数据库完整性和数据质量"""
+    """Validates database integrity and data quality"""
     
     if not os.path.exists(db_path):
-        print(f"❌ 数据库文件不存在: {db_path}")
+        print(f"❌ Database file does not exist: {db_path}")
         return False
     
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # 检查表结构
+    # Check table structure
     tables = [
         'tbl_airports',
         'tbl_runways', 
@@ -380,22 +380,22 @@ def validate_database(db_path):
         'tbl_er_enroute_airways'
     ]
     
-    print("🔍 数据库验证报告")
+    print("🔍 Database Validation Report")
     print("=" * 40)
     
     for table in tables:
         try:
             cursor.execute(f"SELECT COUNT(*) FROM {table}")
             count = cursor.fetchone()[0]
-            print(f"✅ {table}: {count} 条记录")
+            print(f"✅ {table}: {count} records")
         except sqlite3.OperationalError as e:
-            print(f"❌ {table}: 表不存在或查询失败")
+            print(f"❌ {table}: Table does not exist or query failed")
     
-    # 检查数据质量
-    print("\n📊 数据质量检查")
+    # Check data quality
+    print("\n📊 Data Quality Check")
     print("=" * 40)
     
-    # 检查空坐标
+    # Check for null coordinates
     cursor.execute("""
         SELECT COUNT(*) FROM tbl_airports 
         WHERE airport_latitude IS NULL OR airport_longitude IS NULL
@@ -403,9 +403,9 @@ def validate_database(db_path):
     null_coords = cursor.fetchone()[0]
     
     if null_coords == 0:
-        print("✅ 机场坐标: 无空值")
+        print("✅ Airport coordinates: No null values")
     else:
-        print(f"⚠️ 机场坐标: {null_coords} 个空值")
+        print(f"⚠️ Airport coordinates: {null_coords} null values")
     
     conn.close()
     return True
@@ -414,97 +414,97 @@ if __name__ == "__main__":
     validate_database("Output/e_dfd_PMDG.s3db")
 ```
 
-## 🚨 常见使用问题
+## 🚨 Common Usage Issues
 
-### 转换过程问题
+### Conversion Process Issues
 
-#### 问题：程序中途停止
+#### Issue: Program stops midway
 ```bash
-# 原因：数据文件损坏或路径错误
-# 解决：检查所有输入文件的完整性
+# Reason: Data file corrupted or incorrect path
+# Solution: Check the integrity of all input files
 python -c "
 import os
 for f in ['NAIP/AD_HP.csv', 'X-Plane/earth_fix.dat']:
     if os.path.exists(f):
         print(f'{f}: {os.path.getsize(f)} bytes')
     else:
-        print(f'{f}: 文件不存在')
+        print(f'{f}: File does not exist')
 "
 ```
 
-#### 问题：内存不足错误
+#### Issue: Insufficient Memory Error
 ```python
-# 解决：减少批处理大小
-# 在配置中设置较小的BATCH_SIZE
-BATCH_SIZE = 500  # 减少到500
+# Solution: Reduce batch size
+# Set a smaller BATCH_SIZE in the configuration
+BATCH_SIZE = 500  # Reduce to 500
 ```
 
-#### 问题：数据库锁定错误
+#### Issue: Database Locking Error
 ```bash
-# 原因：其他程序正在使用数据库
-# 解决：关闭所有相关程序后重新运行
+# Reason: Another program is using the database
+# Solution: Close all related programs and rerun
 taskkill /f /im "FlightSimulator.exe"
 ```
 
-### 部署问题
+### Deployment Issues
 
-#### 问题：FMC显示"DB OUT OF DATE"
+#### Issue: FMC displays "DB OUT OF DATE"
 ```bash
-# 原因：
-# 1. 数据库文件未正确复制
-# 2. MSFS缓存未清空
-# 3. AIRAC周期不匹配
+# Reasons:
+# 1. Database file not copied correctly
+# 2. MSFS cache not cleared
+# 3. AIRAC cycle mismatch
 
-# 解决步骤：
-# 1. 确认数据库文件存在于正确位置
-# 2. 完全删除NavigationData缓存文件夹内容
-# 3. 重启MSFS
+# Solution steps:
+# 1. Confirm database file exists in the correct location
+# 2. Completely delete the contents of the NavigationData cache folder
+# 3. Restart MSFS
 ```
 
-#### 问题：部分航路点或程序缺失
+#### Issue: Missing Waypoints or Procedures
 ```bash
-# 原因：CIFP数据不完整
-# 解决：
-# 1. 重新下载完整的CIFP数据包
-# 2. 确认目标机场的程序文件存在
-# 3. 检查ICAO区域码是否在支持范围内
+# Reason: Incomplete CIFP data
+# Solution:
+# 1. Re-download the complete CIFP data package
+# 2. Confirm the procedure files for the target airport exist
+# 3. Check if the ICAO region code is within the supported range
 ```
 
-## 📈 性能优化
+## 📈 Performance Optimization
 
-### 🚀 提升转换速度
+### 🚀 Improve Conversion Speed
 
 ```python
-# 启用多进程处理
-MULTIPROCESS_WORKERS = 8  # 根据CPU核心数调整
+# Enable multiprocessing
+MULTIPROCESS_WORKERS = 8  # Adjust according to CPU core count
 
-# 使用SSD存储
-# 将工作目录设置在SSD上可显著提升I/O性能
+# Use SSD storage
+# Setting the working directory on an SSD can significantly improve I/O performance
 
-# 增加可用内存
-# 关闭不必要的程序，确保至少8GB可用内存
+# Increase available memory
+# Close unnecessary programs, ensure at least 8GB of free memory
 ```
 
-### 📊 监控资源使用
+### 📊 Monitor Resource Usage
 
 ```python
 import psutil
 import time
 
 def monitor_performance():
-    """监控系统资源使用情况"""
+    """Monitors system resource usage"""
     while True:
         cpu = psutil.cpu_percent()
         memory = psutil.virtual_memory().percent
         disk = psutil.disk_usage('.').percent
         
-        print(f"CPU: {cpu}% | 内存: {memory}% | 磁盘: {disk}%")
+        print(f"CPU: {cpu}% | Memory: {memory}% | Disk: {disk}%")
         time.sleep(5)
 
-# 在转换过程中运行监控
+# Run monitoring during conversion
 monitor_performance()
 ```
 
 ---
 
-恭喜！您已经掌握了Nav-data工具的完整使用流程。 
+Congratulations! You have now mastered the complete usage workflow for the Nav-data tool.

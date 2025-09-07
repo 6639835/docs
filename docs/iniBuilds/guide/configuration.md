@@ -1,155 +1,155 @@
-# ⚙️ 配置说明
+# ⚙️ Configuration Guide
 
-本指南将详细介绍如何配置Nav-data转换工具的数据源、路径设置和AIRAC周期管理。
+This guide will detail how to configure the Nav-data conversion tool's data sources, path settings, and AIRAC cycle management.
 
-## 📊 数据源概述
+## 📊 Data Source Overview
 
-Nav-data工具支持多种业界标准的航空导航数据源，确保数据的权威性和准确性。
+The Nav-data tool supports various industry-standard aviation navigation data sources, ensuring the authority and accuracy of the data.
 
-### 🔄 支持的数据格式
+### 🔄 Supported Data Formats
 
-| 数据格式 | 来源 | 用途 | 标准 |
-|---------|------|------|------|
-| **NAIP CSV** | Navigraph/Aerosoft | 机场、跑道、航路 | ARINC 424 |
-| **X-Plane DAT** | X-Plane 11/12 | 航路点、导航台 | X-Plane格式 |
-| **CIFP** | 官方程序数据 | SID/STAR/进近 | ARINC 424 |
-| **SQLite DB** | Fenix A320 | NDB参考数据 | 自定义格式 |
+| Data Format | Source | Purpose | Standard |
+|-------------|--------|---------|----------|
+| **NAIP CSV** | Navigraph/Aerosoft | Airports, Runways, Airway Routes | ARINC 424 |
+| **X-Plane DAT** | X-Plane 11/12 | Waypoints, Navaids | X-Plane Format |
+| **CIFP** | Official Procedure Data | SID/STAR/Approach | ARINC 424 |
+| **SQLite DB** | Fenix A320 | NDB Reference Data | Custom Format |
 
-## 🗃️ 必需的数据文件
+## 🗃️ Required Data Files
 
-### 📁 基础目录结构
+### 📁 Basic Directory Structure
 
-创建以下目录结构来组织您的导航数据：
+Create the following directory structure to organize your navigation data:
 
 ```
 NavData_Workspace/
-├── NAIP/                    # NAIP CSV文件目录
-│   ├── AD_HP.csv           # 机场基础数据
-│   ├── RWY.csv             # 跑道信息
-│   ├── RWY_DIRECTION.csv   # 跑道方向数据
-│   └── RTE_SEG.csv         # 航路段数据
+├── NAIP/                    # NAIP CSV file directory
+│   ├── AD_HP.csv           # Airport Basic Data
+│   ├── RWY.csv             # Runway Information
+│   ├── RWY_DIRECTION.csv   # Runway Direction Data
+│   └── RTE_SEG.csv         # Route Segment Data
 │
-├── X-Plane/                 # X-Plane数据文件
-│   ├── earth_fix.dat       # 航路点数据
-│   └── earth_nav.dat       # 导航台数据
+├── X-Plane/                 # X-Plane data files
+│   ├── earth_fix.dat       # Waypoint Data
+│   └── earth_nav.dat       # Navaid Data
 │
-├── CIFP/                    # CIFP程序数据目录
-│   ├── ZBAA.dat            # 北京首都机场
-│   ├── ZSSS.dat            # 上海浦东机场
-│   └── [其他机场].dat      # 各机场程序文件
+├── CIFP/                    # CIFP procedure data directory
+│   ├── ZBAA.dat            # Beijing Capital Airport
+│   ├── ZSSS.dat            # Shanghai Pudong Airport
+│   └── [Other Airport].dat # Procedure files for various airports
 │
-├── NDBs/                    # NDB数据库
-│   └── nd.db3              # Fenix导航数据库
+├── NDBs/                    # NDB database
+│   └── nd.db3              # Fenix Navigation Database
 │
-└── Output/                  # 输出目录
-    └── e_dfd_PMDG.s3db     # 转换后的数据库
+└── Output/                  # Output directory
+    └── e_dfd_PMDG.s3db     # Converted database
 ```
 
-## 🌐 数据源获取指南
+## 🌐 Data Source Acquisition Guide
 
-### 1️⃣ Navigraph数据（推荐）
+### 1️⃣ Navigraph Data (Recommended)
 
-**获取步骤：**
-1. 访问 [Navigraph官网](https://navigraph.com/) 并注册账户
-2. 订阅Navigraph Unlimited或Charts + Data服务
-3. 下载Navigraph FMS Data Manager
-4. 在FMS Data Manager中选择"Generic"格式
-5. 下载并解压NAIP数据包
+**Acquisition Steps:**
+1.  Visit the [Navigraph official website](https://navigraph.com/) and register an account
+2.  Subscribe to Navigraph Unlimited or Charts + Data service
+3.  Download Navigraph FMS Data Manager
+4.  Select "Generic" format in FMS Data Manager
+5.  Download and unzip the NAIP data package
 
-**NAIP文件获取：**
+**NAIP File Acquisition:**
 ```
 Navigraph FMS Data Manager → 
 Generic → 
 NAIP Format → 
-下载当前AIRAC周期
+Download Current AIRAC Cycle
 ```
 
 ### 2️⃣ Aerosoft NavDataPro
 
-**获取步骤：**
-1. 购买 [Aerosoft NavDataPro](https://www.aerosoft.com/en/microsoft-flight-simulator/msfs-tools/navigation-data/)
-2. 下载NavDataPro应用程序
-3. 登录并下载NAIP格式数据
-4. 解压到NAIP目录
+**Acquisition Steps:**
+1.  Purchase [Aerosoft NavDataPro](https://www.aerosoft.com/en/microsoft-flight-simulator/msfs-tools/navigation-data/)
+2.  Download the NavDataPro application
+3.  Log in and download NAIP format data
+4.  Unzip to the NAIP directory
 
-### 3️⃣ X-Plane数据文件
+### 3️⃣ X-Plane Data Files
 
-**来源选项：**
-- **选项A**：从X-Plane 11/12安装目录复制
-  ```
-  [X-Plane安装目录]/Resources/default data/earth_fix.dat
-  [X-Plane安装目录]/Resources/default data/earth_nav.dat
-  ```
+**Source Options:**
+-   **Option A**: Copy from X-Plane 11/12 installation directory
+    ```
+    [X-Plane Installation Directory]/Resources/default data/earth_fix.dat
+    [X-Plane Installation Directory]/Resources/default data/earth_nav.dat
+    ```
 
-- **选项B**：从本项目的样本数据中获取
-  ```
-  [项目目录]/sample_data/earth_fix.dat
-  [项目目录]/sample_data/earth_nav.dat
-  ```
+-   **Option B**: Obtain from this project's sample data
+    ```
+    [Project Directory]/sample_data/earth_fix.dat
+    [Project Directory]/sample_data/earth_nav.dat
+    ```
 
-### 4️⃣ CIFP程序数据
+### 4️⃣ CIFP Procedure Data
 
-**获取方式：**
-- **官方渠道**：FAA官网免费下载
-- **第三方**：Navigraph包含的CIFP数据
-- **项目提供**：预处理的中国区域CIFP文件
+**Acquisition Methods:**
+-   **Official Channels**: Free download from FAA official website
+-   **Third-party**: CIFP data included in Navigraph
+-   **Project Provided**: Pre-processed CIFP files for the China region
 
-### 5️⃣ NDB数据库
+### 5️⃣ NDB Database
 
-**获取途径：**
+**Acquisition Path:**
 ```bash
-# 从Fenix A320安装目录复制
+# Copy from Fenix A320 installation directory
 [MSFS Community]/fenix-a320/Resources/NavData/nd.db3
 ```
 
-## 🛠️ 路径配置向导
+## 🛠️ Path Configuration Wizard
 
-### 自动配置模式
+### Automatic Configuration Mode
 
-运行转换工具时，程序将引导您完成路径配置：
+When running the conversion tool, the program will guide you through the path configuration:
 
 ```bash
 python XP2INI_NDB_Converter.py
 ```
 
-**配置流程：**
-1. **基础目录选择**：选择包含所有数据文件的根目录
-2. **自动检测**：程序自动扫描并验证各类数据文件
-3. **路径确认**：显示检测到的文件路径供您确认
-4. **手动补充**：对于未找到的文件，手动指定路径
+**Configuration Process:**
+1.  **Base Directory Selection**: Select the root directory containing all data files
+2.  **Automatic Detection**: The program automatically scans and verifies various data files
+3.  **Path Confirmation**: Displays detected file paths for your confirmation
+4.  **Manual Supplement**: Manually specify paths for files not found
 
-### 🔍 路径验证清单
+### 🔍 Path Validation Checklist
 
-| 数据类型 | 文件路径 | 验证状态 |
-|---------|---------|---------|
-| NAIP机场数据 | `NAIP/AD_HP.csv` | ✅ |
-| NAIP跑道数据 | `NAIP/RWY.csv` | ✅ |
-| NAIP跑道方向 | `NAIP/RWY_DIRECTION.csv` | ✅ |
-| NAIP航路数据 | `NAIP/RTE_SEG.csv` | ✅ |
-| X-Plane航路点 | `X-Plane/earth_fix.dat` | ✅ |
-| X-Plane导航台 | `X-Plane/earth_nav.dat` | ✅ |
-| CIFP程序目录 | `CIFP/` | ✅ |
-| NDB数据库 | `NDBs/nd.db3` | ✅ |
-| ICAO查找表 | `ICAO.txt` | ✅ |
+| Data Type | File Path | Validation Status |
+|-----------|-----------|-------------------|
+| NAIP Airport Data | `NAIP/AD_HP.csv` | ✅ |
+| NAIP Runway Data | `NAIP/RWY.csv` | ✅ |
+| NAIP Runway Direction | `NAIP/RWY_DIRECTION.csv` | ✅ |
+| NAIP Route Data | `NAIP/RTE_SEG.csv` | ✅ |
+| X-Plane Waypoints | `X-Plane/earth_fix.dat` | ✅ |
+| X-Plane Navaids | `X-Plane/earth_nav.dat` | ✅ |
+| CIFP Procedure Directory | `CIFP/` | ✅ |
+| NDB Database | `NDBs/nd.db3` | ✅ |
+| ICAO Lookup Table | `ICAO.txt` | ✅ |
 
-## 📅 AIRAC周期管理
+## 📅 AIRAC Cycle Management
 
-### 🗓️ AIRAC周期说明
+### 🗓️ AIRAC Cycle Description
 
-**AIRAC（Aeronautical Information Regulation And Control）**是国际民航组织制定的28天航空信息更新周期。
+**AIRAC (Aeronautical Information Regulation And Control)** is a 28-day aeronautical information update cycle established by the International Civil Aviation Organization (ICAO).
 
-- **更新频率**：每28天
-- **全球同步**：全世界统一更新时间
-- **重要性**：确保飞行员和管制员使用相同的导航数据
+-   **Update Frequency**: Every 28 days
+-   **Global Synchronization**: Unified update time worldwide
+-   **Importance**: Ensures pilots and controllers use the same navigation data
 
-### 📊 当前周期查询
+### 📊 Current Cycle Query
 
 ```python
-# 查询当前AIRAC周期
+# Query current AIRAC cycle
 import datetime
 
 def get_current_airac():
-    # AIRAC 2023年参考日期：2023年1月5日
+    # AIRAC 2023 Reference Date: January 5, 2023
     base_date = datetime.date(2023, 1, 5)
     today = datetime.date.today()
     
@@ -158,76 +158,76 @@ def get_current_airac():
     
     return f"AIRAC {today.year}{cycle_number:02d}"
 
-print(f"当前周期：{get_current_airac()}")
+print(f"Current Cycle: {get_current_airac()}")
 ```
 
-### 🔄 数据更新策略
+### 🔄 Data Update Strategy
 
-#### 实时更新用户
-- **更新频率**：每个AIRAC周期
-- **建议来源**：Navigraph（自动更新）
-- **适用场景**：在线飞行、专业用途
+#### Real-time Update Users
+-   **Update Frequency**: Every AIRAC cycle
+-   **Recommended Source**: Navigraph (automatic update)
+-   **Applicable Scenarios**: Online flight, professional use
 
-#### 普通用户
-- **更新频率**：3-6个月
-- **建议来源**：Aerosoft NavDataPro
-- **适用场景**：离线飞行、娱乐用途
+#### Casual Users
+-   **Update Frequency**: 3-6 months
+-   **Recommended Source**: Aerosoft NavDataPro
+-   **Applicable Scenarios**: Offline flight, recreational use
 
-## 🎛️ 高级配置选项
+## 🎛️ Advanced Configuration Options
 
-### 📍 区域过滤配置
+### 📍 Region Filtering Configuration
 
-针对不同地区定制数据处理范围：
+Customize data processing scope for different regions:
 
 ```python
-# 配置处理的ICAO区域代码
+# Configure ICAO region codes to process
 SUPPORTED_ICAO_REGIONS = {
-    'ZB',  # 中国北部地区
-    'ZS',  # 中国东部地区  
-    'ZG',  # 中国南部地区
-    'ZJ',  # 中国华东地区
-    'ZY',  # 中国中部地区
-    'ZL',  # 中国西南地区
-    'ZU',  # 中国西部地区
-    'ZW',  # 中国西北地区
-    'ZP',  # 中国华北地区
-    'ZH',  # 中国华南地区
-    'VM',  # 越南地区
-    'VH',  # 香港地区
-    'RK'   # 韩国地区
+    'ZB',  # Northern China Region
+    'ZS',  # Eastern China Region  
+    'ZG',  # Southern China Region
+    'ZJ',  # East China Region
+    'ZY',  # Central China Region
+    'ZL',  # Southwest China Region
+    'ZU',  # Western China Region
+    'ZW',  # Northwest China Region
+    'ZP',  # North China Region
+    'ZH',  # South China Region
+    'VM',  # Vietnam Region
+    'VH',  # Hong Kong Region
+    'RK'   # Korea Region
 }
 ```
 
-### 🎯 精度配置
+### 🎯 Precision Configuration
 
-设置坐标和计算精度：
-
-```python
-# 坐标精度配置
-COORDINATE_PRECISION = 8  # 小数位数
-MAGNETIC_VARIATION_PRECISION = 1  # 磁偏角精度
-
-# 距离单位转换
-NM_TO_KM = 1.852  # 海里到公里
-KM_TO_NM = 0.539957  # 公里到海里
-```
-
-### ⚡ 性能优化配置
+Set coordinate and calculation precision:
 
 ```python
-# 并行处理配置
-MULTIPROCESS_WORKERS = 4  # 并行进程数
-BATCH_SIZE = 1000  # 批处理大小
-DATABASE_TIMEOUT = 30  # 数据库超时（秒）
+# Coordinate precision configuration
+COORDINATE_PRECISION = 8  # Decimal places
+MAGNETIC_VARIATION_PRECISION = 1  # Magnetic variation precision
 
-# 内存优化
-ENABLE_CACHE = True  # 启用坐标缓存
-CACHE_SIZE_LIMIT = 10000  # 缓存大小限制
+# Distance unit conversion
+NM_TO_KM = 1.852  # Nautical miles to kilometers
+KM_TO_NM = 0.539957  # Kilometers to nautical miles
 ```
 
-## 🔧 配置文件模板
+### ⚡ Performance Optimization Configuration
 
-创建 `config.json` 文件来保存常用配置：
+```python
+# Parallel processing configuration
+MULTIPROCESS_WORKERS = 4  # Number of parallel processes
+BATCH_SIZE = 1000  # Batch size
+DATABASE_TIMEOUT = 30  # Database timeout (seconds)
+
+# Memory optimization
+ENABLE_CACHE = True  # Enable coordinate caching
+CACHE_SIZE_LIMIT = 10000  # Cache size limit
+```
+
+## 🔧 Configuration File Template
+
+Create a `config.json` file to save common configurations:
 
 ```json
 {
@@ -254,73 +254,73 @@ CACHE_SIZE_LIMIT = 10000  # 缓存大小限制
 }
 ```
 
-## ✅ 配置验证
+## ✅ Configuration Validation
 
-### 🔍 配置检查脚本
+### 🔍 Configuration Check Script
 
 ```python
 #!/usr/bin/env python3
-"""配置验证脚本"""
+"""Configuration validation script"""
 
 import os
 import json
 from pathlib import Path
 
 def validate_config():
-    """验证配置文件的完整性"""
+    """Validate the integrity of configuration files"""
     
     required_files = {
-        'NAIP/AD_HP.csv': '机场数据',
-        'NAIP/RWY.csv': '跑道数据', 
-        'NAIP/RWY_DIRECTION.csv': '跑道方向',
-        'NAIP/RTE_SEG.csv': '航路数据',
-        'X-Plane/earth_fix.dat': '航路点',
-        'X-Plane/earth_nav.dat': '导航台',
-        'NDBs/nd.db3': 'NDB数据库'
+        'NAIP/AD_HP.csv': 'Airport Data',
+        'NAIP/RWY.csv': 'Runway Data', 
+        'NAIP/RWY_DIRECTION.csv': 'Runway Direction',
+        'NAIP/RTE_SEG.csv': 'Route Data',
+        'X-Plane/earth_fix.dat': 'Waypoint Data',
+        'X-Plane/earth_nav.dat': 'Navaid Data',
+        'NDBs/nd.db3': 'NDB Database'
     }
     
-    print("🔍 开始验证配置...")
+    print("🔍 Starting configuration validation...")
     
     for file_path, description in required_files.items():
         if os.path.exists(file_path):
             print(f"✅ {description}: {file_path}")
         else:
-            print(f"❌ {description}: {file_path} (文件不存在)")
+            print(f"❌ {description}: {file_path} (File not found)")
     
-    print("🔍 验证完成！")
+    print("🔍 Validation complete!")
 
 if __name__ == "__main__":
     validate_config()
 ```
 
-## 🚨 常见配置问题
+## 🚨 Common Configuration Issues
 
-### 路径问题
+### Path Issues
 ```bash
-# 问题：路径包含中文字符导致编码错误
-# 解决：使用英文路径，避免特殊字符
+# Problem: Path containing Chinese characters causes encoding errors
+# Solution: Use English paths, avoid special characters
 
-# 错误路径示例
+# Incorrect Path Example
 C:/导航数据/NAIP/
 
-# 正确路径示例  
+# Correct Path Example  
 C:/NavData/NAIP/
 ```
 
-### 文件权限问题
+### File Permission Issues
 ```powershell
-# 问题：无读取权限
-# 解决：以管理员身份运行或修改文件权限
+# Problem: No read permission
+# Solution: Run as administrator or modify file permissions
 icacls "C:\NavData" /grant Everyone:F /T
 ```
 
-### 数据完整性问题
+### Data Integrity Issues
 ```bash
-# 问题：NAIP文件不完整
-# 解决：重新下载完整的AIRAC数据包
-# 确保所有CSV文件都存在且非空
+# Problem: Incomplete NAIP files
+# Solution: Re-download the complete AIRAC data package
+# Ensure all CSV files exist and are not empty
 ```
 
 ---
 
-配置完成！下一步请查看 [**使用说明**](./usage.md) 来执行数据转换流程。 
+Configuration complete! Next, please see the [**Usage Instructions**](./usage.md) to execute the data conversion process.

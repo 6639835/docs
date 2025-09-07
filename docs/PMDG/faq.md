@@ -1,193 +1,193 @@
-# 🙋 常见问题解答 (FAQ)
+# 🙋 Frequently Asked Questions (FAQ)
 
-## 📥 安装相关
+## 📥 Installation
 
-### Q1: 系统最低要求是什么？
-**A:** 
-- **操作系统**: Windows 10/11, macOS 10.15+, Linux
-- **Python版本**: 3.8+ (推荐 3.9 或更高版本)
-- **内存**: 至少 4GB RAM (推荐 8GB+)
-- **存储空间**: 至少 2GB 可用空间
-- **MSFS版本**: Microsoft Flight Simulator 2020 或 2024
+### Q1: What are the minimum system requirements?
+**A:**
+- **Operating System**: Windows 10/11, macOS 10.15+, Linux
+- **Python Version**: 3.8+ (3.9 or higher recommended)
+- **RAM**: At least 4GB RAM (8GB+ recommended)
+- **Storage Space**: At least 2GB free space
+- **MSFS Version**: Microsoft Flight Simulator 2020 or 2024
 
-### Q2: 支持哪些 Python 版本？
-**A:** 支持 Python 3.8 及以上版本。推荐使用 Python 3.9 或 3.10 以获得最佳性能和兼容性。
+### Q2: Which Python versions are supported?
+**A:** Python 3.8 and above are supported. Python 3.9 or 3.10 is recommended for optimal performance and compatibility.
 
-### Q3: 是否需要管理员权限？
-**A:** 是的，在Windows系统上需要管理员权限来访问MSFS安装目录和写入数据文件。
+### Q3: Are administrator privileges required?
+**A:** Yes, administrator privileges are required on Windows systems to access the MSFS installation directory and write data files.
 
-### Q4: 可以在虚拟环境中安装吗？
-**A:** 强烈推荐使用虚拟环境（如 venv 或 conda）来隔离依赖，避免与其他Python项目冲突。
+### Q4: Can I install it in a virtual environment?
+**A:** Using a virtual environment (e.g., venv or conda) is highly recommended to isolate dependencies and avoid conflicts with other Python projects.
 
-## ⚙️ 配置相关
+## ⚙️ Configuration
 
-### Q5: 如何获取有效的 AIRAC 数据？
-**A:** 您需要订阅以下服务之一：
-- **Navigraph**: 提供全球完整的导航数据 (推荐)
-- **Aerosoft NavDataPro**: 针对欧洲和部分区域
-- **Jeppesen**: 商业级导航数据服务
+### Q5: How can I obtain valid AIRAC data?
+**A:** You need to subscribe to one of the following services:
+- **Navigraph**: Provides complete global navigation data (Recommended)
+- **Aerosoft NavDataPro**: For Europe and specific regions
+- **Jeppesen**: Commercial-grade navigation data service
 
-### Q6: AIRAC 周期是什么？多久需要更新一次？
-**A:** AIRAC（Aeronautical Information Regulation and Control）是国际标准的航空信息更新周期，每28天更新一次。建议与现实世界的AIRAC周期保持同步。
+### Q6: What is the AIRAC cycle? How often does it need to be updated?
+**A:** AIRAC (Aeronautical Information Regulation and Control) is an international standard for aeronautical information update cycles, updated every 28 days. It is recommended to synchronize with the real-world AIRAC cycle.
 
-### Q7: 数据文件应该放在哪里？
-**A:** 
+### Q7: Where should the data files be placed?
+**A:**
 ```
-推荐目录结构：
+# Recommended directory structure:
 C:/Nav-data/
-├── input/          # 输入的原始数据文件
+├── input/          # Raw input data files
 │   ├── AIRAC2024-01/
 │   └── ...
-├── output/         # 转换后的PMDG格式文件
-└── backup/         # 数据备份
+├── output/         # Converted PMDG format files
+└── backup/         # Data backup
 ```
 
-### Q8: 如何验证配置是否正确？
-**A:** 运行内置的配置验证命令：
+### Q8: How do I verify if the configuration is correct?
+**A:** Run the built-in configuration verification command:
 ```bash
 python verify_config.py --check-all
 ```
 
-## 🔄 使用相关
+## 🔄 Usage
 
-### Q9: 转换过程需要多长时间？
-**A:** 根据数据量和系统性能：
-- **小型数据集** (单个机场): 1-2分钟
-- **区域数据集**: 5-15分钟  
-- **全球数据集**: 30-60分钟
+### Q9: How long does the conversion process take?
+**A:** Depending on the data volume and system performance:
+- **Small datasets** (single airport): 1-2 minutes
+- **Regional datasets**: 5-15 minutes
+- **Global datasets**: 30-60 minutes
 
-### Q10: 可以只转换特定区域的数据吗？
-**A:** 是的，支持区域过滤：
+### Q10: Can I convert data for specific regions only?
+**A:** Yes, regional filtering is supported:
 ```bash
 python converter.py --region ZSPD --include-sids --include-stars
 ```
 
-### Q11: 如何备份现有数据？
-**A:** 转换前会自动创建备份，也可以手动备份：
+### Q11: How do I back up existing data?
+**A:** A backup is automatically created before conversion, but you can also back up manually:
 ```bash
 python backup_tool.py --create-backup --date-suffix
 ```
 
-### Q12: 转换后的数据存储在哪里？
-**A:** 
-- **默认位置**: `%LOCALAPPDATA%/Lockheed Martin/Prepar3D v5/PMDG/Nav Data/`
-- **Steam版 MSFS**: `C:/Users/[用户名]/AppData/Local/Packages/Microsoft.FlightSimulator_[ID]/LocalCache/PMDG/`
-- **Microsoft Store版**: 类似Steam版，但ID不同
+### Q12: Where is the converted data stored?
+**A:**
+- **Default location**: `%LOCALAPPDATA%/Lockheed Martin/Prepar3D v5/PMDG/Nav Data/`
+- **Steam Edition MSFS**: `C:/Users/[username]/AppData/Local/Packages/Microsoft.FlightSimulator_[ID]/LocalCache/PMDG/`
+- **Microsoft Store Edition**: Similar to the Steam Edition, but with a different ID
 
-## ✈️ 兼容性相关
+## ✈️ Compatibility
 
-### Q13: 支持哪些 PMDG 飞机？
-**A:** 
-- ✅ **PMDG 737-600/700/800/900** (全系列)
+### Q13: Which PMDG aircraft are supported?
+**A:**
+- ✅ **PMDG 737-600/700/800/900** (Full series)
 - ✅ **PMDG 777-300ER**
-- ✅ **PMDG 777F** (货机版本)
-- 🔄 **PMDG 747-8** (计划支持)
+- ✅ **PMDG 777F** (Freighter version)
+- 🔄 **PMDG 747-8** (Planned support)
 
-### Q14: 与 MSFS 2024 兼容吗？
-**A:** 是的，完全兼容 Microsoft Flight Simulator 2024。确保使用最新版本的转换工具。
+### Q14: Is it compatible with MSFS 2024?
+**A:** Yes, it is fully compatible with Microsoft Flight Simulator 2024. Ensure you are using the latest version of the conversion tool.
 
-### Q15: 可以与其他导航数据工具同时使用吗？
-**A:** 不推荐同时使用多个导航数据工具，可能会导致数据冲突。使用前请备份并移除其他工具的数据。
+### Q15: Can it be used simultaneously with other navigation data tools?
+**A:** It is not recommended to use multiple navigation data tools simultaneously, as this may lead to data conflicts. Please back up and remove data from other tools before use.
 
-### Q16: 支持第三方机场插件吗？
-**A:** 支持，但需要确保：
-- 第三方机场使用标准ICAO代码
-- 导航数据包含该机场的信息
-- 机场插件与PMDG飞机兼容
+### Q16: Are third-party airport add-ons supported?
+**A:** Yes, but you need to ensure:
+- The third-party airport uses standard ICAO codes
+- The navigation data includes information for that airport
+- The airport add-on is compatible with PMDG aircraft
 
-## 🌍 数据相关
+## 🌍 Data
 
-### Q17: 支持哪些地区的数据？
-**A:** 主要覆盖区域：
-- ✅ **中国大陆全境** (ZB, ZS, ZJ, ZG, ZY, ZL, ZU, ZW, ZP, ZH)
-- ✅ **香港、澳门** (VH, VM)
-- ✅ **台湾地区** (RC)
-- ✅ **东南亚部分** (VT, VH, WS)
-- ⚠️ **其他区域** (数据质量可能有限)
+### Q17: Which regions' data are supported?
+**A:** Main coverage areas:
+- ✅ **Mainland China (entire territory)** (ZB, ZS, ZJ, ZG, ZY, ZL, ZU, ZW, ZP, ZH)
+- ✅ **Hong Kong, Macau** (VH, VM)
+- ✅ **Taiwan region** (RC)
+- ✅ **Parts of Southeast Asia** (VT, VH, WS)
+- ⚠️ **Other regions** (Data quality may be limited)
 
-### Q18: 数据准确性如何？
-**A:** 
-- **AIRAC标准**: 严格遵循国际民航组织标准
-- **精度等级**: 支持8位小数精度坐标
-- **验证机制**: 内置多层数据验证和完整性检查
-- **更新频率**: 跟随官方AIRAC周期更新
+### Q18: What is the data accuracy?
+**A:**
+- **AIRAC Standard**: Strictly adheres to ICAO standards
+- **Precision Level**: Supports 8-decimal place coordinate precision
+- **Validation Mechanism**: Built-in multi-layer data validation and integrity checks
+- **Update Frequency**: Follows official AIRAC cycle updates
 
-### Q19: 如何验证数据完整性？
-**A:** 使用内置验证工具：
+### Q19: How do I verify data integrity?
+**A:** Use the built-in validation tool:
 ```bash
 python validate_data.py --comprehensive --output-report
 ```
 
-### Q20: 数据是否包含中文内容？
-**A:** 是的，支持中文：
-- 机场中英文名称
-- 导航点中英文标识
-- 程序名称本地化
+### Q20: Does the data include Chinese content?
+**A:** Yes, Chinese is supported:
+- Airport names in Chinese and English
+- Navigation point identifiers in Chinese and English
+- Procedure name localization
 
-## 🔧 技术相关
+## 🔧 Technical
 
-### Q21: 如何启用调试模式？
-**A:** 
+### Q21: How do I enable debug mode?
+**A:**
 ```bash
 python converter.py --debug --verbose --log-file=debug.log
 ```
 
-### Q22: 日志文件在哪里？
-**A:** 
-- **默认位置**: `./logs/converter_[日期].log`
-- **调试日志**: `./logs/debug_[日期].log`
-- **错误日志**: `./logs/error_[日期].log`
+### Q22: Where are the log files located?
+**A:**
+- **Default location**: `./logs/converter_[date].log`
+- **Debug logs**: `./logs/debug_[date].log`
+- **Error logs**: `./logs/error_[date].log`
 
-### Q23: 如何优化转换性能？
-**A:** 
-- 使用SSD存储
-- 增加内存到8GB以上
-- 启用多进程处理：`--parallel=4`
-- 关闭不必要的后台程序
+### Q23: How can I optimize conversion performance?
+**A:**
+- Use SSD storage
+- Increase RAM to 8GB or more
+- Enable multi-process handling: `--parallel=4`
+- Close unnecessary background programs
 
-### Q24: 支持命令行批处理吗？
-**A:** 是的，支持完整的命令行界面：
+### Q24: Is command-line batch processing supported?
+**A:** Yes, a full command-line interface is supported:
 ```bash
-# 批量转换
+# Batch conversion
 python converter.py --batch --config-file=batch_config.json
 
-# 定时任务
+# Scheduled tasks
 python scheduler.py --schedule-weekly --auto-update
 ```
 
-## 🆘 获取帮助
+## 🆘 Getting Help
 
-### Q25: 遇到问题如何获取支持？
-**A:** 
-1. **查看日志文件** - 了解具体错误信息
-2. **检查文档** - 阅读相关章节说明
-3. **搜索已知问题** - 查看 [GitHub Issues](https://github.com/nav-data/docs/issues)
-4. **提交新问题** - 包含完整的日志和系统信息
-5. **社区讨论** - 参与 [GitHub Discussions](https://github.com/nav-data/docs/discussions)
+### Q25: How can I get support if I encounter issues?
+**A:**
+1.  **Check log files** - to understand specific error messages
+2.  **Check documentation** - read relevant section descriptions
+3.  **Search for known issues** - see [GitHub Issues](https://github.com/nav-data/docs/issues)
+4.  **Submit a new issue** - include complete logs and system information
+5.  **Community discussion** - participate in [GitHub Discussions](https://github.com/nav-data/docs/discussions)
 
-### Q26: 如何报告Bug？
-**A:** 请在GitHub Issues中报告，包含：
-- 详细的错误描述
-- 完整的错误日志
-- 系统环境信息
-- 重现步骤
-- 预期结果 vs 实际结果
+### Q26: How do I report a bug?
+**A:** Please report it in GitHub Issues, including:
+- A detailed error description
+- Complete error logs
+- System environment information
+- Steps to reproduce
+- Expected result vs. actual result
 
-### Q27: 可以贡献代码吗？
-**A:** 当然欢迎！请参考：
-- [贡献指南](contributing.md)
-- [代码规范](contributing.md#代码规范)
-- [提交流程](contributing.md#提交流程)
+### Q27: Can I contribute code?
+**A:** Absolutely! Please refer to:
+- [Contribution Guide](contributing.md)
+- [Code Standards](contributing.md#代码规范)
+- [Submission Process](contributing.md#提交流程)
 
 ---
 
-## 🔍 找不到答案？
+## 🔍 Can't find your answer?
 
-如果您的问题未在此列表中，请：
+If your question is not in this list, please:
 
-1. 📖 查看 [故障排除指南](troubleshooting.md)
-2. 🔍 使用页面顶部的搜索功能
-3. 💬 在 [GitHub Discussions](https://github.com/nav-data/docs/discussions) 提问
-4. 📧 发送邮件至：support@nav-data.org
+1.  📖 Check the [Troubleshooting Guide](troubleshooting.md)
+2.  🔍 Use the search function at the top of the page
+3.  💬 Ask in [GitHub Discussions](https://github.com/nav-data/docs/discussions)
+4.  📧 Send an email to: support@nav-data.org
 
-我们会持续更新此FAQ，感谢您的反馈和建议！ 
+We will continue to update this FAQ. Thank you for your feedback and suggestions!

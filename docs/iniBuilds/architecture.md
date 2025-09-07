@@ -1,63 +1,63 @@
-# 🏗️ 系统架构
+# 🏗️ System Architecture
 
-本文档详细阐述Nav-data航空导航数据转换工具的系统架构、技术实现和设计理念。
+This document elaborates on the system architecture, technical implementation, and design philosophy of the Nav-data Aeronautical Navigation Data Conversion Tool.
 
-## 🎯 设计原则
+## 🎯 Design Principles
 
-### 🔧 模块化设计
-- **单一职责**：每个模块专注处理特定类型的导航数据
-- **松耦合**：模块间依赖最小化，便于独立开发和测试
-- **高内聚**：相关功能集中在同一模块内部
+### 🔧 Modular Design
+- **Single Responsibility**：Each module focuses on processing specific types of navigation data
+- **Loose Coupling**：Dependencies between modules are minimized for easy independent development and testing
+- **High Cohesion**：Related functionalities are concentrated within the same module
 
-### ⚡ 性能优化
-- **并行处理**：支持多进程并行处理大规模数据集
-- **内存管理**：智能缓存机制减少重复计算
-- **I/O优化**：批量数据库操作提升处理效率
+### ⚡ Performance Optimization
+- **Parallel Processing**：Supports multi-process parallel processing for large-scale datasets
+- **Memory Management**：Intelligent caching mechanism reduces redundant calculations
+- **I/O Optimization**：Batch database operations improve processing efficiency
 
-### 🔒 数据完整性
-- **类型验证**：严格的数据类型和格式验证
-- **错误处理**：优雅的错误恢复和报告机制
-- **数据一致性**：确保跨模块数据的一致性和准确性
+### 🔒 Data Integrity
+- **Type Validation**：Strict data type and format validation
+- **Error Handling**：Graceful error recovery and reporting mechanism
+- **Data Consistency**：Ensures data consistency and accuracy across modules
 
-## 🏛️ 系统架构概览
+## 🏛️ System Architecture Overview
 
 ```mermaid
 graph TB
-    subgraph "输入数据源"
-        A[NAIP CSV数据] 
-        B[X-Plane DAT文件]
-        C[CIFP程序数据]
-        D[NDB数据库]
-        E[ICAO查找表]
+    subgraph "Input Data Sources"
+        A[NAIP CSV Data] 
+        B[X-Plane DAT Files]
+        C[CIFP Procedure Data]
+        D[NDB Database]
+        E[ICAO Lookup Table]
     end
     
-    subgraph "核心处理层"
-        F[主控制器<br/>XP2INI_NDB_Converter]
-        G[路径配置管理器]
-        H[数据验证器]
+    subgraph "Core Processing Layer"
+        F[Main Controller<br/>XP2INI_NDB_Converter]
+        G[Path Configuration Manager]
+        H[Data Validator]
     end
     
-    subgraph "数据处理模块"
-        I[机场处理器<br/>airports.py]
-        J[跑道处理器<br/>runways.py] 
-        K[VHF处理器<br/>vhfs.py]
-        L[NDB处理器<br/>ndbs.py]
-        M[航路点处理器<br/>waypoints.py]
-        N[程序处理器<br/>procedures.py]
-        O[航路处理器<br/>airways.py]
+    subgraph "Data Processing Modules"
+        I[Airport Processor<br/>airports.py]
+        J[Runway Processor<br/>runways.py] 
+        K[VHF Processor<br/>vhfs.py]
+        L[NDB Processor<br/>ndbs.py]
+        M[Waypoint Processor<br/>waypoints.py]
+        N[Procedure Processor<br/>procedures.py]
+        O[Airway Processor<br/>airways.py]
     end
     
-    subgraph "工具模块"
-        P[坐标缓存<br/>CoordinateCache]
-        Q[磁偏角计算<br/>MagneticVariation]
-        R[数据库操作<br/>DatabaseHelper]
-        S[格式转换器<br/>DataConverter]
+    subgraph "Utility Modules"
+        P[Coordinate Cache<br/>CoordinateCache]
+        Q[Magnetic Variation Calculation<br/>MagneticVariation]
+        R[Database Operations<br/>DatabaseHelper]
+        S[Format Converter<br/>DataConverter]
     end
     
-    subgraph "输出层"
-        T[SQLite数据库<br/>e_dfd_PMDG.s3db]
-        U[验证报告]
-        V[处理日志]
+    subgraph "Output Layer"
+        T[SQLite Database<br/>e_dfd_PMDG.s3db]
+        U[Validation Report]
+        V[Processing Log]
     end
     
     A --> F
@@ -124,15 +124,15 @@ graph TB
     F --> V
 ```
 
-## 📦 核心模块详解
+## 📦 Core Module Details
 
-### 🎮 主控制器 (XP2INI_NDB_Converter.py)
+### 🎮 Main Controller (XP2INI_NDB_Converter.py)
 
-**职责**：系统的入口点和流程控制中心
+**Responsibilities**：System entry point and workflow control center
 
 ```python
 class MainController:
-    """主控制器类，负责整个转换流程的协调"""
+    """Main controller class, responsible for coordinating the entire conversion process"""
     
     def __init__(self):
         self.config = {}
@@ -140,43 +140,43 @@ class MainController:
         self.logger = Logger()
     
     def main_config(self):
-        """交互式路径配置向导"""
+        """Interactive path configuration wizard"""
         pass
     
     def main(self, config):
-        """主处理流程"""
+        """Main processing workflow"""
         pass
 ```
 
-**核心功能**：
-- 📂 路径配置和验证
-- 🔄 处理流程编排
-- ⏱️ 性能监控和日志记录
-- 🗜️ 数据库优化和压缩
+**Key Features**：
+- 📂 Path configuration and validation
+- 🔄 Processing workflow orchestration
+- ⏱️ Performance monitoring and logging
+- 🗜️ Database optimization and compression
 
-### 🏢 机场数据处理器 (airports.py)
+### 🏢 Airport Data Processor (airports.py)
 
-**数据来源**：`NAIP/AD_HP.csv`、`ICAO.txt`
+**Data Sources**：`NAIP/AD_HP.csv`、`ICAO.txt`
 
-**核心算法**：
+**Core Algorithms**：
 ```python
 def get_magnetic_variation(lat, lon):
-    """计算磁偏角 - 基于WMM模型"""
+    """Calculate magnetic variation - Based on WMM model"""
     result = geo_mag.calculate(glat=lat, glon=lon, alt=0, time=year_decimal)
     return round(result.d, 1)
 
 def convert_dms_to_decimal(dms_str):
-    """DMS坐标转十进制度"""
-    # 解析度分秒格式：N390842.12 -> 39.145033
+    """DMS coordinate to decimal degrees conversion"""
+    # Parse degrees-minutes-seconds format: N390842.12 -> 39.145033
     direction = dms_str[0]
     if direction in ['N', 'S']:
         deg = float(dms_str[1:3])
         min_val = float(dms_str[3:5])
         sec = float(dms_str[5:])
-    # ... 转换逻辑
+    # ... Conversion logic
 ```
 
-**输出表结构**：`tbl_airports`
+**Output Table Structure**：`tbl_airports`
 ```sql
 CREATE TABLE tbl_airports (
     area_code TEXT DEFAULT 'EEU',
@@ -189,41 +189,41 @@ CREATE TABLE tbl_airports (
 );
 ```
 
-### 🛬 跑道数据处理器 (runways.py)
+### 🛬 Runway Data Processor (runways.py)
 
-**数据来源**：`NAIP/RWY.csv`、`NAIP/RWY_DIRECTION.csv`、Fenix NDB数据库
+**Data Sources**：`NAIP/RWY.csv`、`NAIP/RWY_DIRECTION.csv`、Fenix NDB database
 
-**核心功能**：
-- 🔄 跨数据源坐标匹配
-- 📐 跑道方位角计算
-- 🎯 坐标精度验证
+**Key Features**：
+- 🔄 Cross-data source coordinate matching
+- 📐 Runway bearing calculation
+- 🎯 Coordinate precision validation
 
-**关键算法**：
+**Key Algorithms**：
 ```python
 def load_airport_data(nd_db_path):
-    """从Fenix数据库加载跑道坐标参考"""
-    # 查询基准机场ZYYJ的跑道数据
+    """Load runway coordinate reference from Fenix database"""
+    # Query runway data for base airport ZYYJ
     cursor.execute("SELECT ID FROM Airports WHERE ICAO = 'ZYYJ'")
-    # 计算其他机场相对位移
-    # 提供坐标校正参考
+    # Calculate relative displacement for other airports
+    # Provide coordinate correction reference
 ```
 
-### 📡 VHF导航台处理器 (vhfs.py)
+### 📡 VHF Navaid Processor (vhfs.py)
 
-**数据来源**：`X-Plane/earth_nav.dat`、`ICAO.txt`
+**Data Sources**：`X-Plane/earth_nav.dat`、`ICAO.txt`
 
-**支持的导航台类型**：
-- **VOR/DME** (类型3)：甚高频全向信标/测距设备
-- **DME-ILS** (类型12)：仪表着陆系统测距设备
+**Supported Navaid Types**：
+- **VOR/DME** (Type 3)：VHF Omnidirectional Range/Distance Measuring Equipment
+- **DME-ILS** (Type 12)：Instrument Landing System Distance Measuring Equipment
 
-**频率处理逻辑**：
+**Frequency Processing Logic**：
 ```python
-# 频率格式转换：1173 -> 117.3 MHz
+# Frequency format conversion: 1173 -> 117.3 MHz
 frequency = parts[4]
 navaid_frequency = f"{frequency[:3]}.{frequency[3:]}"
 ```
 
-**磁偏角自动计算**：
+**Automatic Magnetic Variation Calculation**：
 ```python
 def fetch_magnetic_variation_for_record(record):
     lat = record['navaid_latitude']
@@ -233,84 +233,84 @@ def fetch_magnetic_variation_for_record(record):
     return record
 ```
 
-### 📻 NDB导航台处理器 (ndbs.py)
+### 📻 NDB Navaid Processor (ndbs.py)
 
-**数据来源**：`X-Plane/earth_nav.dat`
+**Data Sources**：`X-Plane/earth_nav.dat`
 
-**支持的ICAO区域**：
+**Supported ICAO Regions**：
 ```python
 valid_icao_codes = {
-    'ZB', 'ZG', 'ZS', 'ZJ', 'ZY', 'ZL', 'ZH', 'ZU', 'ZP', 'ZW',  # 中国
-    'VM', 'VH',  # 越南、香港
-    'RK'         # 韩国
+    'ZB', 'ZG', 'ZS', 'ZJ', 'ZY', 'ZL', 'ZH', 'ZU', 'ZP', 'ZW',  # China
+    'VM', 'VH',  # Vietnam, Hong Kong
+    'RK'         # South Korea
 }
 ```
 
-**处理流程**：
-1. 🔍 过滤指定区域的NDB数据
-2. 🧭 计算每个NDB的磁偏角
-3. 📊 批量写入数据库
-4. ⚡ 并行处理优化
+**Processing Workflow**：
+1. 🔍 Filter NDB data for specified regions
+2. 🧭 Calculate magnetic variation for each NDB
+3. 📊 Batch write to database
+4. ⚡ Parallel processing optimization
 
-### 🗺️ 航路点处理器
+### 🗺️ Waypoint Processor
 
-#### 航路点处理器 (enroute_waypoints.py)
-**数据来源**：`X-Plane/earth_fix.dat`
+#### En-route Waypoint Processor (enroute_waypoints.py)
+**Data Sources**：`X-Plane/earth_fix.dat`
 
-**过滤条件**：
+**Filtering Conditions**：
 ```python
 if parts[3] == 'ENRT' and parts[4] in supported_icao_codes:
-    # 处理航路航路点 (En-Route)
+    # Process en-route waypoints (En-Route)
 ```
 
-#### 终端区域点处理器 (terminal_waypoints.py)
-**过滤条件**：
+#### Terminal Area Waypoint Processor (terminal_waypoints.py)
+**Filtering Conditions**：
 ```python
 if parts[3] != 'ENRT' and parts[4] in supported_icao_codes:
-    # 处理终端区域航路点 (Terminal)
+    # Process terminal waypoints (Terminal)
 ```
 
-**坐标精度设置**：
+**Coordinate Precision Setting**：
 ```python
-waypoint_latitude = f"{float(parts[0]):.8f}"   # 8位小数精度
-waypoint_longitude = f"{float(parts[1]):.8f}"  # 8位小数精度
+waypoint_latitude = f"{float(parts[0]):.8f}"   # 8 decimal places precision
+waypoint_longitude = f"{float(parts[1]):.8f}"  # 8 decimal places precision
 ```
 
-### 🛫 程序数据处理器
+### 🛫 Procedure Data Processor
 
-#### SID离场程序处理器 (sids.py)
-#### STAR进场程序处理器 (stars.py)  
-#### IAP进近程序处理器 (iaps.py)
+#### SID Departure Procedure Processor (sids.py)
+#### STAR Arrival Procedure Processor (stars.py)  
+#### IAP Approach Procedure Processor (iaps.py)
 
-**数据来源**：`CIFP/` 目录下的机场程序文件
+**Data Sources**：Airport procedure files under the `CIFP/` directory
 
-**关键特性**：
-- 🗂️ **坐标缓存系统**：预加载航路点和导航台坐标
-- 🔍 **智能匹配**：自动匹配程序中的航路点坐标
-- 📋 **程序解析**：解析复杂的程序逻辑和限制条件
+**Key Features**：
+- 🗂️ **Coordinate Caching System**：Pre-loads waypoint and navaid coordinates
+- 🔍 **Intelligent Matching**：Automatically matches waypoint coordinates in procedures
+- 📋 **Procedure Parsing**：Parses complex procedure logic and constraints
 
-**坐标缓存架构**：
+**Coordinate Cache Architecture**：
 ```python
 class CoordinateCache:
     def __init__(self, earth_fix_path, earth_nav_path):
-        self.fix_data = {}   # 航路点坐标缓存
-        self.nav_data = {}   # 导航台坐标缓存
+        self.fix_data = {}   # Waypoint coordinate cache
+        self.nav_data = {}   # Navaid coordinate cache
     
     def find_coordinates(self, coord_type, identifier, icao_code):
-        """智能坐标查找"""
-        # 优先级：fix_data -> nav_data -> 默认值
+        """Intelligent coordinate lookup"""
+        # Priority: fix_data -> nav_data -> default value
 ```
 
-### 🛣️ 航路数据处理器 (airways.py)
+### 🛣️ Airway Data Processor (airways.py)
 
-**数据来源**：`NAIP/RTE_SEG.csv`、预加载的航路点和导航台数据
+**Data Sources**：`NAIP/RTE_SEG.csv`、pre-loaded waypoint and navaid data
 
-**核心功能**：
-- 🔗 航路段连接关系建立
-- 📐 航路方向和距离计算
-- 🎯 航路点类型识别和分类
+**Key Features**：
+- 🔗 Airway segment connection establishment
+- 📐 Airway direction and distance calculation
+- 🎯 Waypoint type identification and classification
 
-**航路点类型映射**：
+**Waypoint Type Mapping**：
 ```python
 if code_type in ["DESIGNATED_POINT", "地名点"]:
     waypoint_description_code = 'E C'
@@ -323,62 +323,62 @@ elif code_type == "NDB":
     ref_table = 'DB'
 ```
 
-### 🛬 着陆引导系统处理器 (gs.py)
+### 🛬 Landing Guidance System Processor (gs.py)
 
-**数据来源**：`X-Plane/earth_nav.dat`
+**Data Sources**：`X-Plane/earth_nav.dat`
 
-**ILS系统组件**：
-- **Localizer (类型4)**：航向引导
-- **Glide Slope (类型6)**：下滑引导
+**ILS System Components**：
+- **Localizer (Type 4)**：Course guidance
+- **Glide Slope (Type 6)**：Descent guidance
 
-**引导角度计算**：
+**Guidance Angle Calculation**：
 ```python
-# 从导航信息解析GS角度 (例：325 -> 3.25°)
+# Parse GS angle from navigation information (e.g., 325 -> 3.25°)
 gs_angle_str = nav_info[:3]
 gs_angle = float(gs_angle_str) / 100
 
-# 解析真航迹
+# Parse true bearing
 bearing_str = nav_info[3:]
 llz_truebearing = float(bearing_str)
 ```
 
-## 🔄 数据流架构
+## 🔄 Data Flow Architecture
 
-### 📥 输入阶段
+### 📥 Input Phase
 
-1. **数据源验证**
+1. **Data Source Validation**
    ```python
    def validate_paths(config):
-       """验证所有输入文件的存在性和可读性"""
+       """Validate the existence and readability of all input files"""
        for name, path in config.items():
            if not os.path.exists(path):
-               return False, f"文件不存在: {path}"
-       return True, "验证通过"
+               return False, f"File does not exist: {path}"
+       return True, "Validation passed"
    ```
 
-2. **编码检测**
+2. **Encoding Detection**
    ```python
    def detect_encoding(file_path):
-       """自动检测文件编码"""
+       """Automatically detect file encoding"""
        with open(file_path, 'rb') as file:
            raw_data = file.read(10000)
            result = chardet.detect(raw_data)
            return result['encoding']
    ```
 
-### ⚙️ 处理阶段
+### ⚙️ Processing Phase
 
-**处理顺序设计考虑**：
-1. **基础数据优先**：机场 → 跑道 → 导航台
-2. **依赖关系清晰**：航路点 → 程序 → 航路
-3. **数据完整性**：先处理参考数据，再处理关联数据
+**Processing Order Design Considerations**：
+1. **Priority for Basic Data**：Airport → Runway → Navaid
+2. **Clear Dependency Relationships**：Waypoint → Procedure → Airway
+3. **Data Integrity**：Process reference data first, then related data
 
-**并行处理策略**：
+**Parallel Processing Strategy**：
 ```python
 from multiprocessing import ProcessPoolExecutor
 
 def process_magnetic_variations(records):
-    """并行计算磁偏角"""
+    """Parallel calculation of magnetic variation"""
     with ProcessPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(
             fetch_magnetic_variation_for_record, 
@@ -387,86 +387,86 @@ def process_magnetic_variations(records):
     return results
 ```
 
-### 📤 输出阶段
+### 📤 Output Phase
 
-**SQLite数据库结构**：
+**SQLite Database Structure**：
 ```sql
--- 核心数据表
-tbl_airports                   -- 机场基础信息
-tbl_runways                   -- 跑道信息
-tbl_d_vhfnavaids             -- VHF导航台
-tbl_db_enroute_ndbnavaids    -- NDB导航台
-tbl_ea_enroute_waypoints     -- 航路航路点  
-tbl_pc_terminal_waypoints    -- 终端航路点
-tbl_pd_sids                  -- SID程序
-tbl_ps_stars                 -- STAR程序
-tbl_pf_iaps                  -- 进近程序
-tbl_er_enroute_airways       -- 航路数据
-tbl_pg_ils_glideslope        -- ILS引导
+-- Core Data Tables
+tbl_airports                   -- Airport basic information
+tbl_runways                   -- Runway information
+tbl_d_vhfnavaids             -- VHF navaids
+tbl_db_enroute_ndbnavaids    -- NDB navaids
+tbl_ea_enroute_waypoints     -- En-route waypoints  
+tbl_pc_terminal_waypoints    -- Terminal waypoints
+tbl_pd_sids                  -- SID procedures
+tbl_ps_stars                 -- STAR procedures
+tbl_pf_iaps                  -- Approach procedures
+tbl_er_enroute_airways       -- Airway data
+tbl_pg_ils_glideslope        -- ILS guidance
 ```
 
-**数据库优化**：
+**Database Optimization**：
 ```python
 def compress_sqlite_db(db_path):
-    """压缩数据库，减小文件大小"""
+    """Compress database, reduce file size"""
     conn = sqlite3.connect(db_path)
     conn.execute("VACUUM")
     conn.close()
 
 def delete_index_sqlite_db(db_path):
-    """删除临时索引，优化最终数据库"""
-    # 删除处理过程中创建的临时索引
+    """Delete temporary indexes, optimize final database"""
+    # Delete temporary indexes created during processing
 ```
 
-## 🛠️ 技术实现细节
+## 🛠️ Technical Implementation Details
 
-### 🧭 磁偏角计算系统
+### 🧭 Magnetic Variation Calculation System
 
-**WMM模型集成**：
+**WMM Model Integration**：
 ```python
 from pygeomag import GeoMag
 
-# 使用高精度WMM模型
+# Use high-precision WMM model
 geo_mag = GeoMag(
     coefficients_file='wmm/WMMHR_2025.COF', 
     high_resolution=True
 )
 
-# 当前年份的小数表示
+# Decimal representation of current year
 current_date = datetime.datetime.now()
 year_decimal = current_date.year + ((current_date.month - 1) / 12.0) + (current_date.day / 365.0)
 ```
 
-**计算精度**：
-- **坐标精度**：8位小数 (约1.1mm精度)
-- **磁偏角精度**：1位小数 (0.1度精度)
-- **频率精度**：1位小数 (0.1MHz精度)
+**Calculation Precision**：
+- **Coordinate Precision**：8 decimal places (approx. 1.1mm precision)
+- **Magnetic Variation Precision**：1 decimal place (0.1 degree precision)
+- **Frequency Precision**：1 decimal place (0.1MHz precision)
 
-### 📊 数据验证机制
+### 📊 Data Validation Mechanism
 
-**类型验证**：
+**Type Validation**：
 ```python
 def type_check(identifier):
-    """检查标识符是否为机场代码"""
+    """Check if identifier is an airport code"""
     if len(identifier) == 4 and identifier.startswith(('ZB', 'ZS', 'ZG', 'ZJ', 'ZY', 'ZL', 'ZU', 'ZW', 'ZP', 'ZH')):
         return True
     return False
 ```
 
-**坐标验证**：
+**Coordinate Validation**：
 ```python
 def validate_coordinates(lat, lon):
-    """验证坐标有效性"""
+    """Validate coordinate validity"""
     if not (-90 <= lat <= 90):
-        return False, "纬度超出有效范围"
+        return False, "Latitude out of valid range"
     if not (-180 <= lon <= 180):
-        return False, "经度超出有效范围"
-    return True, "坐标有效"
+        return False, "Longitude out of valid range"
+    return True, "Coordinates valid"
 ```
 
-### 🔄 缓存机制
+### 🔄 Caching Mechanism
 
-**智能缓存策略**：
+**Intelligent Caching Strategy**：
 ```python
 class SmartCache:
     def __init__(self, max_size=10000):
@@ -482,15 +482,15 @@ class SmartCache:
     
     def put(self, key, value):
         if len(self.cache) >= self.max_size:
-            # LRU策略清理缓存
+            # LRU strategy for cache eviction
             self._evict_lru()
         self.cache[key] = value
         self.access_count[key] = 1
 ```
 
-### ⚡ 性能优化
+### ⚡ Performance Optimization
 
-**批量数据库操作**：
+**Batch Database Operations**：
 ```python
 class DatabaseBatchWriter:
     def __init__(self, db_path, batch_size=1000):
@@ -504,114 +504,114 @@ class DatabaseBatchWriter:
             self.flush()
     
     def flush(self):
-        """批量提交待处理记录"""
+        """Batch commit pending records"""
         self.conn.executemany(self.insert_sql, self.pending_records)
         self.conn.commit()
         self.pending_records.clear()
 ```
 
-**内存优化**：
+**Memory Optimization**：
 ```python
 def process_large_file_streaming(file_path):
-    """流式处理大文件，避免内存溢出"""
+    """Stream processing large files to avoid memory overflow"""
     with open(file_path, 'r') as file:
         while True:
-            lines = file.readlines(10000)  # 每次读取10000行
+            lines = file.readlines(10000)  # Read 10000 lines at a time
             if not lines:
                 break
             process_chunk(lines)
 ```
 
-## 🎯 扩展性设计
+## 🎯 Scalability Design
 
-### 📦 模块接口规范
+### 📦 Module Interface Specification
 
 ```python
 class DataProcessor:
-    """数据处理器基类"""
+    """Data processor base class"""
     
     def __init__(self, config):
         self.config = config
         self.logger = Logger()
     
     def validate_input(self):
-        """验证输入数据"""
+        """Validate input data"""
         raise NotImplementedError
     
     def process(self):
-        """执行数据处理"""
+        """Execute data processing"""
         raise NotImplementedError
     
     def generate_output(self):
-        """生成输出结果"""
+        """Generate output results"""
         raise NotImplementedError
 ```
 
-### 🔌 插件机制
+### 🔌 Plugin Mechanism
 
 ```python
 class PluginManager:
-    """插件管理器，支持第三方数据处理器"""
+    """Plugin manager, supporting third-party data processors"""
     
     def __init__(self):
         self.processors = {}
     
     def register_processor(self, name, processor_class):
-        """注册数据处理器"""
+        """Register data processor"""
         self.processors[name] = processor_class
     
     def get_processor(self, name):
-        """获取数据处理器实例"""
+        """Get data processor instance"""
         return self.processors.get(name)
 ```
 
-### 🌐 多格式支持
+### 🌐 Multi-Format Support
 
 ```python
 class FormatConverter:
-    """格式转换器，支持多种输出格式"""
+    """Format converter, supporting multiple output formats"""
     
     @staticmethod
     def to_pmdg_format(data):
-        """转换为PMDG格式"""
+        """Convert to PMDG format"""
         pass
     
     @staticmethod 
     def to_inibuilds_format(data):
-        """转换为iniBuilds格式"""
+        """Convert to iniBuilds format"""
         pass
     
     @staticmethod
     def to_generic_format(data):
-        """转换为通用格式"""
+        """Convert to generic format"""
         pass
 ```
 
-## 📈 性能指标
+## 📈 Performance Metrics
 
-### ⏱️ 典型处理时间
+### ⏱️ Typical Processing Time
 
-| 数据类型 | 记录数量 | 处理时间 | 内存使用 |
+| Data Type | Number of Records | Processing Time | Memory Usage |
 |---------|---------|---------|----------|
-| 机场数据 | ~156个 | 15秒 | 45MB |
-| 跑道数据 | ~312条 | 25秒 | 80MB |
-| VHF导航台 | ~89个 | 20秒 | 35MB |
-| 航路点 | ~3,300个 | 35秒 | 120MB |
-| SID程序 | ~234个 | 45秒 | 90MB |
-| 进近程序 | ~445个 | 60秒 | 150MB |
-| 航路数据 | ~167条 | 30秒 | 75MB |
+| Airport Data | ~156个 | 15秒 | 45MB |
+| Runway Data | ~312条 | 25秒 | 80MB |
+| VHF Navaids | ~89个 | 20秒 | 35MB |
+| Waypoints | ~3,300个 | 35秒 | 120MB |
+| SID Procedures | ~234个 | 45秒 | 90MB |
+| Approach Procedures | ~445个 | 60秒 | 150MB |
+| Airway Data | ~167条 | 30秒 | 75MB |
 
-### 📊 优化效果
+### 📊 Optimization Results
 
-**并行处理优化**：
-- 单线程处理：~180秒
-- 4核并行处理：~127秒 (提升29%)
-- 8核并行处理：~95秒 (提升47%)
+**Parallel Processing Optimization**：
+- Single-thread processing：~180 seconds
+- 4-core parallel processing：~127 seconds (29% improvement)
+- 8-core parallel processing：~95 seconds (47% improvement)
 
-**缓存优化效果**：
-- 无缓存：坐标查找平均15ms
-- 启用缓存：坐标查找平均2ms (提升87%)
+**Caching Optimization Results**：
+- No cache：Average coordinate lookup 15ms
+- Cache enabled：Average coordinate lookup 2ms (87% improvement)
 
 ---
 
-以上就是Nav-data系统的完整架构说明。该架构确保了系统的**可扩展性**、**高性能**和**数据准确性**，为航空模拟提供了专业级的导航数据支持。 
+The above is a complete architectural description of the Nav-data system. This architecture ensures the system's **scalability**, **high performance**, and **data accuracy**, providing professional-grade navigation data support for aviation simulation.

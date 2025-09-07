@@ -5,7 +5,188 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 export default withMermaid(defineConfig({
   title: "Nav-data",
   description: "高质量飞行模拟导航数据 - 专业的航空导航数据转换工具",
-  lang: 'zh-CN',
+  
+  // URL重写配置，让英文作为默认路径
+  rewrites: {
+    'en/:rest*': ':rest*'
+  },
+  
+  // 国际化配置
+  locales: {
+    root: { 
+      label: 'English', 
+      lang: 'en-US', 
+      dir: 'ltr'
+    },
+    zh: { 
+      label: '简体中文', 
+      lang: 'zh-CN', 
+      dir: 'ltr',
+      themeConfig: {
+        nav: [
+          { text: '🏠 首页', link: '/zh/' },
+          { text: '🛩️ PMDG', link: '/zh/PMDG/guide/index' },
+          { text: '✈️ iniBuilds', link: '/zh/iniBuilds/guide/index' },
+          { text: '🛫 X-Plane', link: '/zh/X-Plane/guide/index' },
+          { text: '✈️ iFly', link: '/zh/iFly/guide/index' },
+          { text: '🚁 TFDI', link: '/zh/TFDI/guide/index' },
+          { 
+            text: '📖 关于', 
+            items: [
+              { text: '🎯 关于我们', link: '/zh/Introduction/about' },
+              { text: '🤝 如何加入', link: '/zh/Introduction/join' }
+            ]
+          }
+        ],
+        sidebar: {
+          '/zh/Introduction/': [
+            {
+              text: '简介',
+              items: [
+                { text: '关于我们', link: '/zh/Introduction/about' },
+                { text: '如何加入', link: '/zh/Introduction/join' },
+              ],
+            },
+          ],
+          '/zh/PMDG/': [
+            {
+              text: 'PMDG',
+              items: [
+                {
+                  text: '指南',
+                  link: '/zh/PMDG/guide/index',
+                  collapsed: false,
+                  items: [
+                    { text: '安装指南', link: '/zh/PMDG/guide/installation' },
+                    { text: '配置说明', link: '/zh/PMDG/guide/configuration' },
+                    { text: '使用说明', link: '/zh/PMDG/guide/usage' },
+                  ],
+                },
+                { text: '常见问题', link: '/zh/PMDG/faq' },
+                { text: '故障排除', link: '/zh/PMDG/troubleshooting' },
+                { text: '架构说明', link: '/zh/PMDG/architecture' },
+                { text: '贡献指南', link: '/zh/PMDG/contributing' },
+                { text: '更新日志', link: '/zh/PMDG/changelog' },
+                { text: '许可证', link: '/zh/PMDG/license' },
+              ],
+            },
+          ],
+          '/zh/iniBuilds/': [
+            {
+              text: 'iniBuilds',
+              items: [
+                {
+                  text: '指南',
+                  link: '/zh/iniBuilds/guide/index',
+                  collapsed: false,
+                  items: [
+                    { text: '安装指南', link: '/zh/iniBuilds/guide/installation' },
+                    { text: '配置说明', link: '/zh/iniBuilds/guide/configuration' },
+                    { text: '使用说明', link: '/zh/iniBuilds/guide/usage' },
+                  ]
+                },
+                { text: '常见问题', link: '/zh/iniBuilds/faq' },
+                { text: '故障排除', link: '/zh/iniBuilds/troubleshooting' },
+                { text: '架构说明', link: '/zh/iniBuilds/architecture' },
+                { text: '贡献指南', link: '/zh/iniBuilds/contributing' },
+                { text: '更新日志', link: '/zh/iniBuilds/changelog' },
+                { text: '许可证', link: '/zh/iniBuilds/license' },
+              ],
+            },
+          ],
+          '/zh/X-Plane/': [
+            {
+              text: 'X-Plane',
+              items: [
+                { text: '指南', link: '/zh/X-Plane/guide/index', 
+                  collapsed: false, items: [
+                  { text: '安装指南', link: '/zh/X-Plane/guide/installation' },
+                  { text: '配置说明', link: '/zh/X-Plane/guide/configuration' },
+                  { text: '使用说明', link: '/zh/X-Plane/guide/usage' },
+                ] },
+                { text: '常见问题', link: '/zh/X-Plane/faq' },
+                { text: '故障排除', link: '/zh/X-Plane/troubleshooting' },
+                { text: '架构说明', link: '/zh/X-Plane/architecture' },
+                { text: '贡献指南', link: '/zh/X-Plane/contributing' },
+                { text: '更新日志', link: '/zh/X-Plane/changelog' },
+                { text: '许可证', link: '/zh/X-Plane/license' },
+              ],
+            },
+          ],
+          '/zh/iFly/': [
+            {
+              text: 'iFly',
+              items: [
+                {
+                  text: '指南',
+                  link: '/zh/iFly/guide/index',
+                  collapsed: false,
+                  items: [
+                    { text: '安装指南', link: '/zh/iFly/guide/installation' },
+                    { text: '配置说明', link: '/zh/iFly/guide/configuration' },
+                    { text: '使用说明', link: '/zh/iFly/guide/usage' },
+                  ],
+                },
+                { text: '常见问题', link: '/zh/iFly/faq' },
+                { text: '故障排除', link: '/zh/iFly/troubleshooting' },
+                { text: '架构说明', link: '/zh/iFly/architecture' },
+                { text: '贡献指南', link: '/zh/iFly/contributing' },
+                { text: '更新日志', link: '/zh/iFly/changelog' },
+                { text: '许可证', link: '/zh/iFly/license' },
+              ],
+            },
+          ],
+          '/zh/TFDI/': [
+            {
+              text: 'TFDI',
+              items: [
+                {
+                  text: '指南',
+                  link: '/zh/TFDI/guide/index',
+                  collapsed: false,
+                  items: [
+                    { text: '安装指南', link: '/zh/TFDI/guide/installation' },
+                    { text: '配置说明', link: '/zh/TFDI/guide/configuration' },
+                    { text: '使用说明', link: '/zh/TFDI/guide/usage' },
+                  ],
+                },
+                { text: '常见问题', link: '/zh/TFDI/faq' },
+                { text: '故障排除', link: '/zh/TFDI/troubleshooting' },
+                { text: '架构说明', link: '/zh/TFDI/architecture' },
+                { text: '贡献指南', link: '/zh/TFDI/contributing' },
+                { text: '更新日志', link: '/zh/TFDI/changelog' },
+                { text: '许可证', link: '/zh/TFDI/license' },
+              ],
+            },
+          ],
+        },
+        docFooter: {
+          prev: '上一页',
+          next: '下一页'
+        },
+        outline: {
+          label: '页面导航'
+        },
+        lastUpdated: {
+          text: '最后更新于',
+          formatOptions: {
+            dateStyle: 'short',
+            timeStyle: 'medium'
+          }
+        },
+        returnToTopLabel: '返回顶部',
+        sidebarMenuLabel: '菜单',
+        darkModeSwitchLabel: '主题',
+        lightModeSwitchTitle: '切换到浅色模式',
+        darkModeSwitchTitle: '切换到深色模式'
+      }
+    },
+    de: { label: 'Deutsch', lang: 'de-DE', dir: 'ltr' },
+    es: { label: 'Español', lang: 'es-ES', dir: 'ltr' },
+    fr: { label: 'Français', lang: 'fr-FR', dir: 'ltr' },
+    ja: { label: '日本語', lang: 'ja-JP', dir: 'ltr' },
+    ko: { label: '한국어', lang: 'ko-KR', dir: 'ltr' }
+  },
   head: [
     ['meta', { name: 'theme-color', content: '#1e40af' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
@@ -35,29 +216,31 @@ export default withMermaid(defineConfig({
     // 添加logo到头部
     logo: '/favicon.svg',
     
+    // 英文导航 (root locale)
     nav: [
-      { text: '🏠 首页', link: '/' },
+      { text: '🏠 Home', link: '/' },
       { text: '🛩️ PMDG', link: '/PMDG/guide/index' },
       { text: '✈️ iniBuilds', link: '/iniBuilds/guide/index' },
       { text: '🛫 X-Plane', link: '/X-Plane/guide/index' },
       { text: '✈️ iFly', link: '/iFly/guide/index' },
       { text: '🚁 TFDI', link: '/TFDI/guide/index' },
       { 
-        text: '📖 关于', 
+        text: '📖 About', 
         items: [
-          { text: '🎯 关于我们', link: '/Introduction/about' },
-          { text: '🤝 如何加入', link: '/Introduction/join' }
+          { text: '🎯 About Us', link: '/Introduction/about' },
+          { text: '🤝 Join Us', link: '/Introduction/join' }
         ]
       }
     ],
 
+    // 英文侧边栏 (root locale)
     sidebar: {
       '/Introduction/': [
         {
-          text: '简介',
+          text: 'Introduction',
           items: [
-            { text: '关于我们', link: '/Introduction/about' },
-            { text: '如何加入', link: '/Introduction/join' },
+            { text: 'About Us', link: '/Introduction/about' },
+            { text: 'Join Us', link: '/Introduction/join' },
           ],
         },
       ],
@@ -66,21 +249,21 @@ export default withMermaid(defineConfig({
           text: 'PMDG',
           items: [
             {
-              text: '指南',
+              text: 'Guide',
               link: '/PMDG/guide/index',
               collapsed: false,
               items: [
-                { text: '安装指南', link: '/PMDG/guide/installation' },
-                { text: '配置说明', link: '/PMDG/guide/configuration' },
-                { text: '使用说明', link: '/PMDG/guide/usage' },
+                { text: 'Installation', link: '/PMDG/guide/installation' },
+                { text: 'Configuration', link: '/PMDG/guide/configuration' },
+                { text: 'Usage', link: '/PMDG/guide/usage' },
               ],
             },
-            { text: '常见问题', link: '/PMDG/faq' },
-            { text: '故障排除', link: '/PMDG/troubleshooting' },
-            { text: '架构说明', link: '/PMDG/architecture' },
-            { text: '贡献指南', link: '/PMDG/contributing' },
-            { text: '更新日志', link: '/PMDG/changelog' },
-            { text: '许可证', link: '/PMDG/license' },
+            { text: 'FAQ', link: '/PMDG/faq' },
+            { text: 'Troubleshooting', link: '/PMDG/troubleshooting' },
+            { text: 'Architecture', link: '/PMDG/architecture' },
+            { text: 'Contributing', link: '/PMDG/contributing' },
+            { text: 'Changelog', link: '/PMDG/changelog' },
+            { text: 'License', link: '/PMDG/license' },
           ],
         },
       ],
@@ -89,21 +272,21 @@ export default withMermaid(defineConfig({
           text: 'iniBuilds',
           items: [
             {
-              text: '指南',
+              text: 'Guide',
               link: '/iniBuilds/guide/index',
               collapsed: false,
               items: [
-                { text: '安装指南', link: '/iniBuilds/guide/installation' },
-                { text: '配置说明', link: '/iniBuilds/guide/configuration' },
-                { text: '使用说明', link: '/iniBuilds/guide/usage' },
+                { text: 'Installation', link: '/iniBuilds/guide/installation' },
+                { text: 'Configuration', link: '/iniBuilds/guide/configuration' },
+                { text: 'Usage', link: '/iniBuilds/guide/usage' },
               ]
             },
-            { text: '常见问题', link: '/iniBuilds/faq' },
-            { text: '故障排除', link: '/iniBuilds/troubleshooting' },
-            { text: '架构说明', link: '/iniBuilds/architecture' },
-            { text: '贡献指南', link: '/iniBuilds/contributing' },
-            { text: '更新日志', link: '/iniBuilds/changelog' },
-            { text: '许可证', link: '/iniBuilds/license' },
+            { text: 'FAQ', link: '/iniBuilds/faq' },
+            { text: 'Troubleshooting', link: '/iniBuilds/troubleshooting' },
+            { text: 'Architecture', link: '/iniBuilds/architecture' },
+            { text: 'Contributing', link: '/iniBuilds/contributing' },
+            { text: 'Changelog', link: '/iniBuilds/changelog' },
+            { text: 'License', link: '/iniBuilds/license' },
           ],
         },
       ],
@@ -111,18 +294,18 @@ export default withMermaid(defineConfig({
         {
           text: 'X-Plane',
           items: [
-            { text: '指南', link: '/X-Plane/guide/index', 
+            { text: 'Guide', link: '/X-Plane/guide/index', 
               collapsed: false, items: [
-              { text: '安装指南', link: '/X-Plane/guide/installation' },
-              { text: '配置说明', link: '/X-Plane/guide/configuration' },
-              { text: '使用说明', link: '/X-Plane/guide/usage' },
+              { text: 'Installation', link: '/X-Plane/guide/installation' },
+              { text: 'Configuration', link: '/X-Plane/guide/configuration' },
+              { text: 'Usage', link: '/X-Plane/guide/usage' },
             ] },
-            { text: '常见问题', link: '/X-Plane/faq' },
-            { text: '故障排除', link: '/X-Plane/troubleshooting' },
-            { text: '架构说明', link: '/X-Plane/architecture' },
-            { text: '贡献指南', link: '/X-Plane/contributing' },
-            { text: '更新日志', link: '/X-Plane/changelog' },
-            { text: '许可证', link: '/X-Plane/license' },
+            { text: 'FAQ', link: '/X-Plane/faq' },
+            { text: 'Troubleshooting', link: '/X-Plane/troubleshooting' },
+            { text: 'Architecture', link: '/X-Plane/architecture' },
+            { text: 'Contributing', link: '/X-Plane/contributing' },
+            { text: 'Changelog', link: '/X-Plane/changelog' },
+            { text: 'License', link: '/X-Plane/license' },
           ],
         },
       ],
@@ -131,21 +314,21 @@ export default withMermaid(defineConfig({
           text: 'iFly',
           items: [
             {
-              text: '指南',
+              text: 'Guide',
               link: '/iFly/guide/index',
               collapsed: false,
               items: [
-                { text: '安装指南', link: '/iFly/guide/installation' },
-                { text: '配置说明', link: '/iFly/guide/configuration' },
-                { text: '使用说明', link: '/iFly/guide/usage' },
+                { text: 'Installation', link: '/iFly/guide/installation' },
+                { text: 'Configuration', link: '/iFly/guide/configuration' },
+                { text: 'Usage', link: '/iFly/guide/usage' },
               ],
             },
-            { text: '常见问题', link: '/iFly/faq' },
-            { text: '故障排除', link: '/iFly/troubleshooting' },
-            { text: '架构说明', link: '/iFly/architecture' },
-            { text: '贡献指南', link: '/iFly/contributing' },
-            { text: '更新日志', link: '/iFly/changelog' },
-            { text: '许可证', link: '/iFly/license' },
+            { text: 'FAQ', link: '/iFly/faq' },
+            { text: 'Troubleshooting', link: '/iFly/troubleshooting' },
+            { text: 'Architecture', link: '/iFly/architecture' },
+            { text: 'Contributing', link: '/iFly/contributing' },
+            { text: 'Changelog', link: '/iFly/changelog' },
+            { text: 'License', link: '/iFly/license' },
           ],
         },
       ],
@@ -154,21 +337,21 @@ export default withMermaid(defineConfig({
           text: 'TFDI',
           items: [
             {
-              text: '指南',
+              text: 'Guide',
               link: '/TFDI/guide/index',
               collapsed: false,
               items: [
-                { text: '安装指南', link: '/TFDI/guide/installation' },
-                { text: '配置说明', link: '/TFDI/guide/configuration' },
-                { text: '使用说明', link: '/TFDI/guide/usage' },
+                { text: 'Installation', link: '/TFDI/guide/installation' },
+                { text: 'Configuration', link: '/TFDI/guide/configuration' },
+                { text: 'Usage', link: '/TFDI/guide/usage' },
               ],
             },
-            { text: '常见问题', link: '/TFDI/faq' },
-            { text: '故障排除', link: '/TFDI/troubleshooting' },
-            { text: '架构说明', link: '/TFDI/architecture' },
-            { text: '贡献指南', link: '/TFDI/contributing' },
-            { text: '更新日志', link: '/TFDI/changelog' },
-            { text: '许可证', link: '/TFDI/license' },
+            { text: 'FAQ', link: '/TFDI/faq' },
+            { text: 'Troubleshooting', link: '/TFDI/troubleshooting' },
+            { text: 'Architecture', link: '/TFDI/architecture' },
+            { text: 'Contributing', link: '/TFDI/contributing' },
+            { text: 'Changelog', link: '/TFDI/changelog' },
+            { text: 'License', link: '/TFDI/license' },
           ],
         },
       ],
@@ -180,6 +363,25 @@ export default withMermaid(defineConfig({
       options: {
         locales: {
           root: {
+            translations: {
+              button: {
+                buttonText: 'Search',
+                buttonAriaLabel: 'Search'
+              },
+              modal: {
+                displayDetails: 'Display detailed list',
+                resetButtonTitle: 'Reset search',
+                backButtonTitle: 'Back to search',
+                noResultsText: 'No results found',
+                footer: {
+                  selectText: 'Select',
+                  navigateText: 'Navigate',
+                  closeText: 'Close'
+                }
+              }
+            }
+          },
+          zh: {
             translations: {
               button: {
                 buttonText: '搜索文档',

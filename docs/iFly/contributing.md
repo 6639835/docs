@@ -1,117 +1,117 @@
-# 🤝 贡献指南
+# 🤝 Contribution Guide
 
-感谢您对 iFly 导航数据转换器项目的关注！我们欢迎并感谢所有形式的贡献。
+Thank you for your interest in the iFly Navigation Data Converter project! We welcome and appreciate contributions of all forms.
 
-## 🌟 贡献方式
+## 🌟 Ways to Contribute
 
-### 💻 代码贡献
-- 🐛 修复 Bug
-- ✨ 添加新功能
-- 📈 性能优化
-- 🧪 增加测试用例
-- 📚 改进文档
+### 💻 Code Contributions
+- 🐛 Fix Bugs
+- ✨ Add New Features
+- 📈 Optimize Performance
+- 🧪 Add Test Cases
+- 📚 Improve Documentation
 
-### 📝 非代码贡献
-- 🐛 报告问题
-- 💡 提出功能建议
-- 📖 完善文档
-- 🌐 翻译支持
-- 🎓 教程制作
+### 📝 Non-Code Contributions
+- 🐛 Report Issues
+- 💡 Propose Feature Suggestions
+- 📖 Enhance Documentation
+- 🌐 Translation Support
+- 🎓 Create Tutorials
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 环境准备
+### 1. Environment Setup
 
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone https://github.com/your-username/ifly-nav-converter.git
 cd ifly-nav-converter
 
-# 创建虚拟环境
+# Create a virtual environment
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
-pip install -r requirements-dev.txt  # 开发依赖
+pip install -r requirements-dev.txt  # Development dependencies
 ```
 
-### 2. 开发环境配置
+### 2. Development Environment Configuration
 
 ```bash
-# 安装预提交钩子
+# Install pre-commit hooks
 pre-commit install
 
-# 运行测试
+# Run tests
 pytest
 
-# 代码质量检查
+# Code quality checks
 flake8 .
 mypy .
 black . --check
 ```
 
-## 📋 开发流程
+## 📋 Development Workflow
 
-### 1. 创建功能分支
+### 1. Create a Feature Branch
 
 ```bash
-# 从主分支创建新分支
+# Create a new branch from the main branch
 git checkout main
 git pull origin main
 git checkout -b feature/your-feature-name
 
-# 或修复分支
+# Or a fix branch
 git checkout -b fix/issue-description
 ```
 
-### 2. 开发和测试
+### 2. Development and Testing
 
 ```bash
-# 进行开发
-# ... 编写代码 ...
+# Proceed with development
+# ... Write code ...
 
-# 运行测试
+# Run tests
 pytest tests/
 
-# 检查代码质量
+# Check code quality
 black .
 flake8 .
 mypy .
 ```
 
-### 3. 提交代码
+### 3. Commit Code
 
 ```bash
-# 添加文件
+# Add files
 git add .
 
-# 提交（遵循提交信息规范）
+# Commit (follow commit message conventions)
 git commit -m "feat: add new feature description"
 
-# 推送到远程分支
+# Push to remote branch
 git push origin feature/your-feature-name
 ```
 
-### 4. 创建 Pull Request
+### 4. Create a Pull Request
 
-1. 在 GitHub 上创建 Pull Request
-2. 填写详细的 PR 描述
-3. 确保所有检查通过
-4. 等待代码审查
+1. Create a Pull Request on GitHub
+2. Fill out a detailed PR description
+3. Ensure all checks pass
+4. Wait for code review
 
-## 📝 代码规范
+## 📝 Code Standards
 
-### Python 代码风格
+### Python Code Style
 
-我们使用以下工具确保代码质量：
+We use the following tools to ensure code quality:
 
-- **Black**：代码格式化
-- **Flake8**：代码风格检查
-- **MyPy**：类型检查
-- **isort**：导入排序
+- **Black**: Code formatting
+- **Flake8**: Code style checks
+- **MyPy**: Type checking
+- **isort**: Import sorting
 
-### 代码示例
+### Code Example
 
 ```python
 from typing import List, Optional, Dict, Any
@@ -122,20 +122,20 @@ logger = logging.getLogger(__name__)
 
 
 class NavigationDataConverter:
-    """导航数据转换器主类。
+    """Main class for the navigation data converter.
     
-    这个类负责将 Fenix 导航数据转换为 iFly 格式。
+    This class is responsible for converting Fenix navigation data to iFly format.
     
     Attributes:
-        config: 转换器配置
-        logger: 日志记录器
+        config: Converter configuration
+        logger: Logger
     """
     
     def __init__(self, config: ConverterConfig) -> None:
-        """初始化转换器。
+        """Initializes the converter.
         
         Args:
-            config: 转换器配置对象
+            config: Converter configuration object
         """
         self.config = config
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -146,30 +146,30 @@ class NavigationDataConverter:
         target_path: Path,
         options: Optional[Dict[str, Any]] = None
     ) -> bool:
-        """转换导航数据。
+        """Converts navigation data.
         
         Args:
-            source_path: 源数据路径
-            target_path: 目标数据路径  
-            options: 可选的转换选项
+            source_path: Path to source data
+            target_path: Path to target data  
+            options: Optional conversion options
             
         Returns:
-            转换是否成功
+            Whether the conversion was successful
             
         Raises:
-            ConversionError: 转换过程中出现错误
+            ConversionError: An error occurred during conversion
         """
         try:
-            # 实现转换逻辑
+            # Implement conversion logic
             return True
         except Exception as e:
-            self.logger.error(f"转换失败: {e}")
-            raise ConversionError(f"数据转换失败: {e}") from e
+            self.logger.error(f"Conversion failed: {e}")
+            raise ConversionError(f"Data conversion failed: {e}") from e
 ```
 
-### 提交信息规范
+### Commit Message Conventions
 
-使用 [Conventional Commits](https://www.conventionalcommits.org/) 规范：
+Use [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ```
 <type>[optional scope]: <description>
@@ -179,16 +179,16 @@ class NavigationDataConverter:
 [optional footer(s)]
 ```
 
-**类型标识：**
-- `feat`: 新功能
-- `fix`: 修复 Bug
-- `docs`: 文档更新
-- `style`: 代码格式调整
-- `refactor`: 代码重构
-- `test`: 测试用例
-- `chore`: 构建过程或辅助工具的变动
+**Type Identifiers:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation update
+- `style`: Code formatting adjustments
+- `refactor`: Code refactoring
+- `test`: Test cases
+- `chore`: Changes to the build process or auxiliary tools
 
-**示例：**
+**Example:**
 ```
 feat(converter): add magnetic declination calculation
 
@@ -199,19 +199,19 @@ feat(converter): add magnetic declination calculation
 Closes #123
 ```
 
-## 🧪 测试指南
+## 🧪 Testing Guide
 
-### 测试结构
+### Test Structure
 
 ```
 tests/
-├── unit/           # 单元测试
-├── integration/    # 集成测试
-├── fixtures/       # 测试数据
-└── conftest.py     # 测试配置
+├── unit/           # Unit tests
+├── integration/    # Integration tests
+├── fixtures/       # Test data
+└── conftest.py     # Test configuration
 ```
 
-### 编写测试
+### Writing Tests
 
 ```python
 import pytest
@@ -220,11 +220,11 @@ from ifly_converter.converter import NavigationDataConverter
 
 
 class TestNavigationDataConverter:
-    """导航数据转换器测试类。"""
+    """Test class for the navigation data converter."""
     
     @pytest.fixture
     def converter(self):
-        """创建测试用的转换器实例。"""
+        """Creates a converter instance for testing."""
         config = ConverterConfig(
             output_dir="test_output",
             coordinate_precision=8
@@ -232,22 +232,22 @@ class TestNavigationDataConverter:
         return NavigationDataConverter(config)
     
     def test_convert_data_success(self, converter, tmp_path):
-        """测试数据转换成功情况。"""
+        """Tests the successful data conversion scenario."""
         source = tmp_path / "source.db3"
         target = tmp_path / "target"
         
-        # 创建测试数据
+        # Create test data
         source.touch()
         
-        # 执行转换
+        # Execute conversion
         result = converter.convert_data(source, target)
         
-        # 验证结果
+        # Verify result
         assert result is True
         assert target.exists()
     
     def test_convert_data_failure(self, converter):
-        """测试数据转换失败情况。"""
+        """Tests the data conversion failure scenario."""
         with pytest.raises(ConversionError):
             converter.convert_data(
                 Path("nonexistent.db3"),
@@ -255,57 +255,57 @@ class TestNavigationDataConverter:
             )
 ```
 
-### 运行测试
+### Running Tests
 
 ```bash
-# 运行所有测试
+# Run all tests
 pytest
 
-# 运行指定测试文件
+# Run a specific test file
 pytest tests/unit/test_converter.py
 
-# 运行并生成覆盖率报告
+# Run and generate coverage report
 pytest --cov=ifly_converter --cov-report=html
 
-# 运行性能测试
+# Run performance tests
 pytest tests/performance/ -m performance
 ```
 
-## 📚 文档贡献
+## 📚 Documentation Contributions
 
-### 文档结构
+### Documentation Structure
 
 ```
 docs/
-├── guide/          # 用户指南
-├── api/            # API 文档
-├── examples/       # 示例代码
-└── deployment/     # 部署指南
+├── guide/          # User Guide
+├── api/            # API Documentation
+├── examples/       # Example Code
+└── deployment/     # Deployment Guide
 ```
 
-### 文档规范
+### Documentation Standards
 
-- 使用 **Markdown** 格式
-- 包含代码示例
-- 提供多语言支持
-- 保持文档更新
+- Use **Markdown** format
+- Include code examples
+- Provide multilingual support
+- Keep documentation updated
 
-### 文档示例
+### Documentation Example
 
 ```markdown
-## 🔧 配置管理
+## 🔧 Configuration Management
 
-### 基本配置
+### Basic Configuration
 
-转换器使用 `ConverterConfig` 类管理配置：
+The converter uses the `ConverterConfig` class to manage configuration:
 
 ```python
 from ifly_converter.config import ConverterConfig
 
-# 创建默认配置
+# Create default configuration
 config = ConverterConfig()
 
-# 自定义配置
+# Custom configuration
 config = ConverterConfig(
     output_dir="custom_output",
     coordinate_precision=6,
@@ -313,119 +313,119 @@ config = ConverterConfig(
 )
 ```
 
-### 配置选项
+### Configuration Options
 
-| 选项 | 类型 | 默认值 | 描述 |
+| Option | Type | Default Value | Description |
 |------|------|--------|------|
-| `output_dir` | str | "output" | 输出目录 |
-| `coordinate_precision` | int | 8 | 坐标精度 |
-| `enable_validation` | bool | True | 启用验证 |
+| `output_dir` | str | "output" | Output directory |
+| `coordinate_precision` | int | 8 | Coordinate precision |
+| `enable_validation` | bool | True | Enable validation |
 ```
 
-## 🐛 报告问题
+## 🐛 Reporting Issues
 
-### 问题报告模板
+### Issue Report Template
 
-在报告问题时，请提供以下信息：
+When reporting an issue, please provide the following information:
 
 ```markdown
-**问题描述**
-清晰简洁地描述遇到的问题。
+**Problem Description**
+Clearly and concisely describe the issue encountered.
 
-**重现步骤**
-1. 第一步 '...'
-2. 第二步 '...'
-3. 第三步 '...'
-4. 看到错误
+**Steps to Reproduce**
+1. First step '...'
+2. Second step '...'
+3. Third step '...'
+4. Observe error
 
-**预期行为**
-描述您期望发生的情况。
+**Expected Behavior**
+Describe what you expected to happen.
 
-**实际行为**
-描述实际发生的情况。
+**Actual Behavior**
+Describe what actually happened.
 
-**环境信息**
-- OS: [如 Windows 10]
-- Python 版本: [如 3.9.0]
-- 项目版本: [如 v2.0.0]
+**Environment Information**
+- OS: [e.g., Windows 10]
+- Python Version: [e.g., 3.9.0]
+- Project Version: [e.g., v2.0.0]
 
-**日志信息**
+**Log Information**
 ```
-粘贴相关的日志信息
-```
-
-**截图**
-如果适用，添加截图帮助解释问题。
-
-**补充信息**
-添加任何其他相关的上下文信息。
+Paste relevant log information
 ```
 
-### 问题分类
+**Screenshots**
+If applicable, add screenshots to help explain the issue.
 
-使用以下标签分类问题：
+**Additional Information**
+Add any other relevant contextual information.
+```
 
-- 🐛 `bug` - 错误报告
-- ✨ `enhancement` - 功能请求
-- 📚 `documentation` - 文档相关
-- ❓ `question` - 使用问题
-- 🔥 `priority: high` - 高优先级
-- 🧹 `good first issue` - 适合新手
+### Issue Categories
 
-## 📋 功能请求
+Use the following labels to categorize issues:
 
-### 功能请求模板
+- 🐛 `bug` - Bug report
+- ✨ `enhancement` - Feature request
+- 📚 `documentation` - Documentation related
+- ❓ `question` - Usage question
+- 🔥 `priority: high` - High priority
+- 🧹 `good first issue` - Suitable for newcomers
+
+## 📋 Feature Requests
+
+### Feature Request Template
 
 ```markdown
-**功能概述**
-简要描述您希望添加的功能。
+**Feature Overview**
+Briefly describe the feature you would like to add.
 
-**解决的问题**
-这个功能解决了什么问题？
+**Problem Solved**
+What problem does this feature solve?
 
-**详细描述**
-详细描述功能的工作方式。
+**Detailed Description**
+Describe in detail how the feature would work.
 
-**替代方案**
-您是否考虑过其他解决方案？
+**Alternatives Considered**
+Have you considered any alternative solutions?
 
-**附加信息**
-添加任何其他相关信息、截图或示例。
+**Additional Information**
+Add any other relevant information, screenshots, or examples.
 ```
 
-## 🎯 开发路线图
+## 🎯 Development Roadmap
 
-### 近期目标（1-3个月）
-- [ ] GUI 界面开发
-- [ ] 批量处理功能
-- [ ] 数据验证工具增强
-- [ ] 性能优化
+### Short-Term Goals (1-3 months)
+- [ ] GUI interface development
+- [ ] Batch processing functionality
+- [ ] Data validation tool enhancements
+- [ ] Performance optimization
 
-### 中期目标（3-6个月）
-- [ ] 多格式支持
-- [ ] 云端处理
-- [ ] REST API 接口
-- [ ] 插件系统
+### Mid-Term Goals (3-6 months)
+- [ ] Multi-format support
+- [ ] Cloud-based processing
+- [ ] REST API interface
+- [ ] Plugin system
 
-### 长期目标（6-12个月）
-- [ ] 机器学习优化
-- [ ] 实时数据更新
-- [ ] 移动端支持
-- [ ] 企业级功能
+### Long-Term Goals (6-12 months)
+- [ ] Machine learning optimization
+- [ ] Real-time data updates
+- [ ] Mobile support
+- [ ] Enterprise-level features
 
-## 🏆 贡献者
+## 🏆 Contributors
 
-感谢所有为项目做出贡献的开发者！
+Thanks to all developers who have contributed to the project!
 
-<!-- 贡献者列表将自动更新 -->
+<!-- The list of contributors will be updated automatically -->
 
-## 📞 联系我们
+## 📞 Contact Us
 
-- 📧 **邮件**：project@example.com
-- 💬 **讨论**：GitHub Discussions
-- 🐛 **问题**：GitHub Issues
-- 🌐 **官网**：https://ifly-converter.org
+- 📧 **Email**: project@example.com
+- 💬 **Discussions**: GitHub Discussions
+- 🐛 **Issues**: GitHub Issues
+- 🌐 **Official Website**: https://ifly-converter.org
 
 ---
 
-再次感谢您的贡献！让我们一起打造更好的 iFly 导航数据转换器！🚀
+Thank you again for your contributions! Let's work together to build a better iFly Navigation Data Converter! 🚀

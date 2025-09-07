@@ -1,355 +1,354 @@
-# 更新日志
+# Changelog
 
-本文档记录 Nav-data 项目的所有重要变更。
+This document records all important changes for the Nav-data project.
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
+The format is based on [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/), and version numbers follow [Semantic Versioning](https://semver.org/lang/zh-CN/).
 
-## [未发布] - Unreleased
+## [Unreleased] - Unreleased
 
-### 计划添加
-- 多语言界面支持
-- GUI 图形界面版本
-- 云端数据同步功能
-- 批量任务调度器
-- 实时数据验证
+### Planned Additions
+- Multilingual UI support
+- GUI (Graphical User Interface) version
+- Cloud data synchronization feature
+- Batch task scheduler
+- Real-time data validation
 
-### 开发中
-- 性能优化：大文件处理速度提升
-- 新的数据源支持：EUROCONTROL 数据格式
-- 插件系统架构
+### In Development
+- Performance optimization: Increased large file processing speed
+- New data source support: EUROCONTROL data format
+- Plugin system architecture
 
 ## [2.1.0] - 2025-01-15
 
-### 新增
-- **PDF 提取增强** 
-  - 新增自动坐标格式检测功能
-  - 支持更多 PDF 布局类型
-  - 添加手动质量检查工具
-- **AIRAC 周期管理**
-  - 自动计算当前 AIRAC 周期
-  - 周期有效性验证
-  - 历史周期数据支持
-- **批量处理工具**
-  - 新增 `batch_process.py` 脚本
-  - 支持多文件并行处理
-  - 处理进度实时监控
-- **数据验证框架**
-  - 完整的数据验证管道
-  - 自定义验证规则支持
-  - 详细的错误报告
+### Added
+- **PDF Extraction Enhancements**
+  - Added automatic coordinate format detection feature
+  - Supports more PDF layout types
+  - Added manual quality inspection tool
+- **AIRAC Cycle Management**
+  - Automatically calculates current AIRAC cycle
+  - Cycle validity verification
+  - Supports historical cycle data
+- **Batch Processing Tools**
+  - Added `batch_process.py` script
+  - Supports parallel processing of multiple files
+  - Real-time processing progress monitoring
+- **Data Validation Framework**
+  - Complete data validation pipeline
+  - Supports custom validation rules
+  - Detailed error reports
 
-### 改进
-- **性能优化**
-  - CSV 处理速度提升 40%
-  - 内存使用优化，支持更大文件
-  - 并发处理机制改进
-- **错误处理**
-  - 更详细的错误信息
-  - 错误恢复机制增强
-  - 日志系统完善
-- **用户体验**
-  - 进度条显示优化
-  - 彩色控制台输出
-  - 更直观的错误提示
+### Improved
+- **Performance Optimization**
+  - CSV processing speed increased by 40%
+  - Optimized memory usage, supports larger files
+  - Improved concurrent processing mechanism
+- **Error Handling**
+  - More detailed error messages
+  - Enhanced error recovery mechanism
+  - Improved logging system
+- **User Experience**
+  - Optimized progress bar display
+  - Colored console output
+  - More intuitive error prompts
 
-### 修复
-- 修复中文字符编码问题 (#45)
-- 解决 PDF 解析偶发性崩溃 (#52)
-- 修复坐标精度丢失问题 (#48)
-- 解决大文件内存溢出问题 (#41)
+### Fixed
+- Fixed Chinese character encoding issue (#45)
+- Resolved occasional PDF parsing crashes (#52)
+- Fixed coordinate precision loss issue (#48)
+- Resolved large file memory overflow issue (#41)
 
-### 技术债务清理
-- 重构核心数据结构
-- 统一代码风格和命名规范
-- 增加类型注解覆盖率到 95%
-- 测试覆盖率提升到 85%
+### Technical Debt Clean-up
+- Refactored core data structures
+- Standardized code style and naming conventions
+- Increased type annotation coverage to 95%
+- Increased test coverage to 85%
 
 ## [2.0.1] - 2024-12-20
 
-### 修复
-- **关键 Bug 修复**
-  - 修复航路数据重复生成问题 (#38)
-  - 解决终端程序编码错误 (#39)
-  - 修复文件路径包含空格时的处理问题 (#40)
+### Fixed
+- **Critical Bug Fixes**
+  - Fixed duplicate waypoint data generation issue (#38)
+  - Resolved terminal program encoding error (#39)
+  - Fixed handling of file paths containing spaces (#40)
 
-### 改进
-- 改进错误消息的可读性
-- 优化临时文件清理机制
-- 增强跨平台兼容性
+### Improved
+- Improved readability of error messages
+- Optimized temporary file clean-up mechanism
+- Enhanced cross-platform compatibility
 
-### 安全
-- 修复路径遍历安全漏洞 (#37)
-- 加强输入验证机制
+### Security
+- Fixed path traversal security vulnerability (#37)
+- Strengthened input validation mechanism
 
 ## [2.0.0] - 2024-12-01
 
-### 重大变更 ⚠️
-- **架构重构**
-  - 采用模块化设计，各模块可独立运行
-  - 引入新的配置系统
-  - 重新设计 API 接口
-- **Python 版本要求**
-  - 最低要求 Python 3.6+
-  - 推荐使用 Python 3.8+
-- **命令行接口变更**
-  - 统一命令行参数格式
-  - 移除部分已废弃的选项
+### Breaking Changes ⚠️
+- **Architectural Refactoring**
+  - Adopted modular design, allowing each module to run independently
+  - Introduced a new configuration system
+  - Redesigned API interfaces
+- **Python Version Requirements**
+  - Minimum requirement Python 3.6+
+  - Recommended use Python 3.8+
+- **Command-Line Interface Changes**
+  - Unified command-line argument format
+  - Removed some deprecated options
 
-### 新增
-- **终端修复模块 (Terminal Patch)**
-  - 新增 `terminal_encoder.py` 程序编码器
-  - 新增 `terminal_reencode.py` 格式修复器
-  - 支持批量文件处理
-- **X-Plane CIFP 生成**
-  - 完整的 CIFP 数据生成流程
-  - 支持 X-Plane 11 和 X-Plane 12
-  - 导航设备和航路点处理
-- **配置管理系统**
-  - 支持配置文件和环境变量
-  - 模块化配置选项
-  - 配置验证和错误提示
+### Added
+- **Terminal Patch Module**
+  - Added `terminal_encoder.py` program encoder
+  - Added `terminal_reencode.py` format fixer
+  - Supports batch file processing
+- **X-Plane CIFP Generation**
+  - Complete CIFP data generation process
+  - Supports X-Plane 11 and X-Plane 12
+  - Navigation equipment and waypoint processing
+- **Configuration Management System**
+  - Supports configuration files and environment variables
+  - Modular configuration options
+  - Configuration validation and error prompts
 
-### 改进
-- **数据处理精度**
-  - 坐标精度提升到 8 位小数
-  - 改进度分秒转换算法
-  - 增强数据完整性检查
-- **文档系统**
-  - 全新的文档架构
-  - 详细的使用示例
-  - 完整的 API 文档
+### Improved
+- **Data Processing Accuracy**
+  - Coordinate precision increased to 8 decimal places
+  - Improved degree-minute-second conversion algorithm
+  - Enhanced data integrity checks
+- **Documentation System**
+  - Brand new documentation architecture
+  - Detailed usage examples
+  - Complete API documentation
 
-### 移除
-- 移除对 Python 2.7 的支持
-- 移除过时的数据格式支持
-- 清理无用的辅助脚本
+### Removed
+- Removed support for Python 2.7
+- Removed support for outdated data formats
+- Cleaned up unused helper scripts
 
 ## [1.3.2] - 2024-10-15
 
-### 修复
-- 修复 macOS 下文件编码问题 (#28)
-- 解决 Windows 路径分隔符问题 (#29)
-- 修复 PDF 表格解析边界条件 (#30)
+### Fixed
+- Fixed file encoding issue on macOS (#28)
+- Resolved Windows path separator issue (#29)
+- Fixed PDF table parsing boundary conditions (#30)
 
-### 改进
-- 优化大文件加载性能
-- 增强错误日志详细程度
-- 改进中文区域代码处理
+### Improved
+- Optimized large file loading performance
+- Enhanced error log verbosity
+- Improved Chinese region code handling
 
 ## [1.3.1] - 2024-09-28
 
-### 修复
-- **紧急修复**
-  - 修复航路数据丢失问题 (#25)
-  - 解决坐标转换精度问题 (#26)
-  - 修复 CSV 解析异常处理 (#27)
+### Fixed
+- **Urgent Fixes**
+  - Fixed waypoint data loss issue (#25)
+  - Resolved coordinate conversion precision issue (#26)
+  - Fixed CSV parsing exception handling (#27)
 
-### 改进
-- 加强数据验证流程
-- 优化内存使用效率
+### Improved
+- Strengthened data validation process
+- Optimized memory usage efficiency
 
 ## [1.3.0] - 2024-09-10
 
-### 新增
-- **航路点提取增强**
-  - 支持 Edge 浏览器手动提取模式
-  - 新增坐标格式自动识别
-  - 添加数据质量评估报告
-- **区域过滤功能**
-  - 支持自定义区域代码过滤
-  - 中国空域智能识别
-  - 批量区域处理
+### Added
+- **Waypoint Extraction Enhancements**
+  - Supports manual extraction mode for Edge browser
+  - Added automatic coordinate format recognition
+  - Added data quality assessment report
+- **Region Filtering Functionality**
+  - Supports custom region code filtering
+  - Intelligent recognition of Chinese airspace
+  - Batch region processing
 
-### 改进
-- **PDF 处理能力**
-  - 支持更多 PDF 版本格式
-  - 改进文本提取准确性
-  - 增强表格结构识别
-- **数据转换**
-  - 优化 CSV 到 DAT 转换流程
-  - 增强数据完整性检查
-  - 改进错误恢复机制
+### Improved
+- **PDF Processing Capability**
+  - Supports more PDF version formats
+  - Improved text extraction accuracy
+  - Enhanced table structure recognition
+- **Data Conversion**
+  - Optimized CSV to DAT conversion process
+  - Enhanced data integrity checks
+  - Improved error recovery mechanism
 
-### 修复
-- 修复特殊字符处理问题 (#18)
-- 解决并发处理死锁 (#19)
-- 修复临时文件清理问题 (#20)
+### Fixed
+- Fixed special character handling issue (#18)
+- Resolved concurrency deadlock (#19)
+- Fixed temporary file clean-up issue (#20)
 
 ## [1.2.1] - 2024-08-20
 
-### 修复
-- 修复安装依赖缺失问题 (#15)
-- 解决编码检测错误 (#16)
-- 修复日志文件权限问题 (#17)
+### Fixed
+- Fixed missing installation dependency issue (#15)
+- Resolved encoding detection error (#16)
+- Fixed log file permission issue (#17)
 
-### 改进
-- 优化安装流程
-- 改进错误提示信息
-- 增强跨平台兼容性
+### Improved
+- Optimized installation process
+- Improved error prompt messages
+- Enhanced cross-platform compatibility
 
 ## [1.2.0] - 2024-08-01
 
-### 新增
-- **多格式支持**
-  - 支持 JSON 输出格式
-  - 新增 XML 数据导出
-  - 支持自定义输出模板
-- **日志系统**
-  - 结构化日志记录
-  - 多级日志输出
-  - 日志文件轮转
-- **性能监控**
-  - 处理时间统计
-  - 内存使用监控
-  - 系统资源跟踪
+### Added
+- **Multi-format Support**
+  - Supports JSON output format
+  - Added XML data export
+  - Supports custom output templates
+- **Logging System**
+  - Structured logging
+  - Multi-level log output
+  - Log file rotation
+- **Performance Monitoring**
+  - Processing time statistics
+  - Memory usage monitoring
+  - System resource tracking
 
-### 改进
-- **用户界面**
-  - 彩色终端输出
-  - 实时进度显示
-  - 更友好的错误提示
-- **数据处理**
-  - 提升大文件处理速度
-  - 优化内存使用效率
-  - 增强异常处理能力
+### Improved
+- **User Interface**
+  - Colored terminal output
+  - Real-time progress display
+  - More user-friendly error prompts
+- **Data Processing**
+  - Increased large file processing speed
+  - Optimized memory usage efficiency
+  - Enhanced exception handling capabilities
 
-### 修复
-- 修复航路数据重复问题 (#10)
-- 解决PDF解析内存泄漏 (#11)
-- 修复坐标转换边界问题 (#12)
+### Fixed
+- Fixed duplicate waypoint data issue (#10)
+- Resolved PDF parsing memory leak (#11)
+- Fixed coordinate conversion boundary issue (#12)
 
 ## [1.1.0] - 2024-07-15
 
-### 新增
-- **PDF 数据提取**
-  - 自动 PDF 程序数据提取
-  - 支持多步骤数据处理流程
-  - 航路点坐标智能识别
-- **数据验证**
-  - 坐标范围验证
-  - 数据完整性检查
-  - 格式标准化验证
+### Added
+- **PDF Data Extraction**
+  - Automatic PDF procedure data extraction
+  - Supports multi-step data processing workflow
+  - Intelligent recognition of waypoint coordinates
+- **Data Validation**
+  - Coordinate range validation
+  - Data integrity checks
+  - Format standardization validation
 
-### 改进
-- 提升 CSV 处理性能
-- 优化错误处理机制
-- 增强代码可维护性
+### Improved
+- Improved CSV processing performance
+- Optimized error handling mechanism
+- Enhanced code maintainability
 
-### 修复
-- 修复编码转换问题 (#6)
-- 解决文件路径处理错误 (#7)
-- 修复数据类型转换异常 (#8)
+### Fixed
+- Fixed encoding conversion issue (#6)
+- Resolved file path handling error (#7)
+- Fixed data type conversion exception (#8)
 
 ## [1.0.1] - 2024-06-28
 
-### 修复
-- **紧急修复**
-  - 修复安装脚本权限问题 (#3)
-  - 解决依赖包版本冲突 (#4)
-  - 修复示例数据文件缺失 (#5)
+### Fixed
+- **Urgent Fixes**
+  - Fixed installation script permission issue (#3)
+  - Resolved dependency package version conflict (#4)
+  - Fixed missing sample data file issue (#5)
 
-### 改进
-- 改进安装文档
-- 优化错误提示信息
-- 增加使用示例
+### Improved
+- Improved installation documentation
+- Optimized error prompt messages
+- Added usage examples
 
 ## [1.0.0] - 2024-06-15
 
-### 新增
-- **核心功能** 🎉
-  - 航路数据 CSV 到 X-Plane DAT 格式转换
-  - 中国空域区域过滤功能
-  - 支持多种导航点类型 (DESIGNATED_POINT, VOR/DME, NDB)
-  - 自动数据验证和错误报告
-- **基础架构**
-  - 模块化代码结构
-  - 完整的错误处理机制
-  - 基础日志系统
-  - 单元测试框架
+### Added
+- **Core Features** 🎉
+  - Waypoint data CSV to X-Plane DAT format conversion
+  - Chinese airspace region filtering functionality
+  - Supports various navigation point types (DESIGNATED_POINT, VOR/DME, NDB)
+  - Automatic data validation and error reporting
+- **Basic Architecture**
+  - Modular code structure
+  - Comprehensive error handling mechanism
+  - Basic logging system
+  - Unit testing framework
 
-### 支持的功能
-- ✅ CSV 航路数据处理
-- ✅ X-Plane DAT 格式输出
-- ✅ 区域代码过滤
-- ✅ 数据完整性验证
-- ✅ 批量文件处理
-- ✅ 跨平台支持 (Windows, macOS, Linux)
-
----
-
-## 版本说明
-
-### 版本编号规则
-Nav-data 遵循 [语义化版本](https://semver.org/lang/zh-CN/) 规范：
-
-- **主版本号 (X.y.z)**：不兼容的 API 修改
-- **次版本号 (x.Y.z)**：向后兼容的功能性新增
-- **修订号 (x.y.Z)**：向后兼容的问题修正
-
-### 发布周期
-- **主版本**：每年 1-2 次，包含重大功能更新
-- **次版本**：每季度 1 次，包含新功能和重要改进
-- **修订版本**：根据需要，主要用于 Bug 修复
-
-### 支持策略
-- **当前版本**：完全支持，包含新功能和 Bug 修复
-- **前一个主版本**：安全更新和关键 Bug 修复（12 个月）
-- **更早版本**：不再提供官方支持
-
-### 升级指南
-
-#### 从 1.x 升级到 2.x
-由于 2.0.0 版本包含重大架构变更，升级时请注意：
-
-1. **Python 版本要求**：确保使用 Python 3.6+
-2. **配置文件**：需要迁移到新的配置格式
-3. **API 变更**：部分函数接口已更改
-4. **依赖更新**：运行 `pip install -r requirements.txt` 更新依赖
-
-
-### 已知问题
-
-#### 当前版本已知问题
-- 在某些 PDF 格式下，坐标提取可能不够准确 (#60)
-- 大文件（>100MB）处理时可能出现内存不足 (#61)
-- Windows 下长路径支持问题 (#62)
-
-#### 解决方案
-我们正在积极解决这些问题，预计在下个版本中修复。临时解决方案请参考相关 GitHub Issues。
-
-### 贡献统计
-
-#### 版本 2.1.0 贡献者
-- @contributor1 - 主要开发者
-- @contributor2 - PDF 处理模块
-- @contributor3 - 文档改进
-- @contributor4 - 测试和 Bug 修复
-
-#### 特别感谢
-感谢所有提交 Issue、提供反馈和贡献代码的社区成员！
-
-### 路线图
-
-#### 短期计划 (3-6 个月)
-- [ ] 图形界面版本开发
-- [ ] 更多数据源格式支持
-- [ ] 性能优化和内存使用改进
-- [ ] 国际化和多语言支持
-
-#### 长期计划 (6-12 个月)
-- [ ] 云端服务集成
-- [ ] 实时数据同步
-- [ ] 机器学习数据质量检测
-- [ ] 企业级功能扩展
-
-### 反馈和建议
-
-如果您对 Nav-data 的发展有任何建议或反馈，欢迎：
-
-- 在 [GitHub Issues](https://github.com/your-repo/nav-data/issues) 中提交建议
-- 参与 [GitHub Discussions](https://github.com/your-repo/nav-data/discussions) 讨论
-- 发送邮件至 [项目邮箱](mailto:nav-data@example.com)
+### Supported Features
+- ✅ CSV waypoint data processing
+- ✅ X-Plane DAT format output
+- ✅ Region code filtering
+- ✅ Data integrity validation
+- ✅ Batch file processing
+- ✅ Cross-platform support (Windows, macOS, Linux)
 
 ---
 
-**感谢您的关注和支持！** ✈️ Nav-data 将持续改进，为航空模拟社区提供更好的导航数据转换工具。 
+## Version Notes
+
+### Version Numbering Rules
+Nav-data follows the [Semantic Versioning](https://semver.org/lang/zh-CN/) specification:
+
+- **Major Version (X.y.z)**: Incompatible API changes
+- **Minor Version (x.Y.z)**: Backward-compatible feature additions
+- **Patch Version (x.y.Z)**: Backward-compatible bug fixes
+
+### Release Cycle
+- **Major Releases**: 1-2 times per year, including significant feature updates
+- **Minor Releases**: Once per quarter, including new features and important improvements
+- **Patch Releases**: As needed, primarily for bug fixes
+
+### Support Policy
+- **Current Version**: Fully supported, including new features and bug fixes
+- **Previous Major Version**: Security updates and critical bug fixes (12 months)
+- **Older Versions**: No longer officially supported
+
+### Upgrade Guide
+
+#### Upgrading from 1.x to 2.x
+As version 2.0.0 includes significant architectural changes, please note the following when upgrading:
+
+1.  **Python Version Requirement**: Ensure Python 3.6+ is used
+2.  **Configuration Files**: Migration to the new configuration format is required
+3.  **API Changes**: Some function interfaces have been altered
+4.  **Dependency Update**: Run `pip install -r requirements.txt` to update dependencies
+
+### Known Issues
+
+#### Known Issues in Current Version
+- Coordinate extraction might not be accurate enough for certain PDF formats (#60)
+- Out of memory issues may occur when processing large files (>100MB) (#61)
+- Long path support issues on Windows (#62)
+
+#### Solutions
+We are actively working to resolve these issues, with fixes expected in the next version. For temporary solutions, please refer to the relevant GitHub Issues.
+
+### Contribution Statistics
+
+#### Contributors for Version 2.1.0
+- @contributor1 - Lead Developer
+- @contributor2 - PDF Processing Module
+- @contributor3 - Documentation Improvements
+- @contributor4 - Testing and Bug Fixes
+
+#### Special Thanks
+Thanks to all community members who submitted Issues, provided feedback, and contributed code!
+
+### Roadmap
+
+#### Short-term Plan (3-6 months)
+- [ ] GUI (Graphical User Interface) version development
+- [ ] Support for more data source formats
+- [ ] Performance optimization and memory usage improvements
+- [ ] Internationalization and multilingual support
+
+#### Long-term Plan (6-12 months)
+- [ ] Cloud service integration
+- [ ] Real-time data synchronization
+- [ ] Machine learning-based data quality detection
+- [ ] Enterprise-level feature expansion
+
+### Feedback and Suggestions
+
+If you have any suggestions or feedback regarding the development of Nav-data, please feel free to:
+
+- Submit suggestions in [GitHub Issues](https://github.com/your-repo/nav-data/issues)
+- Participate in [GitHub Discussions](https://github.com/your-repo/nav-data/discussions)
+- Send an email to the [project email](mailto:nav-data@example.com)
+
+---
+
+**Thank you for your attention and support!** ✈️ Nav-data will continue to improve, providing better navigation data conversion tools for the aviation simulation community.
