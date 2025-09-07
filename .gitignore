@@ -3,3 +3,6 @@
 /docs/.vitepress/dist
 /docs/.DS_Store
 .DS_Store
+
+# Translation cache
+/.github/translation-cache/

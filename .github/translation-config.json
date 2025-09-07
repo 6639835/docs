@@ -1,0 +1,76 @@
+{
+  "targetLanguages": ["en", "ja", "ko", "fr", "de", "es"],
+  "sourceLanguage": "zh",
+  "excludePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.git/**",
+    "**/i18n/**",
+    "**/public/**"
+  ],
+  "includePatterns": [
+    "docs/**/*.md"
+  ],
+  "outputDir": "i18n",
+  "preserveCodeBlocks": true,
+  "preserveLinks": true,
+  "maxConcurrentTranslations": 3,
+  "retryAttempts": 3,
+  "delayBetweenRequests": 1000,
+  "languageConfig": {
+    "en": {
+      "name": "English",
+      "direction": "ltr",
+      "enabled": true
+    },
+    "ja": {
+      "name": "日本語",
+      "direction": "ltr",
+      "enabled": true
+    },
+    "ko": {
+      "name": "한국어",
+      "direction": "ltr",
+      "enabled": true
+    },
+    "fr": {
+      "name": "Français",
+      "direction": "ltr",
+      "enabled": true
+    },
+    "de": {
+      "name": "Deutsch",
+      "direction": "ltr",
+      "enabled": true
+    },
+    "es": {
+      "name": "Español",
+      "direction": "ltr",
+      "enabled": true
+    }
+  },
+  "translationPrompts": {
+    "system": "You are a professional technical translator specializing in aviation and flight simulation documentation.",
+    "rules": [
+      "Preserve ALL markdown formatting (headers, links, code blocks, lists, tables, etc.)",
+      "Keep code blocks, file paths, and technical commands EXACTLY as they are",
+      "Preserve HTML tags and markdown syntax",
+      "Keep URLs and links unchanged",
+      "Maintain the same structure and formatting",
+      "For technical terms, use industry-standard translations",
+      "Keep emoji and special characters as they are",
+      "If you encounter technical terms that should remain in English (like software names, API names), keep them in English",
+      "Translate naturally while maintaining technical accuracy"
+    ]
+  },
+  "cacheSettings": {
+    "enabled": true,
+    "maxAge": 2592000,
+    "compressionEnabled": false
+  },
+  "rateLimiting": {
+    "requestsPerMinute": 60,
+    "burstLimit": 10
+  }
+}
